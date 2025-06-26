@@ -1,0 +1,146 @@
+package net.nightshade.divinity_engine.network.cap.player.gods;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.MinecraftForge;
+import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.divinity.gods.BaseGod;
+import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
+import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
+import net.nightshade.divinity_engine.network.events.divinity.gods.LoseFaithEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Optional;
+
+
+@ApiStatus.Internal
+public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
+    private static final Logger log = LogManager.getLogger(PlayerGodsCapabilityStorage.class);
+    private final HashMap<ResourceLocation, BaseGodInstance> godsInstances = new HashMap();
+    private @Nullable Entity owner;
+
+    public Collection<BaseGodInstance> getContactedGods() {
+        return this.godsInstances.values();
+    }
+
+    public void updateGodInstance(BaseGodInstance updatedInstance, boolean sync) {
+        updatedInstance.markDirty();
+        this.godsInstances.put(updatedInstance.getBaseGodId(), updatedInstance);
+        if (sync) {
+            this.syncChanges();
+        }
+
+    }
+
+    public boolean contactGod(BaseGodInstance instance) {
+        if (this.owner == null) {
+            log.error("Cannot contact god: no owner set");
+            return false;
+        } else if (this.godsInstances.containsKey(instance.getBaseGodId())) {
+            log.debug("Tried to register a duplicate of {} to {}.", instance.getBaseGodId(), this.owner.getName().getString());
+            return false;
+        } else if (!MinecraftForge.EVENT_BUS.post(new ContactGodEvent(instance, this.owner))) {
+            log.info("Adding god {} to player {}", instance.getBaseGodId(), this.owner.getName().getString());
+            if (this.owner instanceof Player player) {
+                player.displayClientMessage(Component.translatable(instance.getBaseGod().getContactMessageTranslationKey()).withStyle(ChatFormatting.GRAY), false);
+            }
+            instance.markDirty();
+            this.godsInstances.put(instance.getBaseGodId(), instance);
+            log.info("Current gods count: {}", this.godsInstances.size());
+            this.syncChanges();
+            return true;
+        } else {
+            log.debug("Contact god event was cancelled");
+            return false;
+        }
+    }
+
+
+
+    public Optional<BaseGodInstance> getContactedGod(BaseGod god) {
+        return this.godsInstances.values().parallelStream().filter((godInstance) -> godInstance.getBaseGod().equals(god)).findFirst();
+    }
+
+    public void loseContactedGod(BaseGodInstance instance) {
+        if (this.owner != null) {
+            if (this.godsInstances.containsKey(instance.getBaseGodId())) {
+                if (!MinecraftForge.EVENT_BUS.post(new LoseFaithEvent(instance, this.owner))) {
+                    if (this.owner instanceof Player player) {
+                        player.displayClientMessage(Component.translatable(instance.getBaseGod().getLossContactMessageTranslationKey()).withStyle(ChatFormatting.GRAY), false);
+                    }
+                    instance.markDirty();
+                    this.getContactedGods().remove(instance);
+                    this.syncChanges();
+                }
+
+            }
+        }
+    }
+
+    public void loseContactedGod(BaseGod god) {
+        if (this.owner != null) {
+            Optional<BaseGodInstance> optional = this.getContactedGod(god);
+            if (!optional.isEmpty()) {
+                if (!MinecraftForge.EVENT_BUS.post(new LoseFaithEvent((BaseGodInstance)optional.get(), this.owner))) {
+                    if (this.owner instanceof Player player) {
+                        player.displayClientMessage(Component.translatable(god.getLossContactMessageTranslationKey()).withStyle(ChatFormatting.GRAY), false);
+                    }
+                    ((BaseGodInstance)optional.get()).markDirty();
+                    this.getContactedGods().remove(optional.get());
+                    this.syncChanges();
+                }
+
+            }
+        }
+    }
+
+    public CompoundTag serializeNBT() {
+        CompoundTag tag = new CompoundTag();
+        ListTag godsList = new ListTag();
+        this.godsInstances.values().forEach((instance) -> godsList.add(instance.toNBT()));
+        tag.put("contacted_gods", godsList);
+        return tag;
+    }
+
+    public void deserializeNBT(CompoundTag nbt) {
+        if (nbt.contains("resetExistingData")) {
+            this.godsInstances.clear();
+        }
+
+        ListTag godsList = nbt.getList("contacted_gods", 10);
+
+        for(Tag tag : godsList) {
+            if (tag instanceof CompoundTag compoundTag) {
+                try {
+                    BaseGodInstance instance = BaseGodInstance.fromNBT(compoundTag);
+                    this.godsInstances.put(instance.getBaseGodId(), instance);
+                } catch (Exception exception) {
+                    log.error("Exception while deserializing tag {}.\n{}", tag, exception);
+                }
+            } else {
+                log.error("Tag is not a Compound! Exception while deserializing tag {}.", tag);
+            }
+        }
+    }
+
+
+    public @Nullable Entity getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(@Nullable Entity owner) {
+        this.owner = owner;
+    }
+}

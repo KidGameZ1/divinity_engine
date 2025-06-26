@@ -1,0 +1,17 @@
+{
+  "divinity_engine.gods.solarius": "Solarius",
+  "divinity_engine.gods.solarius.contact": "I am Solarius, the blazing sun and eternal justice. Walk in my light, and I shall guide your path.",
+  "divinity_engine.gods.solarius.loss": "You have turned from my light—may the shadows you’ve chosen consume you.",
+
+  "divinity_engine.blessings.radiant_strike": "Radiant Strike",
+  "divinity_engine.blessings.radiant_strike.description": "“Let your blade shine with the fury of the sun.”\nStrikes against undead enemies deal extra damage when under direct sunlight, as Solarius empowers your blows with searing radiance.",
+
+  "gui.divinity_engine.blessings.label_current_favor": "Current Favor: ",
+  "gui.divinity_engine.blessings.label_blessing_name": "Blessing Name",
+  "gui.divinity_engine.blessings.label_required_favor": "Required Favor: ",
+  "gui.divinity_engine.blessings.label_blessings": "Blessings",
+  "gui.divinity_engine.blessings.label_given_by": "Given by: ",
+  "gui.divinity_engine.blessings.button_active": "Active",
+  "block.divinity_engine.shrine": "Shrine",
+  "divinity_engine.tooltip.shift": "Hold Shift to view more Information"
+}
