@@ -69,18 +69,14 @@ public class BlessingsButtonMessage {
 
 		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(entity);
 		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(entity);
-		int maxPages = blessingsInstances != null ? blessingsInstances.size() - 1 : 0;
+		int maxPages = blessingsInstances != null ? blessingsInstances.size() : 0;
 
 		if (buttonID == 1) {
-			// Next page
-			if (pageNum < maxPages) {
-				MainPlayerCapabilityHelper.increaseBlessingsPageNum(entity, 1);
-			}
+			MainPlayerCapabilityHelper.increaseBlessingsPageNum(entity, 1);
+			System.out.println("pageNum: " + pageNum);
 		} else if (buttonID == 2) {
-			// Previous page
-			if (pageNum > 0) {
-				MainPlayerCapabilityHelper.decreaseBlessingsPageNum(entity, 1);
-			}
+			MainPlayerCapabilityHelper.decreaseBlessingsPageNum(entity, 1);
+			System.out.println("pageNum: " + pageNum);
 		} else if (buttonID >= 10 && buttonID <= 12 &&
 				blessingsInstances != null && !blessingsInstances.isEmpty() &&
 				pageNum >= 0 && pageNum < blessingsInstances.size()) {
@@ -100,9 +96,11 @@ public class BlessingsButtonMessage {
 
 			// Handle blessing slot binding (10 = slot 0, 11 = slot 1, 12 = slot 2)
 			int slot = buttonID - 10;
-			MainPlayerCapabilityHelper.setBlessingSlot(entity, slot, selectedBlessingInstance);
-			entity.displayClientMessage(Component.literal("Bound blessing slot "+(slot+1)+" to "+
-					Component.translatable(selectedBlessingInstance.getBlessing().getNameTranslationKey()).getString()+"."), false);
+			if (GodHelper.getGodOrNull(entity, selectedBlessingInstance.getBoundGod()).getFavor() >= selectedBlessingInstance.getBlessing().getNeededFavor()) {
+				MainPlayerCapabilityHelper.setBlessingSlot(entity, slot, selectedBlessingInstance);
+				entity.displayClientMessage(Component.literal("Bound blessing slot " + (slot + 1) + " to " +
+						Component.translatable(selectedBlessingInstance.getBlessing().getNameTranslationKey()).getString() + "."), false);
+			}
 		}
 	}
 

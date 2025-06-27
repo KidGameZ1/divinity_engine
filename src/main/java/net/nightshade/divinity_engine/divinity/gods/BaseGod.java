@@ -56,17 +56,6 @@ public class BaseGod {
     public <T extends BaseGodInstance> T createGodDefaultInstance() {
         BaseGodInstance baseGodInstance = new BaseGodInstance(this);
         // Initialize blessings
-        if (this.getBlessings() != null && !this.getBlessings().isEmpty()) {
-            for (RegistryObject<Blessings> blessingReg : this.getBlessings()) {
-                if (blessingReg != null && blessingReg.isPresent()) {
-                    Blessings blessing = blessingReg.get();
-                    BlessingsInstance instance = blessing.createDefaultInstance();
-                    instance.setBoundGod(baseGodInstance);
-                    baseGodInstance.addBlessing(instance);
-                }
-            }
-        }
-        baseGodInstance.markDirty();
         return (T) baseGodInstance;
     }
 

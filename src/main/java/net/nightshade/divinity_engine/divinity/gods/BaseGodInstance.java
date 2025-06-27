@@ -36,6 +36,15 @@ public class BaseGodInstance implements Cloneable {
     public BaseGodInstance(BaseGod god) {
         this.godsReference = GodsRegistry.GODS_REGISTRY.get().getDelegateOrThrow(god);
 
+        if (god.getBlessings() != null) {
+            for (RegistryObject<Blessings> blessing : god.getBlessings()) {
+                if (blessing != null && blessing.isPresent()) {
+                    BlessingsInstance instance = blessing.get().createDefaultInstance();
+                    instance.setBoundGod(this);
+                    this.addBlessing(instance);
+                }
+            }
+        }
 
     }
 

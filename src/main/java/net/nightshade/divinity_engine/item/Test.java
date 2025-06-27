@@ -19,14 +19,4 @@ public class Test extends Item {
         super(new Properties().stacksTo(1));
     }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (GodHelper.hasContactedGod(pPlayer, GodsRegistry.SOLARIUS.get())){
-            BlessingsInstance instance = BlessingsRegistry.RADIANT_STRIKE.get().createDefaultInstance();
-            instance.setCooldown(300);
-            GodHelper.getGodOrNull(pPlayer,GodsRegistry.SOLARIUS.get()).addBlessing(instance);
-        }
-        return super.use(pLevel, pPlayer, pUsedHand);
-    }
-
 }

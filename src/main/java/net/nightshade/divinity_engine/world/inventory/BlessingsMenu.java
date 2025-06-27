@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.nightshade.divinity_engine.registry.gui.MenusRegistry;
+import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,12 @@ public class BlessingsMenu extends AbstractContainerMenu implements Supplier<Map
 				return this.boundEntity.isAlive();
 		}
 		return true;
+	}
+
+	@Override
+	public void removed(Player pPlayer) {
+		MainPlayerCapabilityHelper.setBlessingsPageNum(pPlayer, 0);
+		super.removed(pPlayer);
 	}
 
 	@Override

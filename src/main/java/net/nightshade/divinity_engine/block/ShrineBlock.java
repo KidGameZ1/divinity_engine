@@ -117,7 +117,6 @@ public class ShrineBlock extends Block{
                         }
                     }, _bpos);
                 }
-                GodHelper.getAllBlessingsInstances(pPlayer).forEach(blessing -> System.out.println(blessing.getBlessingId()));
             }
         }else {
             contactGod(god.get(), pPlayer);

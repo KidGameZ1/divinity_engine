@@ -165,6 +165,10 @@ public class BlessingsInstance implements Cloneable {
         this.dirty = false;
     }
 
+    public int getNeededFavor(){
+        return getBlessing().getNeededFavor();
+    }
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -229,280 +233,160 @@ public class BlessingsInstance implements Cloneable {
     }
 
     public void onToggleOn(LivingEntity entity) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onToggleOn(this, entity);
-            }
-        }
+        this.getBlessing().onToggleOn(this, entity);
     }
 
     public void onToggleOff(LivingEntity entity) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onToggleOff(this, entity);
-            }
+        if (this.getBlessing().onToggleOff(this, entity)){
+            setCooldown(getBlessing().getCooldown());
         }
     }
 
     public void onTick(LivingEntity entity) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onTick(this, entity);
-                if(getBlessing().hasTickCooldown()){
-                    setCooldown(getBlessing().getCooldown());
-                }
+        if (this.getBlessing().onTick(this, entity)){
+            if(getBlessing().hasTickCooldown()){
+                setCooldown(getBlessing().getCooldown());
             }
         }
+
     }
 
     public void onPressed(LivingEntity entity) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onPressed(this, entity);
-            }
-        }
+        this.getBlessing().onPressed(this, entity);
     }
 
     public boolean onHeld(LivingEntity entity, int heldTicks) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                return this.getBlessing().onHeld(this, entity, heldTicks);
-            }
-        }
-        return false;
+        return this.getBlessing().onHeld(this, entity, heldTicks);
     }
 
     public void onRelease(LivingEntity entity, int heldTicks) {
-        if (GodHelper.hasContactedGod(entity, boundGod.getBaseGod())){
-            if (GodHelper.getGodOrNull(entity, this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRelease(this, entity, heldTicks);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onRelease(this, entity, heldTicks))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRightClickBlock(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onRightClickBlock(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRightClickEntity(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onRightClickEntity(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRightClickItem(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onRightClickItem(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRightClickEmpty(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onRightClickEmpty(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onBeingTargeted(LivingEntity target, LivingChangeTargetEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onBeingTargeted(this, target, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onBeingTargeted(this, target, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onBeingDamaged(LivingAttackEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onBeingDamaged(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onBeingDamaged(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
-    public void onDamageEntity(LivingEntity entity, LivingHurtEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onDamageEntity(this, entity,event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+    public void onDamageEntity(LivingEntity player, LivingHurtEvent event) {
+        if(this.getBlessing().onDamageEntity(this, player,event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onTakenDamage(LivingDamageEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onTakenDamage(this,event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onTakenDamage(this,event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onProjectileHit(LivingEntity entity, ProjectileImpactEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onProjectileHit(this, entity, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onProjectileHit(this, entity, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onDeath(LivingDeathEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onDeath(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onDeath(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onRespawn(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onRespawn(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onHeal(LivingHealEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onHeal(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onHeal(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onKnockback(LivingKnockBackEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onKnockback(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onKnockback(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onFall(LivingFallEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onFall(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onFall(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onEXPDrop(LivingExperienceDropEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onEXPDrop(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onEXPDrop(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onEXPPickup(PlayerXpEvent.PickupXp event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onEXPPickup(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onEXPPickup(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onJump(LivingEvent.LivingJumpEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onJump(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onJump(this, event))
+            setCooldown(getBlessing().getCooldown());
+           
     }
 
     public void onDrowning(LivingDrownEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onDrowning(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onDrowning(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onBreathe(LivingBreatheEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onBreathe(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onBreathe(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onBlocksWithShield(ShieldBlockEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onBlocksWithShield(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onBlocksWithShield(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onBreakBlock(BlockEvent.BreakEvent event) {
-        if (GodHelper.hasContactedGod(event.getPlayer(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getPlayer(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onBreakBlock(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onBreakBlock(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onPlaceBlock(BlockEvent.EntityPlaceEvent event){
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onPlaceBlock(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onPlaceBlock(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onItemCrafted(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onItemCrafted(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onItemPickup(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if(this.getBlessing().onItemPickup(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemSmelted(PlayerEvent.ItemSmeltedEvent event){
-        if (GodHelper.hasContactedGod(event.getEntity(), boundGod.getBaseGod())) {
-            if (GodHelper.getGodOrNull(event.getEntity(), this.boundGod.getBaseGod()).getFavor() >= this.getBlessing().getNeededFavor()) {
-                this.getBlessing().onItemSmelted(this, event);
-                setCooldown(getBlessing().getCooldown());
-            }
-        }
+        if (this.getBlessing().onItemSmelted(this, event))
+            setCooldown(getBlessing().getCooldown());
     }
 }

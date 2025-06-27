@@ -35,6 +35,7 @@ public class GodsRegistry {
     public static final RegistryObject<BaseGod> SOLARIUS = register("solarius", () -> {
         Set<RegistryObject<Blessings>> blessings = new HashSet<>();
         blessings.add(BlessingsRegistry.RADIANT_STRIKE);
+        blessings.add(BlessingsRegistry.SUNSKIN);
         return new Solarius(
                 Set.of("light", "justice", "day"),
                 blessings

@@ -6,6 +6,12 @@
   "divinity_engine.blessings.radiant_strike": "Radiant Strike",
   "divinity_engine.blessings.radiant_strike.description": "“Let your blade shine with the fury of the sun.”\nStrikes against undead enemies deal extra damage when under direct sunlight, as Solarius empowers your blows with searing radiance.",
 
+  "divinity_engine.blessings.sunskin": "Sunskin",
+  "divinity_engine.blessings.sunskin.description": "“The sun’s warmth shields those who walk in its light.”\nWhile standing in sunlight, you gradually regenerate health as Solarius envelops you in radiant energy.",
+
+  "divinity_engine.blessings.sunburst": "Sunburst",
+  "divinity_engine.blessings.sunburst.description": "“In his wrath, the sun does not burn—it blinds.”\nUnleash a burst of radiant light that blinds and scorches nearby enemies, a divine flare granted only to Solarius’s most faithful.",
+
   "gui.divinity_engine.blessings.label_current_favor": "Current Favor: ",
   "gui.divinity_engine.blessings.label_blessing_name": "Blessing Name",
   "gui.divinity_engine.blessings.label_required_favor": "Required Favor: ",

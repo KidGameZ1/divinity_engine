@@ -10,6 +10,7 @@ import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.core.mixin.RegistryBuilderAccessor;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.solarius.RadiantStrike;
+import net.nightshade.divinity_engine.divinity.blessing.solarius.Sunskin;
 import net.nightshade.divinity_engine.divinity.gods.solarius.Solarius;
 import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
 
@@ -25,7 +26,10 @@ public class BlessingsRegistry {
         return builder;
     });
     public static final RegistryObject<Blessings> RADIANT_STRIKE = registry.register("radiant_strike",
-            () -> new RadiantStrike(10, 20, false) // example values for neededFavor and cooldown
+            () -> new RadiantStrike(25, 5, false) // example values for neededFavor and cooldown
+    );
+    public static final RegistryObject<Blessings> SUNSKIN = registry.register("sunskin",
+            () -> new Sunskin(50, 5, false) // example values for neededFavor and cooldown
     );
 
 

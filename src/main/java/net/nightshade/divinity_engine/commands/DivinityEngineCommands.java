@@ -21,6 +21,7 @@ public class DivinityEngineCommands {
 	public static void registerCommand(RegisterCommandsEvent event) {
 		setGodsCommand(event);
 		getCommands(event);
+		resetCooldowns(event);
 	}
 
 	public static void setGodsCommand(RegisterCommandsEvent event) {
@@ -147,5 +148,34 @@ public class DivinityEngineCommands {
 
 									return 0;
 								})))));
+	}
+
+	public static void resetCooldowns(RegisterCommandsEvent event){
+		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
+				.then(Commands.literal("reset_cooldowns")
+					.then(Commands.argument("player", EntityArgument.player()).executes(arguments -> {
+						Entity entityCalledOn = (new Object() {
+							public Entity getEntity() {
+								try {
+									return EntityArgument.getEntity(arguments, "player");
+								} catch (CommandSyntaxException e) {
+									e.printStackTrace();
+									return null;
+								}
+							}
+						}.getEntity());
+						Entity commandCaller = arguments.getSource().getEntity();
+
+						if (commandCaller instanceof Player player){
+							if (!GodHelper.getAllBlessingsInstances(entityCalledOn).isEmpty()){
+								GodHelper.getAllBlessingsInstances(entityCalledOn).forEach((blessing) -> {
+									blessing.setCooldown(0);
+								});
+
+							}
+						}
+
+						return 0;
+					}))));
 	}
 }

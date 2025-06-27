@@ -93,6 +93,8 @@ public class MainPlayerCapability {
 				slot1Tag.putString("blessing", blessingId.toString());
 				slot1Tag.put("data", blessingSlot1.toNBT());
 				nbt.put("blessingSlot1", slot1Tag);
+			}else {
+				nbt.putString("blessingSlot1", "none");
 			}
 
 			if (blessingSlot2 != null) {
@@ -101,6 +103,8 @@ public class MainPlayerCapability {
 				slot2Tag.putString("blessing", blessingId.toString());
 				slot2Tag.put("data", blessingSlot2.toNBT());
 				nbt.put("blessingSlot2", slot2Tag);
+			}else {
+				nbt.putString("blessingSlot2", "none");
 			}
 
 			if (blessingSlot3 != null) {
@@ -109,6 +113,8 @@ public class MainPlayerCapability {
 				slot3Tag.putString("blessing", blessingId.toString());
 				slot3Tag.put("data", blessingSlot3.toNBT());
 				nbt.put("blessingSlot3", slot3Tag);
+			}else {
+				nbt.putString("blessingSlot3", "none");
 			}
 
 			nbt.putInt("blessingsPageNum", this.blessingsPageNum);
@@ -118,35 +124,48 @@ public class MainPlayerCapability {
 		@Override
 		public void deserializeNBT(CompoundTag nbt) {
 			if (nbt.contains("blessingSlot1")) {
-				CompoundTag slot1Tag = nbt.getCompound("blessingSlot1");
-				ResourceLocation blessingId = new ResourceLocation(slot1Tag.getString("blessing"));
-				var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
-				if (blessing != null) {
-					BlessingsInstance instance = blessing.createDefaultInstance();
-					instance.deserialize(slot1Tag.getCompound("data"));
-					this.blessingSlot1 = instance;
+				if (nbt.getString("blessingSlot1").equals( "none" )){
+					this.blessingSlot1 = null;
+				}else {
+					CompoundTag slot1Tag = nbt.getCompound("blessingSlot1");
+					ResourceLocation blessingId = new ResourceLocation(slot1Tag.getString("blessing"));
+					var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
+					if (blessing != null) {
+						BlessingsInstance instance = blessing.createDefaultInstance();
+						instance.deserialize(slot1Tag.getCompound("data"));
+						this.blessingSlot1 = instance;
+					}
 				}
 			}
 
 			if (nbt.contains("blessingSlot2")) {
-				CompoundTag slot2Tag = nbt.getCompound("blessingSlot2");
-				ResourceLocation blessingId = new ResourceLocation(slot2Tag.getString("blessing"));
-				var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
-				if (blessing != null) {
-					BlessingsInstance instance = blessing.createDefaultInstance();
-					instance.deserialize(slot2Tag.getCompound("data"));
-					this.blessingSlot2 = instance;
+				if (nbt.getString("blessingSlot2").equals( "none" )){
+					this.blessingSlot2 = null;
+				}else {
+					CompoundTag slot2Tag = nbt.getCompound("blessingSlot2");
+					ResourceLocation blessingId = new ResourceLocation(slot2Tag.getString("blessing"));
+					var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
+					if (blessing != null) {
+						BlessingsInstance instance = blessing.createDefaultInstance();
+						instance.deserialize(slot2Tag.getCompound("data"));
+						this.blessingSlot2 = instance;
+					}
 				}
+
 			}
 
 			if (nbt.contains("blessingSlot3")) {
-				CompoundTag slot3Tag = nbt.getCompound("blessingSlot3");
-				ResourceLocation blessingId = new ResourceLocation(slot3Tag.getString("blessing"));
-				var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
-				if (blessing != null) {
-					BlessingsInstance instance = blessing.createDefaultInstance();
-					instance.deserialize(slot3Tag.getCompound("data"));
-					this.blessingSlot3 = instance;
+				if (nbt.getString("blessingSlot3").equals( "none" )){
+					this.blessingSlot3 = null;
+				}else {
+					CompoundTag slot3Tag = nbt.getCompound("blessingSlot3");
+					ResourceLocation blessingId = new ResourceLocation(slot3Tag.getString("blessing"));
+					var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
+					if (blessing != null) {
+						BlessingsInstance instance = blessing.createDefaultInstance();
+						instance.deserialize(slot3Tag.getCompound("data"));
+						this.blessingSlot3 = instance;
+					}
 				}
 			}
 

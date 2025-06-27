@@ -2,15 +2,18 @@ package net.nightshade.divinity_engine.util.divinity.gods;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.network.cap.player.gods.GodsStorage;
+import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
 import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
+import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +40,55 @@ public class GodHelper {
         return getGodOrNull(entity, god).getBlessingsInstances();
     }
 
+    public static void validateBlessingSlot(Player player, BlessingsInstance slotInstance) {
+        if (player == null || slotInstance == null || slotInstance.getBoundGodInstance() == null) {
+            return;
+        }
+        IMainPlayerCapability capability = MainPlayerCapabilityHelper.getMainPlayerVariables(player);
+
+        BaseGod god = slotInstance.getBoundGod();
+        if (!hasContactedGod(player, god)) {
+            // Clear the slot if player doesn't have contact with the god
+            if (slotInstance.equals(capability.getBlessingSlot1())) {
+                capability.setBlessingSlot1(null);
+            } else if (slotInstance.equals(capability.getBlessingSlot2())) {
+                capability.setBlessingSlot2(null);
+            } else if (slotInstance.equals(capability.getBlessingSlot3())) {
+                capability.setBlessingSlot3(null);
+            }
+        }
+    }
+
+
+    public static void updateBlessingInstance(Player player, BlessingsInstance slotInstance) {
+        if (player == null || slotInstance == null || slotInstance.getBoundGodInstance() == null) {
+            return;
+        }
+
+        BaseGod god = slotInstance.getBoundGod();
+        BaseGodInstance godInstance = getGodOrNull(player, god);
+
+        if (godInstance != null) {
+            // Find matching blessing instance and replace it
+            Set<BlessingsInstance> blessings = godInstance.getBlessingsInstances();
+            BlessingsInstance matchingInstance = null;
+
+            for (BlessingsInstance instance : blessings) {
+                if (instance.getBlessing().equals(slotInstance.getBlessing())) {
+                    matchingInstance = instance;
+                    break;
+                }
+            }
+
+            if (matchingInstance != null) {
+                blessings.remove(matchingInstance);
+                blessings.add(slotInstance);
+                godInstance.markDirty();
+            }
+        }
+    }
+
+
     public static List<BlessingsInstance> getAllBlessingsInstances(Entity entity) {
         if (entity == null) {
             return new ArrayList<>();
@@ -51,6 +103,9 @@ public class GodHelper {
                 .filter(Objects::nonNull)
                 .flatMap(god -> god.getBlessingsInstances().stream())
                 .filter(Objects::nonNull)
+                .filter(b -> b.getBoundGod() != null && b.getBoundGod().getRegistryName() != null)
+                .sorted(Comparator.comparing((BlessingsInstance b) -> b.getBoundGod().getRegistryName().toString())
+                        .thenComparing(BlessingsInstance::getNeededFavor))
                 .collect(Collectors.toList());
     }
 

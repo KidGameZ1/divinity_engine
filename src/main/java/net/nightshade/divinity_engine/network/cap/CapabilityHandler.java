@@ -1,19 +1,24 @@
 package net.nightshade.divinity_engine.network.cap;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.ChunkWatchEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
+import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
+import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 import org.jetbrains.annotations.Nullable;
 
 import static net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability.*;
@@ -35,6 +40,27 @@ public class CapabilityHandler {
     static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent e) {
         PlayerVariables.sync(e.getEntity());
 //        TechniqueLoadoutGUIVariables.checkForFirstLogin(e.getEntity());
+    }
+
+    private static void playerSave(PlayerEvent.SaveToFile event) {
+        Player player = event.getEntity();
+        if (player instanceof ServerPlayer) {
+            if (MainPlayerCapabilityHelper.getBlessingSlot1(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 1 data: " + MainPlayerCapabilityHelper.getBlessingSlot1(player).toNBT());
+            }
+            if (MainPlayerCapabilityHelper.getBlessingSlot2(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 2 data: " + MainPlayerCapabilityHelper.getBlessingSlot2(player).toNBT());
+            }
+            if (MainPlayerCapabilityHelper.getBlessingSlot3(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 3 data: " + MainPlayerCapabilityHelper.getBlessingSlot3(player).toNBT());
+            }
+        }
+    }
+
+    public static void init(IEventBus modEventBus) {
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+        forgeEventBus.addListener(CapabilityHandler::playerSave);
+
     }
 
     @SubscribeEvent

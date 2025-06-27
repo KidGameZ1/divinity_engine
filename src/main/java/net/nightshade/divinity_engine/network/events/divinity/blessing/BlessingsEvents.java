@@ -41,16 +41,58 @@ public class BlessingsEvents {
                 BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
                 BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
                 BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-                if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                    if (blessingSlot1.getCooldown() > 0){
+
+                if (blessingSlot1 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot1);
+                }
+                if (blessingSlot2 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot2);
+                }
+                if (blessingSlot3 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot3);
+                }
+                // Re-get the slots in case they were cleared
+                blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
                         blessingSlot1.onTick(player);
+                    }else {
+                        blessingSlot1.decreaseCooldown(1);
                     }
-                    if (blessingSlot2.getCooldown() > 0){
+                    GodHelper.updateBlessingInstance(player, blessingSlot1);
+                }
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
                         blessingSlot2.onTick(player);
+                    }else {
+                        blessingSlot2.decreaseCooldown(1);
                     }
-                    if (blessingSlot3.getCooldown() > 0){
+                    GodHelper.updateBlessingInstance(player, blessingSlot2);
+                }
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
                         blessingSlot3.onTick(player);
+                    }else {
+                        blessingSlot3.decreaseCooldown(1);
                     }
+                    GodHelper.updateBlessingInstance(player, blessingSlot3);
+                }
+            }else {
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+
+                if (blessingSlot1 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot1);
+                }
+                if (blessingSlot2 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot2);
+                }
+                if (blessingSlot3 != null) {
+                    GodHelper.validateBlessingSlot(player, blessingSlot3);
                 }
             }
         }
@@ -62,14 +104,18 @@ public class BlessingsEvents {
             BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
             BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
             BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
+            if (blessingSlot1 != null) {
+                if (blessingSlot1.getCooldown() == 0) {
                     blessingSlot1.onRightClickBlock(event);
                 }
-                if (blessingSlot2.getCooldown() > 0){
+            }
+            if (blessingSlot2 != null) {
+                if (blessingSlot2.getCooldown() == 0) {
                     blessingSlot2.onRightClickBlock(event);
                 }
-                if (blessingSlot3.getCooldown() > 0){
+            }
+            if (blessingSlot3 != null) {
+                if (blessingSlot3.getCooldown() == 0) {
                     blessingSlot3.onRightClickBlock(event);
                 }
             }
@@ -82,14 +128,18 @@ public class BlessingsEvents {
             BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
             BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
             BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
+            if (blessingSlot1 != null) {
+                if (blessingSlot1.getCooldown() == 0) {
                     blessingSlot1.onRightClickEntity(event);
                 }
-                if (blessingSlot2.getCooldown() > 0){
+            }
+            if (blessingSlot2 != null) {
+                if (blessingSlot2.getCooldown() == 0) {
                     blessingSlot2.onRightClickEntity(event);
                 }
-                if (blessingSlot3.getCooldown() > 0){
+            }
+            if (blessingSlot3 != null) {
+                if (blessingSlot3.getCooldown() == 0) {
                     blessingSlot3.onRightClickEntity(event);
                 }
             }
@@ -103,14 +153,18 @@ public class BlessingsEvents {
             BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
             BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
             BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
+            if (blessingSlot1 != null) {
+                if (blessingSlot1.getCooldown() == 0) {
                     blessingSlot1.onRightClickItem(event);
                 }
-                if (blessingSlot2.getCooldown() > 0){
+            }
+            if (blessingSlot2 != null) {
+                if (blessingSlot2.getCooldown() == 0) {
                     blessingSlot2.onRightClickItem(event);
                 }
-                if (blessingSlot3.getCooldown() > 0){
+            }
+            if (blessingSlot3 != null) {
+                if (blessingSlot3.getCooldown() == 0) {
                     blessingSlot3.onRightClickItem(event);
                 }
             }
@@ -124,14 +178,18 @@ public class BlessingsEvents {
             BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
             BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
             BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
+            if (blessingSlot1 != null) {
+                if (blessingSlot1.getCooldown() == 0) {
                     blessingSlot1.onRightClickEmpty(event);
                 }
-                if (blessingSlot2.getCooldown() > 0){
+            }
+            if (blessingSlot2 != null) {
+                if (blessingSlot2.getCooldown() == 0) {
                     blessingSlot2.onRightClickEmpty(event);
                 }
-                if (blessingSlot3.getCooldown() > 0){
+            }
+            if (blessingSlot3 != null) {
+                if (blessingSlot3.getCooldown() == 0) {
                     blessingSlot3.onRightClickEmpty(event);
                 }
             }
@@ -145,14 +203,18 @@ public class BlessingsEvents {
             BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(target);
             BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(target);
             BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(target);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
+            if (blessingSlot1 != null) {
+                if (blessingSlot1.getCooldown() == 0) {
                     blessingSlot1.onBeingTargeted(target, event);
                 }
-                if (blessingSlot2.getCooldown() > 0){
+            }
+            if (blessingSlot2 != null) {
+                if (blessingSlot2.getCooldown() == 0) {
                     blessingSlot2.onBeingTargeted(target, event);
                 }
-                if (blessingSlot3.getCooldown() > 0){
+            }
+            if (blessingSlot3 != null) {
+                if (blessingSlot3.getCooldown() == 0) {
                     blessingSlot3.onBeingTargeted(target, event);
                 }
             }
@@ -161,97 +223,25 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingBeingDamaged(LivingAttackEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onBeingDamaged(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onBeingDamaged(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onBeingDamaged(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onBeingDamaged(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onBeingDamaged(event);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onBlessingDamageEntity(LivingHurtEvent event) {
-        LivingEntity player = event.getSource().getEntity() instanceof LivingEntity ? (LivingEntity) event.getSource().getEntity() : null;
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onDamageEntity(player,event);
-                }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onDamageEntity(player,event);
-                }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onDamageEntity(player,event);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onBlessingDamageEntity(LivingDamageEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onTakenDamage(event);
-                }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onTakenDamage(event);
-                }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onTakenDamage(event);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onBlessingProjectileHit(ProjectileImpactEvent event) {
-        HitResult var2 = event.getRayTraceResult();
-        if (var2 instanceof EntityHitResult result) {
-            Entity var3 = result.getEntity();
-            if (var3 instanceof LivingEntity player) {
-                if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-                    BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-                    BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-                    BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-                    if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                        if (blessingSlot1.getCooldown() > 0){
-                            blessingSlot1.onProjectileHit(player, event);
-                        }
-                        if (blessingSlot2.getCooldown() > 0){
-                            blessingSlot2.onProjectileHit(player, event);
-                        }
-                        if (blessingSlot3.getCooldown() > 0){
-                            blessingSlot3.onProjectileHit(player, event);
-                        }
-                        if (event.isCanceled()) {
-                            Projectile var9 = event.getProjectile();
-                            if (var9 instanceof AbstractArrow) {
-                                AbstractArrow arrow = (AbstractArrow)var9;
-                                if (arrow.piercingIgnoreEntityIds == null) {
-                                    arrow.piercingIgnoreEntityIds = new IntOpenHashSet(10);
-                                }
-                                arrow.piercingIgnoreEntityIds.add(player.getId());
-                            }
-                        }
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onBeingDamaged(event);
                     }
                 }
             }
@@ -259,21 +249,118 @@ public class BlessingsEvents {
     }
 
     @SubscribeEvent
+    public static void onBlessingDamageEntity(LivingHurtEvent event) {
+        LivingEntity entity = event.getSource().getEntity() instanceof LivingEntity ? (LivingEntity) event.getSource().getEntity() : null;
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onDamageEntity(player, event);
+                    }
+                }
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onDamageEntity(player, event);
+                    }
+                }
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onDamageEntity(player, event);
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBlessingTakenDamage(LivingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onTakenDamage(event);
+                    }
+                }
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onTakenDamage(event);
+                    }
+                }
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onTakenDamage(event);
+                    }
+                }
+            }
+        }
+
+    }
+
+//    @SubscribeEvent
+//    public static void onBlessingProjectileHit(ProjectileImpactEvent event) {
+//        HitResult var2 = event.getRayTraceResult();
+//        if (var2 instanceof EntityHitResult result) {
+//            Entity var3 = result.getEntity();
+//            if (var3 instanceof LivingEntity player) {
+//                if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+//                    BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+//                    BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+//                    BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+//                    if (blessingSlot1 != null) {
+//                        if (blessingSlot1.getCooldown() == 0){
+//                            blessingSlot1.onProjectileHit(player, event);
+//                        }
+//                        if (blessingSlot2.getCooldown() == 0){
+//                            blessingSlot2.onProjectileHit(player, event);
+//                        }
+//                        if (blessingSlot3.getCooldown() == 0){
+//                            blessingSlot3.onProjectileHit(player, event);
+//                        }
+//                        if (event.isCanceled()) {
+//                            Projectile var9 = event.getProjectile();
+//                            if (var9 instanceof AbstractArrow) {
+//                                AbstractArrow arrow = (AbstractArrow)var9;
+//                                if (arrow.piercingIgnoreEntityIds == null) {
+//                                    arrow.piercingIgnoreEntityIds = new IntOpenHashSet(10);
+//                                }
+//                                arrow.piercingIgnoreEntityIds.add(player.getId());
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    @SubscribeEvent
     public static void onBlessingDeath(LivingDeathEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onDeath(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onDeath(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onDeath(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onDeath(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onDeath(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onDeath(event);
+                    }
                 }
             }
         }
@@ -281,20 +368,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onRespawn(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onRespawn(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onRespawn(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onRespawn(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onRespawn(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onRespawn(event);
+                    }
                 }
             }
         }
@@ -302,20 +395,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingHeal(LivingHealEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onHeal(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onHeal(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onHeal(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onHeal(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onHeal(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onHeal(event);
+                    }
                 }
             }
         }
@@ -323,20 +422,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingKnockback(LivingKnockBackEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onKnockback(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onKnockback(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onKnockback(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onKnockback(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onKnockback(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onKnockback(event);
+                    }
                 }
             }
         }
@@ -344,20 +449,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingFall(LivingFallEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onFall(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onFall(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onFall(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onFall(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onFall(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onFall(event);
+                    }
                 }
             }
         }
@@ -365,20 +476,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingEXPDrop(LivingExperienceDropEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onEXPDrop(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onEXPDrop(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onEXPDrop(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onEXPDrop(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onEXPDrop(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onEXPDrop(event);
+                    }
                 }
             }
         }
@@ -386,20 +503,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingEXPPickup(PlayerXpEvent.PickupXp event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onEXPPickup(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onEXPPickup(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onEXPPickup(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onEXPPickup(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onEXPPickup(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onEXPPickup(event);
+                    }
                 }
             }
         }
@@ -407,23 +530,28 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity player = event.getEntity();
-        if (player instanceof Player player1){
-            player1.displayClientMessage(Component.literal("jump"), false);
-        }
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onJump(event);
+        LivingEntity entity = event.getEntity();
+
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onJump(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onJump(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onJump(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onJump(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onJump(event);
+                    }
                 }
             }
         }
@@ -431,20 +559,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingDrowning(LivingDrownEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onDrowning(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()) {
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0) {
+                        blessingSlot1.onDrowning(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onDrowning(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0) {
+                        blessingSlot2.onDrowning(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onDrowning(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0) {
+                        blessingSlot3.onDrowning(event);
+                    }
                 }
             }
         }
@@ -452,20 +586,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingBreathe(LivingBreatheEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onBreathe(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onBreathe(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onBreathe(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onBreathe(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onBreathe(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onBreathe(event);
+                    }
                 }
             }
         }
@@ -473,20 +613,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingBlocksWithShield(ShieldBlockEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onBlocksWithShield(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onBlocksWithShield(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onBlocksWithShield(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onBlocksWithShield(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onBlocksWithShield(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onBlocksWithShield(event);
+                    }
                 }
             }
         }
@@ -494,20 +640,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingBreakBlock(BlockEvent.BreakEvent event) {
-        LivingEntity player = event.getPlayer();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onBreakBlock(event);
+        LivingEntity entity = event.getPlayer();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onBreakBlock(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onBreakBlock(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onBreakBlock(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onBreakBlock(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onBreakBlock(event);
+                    }
                 }
             }
         }
@@ -515,20 +667,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingPlaceBlock(BlockEvent.EntityPlaceEvent event) {
-        LivingEntity player = event.getEntity() instanceof LivingEntity ? (LivingEntity) event.getEntity() : null;
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onPlaceBlock(event);
+        LivingEntity entity = event.getEntity() instanceof LivingEntity ? (LivingEntity) event.getEntity() : null;
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onPlaceBlock(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onPlaceBlock(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onPlaceBlock(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onPlaceBlock(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onPlaceBlock(event);
+                    }
                 }
             }
         }
@@ -536,20 +694,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-        LivingEntity player = event.getEntity() instanceof LivingEntity ? (LivingEntity) event.getEntity() : null;
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onItemCrafted(event);
+        LivingEntity entity = event.getEntity() instanceof LivingEntity ? (LivingEntity) event.getEntity() : null;
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onItemCrafted(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onItemCrafted(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onItemCrafted(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onItemCrafted(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onItemCrafted(event);
+                    }
                 }
             }
         }
@@ -557,20 +721,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingItemPickup(PlayerEvent.ItemPickupEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onItemPickup(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onItemPickup(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onItemPickup(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onItemPickup(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onItemPickup(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onItemPickup(event);
+                    }
                 }
             }
         }
@@ -578,20 +748,26 @@ public class BlessingsEvents {
 
     @SubscribeEvent
     public static void onBlessingItemSmelted(PlayerEvent.ItemSmeltedEvent event) {
-        LivingEntity player = event.getEntity();
-        if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
-            BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
-            BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
-            BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
-            if (blessingSlot1 != null && blessingSlot2 != null && blessingSlot3 != null) {
-                if (blessingSlot1.getCooldown() > 0){
-                    blessingSlot1.onItemSmelted(event);
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (!GodHelper.getContactedGodsFrom(player).getContactedGods().isEmpty()){
+                BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+                BlessingsInstance blessingSlot2 = MainPlayerCapabilityHelper.getBlessingSlot2(player);
+                BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+                if (blessingSlot1 != null) {
+                    if (blessingSlot1.getCooldown() == 0){
+                        blessingSlot1.onItemSmelted(event);
+                    }
                 }
-                if (blessingSlot2.getCooldown() > 0){
-                    blessingSlot2.onItemSmelted(event);
+                if (blessingSlot2 != null) {
+                    if (blessingSlot2.getCooldown() == 0){
+                        blessingSlot2.onItemSmelted(event);
+                    }
                 }
-                if (blessingSlot3.getCooldown() > 0){
-                    blessingSlot3.onItemSmelted(event);
+                if (blessingSlot3 != null) {
+                    if (blessingSlot3.getCooldown() == 0){
+                        blessingSlot3.onItemSmelted(event);
+                    }
                 }
             }
         }

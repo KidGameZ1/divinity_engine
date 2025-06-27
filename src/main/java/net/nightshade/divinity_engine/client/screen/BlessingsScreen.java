@@ -30,6 +30,9 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	private final Level world;
 	private final int x, y, z;
 	private final Player entity;
+	int centerX = this.leftPos + this.imageWidth / 2;
+	int blessingNameX = centerX-16;
+	int blessingNameY = 15;
 
 	Button button_active;
 	Button button_right;
@@ -61,12 +64,12 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 				BlessingsInstance selectedBlessingInstance = blessingsInstances.get(pageNum);
 				Blessings selectedBlessing = selectedBlessingInstance.getBlessing();
 
-				int blessingNameX = leftPos + 39;
+				int blessingNameXX = leftPos + blessingNameX;
 				int blessingNameY = topPos + 14;
 				String blessingName = Component.translatable(selectedBlessing.getNameTranslationKey()).getString();
 
-				if (mouseX >= blessingNameX - font.width(blessingName)/2 &&
-						mouseX <= blessingNameX + font.width(blessingName)/2 &&
+				if (mouseX >= blessingNameXX - font.width(blessingName)/2 &&
+						mouseX <= blessingNameXX + font.width(blessingName)/2 &&
 						mouseY >= blessingNameY &&
 						mouseY <= blessingNameY + 10) {
 
@@ -140,10 +143,9 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 			Blessings selectedBlessing = selectedBlessingInstance.getBlessing();
 
 			// Draw blessing name
-			int blessingNameX = 39;
-			int blessingNameY = 14;
+
 			String blessingName = Component.translatable(selectedBlessing.getNameTranslationKey()).getString();
-			guiGraphics.drawCenteredString(font, blessingName, blessingNameX, blessingNameY, selectedBlessing.getColor().getRGB());
+			guiGraphics.drawCenteredString(font, blessingName, blessingNameX , blessingNameY, selectedBlessing.getColor().getRGB());
 
 			// Draw other information
 			guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_given_by").getString()+Component.translatable(selectedBlessingInstance.getBoundGod().getNameTranslationKey()).getString(), 7, 25, selectedBlessingInstance.getBoundGod().getColor().getRGB(), false);
@@ -248,19 +250,15 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 		}).bounds(this.leftPos + 47, this.topPos + 69, 56, 20).build();
 
 		button_right = Button.builder(Component.literal(">"), e -> {
-			if (pageNum < maxPages) {
-				ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(1, x, y, z));
-				BlessingsButtonMessage.handleButtonAction(entity, 1, x, y, z);
-				updateActiveButton(); // Update button after page change
-			}
+			ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(1, x, y, z));
+			BlessingsButtonMessage.handleButtonAction(entity, 1, x, y, z);
+			updateActiveButton(); // Update button after page change
 		}).bounds(this.leftPos + 155, this.topPos + 43, 30, 20).build();
 
 		button_left = Button.builder(Component.literal("<"), e -> {
-			if (pageNum > 0) {
-				ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(2, x, y, z));
-				BlessingsButtonMessage.handleButtonAction(entity, 2, x, y, z);
-				updateActiveButton(); // Update button after page change
-			}
+			ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(2, x, y, z));
+			BlessingsButtonMessage.handleButtonAction(entity, 2, x, y, z);
+			updateActiveButton(); // Update button after page change
 		}).bounds(this.leftPos + -34, this.topPos + 43, 30, 20).build();
 
 		guistate.put("button:button_active", button_active);

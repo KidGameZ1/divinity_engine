@@ -44,97 +44,128 @@ public class Blessings {
         return hasTickCooldown;
     }
 
-    public void onToggleOn(BlessingsInstance instance, LivingEntity entity) {
+    public boolean onToggleOn(BlessingsInstance instance, LivingEntity entity) {
+        return false;
     }
 
-    public void onToggleOff(BlessingsInstance instance, LivingEntity entity) {
+    public boolean onToggleOff(BlessingsInstance instance, LivingEntity entity) {
+        return false;
     }
 
-    public void onTick(BlessingsInstance instance, LivingEntity living) {
+    public boolean onTick(BlessingsInstance instance, LivingEntity living) {
+        return false;
     }
 
-    public void onPressed(BlessingsInstance instance, LivingEntity entity) {
+    public boolean onPressed(BlessingsInstance instance, LivingEntity entity) {
+        return false;
     }
 
     public boolean onHeld(BlessingsInstance instance, LivingEntity living, int heldTicks) {
         return false;
     }
 
-    public void onRelease(BlessingsInstance instance, LivingEntity entity, int heldTicks) {
+    public boolean onRelease(BlessingsInstance instance, LivingEntity entity, int heldTicks) {
+        return false;
     }
 
-    public void onRightClickBlock(BlessingsInstance instance, PlayerInteractEvent.RightClickBlock event) {
+    public boolean onRightClickBlock(BlessingsInstance instance, PlayerInteractEvent.RightClickBlock event) {
+        return false;
     }
 
-    public void onRightClickEntity(BlessingsInstance instance, PlayerInteractEvent.EntityInteract event) {
+    public boolean onRightClickEntity(BlessingsInstance instance, PlayerInteractEvent.EntityInteract event) {
+        return false;
     }
 
-    public void onRightClickItem(BlessingsInstance instance, PlayerInteractEvent.RightClickItem event) {
+    public boolean onRightClickItem(BlessingsInstance instance, PlayerInteractEvent.RightClickItem event) {
+        return false;
     }
 
-    public void onRightClickEmpty(BlessingsInstance instance, PlayerInteractEvent.RightClickEmpty event) {
+    public boolean onRightClickEmpty(BlessingsInstance instance, PlayerInteractEvent.RightClickEmpty event) {
+        return false;
     }
 
-    public void onBeingTargeted(BlessingsInstance instance, LivingEntity target, LivingChangeTargetEvent event) {
+    public boolean onBeingTargeted(BlessingsInstance instance, LivingEntity target, LivingChangeTargetEvent event) {
+        return false;
     }
 
-    public void onBeingDamaged(BlessingsInstance instance, LivingAttackEvent event) {
+    public boolean onBeingDamaged(BlessingsInstance instance, LivingAttackEvent event) {
+        return false;
     }
 
-    public void onDamageEntity(BlessingsInstance instance, LivingEntity entity, LivingHurtEvent event) {
+    public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
+        return false;
     }
 
-    public void onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
+    public boolean onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
+        return false;
     }
 
-    public void onProjectileHit(BlessingsInstance instance, LivingEntity living, ProjectileImpactEvent event) {
+    public boolean onProjectileHit(BlessingsInstance instance, LivingEntity living, ProjectileImpactEvent event) {
+        return false;
     }
 
-    public void onDeath(BlessingsInstance instance, LivingDeathEvent event) {
+    public boolean onDeath(BlessingsInstance instance, LivingDeathEvent event) {
+        return false;
     }
 
-    public void onRespawn(BlessingsInstance instance, PlayerEvent.PlayerRespawnEvent event) {
+    public boolean onRespawn(BlessingsInstance instance, PlayerEvent.PlayerRespawnEvent event) {
+        return false;
     }
 
-    public void onHeal(BlessingsInstance instance, LivingHealEvent event) {
+    public boolean onHeal(BlessingsInstance instance, LivingHealEvent event) {
+        return false;
     }
 
-    public void onKnockback(BlessingsInstance instance, LivingKnockBackEvent event) {
+    public boolean onKnockback(BlessingsInstance instance, LivingKnockBackEvent event) {
+        return false;
     }
 
-    public void onFall(BlessingsInstance instance, LivingFallEvent event) {
+    public boolean onFall(BlessingsInstance instance, LivingFallEvent event) {
+        return false;
     }
 
-    public void onEXPDrop(BlessingsInstance instance, LivingExperienceDropEvent event) {
+    public boolean onEXPDrop(BlessingsInstance instance, LivingExperienceDropEvent event) {
+        return false;
     }
 
-    public void onEXPPickup(BlessingsInstance instance, PlayerXpEvent.PickupXp event) {
+    public boolean onEXPPickup(BlessingsInstance instance, PlayerXpEvent.PickupXp event) {
+        return false;
     }
 
-    public void onJump(BlessingsInstance instance, LivingEvent.LivingJumpEvent event) {
+    public boolean onJump(BlessingsInstance instance, LivingEvent.LivingJumpEvent event) {
+        return false;
     }
 
-    public void onDrowning(BlessingsInstance instance, LivingDrownEvent event) {
+    public boolean onDrowning(BlessingsInstance instance, LivingDrownEvent event) {
+        return false;
     }
 
-    public void onBreathe(BlessingsInstance instance, LivingBreatheEvent event) {
+    public boolean onBreathe(BlessingsInstance instance, LivingBreatheEvent event) {
+        return false;
     }
 
-    public void onBlocksWithShield(BlessingsInstance instance, ShieldBlockEvent event) {
+    public boolean onBlocksWithShield(BlessingsInstance instance, ShieldBlockEvent event) {
+        return false;
     }
 
-    public void onBreakBlock(BlessingsInstance instance, BlockEvent.BreakEvent event) {
+    public boolean onBreakBlock(BlessingsInstance instance, BlockEvent.BreakEvent event) {
+        return false;
     }
-    public void onPlaceBlock(BlessingsInstance instance, BlockEvent.EntityPlaceEvent event) {
-    }
-
-    public void onItemCrafted(BlessingsInstance instance, PlayerEvent.ItemCraftedEvent event) {
-    }
-
-    public void onItemPickup(BlessingsInstance instance, PlayerEvent.ItemPickupEvent event) {
+    
+    public boolean onPlaceBlock(BlessingsInstance instance, BlockEvent.EntityPlaceEvent event) {
+        return false;
     }
 
-    public void onItemSmelted(BlessingsInstance instance, PlayerEvent.ItemSmeltedEvent event) {
+    public boolean onItemCrafted(BlessingsInstance instance, PlayerEvent.ItemCraftedEvent event) {
+        return false;
+    }
+
+    public boolean onItemPickup(BlessingsInstance instance, PlayerEvent.ItemPickupEvent event) {
+        return false;
+    }
+
+    public boolean onItemSmelted(BlessingsInstance instance, PlayerEvent.ItemSmeltedEvent event) {
+        return false;
     }
 
     public Color getColor() {
