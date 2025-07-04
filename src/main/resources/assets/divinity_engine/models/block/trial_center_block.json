@@ -1,9 +1,0 @@
-{
-  "parent": "divinity_engine:block/statue",
-  "render_type": "minecraft:solid",
-  "textures": {
-    "0": "divinity_engine:block/gods_statue",
-    "all": "minecraft:block/stone_bricks",
-    "particle": "minecraft:block/stone_bricks"
-  }
-}
