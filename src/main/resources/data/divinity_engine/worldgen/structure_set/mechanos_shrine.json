@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "divinity_engine:mechanos_shrine",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 76,
+    "separation": 38,
+    "salt": 695413
+  }
+}

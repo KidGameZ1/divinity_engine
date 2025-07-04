@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "divinity_engine:ignar_shrine",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 70,
+    "separation": 35,
+    "salt": 847362
+  }
+}

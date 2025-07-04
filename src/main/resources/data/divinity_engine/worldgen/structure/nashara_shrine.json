@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:jigsaw",
+  "start_pool": "divinity_engine:nashara_shrine",
+  "size": 1,
+  "max_distance_from_center": 64,
+  "spawn_overrides": {},
+  "step": "underground_decoration",
+  "terrain_adaptation": "beard_box",
+  "start_height": {
+    "absolute": 36
+  },
+  "biomes": "warped_forest",
+  "use_expansion_hack": false
+}

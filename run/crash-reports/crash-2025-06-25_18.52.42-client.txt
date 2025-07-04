@@ -10,7 +10,7 @@ java.lang.IllegalArgumentException: No delegate exists for value net.nightshade.
 	at net.minecraftforge.registries.ForgeRegistry.getDelegateOrThrow(ForgeRegistry.java:497) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading}
 	at net.nightshade.divinity_engine.divinity.gods.BaseGodInstance.<init>(BaseGodInstance.java:35) ~[main/:?] {re:classloading}
 	at net.nightshade.divinity_engine.util.divinity.gods.GodHelper.contactGod(GodHelper.java:96) ~[main/:?] {re:classloading}
-	at net.nightshade.divinity_engine.block.ShrineBlock.use(ShrineBlock.java:64) ~[main/:?] {re:classloading}
+	at net.nightshade.divinity_engine.block.StatueBlock.use(ShrineBlock.java:64) ~[main/:?] {re:classloading}
 	at net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase.use(BlockBehaviour.java:778) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.performUseItemOn(MultiPlayerGameMode.java:323) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItemOn$4(MultiPlayerGameMode.java:291) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
@@ -52,7 +52,7 @@ Stacktrace:
 	at net.minecraftforge.registries.ForgeRegistry.getDelegateOrThrow(ForgeRegistry.java:497) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23183%23190!/:?] {re:classloading}
 	at net.nightshade.divinity_engine.divinity.gods.BaseGodInstance.<init>(BaseGodInstance.java:35) ~[%23189!/:?] {re:classloading}
 	at net.nightshade.divinity_engine.util.divinity.gods.GodHelper.contactGod(GodHelper.java:96) ~[%23189!/:?] {re:classloading}
-	at net.nightshade.divinity_engine.block.ShrineBlock.use(ShrineBlock.java:64) ~[%23189!/:?] {re:classloading}
+	at net.nightshade.divinity_engine.block.StatueBlock.use(ShrineBlock.java:64) ~[%23189!/:?] {re:classloading}
 	at net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase.use(BlockBehaviour.java:778) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.performUseItemOn(MultiPlayerGameMode.java:323) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading,pl:runtimedistcleaner:A}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItemOn$4(MultiPlayerGameMode.java:291) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading,pl:runtimedistcleaner:A}

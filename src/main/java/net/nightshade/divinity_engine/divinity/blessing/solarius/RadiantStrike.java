@@ -1,5 +1,6 @@
 package net.nightshade.divinity_engine.divinity.blessing.solarius;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
@@ -12,8 +13,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class RadiantStrike extends Blessings {
-    public RadiantStrike(int neededFavor, int cooldown, boolean hasTickCooldown) {
-        super(neededFavor, cooldown, hasTickCooldown);
+    public RadiantStrike(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isActive, canToggle, textColor);
     }
 
     @Override
@@ -32,10 +33,5 @@ public class RadiantStrike extends Blessings {
             }
         }
         return false;
-    }
-
-    @Override
-    public Color getColor() {
-        return Color.red;
     }
 }

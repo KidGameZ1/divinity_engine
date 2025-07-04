@@ -6,28 +6,43 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerXpEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
-import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+/**
+ * Represents an instance of a blessing that can be applied to entities.
+ * Handles blessing state management, cooldowns, and event callbacks.
+ * Can be bound to a specific god and serialized/deserialized via NBT.
+ */
 public class BlessingsInstance implements Cloneable {
+    /** Current cooldown ticks remaining before blessing can be used again */
     private int cooldown = 0;
+    /** The god instance this blessing is bound to, if any */
     private BaseGodInstance boundGod = null;
+    /** Whether this blessing is currently toggled on/off (for toggleable blessings) */
+    private boolean toggled = false;
 
+    /**
+     * Tracks if blessing state has changed and needs saving
+     */
     private boolean dirty = false;
 
+    /**
+     * Additional custom NBT data stored with this blessing instance
+     */
     @Nullable
     private CompoundTag tag;
+    /**
+     * Reference to the registry entry for this blessing type
+     */
     private final Holder.Reference<Blessings> blessingsReference;
 
     public BlessingsInstance(Blessings blessings) {
@@ -48,11 +63,19 @@ public class BlessingsInstance implements Cloneable {
         return clone;
     }
 
+    /**
+     * Serializes this blessing instance to NBT data.
+     * Includes blessing ID, cooldown, toggle state, bound god, and custom tag data.
+     *
+     * @return NBT compound containing blessing data
+     */
     @ApiStatus.NonExtendable
     public final CompoundTag toNBT() {
         CompoundTag tag = new CompoundTag();
         tag.putString("Blessing", this.getBlessingId().toString());
         tag.putInt("Cooldown", this.cooldown);
+        if (getBlessing().canToggle())
+            tag.putBoolean("Toggled", this.toggled);
 
         if (this.boundGod != null) {
             CompoundTag godTag = new CompoundTag();
@@ -70,6 +93,8 @@ public class BlessingsInstance implements Cloneable {
 
     public CompoundTag serialize(CompoundTag tag) {
         tag.putInt("Cooldown", this.cooldown);
+        if (getBlessing().canToggle())
+            tag.putBoolean("Toggled", this.toggled);
         if (this.boundGod != null) {
             // Store only the necessary information to identify the bound god
             CompoundTag godTag = new CompoundTag();
@@ -85,8 +110,16 @@ public class BlessingsInstance implements Cloneable {
         return tag;
     }
 
+    /**
+     * Restores this blessing instance's state from NBT data.
+     * Updates cooldown, toggle state, bound god, and custom tag data.
+     *
+     * @param tag NBT compound containing blessing data
+     */
     public void deserialize(CompoundTag tag) {
         this.cooldown = tag.getInt("Cooldown");
+        if (getBlessing().canToggle())
+            this.toggled = tag.getBoolean("Toggled");
         // Handle bound god deserialization
         if (tag.contains("Bound God", 10)) { // 10 is NBT compound tag type
             CompoundTag godTag = tag.getCompound("Bound God");
@@ -110,6 +143,13 @@ public class BlessingsInstance implements Cloneable {
 
     }
 
+    /**
+     * Creates a new blessing instance from serialized NBT data.
+     *
+     * @param tag NBT compound containing blessing data
+     * @return New blessing instance with restored state
+     * @throws IllegalArgumentException if blessing ID is invalid or unknown
+     */
     @ApiStatus.NonExtendable
     public static BlessingsInstance fromNBT(CompoundTag tag) {
         ResourceLocation blessingId = ResourceLocation.tryParse(tag.getString("Blessing"));
@@ -125,6 +165,8 @@ public class BlessingsInstance implements Cloneable {
         // Create the instance
         BlessingsInstance instance = blessing.createDefaultInstance();
         instance.cooldown = tag.getInt("Cooldown");
+        if (blessing.canToggle())
+        instance.toggled = tag.getBoolean("Toggled");
 
         // Handle bound god
         if (tag.contains("Bound God", 10)) {
@@ -193,6 +235,10 @@ public class BlessingsInstance implements Cloneable {
         return this.cooldown;
     }
 
+    public boolean isOnCooldown() {
+        return this.cooldown > 0;
+    }
+
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
         this.markDirty();
@@ -205,6 +251,19 @@ public class BlessingsInstance implements Cloneable {
     public void increaseCooldown(int favor) {
         this.cooldown += favor;
         this.markDirty();
+    }
+
+    public boolean isToggled() {
+        if (getBlessing().canToggle()) {
+            return toggled;
+        }
+        return false;
+    }
+
+    public void setToggled(boolean toggled) {
+        if (getBlessing().canToggle()) {
+            this.toggled = toggled;
+        }
     }
 
     public BaseGodInstance getBoundGodInstance() {
@@ -234,19 +293,19 @@ public class BlessingsInstance implements Cloneable {
 
     public void onToggleOn(LivingEntity entity) {
         this.getBlessing().onToggleOn(this, entity);
+        this.setToggled(true);
     }
 
     public void onToggleOff(LivingEntity entity) {
         if (this.getBlessing().onToggleOff(this, entity)){
             setCooldown(getBlessing().getCooldown());
         }
+        this.setToggled(false);
     }
 
     public void onTick(LivingEntity entity) {
         if (this.getBlessing().onTick(this, entity)){
-            if(getBlessing().hasTickCooldown()){
-                setCooldown(getBlessing().getCooldown());
-            }
+            setCooldown(getBlessing().getCooldown());
         }
 
     }
@@ -255,12 +314,12 @@ public class BlessingsInstance implements Cloneable {
         this.getBlessing().onPressed(this, entity);
     }
 
-    public boolean onHeld(LivingEntity entity, int heldTicks) {
-        return this.getBlessing().onHeld(this, entity, heldTicks);
+    public void onHeld(LivingEntity entity, int heldTicks) {
+        this.getBlessing().onHeld(this, entity, heldTicks);
     }
 
     public void onRelease(LivingEntity entity, int heldTicks) {
-        if (this.getBlessing().onRelease(this, entity, heldTicks))
+        if (this.getBlessing().onRelease(this, entity, heldTicks) || this.getBlessing().onHeld(this, entity, heldTicks) || this.getBlessing().onPressed(this, entity))
             setCooldown(getBlessing().getCooldown());
     }
 
@@ -294,8 +353,18 @@ public class BlessingsInstance implements Cloneable {
             setCooldown(getBlessing().getCooldown());
     }
 
+    public void onCriticalHit(CriticalHitEvent event) {
+        if(this.getBlessing().onCriticalHit(this, event))
+            setCooldown(getBlessing().getCooldown());
+    }
+
     public void onDamageEntity(LivingEntity player, LivingHurtEvent event) {
         if(this.getBlessing().onDamageEntity(this, player,event))
+            setCooldown(getBlessing().getCooldown());
+    }
+
+    public void onKillEntity(LivingEntity player, LivingDeathEvent event) {
+        if(this.getBlessing().onKillEntity(this, player,event))
             setCooldown(getBlessing().getCooldown());
     }
 
@@ -387,6 +456,16 @@ public class BlessingsInstance implements Cloneable {
 
     public void onItemSmelted(PlayerEvent.ItemSmeltedEvent event){
         if (this.getBlessing().onItemSmelted(this, event))
+            setCooldown(getBlessing().getCooldown());
+    }
+
+    public void onSleepInBed(PlayerSleepInBedEvent event) {
+        if(this.getBlessing().onSleepInBed(this, event))
+            setCooldown(getBlessing().getCooldown());
+    }
+
+    public void onWakeUp(PlayerWakeUpEvent event){
+        if (this.getBlessing().onWakeUp(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 }

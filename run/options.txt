@@ -118,7 +118,10 @@ key_key.hotbar.6:key.keyboard.6
 key_key.hotbar.7:key.keyboard.7
 key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
-soundCategory_master:0.5462994101821192
+key_key.divinity_engine.blessing_slot_1:key.keyboard.r
+key_key.divinity_engine.blessing_slot_2:key.keyboard.g
+key_key.divinity_engine.blessing_slot_3:key.keyboard.v
+soundCategory_master:0.0
 soundCategory_music:0.0
 soundCategory_record:1.0
 soundCategory_weather:1.0

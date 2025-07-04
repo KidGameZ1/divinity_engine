@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "divinity_engine:solarius_shrine",
+      "weight": 4
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 30,
+    "salt": 420777
+  }
+}

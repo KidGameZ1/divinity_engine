@@ -10,8 +10,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class Sunskin extends Blessings {
-    public Sunskin(int neededFavor, int cooldown, boolean hasTickCooldown) {
-        super(neededFavor, cooldown, hasTickCooldown);
+    public Sunskin(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isActive, canToggle, textColor);
     }
 
     @Override
@@ -19,15 +19,10 @@ public class Sunskin extends Blessings {
 
         if (living.level().isDay()){
             if (living.getHealth() < living.getMaxHealth()){
-                living.heal(0.002f);
+                living.heal(0.02f);
             }
         }
 
         return false;
-    }
-
-    @Override
-    public Color getColor() {
-        return Color.red;
     }
 }

@@ -8,6 +8,8 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
+import net.nightshade.divinity_engine.block.StatueBlock;
+import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -17,8 +19,15 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-
+        // Generate item models for all statue blocks
+        BlocksRegistry.REGISTRY.getEntries().forEach(block -> {
+            if (block.get() instanceof StatueBlock) {
+                String path = block.getId().getPath();
+                withExistingParent(path, modLoc("block/statue"));
+            }
+        });
     }
+
 
 
 

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "divinity_engine:terra_shrine",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 52,
+    "separation": 26,
+    "salt": 808881
+  }
+}

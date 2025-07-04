@@ -1,5 +1,6 @@
 package net.nightshade.divinity_engine.network.cap.player.gods;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -16,20 +17,14 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
-import net.nightshade.divinity_engine.network.messages.SyncMainPlayerCapabilityPacket;
+import net.nightshade.divinity_engine.network.messages.cap.SyncMainPlayerCapabilityPacket;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
-import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
-import java.util.Optional;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MainPlayerCapability {
@@ -118,6 +113,7 @@ public class MainPlayerCapability {
 			}
 
 			nbt.putInt("blessingsPageNum", this.blessingsPageNum);
+
 			return nbt;
 		}
 

@@ -72,7 +72,7 @@ java.lang.RuntimeException: null
 	Caused by: java.lang.NullPointerException: Registry Object not present: divinity_engine:solarius
 		at java.util.Objects.requireNonNull(Objects.java:360) ~[?:?] {}
 		at net.minecraftforge.registries.RegistryObject.get(RegistryObject.java:204) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23183%23190!/:?] {re:mixin,re:classloading}
-		at net.nightshade.divinity_engine.block.ShrineBlock.<init>(ShrineBlock.java:34) ~[%23189!/:?] {re:classloading}
+		at net.nightshade.divinity_engine.block.StatueBlock.<init>(ShrineBlock.java:34) ~[%23189!/:?] {re:classloading}
 		at net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry.lambda$register$2(GodsRegistry.java:50) ~[%23189!/:?] {re:classloading}
 		at net.minecraftforge.registries.DeferredRegister.lambda$addEntries$1(DeferredRegister.java:386) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23183%23190!/:?] {re:classloading}
 		at net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:59) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23183%23190!/:?] {re:classloading,pl:eventbus:A}
@@ -85,7 +85,7 @@ java.lang.RuntimeException: null
 		at net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:121) ~[javafmllanguage-1.20.1-47.4.2.jar:?] {}
 		... 33 more
 	Suppressed: net.minecraftforge.fml.ModLoadingException: Divinity Engine (divinity_engine) encountered an error during the common_setup event phase
-§7java.lang.NullPointerException: Registry Object not present: divinity_engine:solarius_shrine
+§7java.lang.NullPointerException: Registry Object not present: divinity_engine:solarius_statue
 		at net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:125) ~[javafmllanguage-1.20.1-47.4.2.jar:?] {}
 		at net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$33(ModLoader.java:346) ~[fmlcore-1.20.1-47.4.2.jar:?] {}
 		at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?] {}
@@ -120,7 +120,7 @@ java.lang.RuntimeException: null
 		at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?] {}
 		at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?] {}
 		at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?] {}
-	Caused by: java.lang.NullPointerException: Registry Object not present: divinity_engine:solarius_shrine
+	Caused by: java.lang.NullPointerException: Registry Object not present: divinity_engine:solarius_statue
 		at java.util.Objects.requireNonNull(Objects.java:360) ~[?:?] {}
 		at net.minecraftforge.registries.RegistryObject.get(RegistryObject.java:204) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23183%23190!/:?] {re:mixin,re:classloading}
 		at net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry.lambda$register$3(GodsRegistry.java:51) ~[%23189!/:?] {re:classloading}

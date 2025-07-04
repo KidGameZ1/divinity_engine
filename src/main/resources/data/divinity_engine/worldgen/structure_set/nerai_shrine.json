@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "divinity_engine:nerai_shrine",
+      "weight": 3
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 72,
+    "separation": 36,
+    "salt": 314159
+  }
+}

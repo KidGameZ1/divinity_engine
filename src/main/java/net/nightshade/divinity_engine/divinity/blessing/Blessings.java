@@ -7,47 +7,93 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerXpEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
-import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
-import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import javax.annotation.Nullable;
 import java.awt.*;
 
+/**
+ * Represents a blessing that can be granted to entities in the game.
+ * Handles various event callbacks and blessing state management.
+ */
 public class Blessings {
+    /**
+     * Amount of favor required to activate this blessing
+     */
     private final int neededFavor;
+    /**
+     * Cooldown period in ticks between blessing activations
+     */
     private final int cooldown;
-    private final boolean hasTickCooldown;
+    /**
+     * Whether this blessing is currently active
+     */
+    private final boolean isActive;
+    /**
+     * Whether this blessing can be toggled on/off
+     */
+    private final boolean canToggle;
+    /**
+     * Color used for blessing text display
+     */
+    private final Color textColor;
 
-    public Blessings(int neededFavor, int cooldown, boolean hasTickCooldown) {
+    /**
+     * Creates a new blessing with the specified parameters.
+     *
+     * @param neededFavor Amount of favor required to activate
+     * @param cooldown    Cooldown period in seconds
+     * @param isActive    Initial active state
+     * @param canToggle   Whether blessing can be toggled
+     * @param textColor   Color for blessing text
+     */
+    public Blessings(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
         this.neededFavor = neededFavor;
         this.cooldown = MiscHelper.secondsToTick(cooldown);
-        this.hasTickCooldown = hasTickCooldown;
+        this.isActive = isActive;
+        this.canToggle = canToggle;
+        this.textColor = textColor;
     }
 
+    /**
+     * Gets the amount of favor needed to activate this blessing.
+     *
+     * @return Required favor amount
+     */
     public int getNeededFavor() {
         return neededFavor;
     }
 
+    /**
+     * Gets the cooldown period in ticks.
+     *
+     * @return Cooldown period
+     */
     public int getCooldown() {
         return cooldown;
     }
 
-    public boolean hasTickCooldown() {
-        return hasTickCooldown;
+    /**
+     * Called when this blessing is toggled on.
+     *
+     * @param instance The blessing instance
+     * @param entity   The affected entity
+     */
+    public void onToggleOn(BlessingsInstance instance, LivingEntity entity) {
     }
 
-    public boolean onToggleOn(BlessingsInstance instance, LivingEntity entity) {
-        return false;
-    }
-
+    /**
+     * Called when this blessing is toggled off.
+     *
+     * @param instance The blessing instance
+     * @param entity   The affected entity
+     * @return True if toggle was handled
+     */
     public boolean onToggleOff(BlessingsInstance instance, LivingEntity entity) {
         return false;
     }
@@ -56,7 +102,7 @@ public class Blessings {
         return false;
     }
 
-    public boolean onPressed(BlessingsInstance instance, LivingEntity entity) {
+    public boolean onPressed(BlessingsInstance instance, LivingEntity living) {
         return false;
     }
 
@@ -64,7 +110,7 @@ public class Blessings {
         return false;
     }
 
-    public boolean onRelease(BlessingsInstance instance, LivingEntity entity, int heldTicks) {
+    public boolean onRelease(BlessingsInstance instance, LivingEntity living, int heldTicks) {
         return false;
     }
 
@@ -92,7 +138,15 @@ public class Blessings {
         return false;
     }
 
+    public boolean onCriticalHit(BlessingsInstance instance, CriticalHitEvent event) {
+        return false;
+    }
+
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
+        return false;
+    }
+
+    public boolean onKillEntity(BlessingsInstance instance, LivingEntity player, LivingDeathEvent event) {
         return false;
     }
 
@@ -168,10 +222,28 @@ public class Blessings {
         return false;
     }
 
-    public Color getColor() {
-        return Color.WHITE;
+    public boolean onSleepInBed(BlessingsInstance instance, PlayerSleepInBedEvent event) {
+        return false;
     }
 
+    public boolean onWakeUp(BlessingsInstance instance, PlayerWakeUpEvent event) {
+        return false;
+    }
+
+    public Color getColor() {
+        return textColor;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    /**
+     * Creates a default instance of this blessing.
+     *
+     * @param <T> Type of blessing instance
+     * @return New blessing instance
+     */
     public <T extends BlessingsInstance> T createDefaultInstance() {
         return (T) new BlessingsInstance(this);
     }
@@ -206,5 +278,9 @@ public class Blessings {
         } else {
             return false;
         }
+    }
+
+    public boolean canToggle() {
+        return canToggle;
     }
 }

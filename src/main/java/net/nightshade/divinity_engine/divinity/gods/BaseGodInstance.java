@@ -10,6 +10,7 @@ import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.LoseFaithEvent;
+import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.WhileNearStatueEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.OfferEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.PrayEvent;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
@@ -18,19 +19,29 @@ import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents an instance of a god with its associated state including favor level,
+ * blessings, and custom data. This class handles the persistence and management of
+ * a god's state during gameplay.
+ */
 public class BaseGodInstance implements Cloneable {
+    /** Current favor level with this god, ranging from -100 to 100 */
     private int favor = 0;
 
+    /** Set of active blessings granted by this god */
     private Set<BlessingsInstance> blessingsInstances = new HashSet<BlessingsInstance>();
 
+    /** Indicates if the instance has unsaved changes */
     private boolean dirty = false;
 
+    /** Custom NBT data storage for god-specific data */
     @Nullable
     private CompoundTag tag;
+
+    /** Reference to the base god type in the registry */
     private final Holder.Reference<BaseGod> godsReference;
 
     public BaseGodInstance(BaseGod god) {
@@ -56,12 +67,22 @@ public class BaseGodInstance implements Cloneable {
         return this.godsReference.key().location();
     }
 
+    /**
+     * Creates a clone of this god instance with the same base god and dirty state.
+     * Blessings and other mutable state are not carried over.
+     * @return A new BaseGodInstance clone
+     */
     public BaseGodInstance clone() {
         BaseGodInstance clone = new BaseGodInstance(this.getBaseGod());
         clone.dirty = this.dirty;
         return clone;
     }
 
+    /**
+     * Serializes the god instance to NBT format for persistence.
+     * Saves favor level, blessings, and custom data.
+     * @return CompoundTag containing the serialized god data
+     */
     @ApiStatus.NonExtendable
     public final CompoundTag toNBT() {
         CompoundTag tag = new CompoundTag();
@@ -129,8 +150,9 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public void deserialize(CompoundTag tag) {
-        this.favor = tag.getInt("Favor");
-
+        if (tag.getInt("Favor") <= 100 || tag.getInt("Favor") >= -100) {
+            this.favor = tag.getInt("Favor");
+        }
         // Handle blessings
         if (tag.contains("Blessings", 10)) { // 10 is the NBT tag type for CompoundTag
             blessingsInstances.clear();
@@ -163,6 +185,13 @@ public class BaseGodInstance implements Cloneable {
 
     }
 
+    /**
+     * Deserializes a god instance from NBT data.
+     * Restores favor level, blessings, and custom data.
+     * @param tag The NBT data to deserialize from
+     * @return A new BaseGodInstance with the deserialized state
+     * @throws IllegalArgumentException if the NBT data is invalid
+     */
     @ApiStatus.NonExtendable
     public static BaseGodInstance fromNBT(CompoundTag tag) {
         if (!tag.contains("God")) {
@@ -176,8 +205,9 @@ public class BaseGodInstance implements Cloneable {
         }
 
         BaseGodInstance instance = god.createGodDefaultInstance();
-        instance.favor = tag.getInt("Favor");
-
+        if (tag.getInt("Favor") <= 100 || tag.getInt("Favor") >= -100) {
+            instance.favor = tag.getInt("Favor");
+        }
         // Clear default blessings before loading saved ones
         instance.blessingsInstances.clear();
 
@@ -265,6 +295,10 @@ public class BaseGodInstance implements Cloneable {
         return Objects.hash(new Object[]{this.godsReference});
     }
 
+    /**
+     * Gets the current favor level with this god.
+     * @return Current favor value between -100 and 100
+     */
     public int getFavor() {
         return this.favor;
     }
@@ -275,18 +309,35 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public void decreaseFavor(int favor) {
-        this.favor -= favor;
-        this.markDirty();
+        if (!(this.favor - favor < -100)) {
+            this.favor -= favor;
+            this.markDirty();
+        }else {
+            this.favor = -100;
+            this.markDirty();
+        }
+
     }
+
     public void increaseFavor(int favor) {
-        this.favor += favor;
-        this.markDirty();
+        if (this.favor + favor < 100) {
+            this.favor += favor;
+            this.markDirty();
+        }else {
+            this.favor = 100;
+            this.markDirty();
+        }
     }
 
     public Set<BlessingsInstance> getBlessingsInstances() {
         return blessingsInstances;
     }
 
+    /**
+     * Adds or replaces a blessing instance for this god.
+     * If a blessing of the same type exists, it will be replaced.
+     * @param newInstance The blessing instance to add
+     */
     public void addBlessing(BlessingsInstance newInstance) {
         // Remove any existing instance of this blessing (matches by blessing type)
         blessingsInstances.removeIf(instance ->
@@ -307,6 +358,7 @@ public class BaseGodInstance implements Cloneable {
             }
         }
     }
+
     public void removeBlessing(Blessings blessings) {
         for (BlessingsInstance instance : blessingsInstances) {
             if (instance.getBlessing() == blessings) {
@@ -315,6 +367,7 @@ public class BaseGodInstance implements Cloneable {
             }
         }
     }
+
     public BlessingsInstance getBlessing(Blessings blessings) {
         for (BlessingsInstance instance : blessingsInstances) {
             if (instance.getBlessing() == blessings) {
@@ -346,12 +399,16 @@ public class BaseGodInstance implements Cloneable {
         this.getBaseGod().onPrayedTo(this,event);
     }
 
-    public void onOfferedItems(OfferEvent.OfferItemEvent event) {
-        this.getBaseGod().onOfferedItems(this,event);
+    public void whileNearShrine(WhileNearStatueEvent event) {
+        this.getBaseGod().whileNearShrine(this,event);
     }
 
-    public void onOfferedEntity(OfferEvent.OfferEntityEvent event) {
-        this.getBaseGod().onOfferedEntity(this,event);
+    public boolean onOfferedItems(OfferEvent.OfferItemEvent event) {
+        return this.getBaseGod().onOfferedItems(this,event);
+    }
+
+    public boolean onOfferedEntity(OfferEvent.OfferEntityEvent event) {
+        return this.getBaseGod().onOfferedEntity(this,event);
     }
     public void onContact(LivingEntity living, ContactGodEvent event) {
         this.getBaseGod().onContacted(living, event);

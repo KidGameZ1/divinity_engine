@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.commands.arg.GodsArgument;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
+import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 @Mod.EventBusSubscriber
@@ -52,6 +53,8 @@ public class DivinityEngineCommands {
 													} else {
 														player.displayClientMessage(Component.literal(entityCalledOn.getDisplayName().getString() + " is already in contact with " + Component.translatable(god.getNameTranslationKey()).getString()), false);
 													}
+												}else {
+													GodHelper.contactGod(god, (LivingEntity) entityCalledOn);
 												}
 											}
 											return 0;
@@ -166,14 +169,18 @@ public class DivinityEngineCommands {
 						}.getEntity());
 						Entity commandCaller = arguments.getSource().getEntity();
 
-						if (commandCaller instanceof Player player){
 							if (!GodHelper.getAllBlessingsInstances(entityCalledOn).isEmpty()){
 								GodHelper.getAllBlessingsInstances(entityCalledOn).forEach((blessing) -> {
 									blessing.setCooldown(0);
 								});
+								if (MainPlayerCapabilityHelper.getBlessingSlot1(entityCalledOn) != null)
+									MainPlayerCapabilityHelper.getBlessingSlot1(entityCalledOn).setCooldown(0);
+								if (MainPlayerCapabilityHelper.getBlessingSlot2(entityCalledOn) != null)
+									MainPlayerCapabilityHelper.getBlessingSlot2(entityCalledOn).setCooldown(0);
+								if (MainPlayerCapabilityHelper.getBlessingSlot3(entityCalledOn) != null)
+									MainPlayerCapabilityHelper.getBlessingSlot3(entityCalledOn).setCooldown(0);
 
 							}
-						}
 
 						return 0;
 					}))));

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GodsArgument implements ArgumentType<BaseGod> {
-    private static final DynamicCommandExceptionType ERROR_INVALID_VALUE = new DynamicCommandExceptionType((o) -> Component.translatable("tbate.argument.clan.invalid"));
+    private static final DynamicCommandExceptionType ERROR_INVALID_VALUE = new DynamicCommandExceptionType((o) -> Component.translatable("divinity.argument.gods.invalid"));
 
     public GodsArgument() {
     }
@@ -48,7 +48,7 @@ public class GodsArgument implements ArgumentType<BaseGod> {
     }
 
     public Collection<String> getExamples() {
-        return (Collection) Stream.of(GodsRegistry.SOLARIUS.getId(), GodsRegistry.SOLARIUS.getId()).map(ResourceLocation::toString).collect(Collectors.toList());
+        return (Collection) Stream.of(GodsRegistry.SOLARIUS.getId(), GodsRegistry.NASHARA.getId()).map(ResourceLocation::toString).collect(Collectors.toList());
     }
 
 }

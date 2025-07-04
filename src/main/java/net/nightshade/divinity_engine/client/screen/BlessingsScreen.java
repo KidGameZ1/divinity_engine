@@ -3,6 +3,7 @@ package net.nightshade.divinity_engine.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,8 @@ import net.minecraft.world.level.Level;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
-import net.nightshade.divinity_engine.network.messages.BlessingsButtonMessage;
+import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
+import net.nightshade.divinity_engine.network.messages.gui.BlessingsButtonMessage;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
 import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
@@ -21,7 +23,6 @@ import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 
@@ -50,6 +51,27 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	}
 
 	private static final ResourceLocation texture = new ResourceLocation(DivinityEngineMod.MODID +":textures/screens/blessings_screen.png");
+
+	@Override
+	public void containerTick() {
+		super.containerTick();
+
+		// Update the active button text and state
+		updateActiveButton();
+
+		// Force the screen to refresh
+		this.setFocused(null);
+		if (this.minecraft != null && this.minecraft.player != null) {
+			// Request a sync of gods data from server
+			GodHelper.getAllBlessingsInstances(this.minecraft.player).forEach(blessing -> {
+				var god = blessing.getBoundGod();
+				var instance = GodHelper.getGodOrNull(this.minecraft.player, god);
+				if (instance != null) {
+					instance.markDirty();
+				}
+			});
+		}
+	}
 
 
 	@Override
@@ -141,62 +163,86 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 		if (pageNum >= 0 && pageNum < blessingsInstances.size()) {
 			BlessingsInstance selectedBlessingInstance = blessingsInstances.get(pageNum);
 			Blessings selectedBlessing = selectedBlessingInstance.getBlessing();
+			int current_favor = GodHelper.getGodOrNull(minecraft.player,selectedBlessingInstance.getBoundGod()).getFavor();
 
 			// Draw blessing name
 
 			String blessingName = Component.translatable(selectedBlessing.getNameTranslationKey()).getString();
 			guiGraphics.drawCenteredString(font, blessingName, blessingNameX , blessingNameY, selectedBlessing.getColor().getRGB());
 
+			String favorTier = Component.translatable(FavorTiers.getByFavor(current_favor).getNameTranslationKey()).getString();
+
 			// Draw other information
 			guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_given_by").getString()+Component.translatable(selectedBlessingInstance.getBoundGod().getNameTranslationKey()).getString(), 7, 25, selectedBlessingInstance.getBoundGod().getColor().getRGB(), false);
 			guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_required_favor").getString()+selectedBlessing.getNeededFavor(), 7, 40, -12829636, false);
-			guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_current_favor").getString()+GodHelper.getGodOrNull(minecraft.player,selectedBlessingInstance.getBoundGod()).getFavor(), 7, 54, -12829636, false);
+			if(Screen.hasShiftDown()){
+				guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_current_favor").getString()+current_favor, 7, 54, -12829636, false);
+			}else {
+				guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_current_favor").getString()+favorTier, 7, 54, -12829636, false);
+			}
+
 		}
 	}
 
 	private void updateActiveButton() {
 		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
 		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
-
 		if (waitingForKeyPress) {
-			// Remove old button
 			this.removeWidget(button_active);
-
-			// Create new wider button
 			button_active = Button.builder(Component.literal("Press 1, 2, or 3"), e -> {
 				// Clicking while waiting does nothing
 			}).bounds(this.leftPos + 32, this.topPos + 69, 86, 20).build();
-
 			this.addRenderableWidget(button_active);
 		} else {
-			// Remove wide button
 			this.removeWidget(button_active);
 
-			// Check if blessing is already equipped
-			boolean isEquipped = false;
-			if (blessingsInstances != null && !blessingsInstances.isEmpty() && pageNum >= 0 && pageNum < blessingsInstances.size()) {
+			// Check if blessing is equipped and where
+			int equippedSlot = -1;
+			if (blessingsInstances != null && !blessingsInstances.isEmpty() &&
+					pageNum >= 0 && pageNum < blessingsInstances.size()) {
 				BlessingsInstance selectedBlessing = blessingsInstances.get(pageNum);
-				isEquipped = isAnySlotEquipped(selectedBlessing);
+				equippedSlot = getEquippedSlot(selectedBlessing);
 			}
 
-			// Restore original button with appropriate text
-			Component buttonText = isEquipped ?
-					Component.literal("Already Equipped") :
+			// Create button with appropriate text and action
+			Component buttonText = equippedSlot != -1 ?
+					Component.literal("Unequip from " + (equippedSlot + 1)) :
 					Component.translatable("gui.divinity_engine.blessings.button_active");
+
 			button_active = Button.builder(buttonText, e -> {
-				if (blessingsInstances != null && !blessingsInstances.isEmpty() && pageNum >= 0 && pageNum < blessingsInstances.size()) {
+				if (blessingsInstances != null && !blessingsInstances.isEmpty() &&
+						pageNum >= 0 && pageNum < blessingsInstances.size()) {
 					BlessingsInstance selectedBlessing = blessingsInstances.get(pageNum);
-					boolean equipped = isAnySlotEquipped(selectedBlessing);
-					if (!equipped) {
+					int slot = getEquippedSlot(selectedBlessing);
+					if (slot != -1) {
+						// If equipped, send unequip message
+						ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(10 + slot, x, y, z));
+					} else {
+						// If not equipped, start equip process
 						waitingForKeyPress = true;
 						updateActiveButton();
 					}
 				}
 			}).bounds(this.leftPos + 47, this.topPos + 69, 56, 20).build();
 
+
+
+
 			this.addRenderableWidget(button_active);
 		}
 	}
+
+	private int getEquippedSlot(BlessingsInstance blessing) {
+		BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(minecraft.player);
+		BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(minecraft.player);
+		BlessingsInstance slot2 = MainPlayerCapabilityHelper.getBlessingSlot3(minecraft.player);
+
+		if (slot0 != null && slot0.getBlessing().equals(blessing.getBlessing())) return 0;
+		if (slot1 != null && slot1.getBlessing().equals(blessing.getBlessing())) return 1;
+		if (slot2 != null && slot2.getBlessing().equals(blessing.getBlessing())) return 2;
+		return -1;
+	}
+
 	private boolean isAnySlotEquipped(BlessingsInstance blessing) {
 		BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(minecraft.player);
 		BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(minecraft.player);

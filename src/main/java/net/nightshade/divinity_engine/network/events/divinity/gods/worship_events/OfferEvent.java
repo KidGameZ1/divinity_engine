@@ -2,6 +2,7 @@ package net.nightshade.divinity_engine.network.events.divinity.gods.worship_even
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.network.events.divinity.gods.GodsEvent;
@@ -20,10 +21,12 @@ public class OfferEvent extends GodsEvent {
 
     public static class OfferItemEvent extends OfferEvent {
         private ItemStack offeredItem;
+        private ItemEntity offeredItemEntity;
 
-        public OfferItemEvent(BaseGodInstance instance, LivingEntity offerer, ItemStack offeredItem) {
+        public OfferItemEvent(BaseGodInstance instance, LivingEntity offerer, ItemStack offeredItem, ItemEntity offeredItemEntity) {
             super(instance, offerer);
             this.offeredItem = offeredItem;
+            this.offeredItemEntity = offeredItemEntity;
         }
 
         public ItemStack getOffer() {
@@ -33,6 +36,15 @@ public class OfferEvent extends GodsEvent {
         public void setOfferedItem(ItemStack offeredItem) {
             this.offeredItem = offeredItem;
         }
+
+        public ItemEntity getOfferedItemEntity() {
+            return offeredItemEntity;
+        }
+
+        public void setOfferedItemEntity(ItemEntity offeredItemEntity) {
+            this.offeredItemEntity = offeredItemEntity;
+        }
+
     }
 
     public static class OfferEntityEvent extends OfferEvent {

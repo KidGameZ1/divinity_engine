@@ -8,9 +8,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
-import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.divinity.curse.Curse;
 import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.LoseFaithEvent;
+import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.WhileNearStatueEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.OfferEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.PrayEvent;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
@@ -18,21 +19,54 @@ import net.nightshade.divinity_engine.registry.divinity.gods.domains.GodsDomainR
 
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.List;
 import java.util.Set;
 
+/**
+ * Base class for all gods in the divinity system.
+ * Provides core functionality for handling domains, blessings, and divine interactions.
+ */
 public class BaseGod {
 
+    /**
+     * The domains (spheres of influence) this god has authority over
+     */
     private final Set<String> domains;
-
+    /**
+     * The blessings this god can bestow upon followers
+     */
     private final Set<RegistryObject<Blessings>> blessings;
+    /**
+     * The color used for text related to this god in the UI
+     */
+    private final Color textColor;
 
-    public BaseGod(Set<String> domains, Set<RegistryObject<Blessings>> blessings) {
+    private final @Nullable Curse curse;
+
+    /**
+     * Creates a new god with specified domains, blessings and text color.
+     * Automatically registers all domains with the GodsDomainRegistry.
+     *
+     * @param domains   The set of domain names this god controls
+     * @param blessings The set of blessings this god can grant
+     * @param textColor The color used for god-related text in UI
+     */
+    public BaseGod(Set<String> domains, Set<RegistryObject<Blessings>> blessings, @Nullable Curse curse, Color textColor) {
         this.domains = domains;
+        this.textColor = textColor;
         for (int i = 0; i < domains.size(); i++) {
             GodsDomainRegistry.registerDomain(domains.stream().toList().get(i));
         }
         this.blessings = blessings;
+        this.curse = curse;
+    }
+    public BaseGod(Set<String> domains, Set<RegistryObject<Blessings>> blessings, Color textColor) {
+        this.domains = domains;
+        this.textColor = textColor;
+        for (int i = 0; i < domains.size(); i++) {
+            GodsDomainRegistry.registerDomain(domains.stream().toList().get(i));
+        }
+        this.blessings = blessings;
+        this.curse = null;
     }
 
     public Set<String> getDomains() {
@@ -43,22 +77,55 @@ public class BaseGod {
         return blessings;
     }
 
-    public void onPrayedTo(BaseGodInstance instance, PrayEvent event) {}
-
-    public void onOfferedItems(BaseGodInstance instance, OfferEvent.OfferItemEvent event) {}
-
-    public void onOfferedEntity(BaseGodInstance instance, OfferEvent.OfferEntityEvent event) {}
-
-    public void onContacted(LivingEntity living, ContactGodEvent event) {}
-
-    public void onLoseFaith(LivingEntity living, LoseFaithEvent event) {}
-
-    public <T extends BaseGodInstance> T createGodDefaultInstance() {
-        BaseGodInstance baseGodInstance = new BaseGodInstance(this);
-        // Initialize blessings
-        return (T) baseGodInstance;
+    public Curse getCurse() {
+        return curse;
     }
 
+    /**
+     * Called when a player prays to this god
+     */
+    public void onPrayedTo(BaseGodInstance instance, PrayEvent event) {
+    }
+
+    /**
+     * Called when items are offered to this god. Returns true if offering is accepted
+     */
+    public boolean onOfferedItems(BaseGodInstance instance, OfferEvent.OfferItemEvent event) {
+        return false;
+    }
+
+    /**
+     * Called when an entity is offered to this god. Returns true if offering is accepted
+     */
+    public boolean onOfferedEntity(BaseGodInstance instance, OfferEvent.OfferEntityEvent event) {
+        return false;
+    }
+
+    /**
+     * Called periodically while a player is near this god's statue
+     */
+    public void whileNearShrine(BaseGodInstance instance, WhileNearStatueEvent event) {
+    }
+
+    /**
+     * Called when a player first makes contact with this god
+     */
+    public void onContacted(LivingEntity living, ContactGodEvent event) {
+    }
+
+    /**
+     * Called when a player loses faith in this god
+     */
+    public void onLoseFaith(LivingEntity living, LoseFaithEvent event) {}
+
+    /**
+     * Creates a new instance of this god's handler class.
+     * @return A new BaseGodInstance for this god
+     */
+    public <T extends BaseGodInstance> T createGodDefaultInstance() {
+        BaseGodInstance baseGodInstance = new BaseGodInstance(this);
+        return (T) baseGodInstance;
+    }
 
     @Nullable
     public ResourceLocation getRegistryName() {
@@ -82,11 +149,22 @@ public class BaseGod {
     public String getLossContactMessageTranslationKey() {
         return String.format("%s.gods.%s.loss", this.getRegistryName().getNamespace(), this.getRegistryName().getPath().replace('/', '.'));
     }
-
-    public Color getColor() {
-        return Color.WHITE;
+    public String getCurseMessageTranslationKey() {
+        return String.format("%s.gods.%s.curse", this.getRegistryName().getNamespace(), this.getRegistryName().getPath().replace('/', '.'));
+    }
+    public String getUncurseMessageTranslationKey() {
+        return String.format("%s.gods.%s.uncurse", this.getRegistryName().getNamespace(), this.getRegistryName().getPath().replace('/', '.'));
     }
 
+    public Color getColor() {
+        return textColor;
+    }
+
+    /**
+     * Checks if another god is equal to this one based on registry name.
+     * @param o The object to compare with
+     * @return true if the objects are the same god
+     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;

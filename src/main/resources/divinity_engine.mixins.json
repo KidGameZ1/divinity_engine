@@ -5,14 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "divinity_engine.refmap.json",
   "mixins": [
+    "PowderSnowBlockMixin",
     "RegistryBuilderAccessor"
   ],
   "client": [
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
   }
 }
