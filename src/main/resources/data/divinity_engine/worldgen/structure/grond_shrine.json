@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:jigsaw",
+  "start_pool": "divinity_engine:grond_shrine",
+  "size": 1,
+  "max_distance_from_center": 64,
+  "spawn_overrides": {},
+  "step": "underground_decoration",
+  "terrain_adaptation": "beard_box",
+  "start_height": {
+    "absolute": 33
+  },
+  "biomes": "#minecraft:has_structure/nether_fortress",
+  "use_expansion_hack": false
+}
