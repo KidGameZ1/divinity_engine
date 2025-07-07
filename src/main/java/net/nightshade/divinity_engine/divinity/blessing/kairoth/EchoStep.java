@@ -60,7 +60,7 @@ public class EchoStep extends Blessings {
     public boolean onPressed(BlessingsInstance instance, LivingEntity living) {
         if (instance.getTag() != null) {
             if (instance.getTag().getDouble("oldPositionX") != 0 && instance.getTag().getDouble("oldPositionY") != 0 && instance.getTag().getDouble("oldPositionZ") != 0) {}
-            living.setPos(instance.getOrCreateTag().getDouble("oldPositionX"), instance.getOrCreateTag().getDouble("oldPositionY"), instance.getOrCreateTag().getDouble("oldPositionZ"));
+                living.setPos(instance.getOrCreateTag().getDouble("oldPositionX"), instance.getOrCreateTag().getDouble("oldPositionY"), instance.getOrCreateTag().getDouble("oldPositionZ"));
             return true;
         }
         return super.onPressed(instance, living);

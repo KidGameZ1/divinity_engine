@@ -45,37 +45,36 @@ public class Veilpiercer extends Blessings {
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
         Random random = new Random();
-        MiscHelper.executeClientOnlyCode(() -> {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null && mc.player.isShiftKeyDown()) {
-                // Get all living entities in a larger range for glow removal
-                List<LivingEntity> allEntities = mc.player.level().getEntitiesOfClass(
-                        LivingEntity.class,
-                        mc.player.getBoundingBox().inflate(32.0D),
-                        entity -> entity != mc.player
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null && mc.player.isShiftKeyDown()) {
+            // Get all living entities in a larger range for glow removal
+            List<LivingEntity> allEntities = mc.player.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    mc.player.getBoundingBox().inflate(32.0D),
+                    entity -> entity != mc.player
+            );
+
+            // Track only entities within the 16-block effect radius
+            Set<LivingEntity> affectedEntities = allEntities.stream()
+                    .filter(entity -> entity.distanceTo(mc.player) <= 16.0D)
+                    .collect(Collectors.toSet());
+
+            for (LivingEntity entity : affectedEntities) {
+                entity.level().addParticle(
+                        ParticleTypes.END_ROD,
+                        entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(),
+                        0, 0, 0
                 );
-
-                // Track only entities within the 16-block effect radius
-                Set<LivingEntity> affectedEntities = allEntities.stream()
-                        .filter(entity -> entity.distanceTo(mc.player) <= 16.0D)
-                        .collect(Collectors.toSet());
-
-                for (LivingEntity entity : affectedEntities) {
-                    entity.level().addParticle(
-                            ParticleTypes.END_ROD,
-                            entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(),
-                            0, 0, 0
-                    );
-                    if (random.nextFloat() <= 0.4f) {
-                        double offsetX = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                        double offsetY = random.nextDouble();          // Random height offset
-                        double offsetZ = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                        entity.level().addParticle(ParticleTypes.END_ROD, entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ, 0, 0, 0);
-                    }
-
+                if (random.nextFloat() <= 0.4f) {
+                    double offsetX = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
+                    double offsetY = random.nextDouble();          // Random height offset
+                    double offsetZ = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
+                    entity.level().addParticle(ParticleTypes.END_ROD, entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ, 0, 0, 0);
                 }
+
             }
-        });
+        }
+
 
         return super.onTick(instance, living);
     }

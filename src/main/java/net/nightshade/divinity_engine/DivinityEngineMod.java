@@ -1,6 +1,7 @@
 package net.nightshade.divinity_engine;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -11,15 +12,18 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.nightshade.divinity_engine.network.cap.CapabilityHandler;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
 import net.nightshade.divinity_engine.registry.DivinityEngineRegistry;
+import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
 import net.nightshade.divinity_engine.registry.keys.DivinityEngineKeyMappings;
 import net.nightshade.nightshade_core.util.MiscHelper;
 import org.slf4j.Logger;
 
 import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -38,6 +42,7 @@ public class DivinityEngineMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModMessages.register();
+        settingGodStatue();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -56,6 +61,18 @@ public class DivinityEngineMod {
     }
 
     private static final Collection<AbstractMap.SimpleEntry<Runnable, Integer>> workQueue = new ConcurrentLinkedQueue<>();
+
+
+    private void settingGodStatue() {
+        var resources = GodsRegistry.GODS_REGISTRY.get().getValues();
+        resources.stream().filter(Objects::nonNull).forEach(resource -> {
+            var blocks = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DivinityEngineMod.MODID, Objects.requireNonNull(resource.getRegistryName()).getPath().toLowerCase()+"_statue"));
+            var blocksEntity = ForgeRegistries.BLOCK_ENTITY_TYPES.getValue(new ResourceLocation(DivinityEngineMod.MODID, Objects.requireNonNull(resource.getRegistryName()).getPath().toLowerCase()+"_statue"));
+
+            resource.setStatueBlock(blocks);
+            resource.setStatueBlockEntity(blocksEntity);
+        });
+    }
 
     public static void waitInTicks(int tick, Runnable action) {
         if (Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER)

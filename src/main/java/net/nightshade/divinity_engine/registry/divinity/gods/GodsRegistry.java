@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.block.StatueBlock;
+import net.nightshade.divinity_engine.block.entity.StatueBlockEntity;
 import net.nightshade.divinity_engine.core.mixin.RegistryBuilderAccessor;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
@@ -34,6 +35,7 @@ import net.nightshade.divinity_engine.divinity.gods.voltira.Voltira;
 import net.nightshade.divinity_engine.divinity.gods.zephra.Zephra;
 import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
+import net.nightshade.divinity_engine.registry.blocks.entity.BlockEntitesRegistry;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
 import net.nightshade.divinity_engine.registry.divinity.curse.CurseRegistry;
 import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
@@ -352,6 +354,8 @@ public class GodsRegistry {
 
         RegistryObject<Block> statue = BlocksRegistry.REGISTRY.register(name + "_statue", () -> new StatueBlock(reg));
         ItemsRegistry.REGISTRY.register(statue.getId().getPath(), () -> new BlockItem(statue.get(), new Item.Properties()));
+        BlockEntitesRegistry.register(name+"_statue", statue, StatueBlockEntity::new);
+
 
         return reg;
     }

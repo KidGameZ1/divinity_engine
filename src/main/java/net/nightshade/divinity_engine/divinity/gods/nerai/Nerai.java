@@ -91,7 +91,8 @@ public class Nerai extends BaseGod {
      */
     @Override
     public void whileNearShrine(BaseGodInstance instance, WhileNearStatueEvent event) {
-        if (event.getLiving().isSwimming()) {
+        if (event.getLiving().isSwimming() || event.getLiving().isInWaterOrBubble()) {
+            GodHelper.increaseFavor(instance, event.getLiving(), 1);
         } else if (event.getLiving().level().isRaining()) {
             GodHelper.increaseFavor(instance, event.getLiving(), 1);
         }

@@ -68,11 +68,19 @@ public class BlessingsButtonMessage {
 		Level world = entity.level();
 		HashMap guistate = BlessingsMenu.guistate;
 
+		BlessingsMenu blessingsMenu = entity.containerMenu instanceof BlessingsMenu ? (BlessingsMenu) entity.containerMenu : null;
+
 		// security measure to prevent arbitrary chunk generation
 		if (!world.hasChunkAt(new BlockPos(x, y, z)))
 			return;
 
-		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(entity);
+		List<BlessingsInstance> blessingsInstances;
+		if (blessingsMenu.getGod() == null) {
+			blessingsInstances = GodHelper.getAllBlessingsInstances(entity);
+		}else {
+			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(entity, blessingsMenu.getGod());
+		}
+
 		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(entity);
 		int maxPages = blessingsInstances != null ? blessingsInstances.size() -1: 0;
 

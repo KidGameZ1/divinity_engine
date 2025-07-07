@@ -174,6 +174,33 @@ public class GodHelper {
                 .collect(Collectors.toList());
     }
 
+    public static List<BlessingsInstance> getAllBlessingsInstancesOfGod(Entity entity, BaseGod targetGod) {
+        if (entity == null || targetGod == null) {
+            return new ArrayList<>();
+        }
+
+        GodsStorage storage = getContactedGodsFrom(entity);
+        if (storage == null) {
+            return new ArrayList<>();
+        }
+
+        // Find the ContactedGod object for the specific god
+        Optional<BaseGodInstance> matchedGod = storage.getContactedGods().stream()
+                .filter(cg -> cg.getBaseGod() == targetGod)
+                .findFirst();
+
+        if (matchedGod.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // Return only blessings bound to the specified god
+        return matchedGod.get().getBlessingsInstances().stream()
+                .filter(Objects::nonNull)
+                .filter(b -> b.getBoundGod() == targetGod)
+                .sorted(Comparator.comparing(BlessingsInstance::getNeededFavor))
+                .collect(Collectors.toList());
+    }
+
     /**
      * Gets a specific blessing instance for an entity and god
      *
@@ -364,6 +391,15 @@ public class GodHelper {
             BaseGodInstance instance = god.createGodDefaultInstance();
             contactGod(instance, entity);
         }
+    }
+
+    public static List<BaseGodInstance> getAllContactedGods(LivingEntity entity) {
+        List<BaseGodInstance> gods = new ArrayList<>();
+        for (int i = 0; i < GodsRegistry.GODS_REGISTRY.get().getEntries().size(); i++) {
+            BaseGod god = GodsRegistry.GODS_REGISTRY.get().getEntries().stream().toList().get(i).getValue();
+            gods.add(getGodOrNull(entity, god));
+        }
+        return gods;
     }
 
     /**

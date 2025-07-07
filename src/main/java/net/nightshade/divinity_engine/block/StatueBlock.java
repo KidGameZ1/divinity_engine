@@ -15,7 +15,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,6 +27,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -39,11 +39,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.RegistryObject;
+import net.nightshade.divinity_engine.block.entity.StatueBlockEntity;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
@@ -59,14 +59,14 @@ import java.util.List;
 
 import static net.nightshade.divinity_engine.util.divinity.gods.GodHelper.*;
 
-public class StatueBlock extends Block{
+public class StatueBlock extends Block implements SimpleWaterloggedBlock, EntityBlock{
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final double DETECTION_RANGE = 5.0D;
     private final @Nullable RegistryObject<BaseGod> god;
     public StatueBlock(@Nullable RegistryObject<BaseGod> godObject) {
-        super(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(1f, 10f).randomTicks().lightLevel(s -> 5).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+        super(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(1f, 10f).randomTicks().lightLevel(s -> 5).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
         this.god = godObject;
     }
@@ -252,19 +252,13 @@ public class StatueBlock extends Block{
 
         if (hasContactedGod(pPlayer, god.get())){
             if (GodHelper.getAllBlessingsInstances(pPlayer) != null){
-                if (pPlayer instanceof ServerPlayer _ent) {
-                    BlockPos _bpos = BlockPos.containing(pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
-                    NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
-                        @Override
-                        public Component getDisplayName() {
-                            return Component.literal("Curse");
-                        }
-
-                        @Override
-                        public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                            return new BlessingsMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
-                        }
-                    }, _bpos);
+                if (!pLevel.isClientSide()) {
+                    BlockEntity entity = pLevel.getBlockEntity(pPos);
+                    if(entity instanceof StatueBlockEntity) {
+                        NetworkHooks.openScreen(((ServerPlayer)pPlayer), (StatueBlockEntity)entity, pPos);
+                    } else {
+                        throw new IllegalStateException("Our Container provider is missing!");
+                    }
                 }
             }
         }else {
@@ -278,12 +272,22 @@ public class StatueBlock extends Block{
 
     @Override
     public MutableComponent getName() {
+        if (god.get() != null && god != null){
+            return Component.literal(Component.translatable(god.get().getNameTranslationKey()).getString() + " " + Component.translatable("block.divinity_engine.statue").getString());
+        }
         return Component.translatable("block.divinity_engine.statue");
     }
 
     @Override
     public String getDescriptionId() {
+        if (god.get() != null && god != null){
+            return Component.literal(Component.translatable(god.get().getNameTranslationKey()).getString()+ " " + Component.translatable("block.divinity_engine.statue").getString()).getString();
+        }
         return Component.translatable("block.divinity_engine.statue").getString();
+    }
+
+    public BaseGod getGod(){
+        return this.god.get();
     }
 
     @Override
@@ -298,5 +302,23 @@ public class StatueBlock extends Block{
         }
 
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
+    }
+
+    @Override
+    public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
+        BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+        return tileEntity instanceof MenuProvider menuProvider ? menuProvider : null;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new StatueBlockEntity(pos, state, this.god.get().getStatueBlockEntity());
+    }
+
+    @Override
+    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int eventID, int eventParam) {
+        super.triggerEvent(state, world, pos, eventID, eventParam);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity == null ? false : blockEntity.triggerEvent(eventID, eventParam);
     }
 }

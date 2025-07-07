@@ -11,8 +11,11 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.nightshade.divinity_engine.block.StatueBlock;
+import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.registry.gui.MenusRegistry;
 import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 
@@ -32,12 +35,13 @@ public class BlessingsMenu extends AbstractContainerMenu implements Supplier<Map
 	private Supplier<Boolean> boundItemMatcher = null;
 	private Entity boundEntity = null;
 	private BlockEntity boundBlockEntity = null;
+	private BaseGod god;
 
 	public BlessingsMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
 		super(MenusRegistry.BLESSINGS_GUI.get(), id);
 		this.entity = inv.player;
 		this.world = inv.player.level();
-		this.internal = new ItemStackHandler(0);
+        this.internal = new ItemStackHandler(0);
 		BlockPos pos = null;
 		if (extraData != null) {
 			pos = extraData.readBlockPos();
@@ -46,6 +50,14 @@ public class BlessingsMenu extends AbstractContainerMenu implements Supplier<Map
 			this.z = pos.getZ();
 			access = ContainerLevelAccess.create(world, pos);
 		}
+		if (world.getBlockState(pos).getBlock() instanceof StatueBlock block) {
+			this.god = block.getGod();
+			System.out.println(block.getGod());
+		}
+	}
+
+	public BaseGod getGod() {
+		return god;
 	}
 
 	@Override

@@ -5,6 +5,9 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
@@ -16,6 +19,7 @@ import net.nightshade.divinity_engine.network.events.divinity.gods.worship_event
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.PrayEvent;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
 import net.nightshade.divinity_engine.registry.divinity.gods.domains.GodsDomainRegistry;
+import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -41,6 +45,24 @@ public class BaseGod {
     private final Color textColor;
 
     private final @Nullable Curse curse;
+    private Block statueBlock;
+    private BlockEntityType statueBlockEntity;
+
+    public Block getStatueBlock() {
+        return statueBlock;
+    }
+
+    public void setStatueBlock(Block statueBlock) {
+        this.statueBlock = statueBlock;
+    }
+
+    public BlockEntityType getStatueBlockEntity() {
+        return statueBlockEntity;
+    }
+
+    public void setStatueBlockEntity(BlockEntityType statueBlockEntity) {
+        this.statueBlockEntity = statueBlockEntity;
+    }
 
     /**
      * Creates a new god with specified domains, blessings and text color.
@@ -85,6 +107,7 @@ public class BaseGod {
      * Called when a player prays to this god
      */
     public void onPrayedTo(BaseGodInstance instance, PrayEvent event) {
+        GodHelper.increaseFavor(instance,event.getLiving(), 1);
     }
 
     /**

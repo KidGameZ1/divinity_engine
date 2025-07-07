@@ -4,6 +4,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.nightshade.divinity_engine.network.cap.CapabilityHandler;
 import net.nightshade.divinity_engine.registry.arg.DivinityEngineArgumentTypes;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
+import net.nightshade.divinity_engine.registry.blocks.entity.BlockEntitesRegistry;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
 import net.nightshade.divinity_engine.registry.divinity.curse.CurseRegistry;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
@@ -28,6 +29,7 @@ public class DivinityEngineRegistry {
         DivinityEngineArgumentTypes.init(bus);
         ItemsRegistry.init(bus);
         BlocksRegistry.init(bus);
+        BlockEntitesRegistry.init(bus);
         TabsRegistry.init(bus);
         MenusRegistry.init(bus);
         CapabilityHandler.init(bus);

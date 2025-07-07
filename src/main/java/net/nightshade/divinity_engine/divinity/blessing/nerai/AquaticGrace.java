@@ -18,7 +18,7 @@ public class AquaticGrace extends Blessings {
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
         if (living.isInWaterOrBubble()){
             if (!living.hasEffect(MobEffects.DOLPHINS_GRACE)){
-                living.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 200, 1, false, false, true));
+                living.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 200, 0, false, false, true));
             }
         }
         return super.onTick(instance, living);

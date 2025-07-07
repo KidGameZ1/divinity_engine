@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -12,8 +13,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.nightshade.divinity_engine.DivinityEngineMod;
+import net.nightshade.divinity_engine.block.StatueBlock;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.messages.gui.BlessingsButtonMessage;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
@@ -39,6 +42,8 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	Button button_right;
 	Button button_left;
 
+	BaseGod baseGod;
+
 	public BlessingsScreen(BlessingsMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
 		this.world = container.world;
@@ -48,6 +53,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 		this.entity = container.entity;
 		this.imageWidth = 150;
 		this.imageHeight = 95;
+		this.baseGod = container.getGod();
 	}
 
 	private static final ResourceLocation texture = new ResourceLocation(DivinityEngineMod.MODID +":textures/screens/blessings_screen.png");
@@ -58,6 +64,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 
 		// Update the active button text and state
 		updateActiveButton();
+		System.out.println(menu.getGod());
 
 		// Force the screen to refresh
 		this.setFocused(null);
@@ -79,7 +86,12 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 		this.renderBackground(guiGraphics);
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
-		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(this.minecraft.player);
+		List<BlessingsInstance> blessingsInstances;
+		if (this.menu.getGod() == null) {
+			blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
+		}else {
+			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(minecraft.player, menu.getGod());
+		}
 		if (blessingsInstances != null && !blessingsInstances.isEmpty()) {
 			int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
 			if (pageNum >= 0 && pageNum < blessingsInstances.size()) {
@@ -152,7 +164,13 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
 		guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_blessings"), 48, 4, -16777216, false);
 
-		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(this.minecraft.player);
+		List<BlessingsInstance> blessingsInstances;
+		if (this.menu.getGod() == null) {
+			blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
+		}else {
+			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(minecraft.player, menu.getGod());
+		}
+
 		if (blessingsInstances == null || blessingsInstances.isEmpty()) {
 			guiGraphics.drawString(this.font, Component.translatable("gui.divinity_engine.blessings.label_blessing_name").getString(), 39, 14, -6710887, false);
 			this.minecraft.player.closeContainer();
@@ -186,7 +204,13 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 
 	private void updateActiveButton() {
 		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
-		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
+		List<BlessingsInstance> blessingsInstances;
+		if (this.menu.getGod() == null) {
+			blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
+		}else {
+			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(minecraft.player, menu.getGod());
+		}
+
 		if (waitingForKeyPress) {
 			this.removeWidget(button_active);
 			button_active = Button.builder(Component.literal("Press 1, 2, or 3"), e -> {
@@ -283,6 +307,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	@Override
 	public void init() {
 		super.init();
+		this.baseGod = menu.getGod();
 
 		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
 		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);

@@ -1,5 +1,7 @@
 package net.nightshade.divinity_engine.divinity.blessing.solarius;
 
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.level.Level;
@@ -12,6 +14,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
+import java.util.List;
+
 
 public class Sunburst extends Blessings {
     public Sunburst(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
@@ -23,7 +27,9 @@ public class Sunburst extends Blessings {
         Level level = living.level();
         double range = 5.0D;
 
-        for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, living.getBoundingBox().inflate(range))) {
+        List<LivingEntity> entityList = level.getEntitiesOfClass(LivingEntity.class, living.getBoundingBox().inflate(range));
+        entityList.remove(living);
+        for (LivingEntity target : entityList) {
             if (target != living) {
                 // Apply blindness
                 target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, MiscHelper.secondsToTick(5), 0, false, false, true));
@@ -42,7 +48,20 @@ public class Sunburst extends Blessings {
             }
         }
 
+        if (!entityList.isEmpty()){
+            if (level instanceof ServerLevel serverLevel) {
+                for (int i = 0; i < 100; i++) {
+                    double angle = level.getRandom().nextDouble() * 2 * Math.PI;
+                    double radius = level.getRandom().nextDouble() * range;
+                    double x = living.getX() + Math.cos(angle) * radius;
+                    double y = living.getY() + level.getRandom().nextDouble() * 1.5;
+                    double z = living.getZ() + Math.sin(angle) * radius;
 
-        return true;
+                    serverLevel.sendParticles(ParticleTypes.FLAME, x, y, z, 1, 0, 0, 0, 0);
+                }
+            }
+        }
+
+        return !entityList.isEmpty();
     }
 }

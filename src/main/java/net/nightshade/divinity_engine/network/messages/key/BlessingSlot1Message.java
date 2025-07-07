@@ -54,7 +54,7 @@ public class BlessingSlot1Message {
 			return;
 		BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
 		if (blessingSlot1 != null) {
-			if (!blessingSlot1.getBlessing().isActive()) {
+			if (!blessingSlot1.getBlessing().isPassive()) {
 				if (blessingSlot1.getCooldown() == 0) {
 					if (type == 0) {
 						if (blessingSlot1.getBlessing().canToggle()) {

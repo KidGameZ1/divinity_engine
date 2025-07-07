@@ -1,12 +1,12 @@
 {
-  "name": "divinity_engine:grond_shrine",
+  "name": "divinity_engine:aethon_shrine",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "divinity_engine:grond_shrine",
+        "location": "divinity_engine:aethon_shrine",
         "projection": "rigid",
         "processors": {
           "processors": [
@@ -20,7 +20,7 @@
                   "Name": "minecraft:grass_block"
                 },
                 {
-                  "Name": "minecraft:air"
+                  "Name": "minecraft:end_stone"
                 }
               ]
             }
