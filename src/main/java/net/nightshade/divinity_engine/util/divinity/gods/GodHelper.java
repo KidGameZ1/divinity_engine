@@ -379,10 +379,14 @@ public class GodHelper {
     }
 
     public static List<BaseGodInstance> getAllContactedGods(LivingEntity entity) {
-        List<BaseGodInstance> gods = new ArrayList<>();
+        return getContactedGodsFrom(entity).getContactedGods().stream().toList();
+    }
+
+    public static List<BaseGod> getContactedGods(LivingEntity entity) {
+        List<BaseGod> gods = new ArrayList<>();
         for (int i = 0; i < GodsRegistry.GODS_REGISTRY.get().getEntries().size(); i++) {
             BaseGod god = GodsRegistry.GODS_REGISTRY.get().getEntries().stream().toList().get(i).getValue();
-            gods.add(getGodOrNull(entity, god));
+            gods.add(god);
         }
         return gods;
     }

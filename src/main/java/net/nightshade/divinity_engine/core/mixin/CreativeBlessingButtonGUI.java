@@ -84,6 +84,7 @@ public abstract class CreativeBlessingButtonGUI extends AbstractContainerScreen<
                     !GodHelper.getAllContactedGods(player).isEmpty() && selectedTab.getType() == CreativeModeTab.Type.INVENTORY
             ) {
                 ModMessages.INSTANCE.sendToServer(new PlayerBlessingsButtonMessage(1, player.getBlockX(), player.getBlockY(), player.getBlockZ()));
+                System.out.println(GodHelper.getAllContactedGods(player).size());
                 updateButton();
             }else {
                 updateButton();
@@ -97,8 +98,10 @@ public abstract class CreativeBlessingButtonGUI extends AbstractContainerScreen<
 
                         !GodHelper.getAllContactedGods(player).isEmpty() && selectedTab.getType() == CreativeModeTab.Type.INVENTORY
 
-                )
+                ) {
+                    System.out.println(GodHelper.getAllContactedGods(player).size());
                     super.render(guiGraphics, gx, gy, ticks);
+                }
             }
         };
 
