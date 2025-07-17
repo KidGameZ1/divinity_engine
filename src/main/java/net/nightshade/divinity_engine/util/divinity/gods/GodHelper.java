@@ -17,7 +17,7 @@ import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapabili
 import net.nightshade.divinity_engine.network.events.divinity.curse.CursePlayerEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -89,7 +89,7 @@ public class GodHelper {
         if (player == null || slotInstance == null || slotInstance.getBoundGodInstance() == null) {
             return;
         }
-        IMainPlayerCapability capability = MainPlayerCapabilityHelper.getMainPlayerVariables(player);
+        IMainPlayerCapability capability = DivinityEngineHelper.getMainPlayerVariables(player);
 
         BaseGod god = slotInstance.getBoundGod();
         if (!hasContactedGod(player, god)) {
@@ -129,22 +129,7 @@ public class GodHelper {
         BaseGodInstance godInstance = getGodOrNull(player, god);
 
         if (godInstance != null) {
-            // Find matching blessing instance and replace it
-            Set<BlessingsInstance> blessings = godInstance.getBlessingsInstances();
-            BlessingsInstance matchingInstance = null;
-
-            for (BlessingsInstance instance : blessings) {
-                if (instance.getBlessing().equals(slotInstance.getBlessing())) {
-                    matchingInstance = instance;
-                    break;
-                }
-            }
-
-            if (matchingInstance != null) {
-                blessings.remove(matchingInstance);
-                blessings.add(slotInstance);
-                godInstance.markDirty();
-            }
+            getContactedGodsFrom(player).updateBlessingInstance(godInstance, slotInstance, true);
         }
     }
 
@@ -408,9 +393,7 @@ public class GodHelper {
      * @param entity The entity losing faith
      */
     public static void loseFaithAllGods(LivingEntity entity) {
-        for (int i = 0; i < GodsRegistry.GODS_REGISTRY.get().getEntries().size(); i++) {
-            BaseGod god = GodsRegistry.GODS_REGISTRY.get().getEntries().stream().toList().get(i).getValue();
-            BaseGodInstance instance = god.createGodDefaultInstance();
+        for (BaseGodInstance instance : getAllContactedGods(entity)) {
             getContactedGodsFrom(entity).loseContactedGod(instance);
         }
     }

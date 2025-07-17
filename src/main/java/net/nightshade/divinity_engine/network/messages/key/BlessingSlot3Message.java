@@ -10,7 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.util.function.Supplier;
@@ -52,9 +52,9 @@ public class BlessingSlot3Message {
 		// security measure to prevent arbitrary chunk generation
 		if (!world.hasChunkAt(player.blockPosition()))
 			return;
-		BlessingsInstance blessingSlot3 = MainPlayerCapabilityHelper.getBlessingSlot3(player);
+		BlessingsInstance blessingSlot3 = DivinityEngineHelper.getBlessingSlot3(player);
 		if (blessingSlot3 != null) {
-			if (!blessingSlot3.getBlessing().isPassive()) {
+			if (blessingSlot3.getBlessing().isActive()) {
 				if (blessingSlot3.getCooldown() == 0) {
 					if (type == 0) {
 						if (blessingSlot3.getBlessing().canToggle()) {

@@ -19,12 +19,12 @@ public class CleansingFlame extends Blessings {
     /**
      * @param neededFavor Amount of favor required to activate this blessing
      * @param cooldown    Time in ticks between activations
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   Color used for blessing text in UI
      */
-    public CleansingFlame(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public CleansingFlame(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

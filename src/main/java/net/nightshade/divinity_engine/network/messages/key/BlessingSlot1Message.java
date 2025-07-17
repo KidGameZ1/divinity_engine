@@ -10,7 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.util.function.Supplier;
@@ -49,12 +49,14 @@ public class BlessingSlot1Message {
 		double y = player.getY();
 		double z = player.getZ();
 
+		System.out.println("pressAction called: type=" + type + " held=" + pressedms + " on " + (player.level().isClientSide ? "CLIENT" : "SERVER"));
+
 		// security measure to prevent arbitrary chunk generation
 		if (!world.hasChunkAt(player.blockPosition()))
 			return;
-		BlessingsInstance blessingSlot1 = MainPlayerCapabilityHelper.getBlessingSlot1(player);
+		BlessingsInstance blessingSlot1 = DivinityEngineHelper.getBlessingSlot1(player);
 		if (blessingSlot1 != null) {
-			if (!blessingSlot1.getBlessing().isPassive()) {
+			if (blessingSlot1.getBlessing().isActive()) {
 				if (blessingSlot1.getCooldown() == 0) {
 					if (type == 0) {
 						if (blessingSlot1.getBlessing().canToggle()) {

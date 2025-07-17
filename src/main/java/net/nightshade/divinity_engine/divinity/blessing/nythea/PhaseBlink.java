@@ -9,8 +9,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class PhaseBlink extends Blessings {
-    public PhaseBlink(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public PhaseBlink(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
     
     private void makeInvulnerable(LivingEntity living) {

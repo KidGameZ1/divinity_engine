@@ -22,12 +22,12 @@ public class BlazingHands extends Blessings {
      *
      * @param neededFavor Amount of favor points required to activate
      * @param cooldown    Cooldown duration in ticks
-     * @param isActive    Initial activation state
+     * @param isPassive    Initial activation state
      * @param canToggle   Whether blessing can be toggled on/off
      * @param textColor   Color used for blessing UI elements
      */
-    public BlazingHands(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public BlazingHands(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

@@ -28,7 +28,7 @@ public class PlayerGodsCapability {
         e.register(InternalGodsStorage.class);
     }
 
-    private static void attach(AttachCapabilitiesEvent<Entity> e) {
+    private static void attach(AttachCapabilitiesEvent<Player> e) {
         e.addCapability(ID, new GenericCapabilityProvider(CAP, PlayerGodsCapabilityStorage::new));
     }
 

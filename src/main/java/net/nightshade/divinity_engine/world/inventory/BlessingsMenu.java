@@ -11,13 +11,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.nightshade.divinity_engine.block.StatueBlock;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.registry.gui.MenusRegistry;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class BlessingsMenu extends AbstractContainerMenu implements Supplier<Map
 	private Supplier<Boolean> boundItemMatcher = null;
 	private Entity boundEntity = null;
 	private BlockEntity boundBlockEntity = null;
-	private BaseGod god;
+	private BaseGod god = null;
 
 	public BlessingsMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
 		super(MenusRegistry.BLESSINGS_GUI.get(), id);
@@ -75,7 +74,7 @@ public class BlessingsMenu extends AbstractContainerMenu implements Supplier<Map
 
 	@Override
 	public void removed(Player pPlayer) {
-		MainPlayerCapabilityHelper.setBlessingsPageNum(pPlayer, 0);
+		DivinityEngineHelper.setBlessingsPageNum(pPlayer, 0);
 		super.removed(pPlayer);
 	}
 

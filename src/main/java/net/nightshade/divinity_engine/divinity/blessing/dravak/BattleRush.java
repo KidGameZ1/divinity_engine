@@ -17,12 +17,12 @@ public class BattleRush extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate
      * @param cooldown    Cooldown period in seconds
-     * @param isActive    Initial active state
+     * @param isPassive    Initial active state
      * @param canToggle   Whether blessing can be toggled
      * @param textColor   Color for blessing text
      */
-    public BattleRush(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public BattleRush(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**
@@ -35,13 +35,8 @@ public class BattleRush extends Blessings {
      */
     @Override
     public boolean onKillEntity(BlessingsInstance instance, LivingEntity player, LivingDeathEvent event) {
-
-        if (!event.getEntity().isAlive()) {
-            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 0, false, false, true));
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, false, true));
-            return true;
-        }
-
-        return super.onKillEntity(instance, player, event);
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, false, true));
+        return true;
     }
 }

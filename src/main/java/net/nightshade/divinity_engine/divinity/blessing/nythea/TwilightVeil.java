@@ -11,8 +11,8 @@ import java.awt.*;
 import java.util.UUID;
 
 public class TwilightVeil extends Blessings {
-    public TwilightVeil(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public TwilightVeil(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TwilightVeil extends Blessings {
             }
         } else {
             living.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(speedModifier);
-            if (!living.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY)) {}
+            if (!living.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY))
                 living.setInvisible(false);
         }
 

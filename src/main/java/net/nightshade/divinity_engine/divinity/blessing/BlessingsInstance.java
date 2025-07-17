@@ -95,20 +95,20 @@ public class BlessingsInstance implements Cloneable {
         tag.putInt("Cooldown", this.cooldown);
         if (getBlessing().canToggle())
             tag.putBoolean("Toggled", this.toggled);
+
         if (this.boundGod != null) {
-            // Store only the necessary information to identify the bound god
             CompoundTag godTag = new CompoundTag();
             godTag.putString("God Id", this.boundGod.getBaseGodId().toString());
             tag.put("Bound God", godTag);
         }
 
-
         if (this.tag != null) {
-            tag.put("tag", this.tag.copy());
+            tag.put("Tag", this.tag.copy()); // 🔁 FIXED to match `fromNBT()` and `toNBT()`
         }
 
         return tag;
     }
+
 
     /**
      * Restores this blessing instance's state from NBT data.
@@ -120,8 +120,8 @@ public class BlessingsInstance implements Cloneable {
         this.cooldown = tag.getInt("Cooldown");
         if (getBlessing().canToggle())
             this.toggled = tag.getBoolean("Toggled");
-        // Handle bound god deserialization
-        if (tag.contains("Bound God", 10)) { // 10 is NBT compound tag type
+
+        if (tag.contains("Bound God", 10)) {
             CompoundTag godTag = tag.getCompound("Bound God");
             if (godTag.contains("God Id")) {
                 try {
@@ -136,12 +136,11 @@ public class BlessingsInstance implements Cloneable {
             }
         }
 
-        if (tag.contains("tag", 10)) {
-            this.tag = tag.getCompound("tag");
+        if (tag.contains("Tag", 10)) { // 🔁 FIXED case
+            this.tag = tag.getCompound("Tag").copy();
         }
-
-
     }
+
 
     /**
      * Creates a new blessing instance from serialized NBT data.

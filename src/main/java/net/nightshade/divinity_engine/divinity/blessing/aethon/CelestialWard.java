@@ -22,12 +22,12 @@ public class CelestialWard extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate
      * @param cooldown    Cooldown period between uses
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   Color used for UI display
      */
-    public CelestialWard(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public CelestialWard(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

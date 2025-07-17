@@ -113,6 +113,10 @@
   "divinity_engine.blessings.sunskin.description": "“The sun’s warmth shields those who walk in its light.”\nWhile standing in sunlight, you gradually regenerate health as Solarius envelops you in radiant energy.",
   "divinity_engine.blessings.sunburst": "Sunburst",
   "divinity_engine.blessings.sunburst.description": "“In his wrath, the sun does not burn—it blinds.”\nUnleash a burst of radiant light that blinds and scorches nearby enemies, a divine flare granted only to Solarius’s most faithful.",
+  "divinity_engine.blessings.solar_ward": "Solar Ward",
+  "divinity_engine.blessings.solar_ward.description": "“The sun shields those who shine with purpose.”\nWhen below half health in daylight, gain Absorption I and glowing for 10 seconds. 30s cooldown.",
+  "divinity_engine.blessings.corona_ascendant": "Corona Ascendant",
+  "divinity_engine.blessings.corona_ascendant.description": "“A blazing crown scorches those who dare approach.”\nWhile in sunlight, nearby hostile mobs take 1 fire damage every second and your melee attacks apply Weakness I for 3 seconds.",
 
   "divinity_engine.blessings.toxic_skin": "Toxic Skin",
   "divinity_engine.blessings.toxic_skin.description": "“The serpent’s gift is not in her bite, but in her blood.”\nGrants complete immunity to poison effects. Nashara’s venom flows through you, making your body a sanctuary from toxins.",
@@ -120,6 +124,10 @@
   "divinity_engine.blessings.serpents_bite.description": "“Fangs strike swiftly when unseen.”\nYour melee attacks have a chance to inflict poison for 5 seconds. A mark of Nashara's cunning in close combat.",
   "divinity_engine.blessings.shadowstep": "Shadowstep",
   "divinity_engine.blessings.shadowstep.description": "“Where light stumbles, the serpent glides unseen.”\nWhen taking damage, instantly teleport a short distance in a random nearby direction and briefly gain invisibility. 45-second cooldown.",
+  "divinity_engine.blessings.venomblood": "Venomblood",
+  "divinity_engine.blessings.venomblood.description": "“Poison seeps from every wound you suffer.”\nWhen damaged, poison your attacker for 5 seconds. Also grants immunity to Wither.",
+  "divinity_engine.blessings.coiled_retribution": "Coiled Retribution",
+  "divinity_engine.blessings.coiled_retribution.description": "“A serpent strikes hardest when cornered.”\nWhile below 50% HP, reflect 25% of melee damage taken back as poison damage.",
 
   "divinity_engine.blessings.hammerhand": "Hammerhand",
   "divinity_engine.blessings.hammerhand.description": "“Grond lends weight to every blow.”\nYour melee attacks deal +3 bonus damage when using tools.",
@@ -127,6 +135,10 @@
   "divinity_engine.blessings.stoneform.description": "“Become as the mountain—unshaken, unyielding.”\nWhen your health drops below 5 hearts, gain Resistance I for 10 seconds. Triggers once every 45 seconds.",
   "divinity_engine.blessings.echoing_strike": "Echoing Strike",
   "divinity_engine.blessings.echoing_strike.description": "“One blow, the voice of ten.”\nYour melee attacks occasionally release a shockwave that damages and knocks back nearby enemies. 45-second cooldown.",
+  "divinity_engine.blessings.earthbind_grip": "Earthbind Grip",
+  "divinity_engine.blessings.earthbind_grip.description": "“Your landing quakes the resolve of all nearby.”\nLanding from a fall slows all grounded enemies within 5 blocks for 3 seconds. 6s cooldown.",
+  "divinity_engine.blessings.forgeheart": "Forgeheart",
+  "divinity_engine.blessings.forgeheart.description": "“The forge burns within you, stoking resolve and strength.”\nWhile below 50% health, gain Resistance I and +20% tool damage.",
 
   "divinity_engine.blessings.feral_step": "Feral Step",
   "divinity_engine.blessings.feral_step.description": "“The wild does not wait for hesitation.”\nYou sprint slightly faster and take less fall damage. A subtle gift of instinct and agility from Varun.",
@@ -134,6 +146,11 @@
   "divinity_engine.blessings.trackers_mark.description": "“To hunt is to know your prey.”\nNearby mobs are revealed to you passively. Your senses sharpen with the wild’s guidance.",
   "divinity_engine.blessings.predators_focus": "Predator’s Focus",
   "divinity_engine.blessings.predators_focus.description": "“Stillness is the blade of the hunter.”\nWhen crouching for 3 seconds without moving, you gain temporary Strength I and Night Vision for 10 seconds. Only triggers once per 45 seconds.",
+  "divinity_engine.blessings.savage_hunger": "Savage Hunger",
+  "divinity_engine.blessings.savage_hunger.description": "“The hunt ignites your primal fire.”\nKilling a mob grants Strength I or Speed I for 5 seconds. 10s cooldown.",
+  "divinity_engine.blessings.alphas_call": "Alpha’s Call",
+  "divinity_engine.blessings.alphas_call.description": "“Your roar silences the wild.”\nEvery 30 seconds, unleash a primal roar that briefly stuns nearby hostile mobs (1 second) and causes passive mobs to flee for 3 seconds.",
+
 
   "divinity_engine.blessings.battle_rush": "Battle Rush",
   "divinity_engine.blessings.battle_rush.description": "“Victory feeds the flame.”\nGain a short burst of Speed I and Strength I for 5 seconds after killing a hostile mob or player. Triggers every 10 seconds. Dravak rewards relentless aggression.",
@@ -141,6 +158,10 @@
   "divinity_engine.blessings.unyielding.description": "“Break before you bend? Not while Dravak watches.”\nGrants Resistance I and reduced knockback when below 50% health. You become harder to stagger under pressure.",
   "divinity_engine.blessings.crushing_blow": "Crushing Blow",
   "divinity_engine.blessings.crushing_blow.description": "“One strike to silence the cowards.”\nEvery 6th melee hit against enemies deals a critical strike with bonus damage and high knockback. Cooldown per crit: 30 seconds per target. A divine edge for the champions of war.",
+  "divinity_engine.blessings.warlords_will": "Warlord’s Will",
+  "divinity_engine.blessings.warlords_will.description": "“Dravak bloodlust fills you.”\nAnyone within 7 block of you will feel fear, be blinded and low intellect mobs will be confused and attack others.",
+  "divinity_engine.blessings.fury_unbound": "Fury Unbound",
+  "divinity_engine.blessings.fury_unbound.description": "“Unleash your wrath, forged in war.”\nActivate to gain Strength II and Resistance I for 10 seconds. 60s cooldown.",
 
   "divinity_engine.blessings.insightful_kill": "Insightful Kill",
   "divinity_engine.blessings.insightful_kill.description": "“Every death reveals a lesson.”\nGain increased experience from defeating mobs. Elaris rewards those who learn from conflict.",
@@ -148,6 +169,11 @@
   "divinity_engine.blessings.foresight.description": "“With your mind unshackled from the physical, you sense hostile intent before it strikes.”\n With Elaris endless knowledge you dodge incoming attack like you know the future.",
   "divinity_engine.blessings.scholars_edge": "Scholar’s Edge",
   "divinity_engine.blessings.scholars_edge.description": "“Preparation is deadlier than steel.”\nYour attacks deal +15% bonus damage to enemies at full health.\nElaris grants precision to those who strike with purpose.",
+  "divinity_engine.blessings.mind_mirror": "Mind Mirror",
+  "divinity_engine.blessings.mind_mirror.description": "“Let their malice turn inward.”\nOn hit 45% to reflect your harmful status effects back to the attacker.",
+  "divinity_engine.blessings.arcane_recall": "Arcane Recall",
+  "divinity_engine.blessings.arcane_recall.description": "“A whisper through time reclaims your footing.”\nAfter taking damage, teleport backward to where you stood 2 second ago. 20s cooldown.",
+
 
   "divinity_engine.blessings.stormstep": "Stormstep",
   "divinity_engine.blessings.stormstep.description": "“The storm does not ask—it moves.”\nDash forward in a flash of lightning. While sneaking, launch upward instead. Grants brief fall immunity after use.\nA gift of pure momentum from Voltira, the storm unbound.",
@@ -155,6 +181,10 @@
   "divinity_engine.blessings.shockshield.description": "“Touch the sky, and the sky touches back.”\nWhen hit in melee, there’s a chance to zap your attacker with minor lightning damage (5-second internal cooldown).",
   "divinity_engine.blessings.tempest_wrath": "Tempest Wrath",
   "divinity_engine.blessings.tempest_wrath.description": "“What stands beneath the storm must fall.”\nKilling an enemy triggers a thunderclap that damages and knocks back nearby foes. Cooldown: 30 seconds. Empowered during thunderstorms.",
+  "divinity_engine.blessings.charge_relay": "Charge Relay",
+  "divinity_engine.blessings.charge_relay.description": "“Every strike charges your next.”\nDealing damage reduces the cooldown of Stormstep and Tempest Wrath by 1s. Reduced by 2s during storms.",
+  "divinity_engine.blessings.lightning_conduit": "Lightning Conduit",
+  "divinity_engine.blessings.lightning_conduit.description": "“Your steps beckon the storm itself.”\nWhile sprinting, hitting enemies has a 10% chance to call lightning.",
 
   "divinity_engine.blessings.soul_leech": "Soul Leech",
   "divinity_engine.blessings.soul_leech.description": "“Every death feeds the void within.”\nRestore a small amount of health when you kill an enemy. Vokar grants strength not through life, but through ending it.",
@@ -162,6 +192,10 @@
   "divinity_engine.blessings.wraithwalk.description": "“Pain is a door—step through it.”\nAfter taking damage, become invisible for 5 seconds. Cooldown: 15 seconds.\nA silent escape through the veil.",
   "divinity_engine.blessings.ghastly_aura": "Ghastly Aura",
   "divinity_engine.blessings.ghastly_aura.description": "“The presence of death weakens the living.”\nNearby enemies within 6 blocks have reduced attack power and movement speed.\nVokar’s chill clings to the battlefield.",
+  "divinity_engine.blessings.dread_consumption": "Dread Consumption",
+  "divinity_engine.blessings.dread_consumption.description": "“Their final breath feeds your strength.”\nKilling a mob with weakness and below 30% health heals you for 2 hearts. 6s cooldown.",
+  "divinity_engine.blessings.witherbound": "Witherbound",
+  "divinity_engine.blessings.witherbound.description": "“The void answers your call with fear.”\nEnemies within 5 blocks take Wither I for 3 seconds every 20s.",
 
   "divinity_engine.blessings.twilight_veil": "Twilight Veil",
   "divinity_engine.blessings.twilight_veil.description": "The dusk clings to those she favors.”\nAt night, gain +10% movement speed, and become invisible while sneaking.\nAs the world sleeps, Nythea makes you one with the shadow.",
@@ -169,6 +203,10 @@
   "divinity_engine.blessings.lull_of_the_lost.description": "“Sleep is not escape—it is entry.”\nWhen a mob targets you, there’s a chance it briefly loses interest (1.5–2 seconds).\nCooldown per mob: 20 seconds.",
   "divinity_engine.blessings.phase_blink": "Phase Blink",
   "divinity_engine.blessings.phase_blink.description": "Dash forward in a zigzag pattern, phasing through space unpredictably.\nEach blink moves you a short distance at a sharp angle, mimicking a flickering mirage.",
+  "divinity_engine.blessings.silver_mirror": "Silver Mirror",
+  "divinity_engine.blessings.silver_mirror.description": "“The moon reflects all harm.”\nFor 5 seconds after activating, reflect 25% of incoming damage back to attackers. 25s cooldown.",
+  "divinity_engine.blessings.moondrinker": "Moondrinker",
+  "divinity_engine.blessings.moondrinker.description": "“Drink deep of Nythea’s silence.”\nWhile under moonlight, gain passive regeneration.",
 
   "divinity_engine.blessings.second_chance": "Second Chance",
   "divinity_engine.blessings.second_chance.description": "“Fate rarely offers mercy—but I do.”\nOnce every 3 hours, survive a killing blow and restore to half health.\nTime fractures just enough to rewrite your end.",
@@ -176,6 +214,10 @@
   "divinity_engine.blessings.echo_step.description": "“What has passed may yet return.”\nRewind your position to where you stood 3 seconds ago.\nUseful for escaping danger or repositioning after a mistake.",
   "divinity_engine.blessings.predicted_path": "Predicted Path",
   "divinity_engine.blessings.predicted_path.description": "“I see the arrow before it’s loosed.”\nWhen a hostile entity targets you , gain Speed II for 4 seconds.\nTriggers once every 15 seconds.",
+  "divinity_engine.blessings.threadsever": "Threadsever",
+  "divinity_engine.blessings.threadsever.description": "“When fate frays, Kairoth cuts the cord.”\nYour next critical hit applies Weakness II for 5 seconds. 20s cooldown.",
+  "divinity_engine.blessings.fateful_draw": "Fateful Draw",
+  "divinity_engine.blessings.fateful_draw.description": "Chance always favors the chosen.”\nEvery 30 seconds, randomly gain either Strength I, Speed I, or Resistance I for 10 seconds.",
 
   "divinity_engine.blessings.frozen_heart": "Frozen Heart",
   "divinity_engine.blessings.frozen_heart.description": "“Let the cold in, and it will never leave you.”\nGain resistance to freezing, powder snow, and slowness from cold sources.\nCryonis hardens your spirit like ice—unyielding and still.",
@@ -183,6 +225,10 @@
   "divinity_engine.blessings.icy_pulse.description": "“Each strike spreads the stillness.”\nOn melee hit, slow nearby enemies in a small radius (2–3 blocks) for 3 seconds.\nCooldown per target: 8 seconds.",
   "divinity_engine.blessings.snowveil": "Snowveil",
   "divinity_engine.blessings.snowveil.description": "“In falling snow, you are unseen.”\nBecome invisible while standing in snowfall or snowy terrain and not attacking.\nCryonis hides her chosen in the stillness of winter.",
+  "divinity_engine.blessings.frostbite_mantle": "Frostbite Mantle",
+  "divinity_engine.blessings.frostbite_mantle.description": "“Cold clings to your every step.”\nEnemies that strike you in melee are slowed and take 1 point of frost damage.",
+  "divinity_engine.blessings.permafrost_surge": "Permafrost Surge",
+  "divinity_engine.blessings.permafrost_surge.description": "“Unleash the still fury of winter.”\nActivate to create a freezing burst around you freezing and slowing enemies. 25s cooldown.",
 
   "divinity_engine.blessings.aquatic_grace": "Aquatic Grace",
   "divinity_engine.blessings.aquatic_grace.description": "“The water remembers its own.”\nYou swim faster and can breathe underwater for longer. Nerai flows through your lungs and limbs like the current.",
@@ -190,6 +236,10 @@
   "divinity_engine.blessings.rains_favor.description": "“She weeps gently—and you heal.”\nWhile in rain and water, gain passive Regeneration I.\nThe falling sky soothes the wounds of Nerai’s chosen.",
   "divinity_engine.blessings.wavebound": "Wavebound",
   "divinity_engine.blessings.wavebound.description": "“Be as the tide—swift and unstoppable.”\nWhile in water, dash rapidly forward in a surge. Can be used for underwater combat, mobility, or escaping danger.",
+  "divinity_engine.blessings.undercurrent_grip": "Undercurrent Grip",
+  "divinity_engine.blessings.undercurrent_grip.description": "“The tide pulls more than it pushes.”\nEnemies within 5 blocks are pulled slightly toward you while underwater.",
+  "divinity_engine.blessings.tidecallers_wrath": "Tidecaller’s Wrath",
+  "divinity_engine.blessings.tidecallers_wrath.description": "“Your fury rises like the sea.”\nSummon a geyser that launches nearby mobs upward. 30s cooldown; water required.",
 
   "divinity_engine.blessings.gale_step": "Gale Step",
   "divinity_engine.blessings.gale_step.description": "“The wind favors those who move with it.”\nGrants a small boost to movement speed at all times. Zephra blesses the swift-footed with her restless breeze.",
@@ -197,6 +247,10 @@
   "divinity_engine.blessings.windcallers_reflex.description": "“You feel the strike before it lands.”\nWhen hit by a ranged attack, gain Speed II for 3 seconds and briefly deflect the next projectile. Cooldown: 20 seconds.",
   "divinity_engine.blessings.cyclone_leap": "Cyclone Leap",
   "divinity_engine.blessings.cyclone_leap.description": "“Leap, and the wind will catch you.”\nLaunch into the air with a spinning gust, gaining a burst of lift and control. Allows gliding or midair repositioning when timed well.",
+  "divinity_engine.blessings.shearwind_dash": "Shearwind Dash",
+  "divinity_engine.blessings.shearwind_dash.description": "“Leap, and the wind will catch you.”\nLaunch into the air with a spinning gust, gaining a burst of lift and control. Allows gliding or midair repositioning when timed well.",
+  "divinity_engine.blessings.tempest_spiral": "Tempest Spiral",
+  "divinity_engine.blessings.tempest_spiral.description": "“A wind vortex obeys your fury.”\nCreate a 4-block vortex that pulls in mobs and deals minor damage. 25s cooldown.",
 
   "divinity_engine.blessings.verdant_touch": "Verdant Touch",
   "divinity_engine.blessings.verdant_touch.description": "“Where her footsteps fall, life follows.”\nCrops and saplings grow faster in a small radius around you.\nTerra's presence brings quiet, constant renewal.",
@@ -204,6 +258,10 @@
   "divinity_engine.blessings.thornskin.description": "“To harm the earth is to bleed from it.”\nMelee attackers take minor damage when they hit you.\nYou carry Terra’s quiet wrath beneath your skin.",
   "divinity_engine.blessings.stonewardens_embrace": "Stonewarden’s Embrace",
   "divinity_engine.blessings.stonewardens_embrace.description": "“The earth shields its own.”\nWhen standing on natural blocks (stone, dirt, grass, etc.), gain Resistance I.\nYou are hardest to kill where Terra’s touch is strongest.",
+  "divinity_engine.blessings.rootgrip": "Rootgrip",
+  "divinity_engine.blessings.rootgrip.description": "“Vines retaliate when tread upon.”\nEnemies that hit you are slowed for 3 seconds. 10s cooldown.",
+  "divinity_engine.blessings.wildheart_bloom": "Wildheart Bloom",
+  "divinity_engine.blessings.wildheart_bloom.description": "“Your presence restores life.”\nHeals nearby allies by half heart every 2 seconds.",
 
   "divinity_engine.blessings.beacons_grace": "Beacon’s Grace",
   "divinity_engine.blessings.beacons_grace.description": "“In her light, your path is sure.”\nHostile mobs are slower to notice you in bright light, and you gain +10% movement speed when in sunlight or near light sources.",
@@ -211,6 +269,10 @@
   "divinity_engine.blessings.cleansing_flame.description": "“The flame judges—and heals.”\nWhen you take damage, you purge all negative status effects (poison, wither, slowness, etc.) once every 30 seconds.",
   "divinity_engine.blessings.divine_radiance": "Divine Radiance",
   "divinity_engine.blessings.divine_radiance.description": "Let light drive out all darkness.”\nUnleash a burst of radiant energy that blinds enemies around you and grants Resistance I for 5 seconds.\nEnemies are disoriented; you stand protected in her glow.",
+  "divinity_engine.blessings.lightbearers_oath": "Lightbearer’s Oath",
+  "divinity_engine.blessings.lightbearers_oath.description": "“You are the blade of dawn.”\nDeal +20% damage to undead and dark-aligned mobs (e.g., Ender Mobs).",
+  "divinity_engine.blessings.dawnshatter": "Dawnshatter",
+  "divinity_engine.blessings.dawnshatter.description": "“Light purifies, even in fury.”\nUnleash a cone of light that deals 4 radiant damage and removes 1 effect from allies. 30s cooldown.",
 
   "divinity_engine.blessings.tinkers_grace": "Tinker’s Grace",
   "divinity_engine.blessings.tinkers_grace.description": "“Every gear turns with purpose.”\nTools lose durability 15% slower when used.\nMechanos rewards careful, calculated use of your craft.",
@@ -218,6 +280,10 @@
   "divinity_engine.blessings.auto_smelter.description": "“No need for flame when the machine remembers heat.”\nWhen mining ores, there's a chance they drop pre-smelted (e.g. iron ingot instead of raw iron).\nMechanos compresses work and time into raw output.",
   "divinity_engine.blessings.clockwork_punch": "Clockwork Punch",
   "divinity_engine.blessings.clockwork_punch.description": "“Precision winds power.”\nMelee attacks have a 30% chance to deliver a gear-powered knockback, pushing enemies away with a mechanical jolt.",
+  "divinity_engine.blessings.precision_impact": "Precision Impact",
+  "divinity_engine.blessings.precision_impact.description": "“You strike with mechanical mastery.”\nTemporarily boosts speed of nearby machines when hitting a block.",
+  "divinity_engine.blessings.overdrive_loop": "Overdrive Loop",
+  "divinity_engine.blessings.overdrive_loop.description": "“The gears within burn faster.”\n+15% mining and movement speed while sprinting, mining, or crafting. Ends after 10s inactivity.",
 
   "divinity_engine.blessings.blazing_hands": "Blazing Hands",
   "divinity_engine.blessings.blazing_hands.description": "“All who strike in my name shall burn.”\nYour melee attacks have a 15% chance to ignite enemies for 3 seconds.\nA spark from Ignar lingers in every blow.",
@@ -225,6 +291,10 @@
   "divinity_engine.blessings.fireproof.description": "“I do not fear the fire—I am it.”\nGain full immunity to fire, lava, and burn damage.\nYou stride through flame as if it were mist.",
   "divinity_engine.blessings.flash_flare": "Flash Flare",
   "divinity_engine.blessings.flash_flare.description": "“Let them know your fury.”\nRelease a fiery burst around you, damaging and igniting all nearby enemies in a 5-block radius.\nAlso emits a blinding flash of light that disorients hostile mobs for 2 seconds.",
+  "divinity_engine.blessings.kindling_fury": "Kindling Fury",
+  "divinity_engine.blessings.kindling_fury.description": "“Pain feeds the inferno.”\nDeal +25% damage to mobs already burning.",
+  "divinity_engine.blessings.inferno_mantle": "Inferno Mantle",
+  "divinity_engine.blessings.inferno_mantle.description": "“Your wrath is an endless blaze.”\nEnemies within 3 blocks take 1 fire damage every 2s and ignite for 3s.",
 
   "divinity_engine.blessings.veilpiercer": "Veilpiercer",
   "divinity_engine.blessings.astral_sight.description": "“When you slow your breath and blend with the dark, the veil between worlds shudders. Shadows reveal what lies hidden.”\n While sneaking, Aethon views the endless stars to all nearby mobs/entities within 12 blocks and cause them to have a faint shimmer",
@@ -232,6 +302,10 @@
   "divinity_engine.blessings.celestial_ward.description": "“Starlight shields the righteous.”\nEvery 30 seconds, automatically block one instance of projectile damage (arrow, trident, etc.).",
   "divinity_engine.blessings.starlit_mirror": "Starlit Mirror",
   "divinity_engine.blessings.starlit_mirror.description": "“The stars do not strike—they reflect.”\nFor 6 seconds, any ranged attack (arrow, trident, any projectiles) aimed at you is redirected back toward its source with reduced damage.\nThe sky becomes your shield.",
+  "divinity_engine.blessings.gravity_fold": "Gravity Fold",
+  "divinity_engine.blessings.gravity_fold.description": "“You bend the stars beneath your steps.”\nHold jump midair to slow-fall and hover for 2 seconds. 8s cooldown.",
+  "divinity_engine.blessings.pocket_dimension": "Pocket Dimension",
+  "divinity_engine.blessings.pocket_dimension.description": "“Retreat into your own shard of the cosmos.”\nAccess a private inventory and space bound to you, accessible anywhere.",
 
   "divinity_engine.gods.favor_tier.enemy": "Enemy",
   "divinity_engine.gods.favor_tier.displeased": "Displeased",
@@ -239,10 +313,6 @@
   "divinity_engine.gods.favor_tier.favorable": "Favorable",
   "divinity_engine.gods.favor_tier.devoted": "Devoted",
   "divinity_engine.gods.favor_tier.champion": "Champion",
-
-
-
-
 
   "divinity.argument.gods.invalid": "Invalid gods id. ",
   "gui.divinity_engine.blessings.label_current_favor": "Current Favor: ",
@@ -252,6 +322,7 @@
   "gui.divinity_engine.blessings.label_given_by": "Given by: ",
   "gui.divinity_engine.blessings.button_active": "Active",
   "block.divinity_engine.statue": "Statue",
+  "block.divinity_engine.pocket_dimension": "Pocket Dimension",
   "divinity_engine.tooltip.shift": "Hold Shift to view more Information",
   "key.categories.divinity_engine": "Divinity Engine Key",
   "key.divinity_engine.blessing_slot_1": "Blessing Slot 1",

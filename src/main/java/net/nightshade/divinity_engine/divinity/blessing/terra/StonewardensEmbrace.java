@@ -14,8 +14,8 @@ import java.awt.*;
 
 public class StonewardensEmbrace extends Blessings {
 
-    public StonewardensEmbrace(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public StonewardensEmbrace(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

@@ -26,12 +26,12 @@ public class Veilpiercer extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate
      * @param cooldown    Cooldown period in seconds
-     * @param isActive    Whether blessing starts active
+     * @param isPassive    Whether blessing starts active
      * @param canToggle   Whether blessing can be toggled
      * @param textColor   Color for blessing text
      */
-    public Veilpiercer(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Veilpiercer(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

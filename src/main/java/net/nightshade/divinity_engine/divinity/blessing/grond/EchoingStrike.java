@@ -20,12 +20,12 @@ public class EchoingStrike extends Blessings {
      *
      * @param neededFavor The favor points required to use this blessing
      * @param cooldown    The cooldown period in ticks
-     * @param isActive    Whether the blessing is initially active
+     * @param isPassive    Whether the blessing is initially active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for blessing text in the UI
      */
-    public EchoingStrike(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public EchoingStrike(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

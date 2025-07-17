@@ -18,9 +18,7 @@ import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents an instance of a god with its associated state including favor level,
@@ -59,6 +57,10 @@ public class BaseGodInstance implements Cloneable {
 
     }
 
+    public List<BlessingsInstance> getDirtyBlessings() {
+        return this.getBlessingsInstances().parallelStream().filter(BlessingsInstance::isDirty).toList();
+    }
+
     public BaseGod getBaseGod() {
         return (BaseGod)this.godsReference.get();
     }
@@ -93,6 +95,11 @@ public class BaseGodInstance implements Cloneable {
         ListTag blessingsTag = new ListTag();
         for (BlessingsInstance blessing : this.blessingsInstances) {
             try {
+                if (this.blessingsInstances.size() != this.getBaseGod().getBlessings().size()) {
+                    for (RegistryObject<Blessings> blessings : this.getBaseGod().getBlessings()){
+                        this.addBlessingsAndDontRemove(blessings.get().createDefaultInstance());
+                    }
+                }
                 CompoundTag blessingTag = new CompoundTag();
                 ResourceLocation blessingId = BlessingsRegistry.BLESSINGS_REGISTRY.get()
                         .getKey(blessing.getBlessing());
@@ -109,6 +116,7 @@ public class BaseGodInstance implements Cloneable {
 
                     blessingsTag.add(blessingTag);
                 }
+
             } catch (Exception e) {
                 System.err.println("Failed to save blessing: " + e.getMessage());
             }
@@ -129,6 +137,11 @@ public class BaseGodInstance implements Cloneable {
         tag.putInt("Favor", this.favor);
 
         ListTag blessingsList = new ListTag();
+        if (this.blessingsInstances.size() != this.getBaseGod().getBlessings().size()) {
+            for (RegistryObject<Blessings> blessings : this.getBaseGod().getBlessings()){
+                this.addBlessingsAndDontRemove(blessings.get().createDefaultInstance());
+            }
+        }
         for (BlessingsInstance instance : blessingsInstances) {
             CompoundTag blessingTag = new CompoundTag();
             // Save the blessing type
@@ -150,18 +163,25 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public void deserialize(CompoundTag tag) {
-        if (tag.getInt("Favor") <= 100 || tag.getInt("Favor") >= -100) {
-            this.favor = tag.getInt("Favor");
-        }
+        this.favor = tag.getInt("Favor");
+
         // Handle blessings
         if (tag.contains("Blessings", 10)) { // 10 is the NBT tag type for CompoundTag
             blessingsInstances.clear();
             ListTag blessingsList = tag.getList("Blessings", 10);
 
             for (int i = 0; i < blessingsList.size(); i++) {
-                CompoundTag blessingTag = blessingsList.getCompound(i);
                 try {
                     // Get the blessing type from the registry
+                    CompoundTag blessingTag = blessingsList.getCompound(i);
+                    if (blessingsList.size() != getBaseGod().getBlessings().size()) {
+                        for (RegistryObject<Blessings> blessings : getBaseGod().getBlessings()){
+                            BlessingsInstance instance = blessings.get().createDefaultInstance();
+                            instance.setBoundGod(this);
+                            addBlessingsAndDontRemove(instance);
+                        }
+                    }
+
                     ResourceLocation blessingId = new ResourceLocation(blessingTag.getString("BlessingType"));
                     var blessing = BlessingsRegistry.BLESSINGS_REGISTRY.get().getValue(blessingId);
 
@@ -205,9 +225,8 @@ public class BaseGodInstance implements Cloneable {
         }
 
         BaseGodInstance instance = god.createGodDefaultInstance();
-        if (tag.getInt("Favor") <= 100 || tag.getInt("Favor") >= -100) {
-            instance.favor = tag.getInt("Favor");
-        }
+        instance.favor = tag.getInt("Favor");
+
         // Clear default blessings before loading saved ones
         instance.blessingsInstances.clear();
 
@@ -244,7 +263,11 @@ public class BaseGodInstance implements Cloneable {
                 }
             }
         }
-
+        if (instance.blessingsInstances.size() != instance.getBaseGod().getBlessings().size()) {
+            for (RegistryObject<Blessings> blessings : instance.getBaseGod().getBlessings()){
+                instance.addBlessingsAndDontRemove(blessings.get().createDefaultInstance());
+            }
+        }
         // If no blessings were loaded, initialize with defaults
         if (instance.blessingsInstances.isEmpty() && god.getBlessings() != null) {
             for (RegistryObject<Blessings> blessingReg : god.getBlessings()) {
@@ -309,22 +332,22 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public void decreaseFavor(int favor) {
-        if (!(this.favor - favor < -100)) {
+        if (!(this.favor - favor < FavorTiers.Enemy.getMinFavor())) {
             this.favor -= favor;
             this.markDirty();
         }else {
-            this.favor = -100;
+            this.favor = FavorTiers.Enemy.getMinFavor();
             this.markDirty();
         }
 
     }
 
     public void increaseFavor(int favor) {
-        if (this.favor + favor < 100) {
+        if (this.favor + favor < FavorTiers.Champion.getMaxFavor()) {
             this.favor += favor;
             this.markDirty();
         }else {
-            this.favor = 100;
+            this.favor = FavorTiers.Champion.getMaxFavor();
             this.markDirty();
         }
     }
@@ -344,6 +367,13 @@ public class BaseGodInstance implements Cloneable {
                 instance.getBlessing().equals(newInstance.getBlessing())
         );
         blessingsInstances.add(newInstance);
+        markDirty();
+    }
+
+    public void addBlessingsAndDontRemove(BlessingsInstance newInstance) {
+        if (this.getBlessing(newInstance.getBlessing()) == null) {
+            blessingsInstances.add(newInstance);
+        }
         markDirty();
     }
 

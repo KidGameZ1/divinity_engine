@@ -12,8 +12,8 @@ import net.nightshade.nightshade_core.util.MiscHelper;
 import java.awt.*;
 
 public class GaleStep extends Blessings {
-    public GaleStep(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public GaleStep(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

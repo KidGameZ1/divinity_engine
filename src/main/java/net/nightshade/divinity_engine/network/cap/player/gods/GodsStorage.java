@@ -3,11 +3,11 @@ package net.nightshade.divinity_engine.network.cap.player.gods;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.curse.Curse;
 import net.nightshade.divinity_engine.divinity.curse.CurseInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
-import org.jetbrains.annotations.ApiStatus.AvailableSince;
 import org.jetbrains.annotations.ApiStatus.NonExtendable;
 
 import java.util.Collection;
@@ -24,6 +24,8 @@ public interface GodsStorage extends INBTSerializable<CompoundTag> {
     void updateGodInstance(BaseGodInstance var1);
 
     void updateGodInstances(List<BaseGodInstance> var1);
+
+    void updateBlessingInstance(BaseGodInstance instance, BlessingsInstance updateInstance, boolean sync);
 
     void updateGodInstances(BaseGodInstance... var1);
 
@@ -44,6 +46,8 @@ public interface GodsStorage extends INBTSerializable<CompoundTag> {
     void uncurse(CurseInstance var1);
 
     void uncurse(Curse var1);
+
+    void loseContactAllGods();
 
     Optional<BaseGodInstance> getContactedGod(BaseGod var1);
     Optional<CurseInstance> getCurse(Curse var1);

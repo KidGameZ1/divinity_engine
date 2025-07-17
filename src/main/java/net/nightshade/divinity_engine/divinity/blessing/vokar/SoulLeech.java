@@ -9,8 +9,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class SoulLeech extends Blessings {
-    public SoulLeech(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public SoulLeech(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

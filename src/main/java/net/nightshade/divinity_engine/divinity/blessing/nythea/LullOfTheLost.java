@@ -15,8 +15,8 @@ import java.util.UUID;
 public class LullOfTheLost extends Blessings {
     private final Random random = new Random();
 
-    public LullOfTheLost(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public LullOfTheLost(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

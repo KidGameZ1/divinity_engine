@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.PacketDistributor;
 
+import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.curse.Curse;
 import net.nightshade.divinity_engine.divinity.curse.CurseInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
@@ -68,6 +69,8 @@ public interface InternalGodsStorage extends GodsStorage {
         this.updateGodInstance(updatedInstance, true);
     }
 
+    void updateBlessingInstance(BaseGodInstance instance, BlessingsInstance updateInstance, boolean sync);
+
     default void updateGodInstances(List<BaseGodInstance> updatedInstances) {
         updatedInstances.forEach((magicInstance) -> this.updateGodInstance(magicInstance, false));
         this.syncChanges();
@@ -115,6 +118,8 @@ public interface InternalGodsStorage extends GodsStorage {
     default boolean curse(Curse curse, BaseGod god) {
         return this.curse(curse.createDefaultInstance(), god);
     }
+
+    void loseContactAllGods();
 
     default void uncurse(Curse god) {
         this.getContactedGods().removeIf((instance) -> instance.getBaseGodId().equals(CurseRegistry.CURSES_REGISTRY.get().getKey(god)));

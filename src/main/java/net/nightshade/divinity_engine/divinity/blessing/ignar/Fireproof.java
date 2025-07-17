@@ -18,12 +18,12 @@ public class Fireproof extends Blessings {
      *
      * @param neededFavor The amount of favor points required to activate this blessing
      * @param cooldown    The cooldown duration in ticks before the blessing can be used again
-     * @param isActive    Whether the blessing starts in an active state
+     * @param isPassive    Whether the blessing starts in an active state
      * @param canToggle   Whether the blessing can be toggled on and off by the player
      * @param textColor   The color used to display this blessing in the UI
      */
-    public Fireproof(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Fireproof(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

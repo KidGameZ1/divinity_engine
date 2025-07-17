@@ -11,8 +11,8 @@ public class FeralStep extends Blessings {
     private final float SPEED_BOOST = 0.07f;
     private final float FALL_DAMAGE_REDUCTION = 0.4f;
 
-    public FeralStep(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public FeralStep(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
 

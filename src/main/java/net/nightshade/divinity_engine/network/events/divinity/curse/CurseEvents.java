@@ -1,41 +1,43 @@
 package net.nightshade.divinity_engine.network.events.divinity.curse;
 
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.curse.CurseInstance;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 @Mod.EventBusSubscriber(modid = DivinityEngineMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CurseEvents {
+    /*private static final WeakHashMap<Player, Integer> playerTickCounters = new WeakHashMap<>();
+
     @SubscribeEvent
     public static void onCurseTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            Player player = event.player;
-            if (!GodHelper.getContactedGodsFrom(player).getCurses().isEmpty()){
-                for (CurseInstance curseInstance : GodHelper.getContactedGodsFrom(player).getCurses()) {
-                    curseInstance.onTick(player);
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
+
+        Player player = event.player;
+        int tickCount = playerTickCounters.getOrDefault(player, 0);
+
+        if (tickCount % 20 == 0) { // Run once every 20 ticks (1 second)
+            var curses = GodHelper.getContactedGodsFrom(player).getCurses();
+            if (!curses.isEmpty()) {
+                for (CurseInstance curse : curses) {
+                    curse.onTick(player);
                 }
             }
         }
-    }
+
+        playerTickCounters.put(player, tickCount + 1);
+    }*/
+
     @SubscribeEvent
     public static void onCurseRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();

@@ -22,12 +22,12 @@ public class PredictedPath extends Blessings {
      *
      * @param neededFavor The favor points required to activate this blessing
      * @param cooldown    The cooldown period in ticks before the blessing can be used again
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for displaying blessing text in the UI
      */
-    public PredictedPath(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public PredictedPath(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

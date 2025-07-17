@@ -17,8 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
-import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import org.jetbrains.annotations.Nullable;
 
 import static net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability.*;
@@ -45,15 +44,18 @@ public class CapabilityHandler {
     private static void playerSave(PlayerEvent.SaveToFile event) {
         Player player = event.getEntity();
         if (player instanceof ServerPlayer) {
-            if (MainPlayerCapabilityHelper.getBlessingSlot1(player) != null) {
-                System.out.println("Saving player " + player.getName().getString() + " blessing slot 1 data: " + MainPlayerCapabilityHelper.getBlessingSlot1(player).toNBT());
+            if (DivinityEngineHelper.getBlessingSlot1(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 1 data: " + DivinityEngineHelper.getBlessingSlot1(player).toNBT());
             }
-            if (MainPlayerCapabilityHelper.getBlessingSlot2(player) != null) {
-                System.out.println("Saving player " + player.getName().getString() + " blessing slot 2 data: " + MainPlayerCapabilityHelper.getBlessingSlot2(player).toNBT());
+            if (DivinityEngineHelper.getBlessingSlot2(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 2 data: " + DivinityEngineHelper.getBlessingSlot2(player).toNBT());
             }
-            if (MainPlayerCapabilityHelper.getBlessingSlot3(player) != null) {
-                System.out.println("Saving player " + player.getName().getString() + " blessing slot 3 data: " + MainPlayerCapabilityHelper.getBlessingSlot3(player).toNBT());
+            if (DivinityEngineHelper.getBlessingSlot3(player) != null) {
+                System.out.println("Saving player " + player.getName().getString() + " blessing slot 3 data: " + DivinityEngineHelper.getBlessingSlot3(player).toNBT());
             }
+            MainPlayerCapability.PlayerVariables.getFrom(player).ifPresent((data) -> {
+                data.setBlessingsPageNum(0);
+            });
         }
     }
 

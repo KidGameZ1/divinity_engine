@@ -1,0 +1,13 @@
+{
+  "type": "divinity_engine:pocket_dimension",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [],
+      "biome": "minecraft:the_void",
+      "structures": {
+        "structures": {}
+      }
+    }
+  }
+}

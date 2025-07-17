@@ -18,12 +18,12 @@ public class EchoStep extends Blessings {
      *
      * @param neededFavor The favor cost to use this blessing
      * @param cooldown    The cooldown period in ticks
-     * @param isActive    Whether the blessing is initially active
+     * @param isPassive    Whether the blessing is initially active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for blessing text in UI
      */
-    public EchoStep(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public EchoStep(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**
@@ -59,9 +59,13 @@ public class EchoStep extends Blessings {
     @Override
     public boolean onPressed(BlessingsInstance instance, LivingEntity living) {
         if (instance.getTag() != null) {
-            if (instance.getTag().getDouble("oldPositionX") != 0 && instance.getTag().getDouble("oldPositionY") != 0 && instance.getTag().getDouble("oldPositionZ") != 0) {}
-                living.setPos(instance.getOrCreateTag().getDouble("oldPositionX"), instance.getOrCreateTag().getDouble("oldPositionY"), instance.getOrCreateTag().getDouble("oldPositionZ"));
-            return true;
+            if (instance.getTag().getDouble("oldPositionX") != 0 && instance.getTag().getDouble("oldPositionY") != 0 && instance.getTag().getDouble("oldPositionZ") != 0) {
+                living.setPos(instance.getTag().getDouble("oldPositionX"), instance.getTag().getDouble("oldPositionY"), instance.getTag().getDouble("oldPositionZ"));
+                instance.getOrCreateTag().putDouble("oldPositionX", 0);
+                instance.getOrCreateTag().putDouble("oldPositionY", 0);
+                instance.getOrCreateTag().putDouble("oldPositionZ", 0);
+                return true;
+            }
         }
         return super.onPressed(instance, living);
     }

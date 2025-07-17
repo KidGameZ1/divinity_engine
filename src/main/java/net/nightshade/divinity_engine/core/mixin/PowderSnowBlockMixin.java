@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class PowderSnowBlockMixin {
 
     @Inject(method = "entityInside", at =@At("TAIL"),cancellable = true)
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity, CallbackInfo ci){
-        if (MainPlayerCapabilityHelper.hasBlessingInSlot(BlessingsRegistry.SNOWVEIL.get(), pEntity)) {
+        if (DivinityEngineHelper.hasBlessingInSlot(BlessingsRegistry.SNOWVEIL.get(), pEntity)) {
             if (pEntity instanceof LivingEntity _livEntity){
 //                _livEntity.setInvisible(true);
                 _livEntity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 40, 2, false, false));
@@ -31,7 +31,7 @@ public class PowderSnowBlockMixin {
     }
     @Inject(method = "canEntityWalkOnPowderSnow", at =@At("HEAD"),cancellable = true)
     private static void canEntityWalkOnPowderSnow(Entity pEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (MainPlayerCapabilityHelper.hasBlessingInSlot(BlessingsRegistry.FROZEN_HEART.get(), pEntity)) {
+        if (DivinityEngineHelper.hasBlessingInSlot(BlessingsRegistry.FROZEN_HEART.get(), pEntity)) {
                 cir.setReturnValue(true);
         }
     }

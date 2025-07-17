@@ -12,11 +12,11 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.commands.arg.GodsArgument;
-import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 import java.util.Objects;
@@ -134,7 +134,10 @@ public class DivinityEngineCommands {
 													}.getEntity());
 													Entity commandCaller = arguments.getSource().getEntity();
 													if (entityCalledOn instanceof LivingEntity player) {
-														GodHelper.loseFaithAllGods(player);
+														for (BaseGodInstance instance : GodHelper.getAllContactedGods(player)) {
+															GodHelper.getContactedGodsFrom(entityCalledOn).loseContactAllGods();
+
+														}
 													}
 													return 0;
 												}))))));
@@ -144,7 +147,7 @@ public class DivinityEngineCommands {
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.argument("god-id", GodsArgument.god())
-												.then(Commands.argument("favor", IntegerArgumentType.integer(-100, 100))
+												.then(Commands.argument("favor", IntegerArgumentType.integer(FavorTiers.Enemy.getMinFavor(), FavorTiers.Champion.getMaxFavor()))
 													.executes(arguments -> {
 														Entity entityCalledOn = (new Object() {
 															public Entity getEntity() {
@@ -165,7 +168,7 @@ public class DivinityEngineCommands {
 															if (commandCaller instanceof Player player) {
 																if (GodHelper.hasContactedGod(entityCalledOn, god)){
 																	GodHelper.getGodOrNull(entityCalledOn, god).setFavor(favor);
-																	player.displayClientMessage(Component.literal(entityCalledOn.getDisplayName().getString() + " has favor set to " + favor), false);
+																	player.displayClientMessage(Component.literal(entityCalledOn.getDisplayName().getString() + " favor has been set to " + favor), false);
 																}
 															}
 														}
@@ -176,7 +179,7 @@ public class DivinityEngineCommands {
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.literal("all")
-												.then(Commands.argument("favor", IntegerArgumentType.integer(-100, 100))
+												.then(Commands.argument("favor", IntegerArgumentType.integer(FavorTiers.Enemy.getMinFavor(), FavorTiers.Champion.getMaxFavor()))
 														.executes(arguments -> {
 															Entity entityCalledOn = (new Object() {
 																public Entity getEntity() {
@@ -196,7 +199,7 @@ public class DivinityEngineCommands {
 																for (BaseGodInstance instance : GodHelper.getAllContactedGods(player)) {
 																	instance.setFavor(favor);
 																}
-																player.displayClientMessage(Component.literal(entityCalledOn.getDisplayName().getString() + " has favor set to " + favor), false);
+																player.displayClientMessage(Component.literal(entityCalledOn.getDisplayName().getString() + " favor has been set to " + favor), false);
 															}
 															return 0;
 														})))))));
@@ -254,20 +257,20 @@ public class DivinityEngineCommands {
 									blessing.setCooldown(0);
 								});
 							}
-						if (MainPlayerCapabilityHelper.getBlessingSlot1(entityCalledOn) != null) {
-							BlessingsInstance instance = Objects.requireNonNull(MainPlayerCapabilityHelper.getBlessingSlot1(entityCalledOn));
+						if (DivinityEngineHelper.getBlessingSlot1(entityCalledOn) != null) {
+							BlessingsInstance instance = Objects.requireNonNull(DivinityEngineHelper.getBlessingSlot1(entityCalledOn));
 							instance.setCooldown(0);
-							MainPlayerCapabilityHelper.setBlessingSlot1(entityCalledOn, instance);
+							DivinityEngineHelper.setBlessingSlot1(entityCalledOn, instance);
 						}
-						if (MainPlayerCapabilityHelper.getBlessingSlot2(entityCalledOn) != null) {
-							BlessingsInstance instance = Objects.requireNonNull(MainPlayerCapabilityHelper.getBlessingSlot2(entityCalledOn));
+						if (DivinityEngineHelper.getBlessingSlot2(entityCalledOn) != null) {
+							BlessingsInstance instance = Objects.requireNonNull(DivinityEngineHelper.getBlessingSlot2(entityCalledOn));
 							instance.setCooldown(0);
-							MainPlayerCapabilityHelper.setBlessingSlot2(entityCalledOn, instance);
+							DivinityEngineHelper.setBlessingSlot2(entityCalledOn, instance);
 						}
-						if (MainPlayerCapabilityHelper.getBlessingSlot3(entityCalledOn) != null) {
-							BlessingsInstance instance = Objects.requireNonNull(MainPlayerCapabilityHelper.getBlessingSlot3(entityCalledOn));
+						if (DivinityEngineHelper.getBlessingSlot3(entityCalledOn) != null) {
+							BlessingsInstance instance = Objects.requireNonNull(DivinityEngineHelper.getBlessingSlot3(entityCalledOn));
 							instance.setCooldown(0);
-							MainPlayerCapabilityHelper.setBlessingSlot3(entityCalledOn, instance);
+							DivinityEngineHelper.setBlessingSlot3(entityCalledOn, instance);
 						}
 
 						return 0;

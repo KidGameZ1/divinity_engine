@@ -14,8 +14,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class TempestWrath extends Blessings {
-    public TempestWrath(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public TempestWrath(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

@@ -31,9 +31,13 @@ public class Blessings {
      */
     private final int cooldown;
     /**
-     * Whether this blessing is currently active
+     * Whether this blessing is passive
      */
     private final boolean isPassive;
+    /**
+     * Whether this blessing is currently active
+     */
+    private final boolean isActive;
     /**
      * Whether this blessing can be toggled on/off
      */
@@ -48,14 +52,15 @@ public class Blessings {
      *
      * @param neededFavor Amount of favor required to activate
      * @param cooldown    Cooldown period in seconds
-     * @param isPassive    Initial active state
+     * @param isPassive   Is a passive blessing or not
      * @param canToggle   Whether blessing can be toggled
      * @param textColor   Color for blessing text
      */
-    public Blessings(int neededFavor, int cooldown, boolean isPassive, boolean canToggle, Color textColor) {
+    public Blessings(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
         this.neededFavor = neededFavor;
         this.cooldown = MiscHelper.secondsToTick(cooldown);
         this.isPassive = isPassive;
+        this.isActive = isActive;
         this.canToggle = canToggle;
         this.textColor = textColor;
     }
@@ -282,5 +287,9 @@ public class Blessings {
 
     public boolean canToggle() {
         return canToggle;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }

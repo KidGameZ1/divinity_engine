@@ -5,10 +5,16 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "divinity_engine.refmap.json",
   "mixins": [
+    "BlessingButtonGUI",
+    "CreativeBlessingButtonGUI",
+    "FurnaceBlockEntityAccessor",
+    "FurnaceBlockEntityMixin",
     "PowderSnowBlockMixin",
     "RegistryBuilderAccessor"
   ],
   "client": [
+    "BlessingButtonGUI",
+    "CreativeBlessingButtonGUI"
   ],
   "injectors": {
     "defaultRequire": 1

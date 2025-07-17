@@ -10,8 +10,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class GhastlyAura extends Blessings {
-    public GhastlyAura(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public GhastlyAura(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

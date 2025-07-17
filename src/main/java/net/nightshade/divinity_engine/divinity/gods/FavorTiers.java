@@ -10,13 +10,13 @@ import net.minecraft.network.chat.contents.TranslatableContents;
  */
 public enum FavorTiers {
     /**
-     * Represents hostile relationship with favor range -100 to -51
+     * Represents hostile relationship with favor range -250 to -101
      */
-    Enemy("enemy", -100, -51),
+    Enemy("enemy", -250, -101),
     /**
      * Represents unfavorable relationship with favor range -50 to -1
      */
-    Displeased("displeased", -50, -1),
+    Displeased("displeased", -100, -1),
     /**
      * Represents neutral relationship with favor value 0
      */
@@ -24,15 +24,15 @@ public enum FavorTiers {
     /**
      * Represents positive relationship with favor range 1 to 50
      */
-    Favorable("favorable", 1, 50),
+    Favorable("favorable", 1, 100),
     /**
      * Represents strong positive relationship with favor range 51 to 80
      */
-    Devoted("devoted", 51, 80),
+    Devoted("devoted", 101, 175),
     /**
      * Represents highest positive relationship with favor range 81 to 100
      */
-    Champion("champion",81,100);
+    Champion("champion",176,250);
 
 
     private final String id;

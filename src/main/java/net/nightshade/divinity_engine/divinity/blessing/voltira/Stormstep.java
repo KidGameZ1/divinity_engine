@@ -20,8 +20,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class Stormstep extends Blessings {
-    public Stormstep(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Stormstep(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override
@@ -54,8 +54,10 @@ public class Stormstep extends Blessings {
         }
 
         living.setDeltaMovement(movement);
-        if (!living.getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) {
-            living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, getFallImmunityDuration(instance), 0,false, false, true));
+        if (living.isShiftKeyDown()) {
+            if (!living.getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) {
+                living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, getFallImmunityDuration(instance), 0, false, false, true));
+            }
         }
 
         if (living.level() instanceof ServerLevel serverLevel) {

@@ -14,12 +14,12 @@ public class SecondChance extends Blessings {
     /**
      * @param neededFavor Amount of favor required to activate this blessing
      * @param cooldown    Cooldown duration in ticks before the blessing can be used again
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   Color used for blessing text in the UI
      */
-    public SecondChance(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public SecondChance(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

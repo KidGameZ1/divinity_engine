@@ -23,12 +23,12 @@ public class FlashFlare extends Blessings {
      *
      * @param neededFavor The amount of favor required to use this blessing
      * @param cooldown    The cooldown period in ticks before the blessing can be used again
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for displaying the blessing in the UI
      */
-    public FlashFlare(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public FlashFlare(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

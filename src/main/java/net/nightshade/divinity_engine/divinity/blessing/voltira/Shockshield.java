@@ -11,8 +11,8 @@ import java.util.Random;
 public class Shockshield extends Blessings {
     private static final Random random = new Random();
 
-    public Shockshield(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Shockshield(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

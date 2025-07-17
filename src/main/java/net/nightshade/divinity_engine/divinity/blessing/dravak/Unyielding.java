@@ -20,12 +20,12 @@ public class Unyielding extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate this blessing
      * @param cooldown    Cooldown period in ticks
-     * @param isActive    Whether the blessing starts active
+     * @param isPassive    Whether the blessing starts active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   Color used for blessing text display
      */
-    public Unyielding(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Unyielding(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

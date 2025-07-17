@@ -29,7 +29,7 @@ public class SyncGodsPacket {
 
     public SyncGodsPacket(FriendlyByteBuf buf) {
         this.entityId = buf.readInt();
-        this.syncType = (SyncType)buf.readEnum(SyncType.class);
+        this.syncType = buf.readEnum(SyncType.class);
         this.godsTag = buf.readAnySizeNbt();
     }
 
@@ -40,8 +40,8 @@ public class SyncGodsPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> this.syncType.handler.update(this.entityId, this.godsTag));
-        ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
+        ctx.get().enqueueWork(() -> this.syncType.handler.update(this.entityId, this.godsTag));
+        ctx.get().setPacketHandled(true);
     }
 
     public static enum SyncType {
@@ -51,42 +51,52 @@ public class SyncGodsPacket {
                 PlayerGodsCapability.load(target).deserializeNBT(updateTag);
             }
         })),
+
         CHANGES_ONLY((godsStorage) -> {
             CompoundTag tag = new CompoundTag();
-            ListTag magic = new ListTag();
-            godsStorage.getDirtyContactedGods().forEach((magicInstance) -> {
-                magicInstance.resetDirty();
-                magic.add(magicInstance.toNBT());
+            ListTag gods = new ListTag();
+
+            godsStorage.getDirtyContactedGods().forEach(instance -> {
+                instance.resetDirty();
+
+                instance.getDirtyBlessings().forEach(blessing -> {
+                    blessing.resetDirty();
+                    instance.addBlessing(blessing); // Blessings stored inside the instance
+                });
+
+                gods.add(instance.toNBT());
             });
-            tag.put("contacted_gods", magic);
+
+            tag.put("contacted_gods", gods);
+
             ListTag curse = new ListTag();
-            godsStorage.getDirtyCurses().forEach((magicInstance) -> {
-                magicInstance.resetDirty();
-                curse.add(magicInstance.toNBT());
+            godsStorage.getDirtyCurses().forEach(instance -> {
+                instance.resetDirty();
+                curse.add(instance.toNBT());
             });
             tag.put("curses", curse);
+
             return tag;
         }, (entityId1, updateTag) -> ClientLevelAccessor.execute((level) -> {
             Entity target = level.getEntity(entityId1);
             if (target != null) {
                 if (updateTag.contains("contacted_gods")) {
-                    List<BaseGodInstance> updatedMagics = new ArrayList();
+                    List<BaseGodInstance> updatedGods = new ArrayList<>();
 
-                    for(Tag tag : updateTag.getList("contacted_gods", 10)) {
-                        if (tag instanceof CompoundTag) {
-                            CompoundTag compoundTag = (CompoundTag)tag;
-                            updatedMagics.add(BaseGodInstance.fromNBT(compoundTag));
+                    for (Tag tagElement : updateTag.getList("contacted_gods", Tag.TAG_COMPOUND)) {
+                        if (tagElement instanceof CompoundTag compoundTag) {
+                            updatedGods.add(BaseGodInstance.fromNBT(compoundTag)); // This includes blessings
                         }
                     }
 
-                    PlayerGodsCapability.load(target).updateGodInstances(updatedMagics);
+                    PlayerGodsCapability.load(target).updateGodInstances(updatedGods);
                 }
-                if (updateTag.contains("curses")) {
-                    List<CurseInstance> updatedCurses = new ArrayList();
 
-                    for(Tag tag : updateTag.getList("curses", 10)) {
-                        if (tag instanceof CompoundTag) {
-                            CompoundTag compoundTag = (CompoundTag)tag;
+                if (updateTag.contains("curses")) {
+                    List<CurseInstance> updatedCurses = new ArrayList<>();
+
+                    for (Tag tagElement : updateTag.getList("curses", Tag.TAG_COMPOUND)) {
+                        if (tagElement instanceof CompoundTag compoundTag) {
                             updatedCurses.add(CurseInstance.fromNBT(compoundTag));
                         }
                     }
@@ -99,7 +109,7 @@ public class SyncGodsPacket {
         private final UpdateFactory factory;
         private final UpdateHandler handler;
 
-        private SyncType(UpdateFactory factory, UpdateHandler handler) {
+        SyncType(UpdateFactory factory, UpdateHandler handler) {
             this.factory = factory;
             this.handler = handler;
         }
@@ -107,11 +117,11 @@ public class SyncGodsPacket {
 
     @FunctionalInterface
     private interface UpdateFactory {
-        CompoundTag create(InternalGodsStorage var1);
+        CompoundTag create(InternalGodsStorage storage);
     }
 
     @FunctionalInterface
     private interface UpdateHandler {
-        void update(int var1, CompoundTag var2);
+        void update(int entityId, CompoundTag tag);
     }
 }

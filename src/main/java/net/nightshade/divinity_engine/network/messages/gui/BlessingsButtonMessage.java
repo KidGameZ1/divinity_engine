@@ -1,7 +1,6 @@
 package net.nightshade.divinity_engine.network.messages.gui;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.Main;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -11,12 +10,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
-import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
-import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
 
@@ -81,20 +78,20 @@ public class BlessingsButtonMessage {
 			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(entity, blessingsMenu.getGod());
 		}
 
-		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(entity);
+		int pageNum = DivinityEngineHelper.getBlessingsPageNum(entity);
 		int maxPages = blessingsInstances != null ? blessingsInstances.size() -1: 0;
 
 		if (buttonID == 1) {
 			if (pageNum < maxPages) {
-				MainPlayerCapabilityHelper.increaseBlessingsPageNum(entity, 1);
+				DivinityEngineHelper.increaseBlessingsPageNum(entity, 1);
 			}else {
-				MainPlayerCapabilityHelper.setBlessingsPageNum(entity, 0);
+				DivinityEngineHelper.setBlessingsPageNum(entity, 0);
 			}
 		} else if (buttonID == 2) {
 			if (pageNum > 0) {
-				MainPlayerCapabilityHelper.decreaseBlessingsPageNum(entity, 1);
+				DivinityEngineHelper.decreaseBlessingsPageNum(entity, 1);
 			}else if (pageNum == 0) {
-				MainPlayerCapabilityHelper.setBlessingsPageNum(entity, maxPages);
+				DivinityEngineHelper.setBlessingsPageNum(entity, maxPages);
 			}
 		} else if (buttonID >= 10 && buttonID <= 12 &&
 				blessingsInstances != null && !blessingsInstances.isEmpty() &&
@@ -107,26 +104,26 @@ public class BlessingsButtonMessage {
 			BlessingsInstance currentSlotBlessing = null;
 			switch(slot) {
 				case 0:
-					currentSlotBlessing = MainPlayerCapabilityHelper.getBlessingSlot1(entity);
+					currentSlotBlessing = DivinityEngineHelper.getBlessingSlot1(entity);
 					break;
 				case 1:
-					currentSlotBlessing = MainPlayerCapabilityHelper.getBlessingSlot2(entity);
+					currentSlotBlessing = DivinityEngineHelper.getBlessingSlot2(entity);
 					break;
 				case 2:
-					currentSlotBlessing = MainPlayerCapabilityHelper.getBlessingSlot3(entity);
+					currentSlotBlessing = DivinityEngineHelper.getBlessingSlot3(entity);
 					break;
 			}
 
 			if (currentSlotBlessing != null &&
 					currentSlotBlessing.getBlessing().equals(selectedBlessingInstance.getBlessing())) {
 				// Unequip the blessing
-				MainPlayerCapabilityHelper.setBlessingSlot(entity, slot, null);
+				DivinityEngineHelper.setBlessingSlot(entity, slot, null);
 				entity.displayClientMessage(Component.literal("Unequipped blessing from slot " + (slot + 1) + "."), false);
 			} else if (!isAnySlotEquipped(entity, selectedBlessingInstance)) {
 				// Equip the blessing if it has enough favor
 				if (GodHelper.getGodOrNull(entity, selectedBlessingInstance.getBoundGod())
 						.getFavor() >= selectedBlessingInstance.getBlessing().getNeededFavor()) {
-					MainPlayerCapabilityHelper.setBlessingSlot(entity, slot, selectedBlessingInstance);
+					DivinityEngineHelper.setBlessingSlot(entity, slot, selectedBlessingInstance);
 					entity.displayClientMessage(Component.literal("Bound blessing slot " + (slot + 1) + " to " +
 							Component.translatable(selectedBlessingInstance.getBlessing().getNameTranslationKey())
 									.getString() + "."), false);
@@ -149,9 +146,9 @@ public class BlessingsButtonMessage {
 	}
 
 	private static boolean isAnySlotEquipped(Player entity, BlessingsInstance blessing) {
-		BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(entity);
-		BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(entity);
-		BlessingsInstance slot2 = MainPlayerCapabilityHelper.getBlessingSlot3(entity);
+		BlessingsInstance slot0 = DivinityEngineHelper.getBlessingSlot1(entity);
+		BlessingsInstance slot1 = DivinityEngineHelper.getBlessingSlot2(entity);
+		BlessingsInstance slot2 = DivinityEngineHelper.getBlessingSlot3(entity);
 
 		return (slot0 != null && slot0.getBlessing().equals(blessing.getBlessing())) ||
 				(slot1 != null && slot1.getBlessing().equals(blessing.getBlessing())) ||

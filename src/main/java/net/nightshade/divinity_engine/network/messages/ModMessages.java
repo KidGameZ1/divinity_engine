@@ -13,6 +13,7 @@ import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.messages.cap.SyncGodsPacket;
 import net.nightshade.divinity_engine.network.messages.cap.SyncMainPlayerCapabilityPacket;
 import net.nightshade.divinity_engine.network.messages.gui.BlessingsButtonMessage;
+import net.nightshade.divinity_engine.network.messages.gui.PlayerBlessingsButtonMessage;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot1Message;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot2Message;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot3Message;
@@ -46,6 +47,7 @@ public class ModMessages {
         INSTANCE.registerMessage(id(), BlessingSlot1Message.class, BlessingSlot1Message::buffer, BlessingSlot1Message::new, BlessingSlot1Message::handler);
         INSTANCE.registerMessage(id(), BlessingSlot2Message.class, BlessingSlot2Message::buffer, BlessingSlot2Message::new, BlessingSlot2Message::handler);
         INSTANCE.registerMessage(id(), BlessingSlot3Message.class, BlessingSlot3Message::buffer, BlessingSlot3Message::new, BlessingSlot3Message::handler);
+        INSTANCE.registerMessage(id(), PlayerBlessingsButtonMessage.class, PlayerBlessingsButtonMessage::buffer, PlayerBlessingsButtonMessage::new, PlayerBlessingsButtonMessage::handler);
     }
 
     public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

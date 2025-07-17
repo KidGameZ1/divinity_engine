@@ -11,8 +11,8 @@ import net.nightshade.nightshade_core.util.MiscHelper;
 import java.awt.*;
 
 public class WindcallersReflex extends Blessings {
-    public WindcallersReflex(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public WindcallersReflex(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

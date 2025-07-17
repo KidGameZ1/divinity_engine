@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "divinity_engine:solarius_statue"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "divinity_engine:blocks/solarius_statue"
+}

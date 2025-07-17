@@ -19,7 +19,8 @@ import java.util.function.Consumer;
 public class ItemsRegistry {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, DivinityEngineMod.MODID);
 
-    public static final RegistryObject<Item> TEST = REGISTRY.register("test", () -> new Test());
+//    public static final RegistryObject<Item> TEST = REGISTRY.register("test", () -> new Test());
+    public static final RegistryObject<Item> POCKET_DIMENSION = block(BlocksRegistry.POCKET_DIMENSION);
 
     private static RegistryObject<Item> block(RegistryObject<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));

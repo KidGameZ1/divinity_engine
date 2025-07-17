@@ -71,6 +71,8 @@ public class GodsRegistry {
         blessings.add(RADIANT_STRIKE);
         blessings.add(SUNSKIN);
         blessings.add(SUNBURST);
+        blessings.add(SOLAR_WARD);
+        blessings.add(CORONA_ASCENDANT);
         return new Solarius(
                 Set.of("light", "justice", "day"),
                 blessings,
@@ -85,6 +87,8 @@ public class GodsRegistry {
         blessings.add(TOXIC_SKIN);
         blessings.add(SERPENTS_BITE);
         blessings.add(SHADOWSTEP);
+        blessings.add(VENOMBLOOD);
+        blessings.add(COIDED_RETRIBUTION);
         return new Nashara(
                 Set.of("poison", "deception", "shadow"),
                 blessings,
@@ -99,6 +103,8 @@ public class GodsRegistry {
         blessings.add(HAMMERHAND);
         blessings.add(STONEFORM);
         blessings.add(ECHOING_STRIKE);
+        blessings.add(EARTHBIND_GRIP);
+        blessings.add(FORGEHEART);
         return new Grond(
                 Set.of("mountains", "crafting", "endurance"),
                 blessings,
@@ -113,6 +119,8 @@ public class GodsRegistry {
         blessings.add(FERAL_STEP);
         blessings.add(TRACKERS_MARK);
         blessings.add(PREDATORS_FOCUS);
+        blessings.add(SAVAGE_HUNGER);
+        blessings.add(ALPHAS_CALL);
         return new Varun(
                 Set.of("animals", "instinct", "wilderness"),
                 blessings,
@@ -127,6 +135,8 @@ public class GodsRegistry {
         blessings.add(BATTLE_RUSH);
         blessings.add(UNYIELDING);
         blessings.add(CRUSHING_BLOW);
+        blessings.add(WARLORDS_WILL);
+        blessings.add(FURY_UNBOUND);
         return new Dravak(
                 Set.of("blood", "valor", "strength"),
                 blessings,
@@ -141,6 +151,8 @@ public class GodsRegistry {
         blessings.add(INSIGHTFUL_KILL);
         blessings.add(FORESIGHT);
         blessings.add(SCHOLARS_EDGE);
+        blessings.add(MIND_MIRROR);
+        blessings.add(ARCANE_RECALL);
         return new Elaris(
                 Set.of("knowledge", "magic", "insight"),
                 blessings,
@@ -155,6 +167,8 @@ public class GodsRegistry {
         blessings.add(STORMSTEP);
         blessings.add(SHOCKSHIELD);
         blessings.add(TEMPEST_WRATH);
+        blessings.add(CHARGE_RELAY);
+        blessings.add(LIGHTNING_CONDUIT);
         return new Voltira(
                 Set.of("thunder", "chaos", "sky"),
                 blessings,
@@ -169,6 +183,8 @@ public class GodsRegistry {
         blessings.add(SOUL_LEECH);
         blessings.add(WRAITHWALK);
         blessings.add(GHASTLY_AURA);
+        blessings.add(DREAD_COMSUMPTION);
+        blessings.add(WITHERBOUND);
         return new Vokar(
                 Set.of("spirits", "shadows", "finality"),
                 blessings,
@@ -183,6 +199,8 @@ public class GodsRegistry {
         blessings.add(TWILIGHT_VEIL);
         blessings.add(LULL_OF_THE_LOST);
         blessings.add(PHASE_BLINK);
+        blessings.add(SILVER_MIRROR);
+        blessings.add(MOONDRINKER);
         return new Nythea(
                 Set.of("night", "illusion", "calm"),
                 blessings,
@@ -197,6 +215,8 @@ public class GodsRegistry {
         blessings.add(SECOND_CHANCE);
         blessings.add(ECHO_STEP);
         blessings.add(PREDICTED_PATH);
+        blessings.add(THREADSEVER);
+        blessings.add(FATEFUL_DRAW);
         return new Kairoth(
                 Set.of("time", "destiny", "choice"),
                 blessings,
@@ -211,6 +231,8 @@ public class GodsRegistry {
         blessings.add(FROZEN_HEART);
         blessings.add(ICY_PULSE);
         blessings.add(SNOWVEIL);
+        blessings.add(FROSTBITE_MANTLE);
+        blessings.add(PERMAFROST_SURGE);
         return new Cryonis(
                 Set.of("ice", "winter", "stillness"),
                 blessings,
@@ -225,6 +247,8 @@ public class GodsRegistry {
         blessings.add(AQUATIC_GRACE);
         blessings.add(RAINS_FAVOR);
         blessings.add(WAVEBOUND);
+        blessings.add(UNDERCURRENT_GRIP);
+        blessings.add(TIDECALLERS_WRATH);
         return new Nerai(
                 Set.of("water", "rain", "weather"),
                 blessings,
@@ -239,6 +263,8 @@ public class GodsRegistry {
         blessings.add(GALE_STEP);
         blessings.add(WINDCALLERS_REFLEX);
         blessings.add(CYCLONE_LEAP);
+        blessings.add(SHEARWIND_DASH);
+        blessings.add(TEMPEST_SPIRAL);
         return new Zephra(
                 Set.of("air", "movement", "speed"),
                 blessings,
@@ -253,6 +279,8 @@ public class GodsRegistry {
         blessings.add(VERDANT_TOUCH);
         blessings.add(THORNSKIN);
         blessings.add(STONEWARDENS_EMBRACE);
+        blessings.add(ROOTGRIP);
+        blessings.add(WILDHEART_BLOOM);
         return new Terra(
                 Set.of("nature", "plants", "earth"),
                 blessings,
@@ -267,6 +295,8 @@ public class GodsRegistry {
         blessings.add(BEACONS_GRACE);
         blessings.add(CLEANSING_FLAME);
         blessings.add(DIVINE_RADIANCE);
+        blessings.add(LIGHTBEARERS_OATH);
+        blessings.add(DAWNSHATTER);
         return new Lumen(
                 Set.of("light", "order", "purity"),
                 blessings,
@@ -281,6 +311,8 @@ public class GodsRegistry {
         blessings.add(TINKERS_GRACE);
         blessings.add(AUTO_SMELTER);
         blessings.add(CLOCKWORK_PUNCH);
+        blessings.add(PRECISION_IMPACT);
+        blessings.add(OVERDRIVE_LOOP);
         return new Mechanos(
                 Set.of("metal", "crafting", "golems"),
                 blessings,
@@ -295,6 +327,8 @@ public class GodsRegistry {
         blessings.add(BLAZING_HANDS);
         blessings.add(FIREPROOF);
         blessings.add(FLASHFLARE);
+        blessings.add(KINDING_FURY);
+        blessings.add(INFERNO_MANTLE);
         return new Ignar(
                 Set.of("fire", "combat"),
                 blessings,
@@ -309,6 +343,8 @@ public class GodsRegistry {
         blessings.add(VAILPIERCER);
         blessings.add(CELESTIAL_WARD);
         blessings.add(STARLIT_MIRROR);
+        blessings.add(GRAVITY_FOLD);
+        blessings.add(POCKET_DIMENSION);
         return new Aethon(
                 Set.of("stars", "vision", "cosmic"),
                 blessings,

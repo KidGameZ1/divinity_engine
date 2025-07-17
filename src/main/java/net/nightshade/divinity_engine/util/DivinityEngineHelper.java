@@ -1,19 +1,23 @@
 package net.nightshade.divinity_engine.util;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.util.LazyOptional;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
-import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
+
+import java.util.UUID;
 
 /**
  * Helper class for managing player capabilities related to blessings and their slots.
  * Provides utility methods to access and modify blessing-related data for entities.
  */
-public class MainPlayerCapabilityHelper {
+public class DivinityEngineHelper {
     /**
      * Retrieves the player variables capability for the given entity.
      *
@@ -156,5 +160,60 @@ public class MainPlayerCapabilityHelper {
         }
     }
 
+    public static BlessingsInstance getBlessingInSlot(Player player, int slot) {
+        switch(slot) {
+            case 0:
+                return getBlessingSlot1(player);
+            case 1:
+                return getBlessingSlot2(player);
+            case 2:
+                return getBlessingSlot3(player);
+            case -1:
+                return null;
+        }
+        return null;
+    }
+
+    public record PlayerData(UUID uuid, BlockPos pos, boolean isSneaking) {
+        /**
+         * Calculate squared distance to another BlockPos. Safe for async.
+         */
+        public double distSqr(BlockPos other) {
+            double dx = pos.getX() + 0.5 - other.getX() - 0.5;
+            double dy = pos.getY() + 0.5 - other.getY() - 0.5;
+            double dz = pos.getZ() + 0.5 - other.getZ() - 0.5;
+            return dx * dx + dy * dy + dz * dz;
+        }
+    }
+
+    public static boolean isCtrlPressed() {
+        Minecraft mc = Minecraft.getInstance();
+        // Check if left or right control key is down
+        boolean leftCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_CONTROL);
+        boolean rightCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_RIGHT_CONTROL);
+        return leftCtrl || rightCtrl;
+    }
+
+    public static boolean isAltPressed() {
+        Minecraft mc = Minecraft.getInstance();
+        // Check if left or right control key is down
+        boolean leftCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_ALT);
+        boolean rightCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_RIGHT_ALT);
+        return leftCtrl || rightCtrl;
+    }
+
+    public static boolean isShiftPressed() {
+        Minecraft mc = Minecraft.getInstance();
+        // Check if left or right control key is down
+        boolean leftCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT);
+        boolean rightCtrl = InputConstants.isKeyDown(mc.getWindow().getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
+        return leftCtrl || rightCtrl;
+    }
+
+    public static boolean isKeyPressed(int key) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean KEY = InputConstants.isKeyDown(mc.getWindow().getWindow(), key);
+        return KEY;
+    }
 
 }

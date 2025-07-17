@@ -23,12 +23,12 @@ public class InsightfulKill extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate the blessing
      * @param cooldown    Duration before the blessing can be used again
-     * @param isActive    Current state of the blessing
+     * @param isPassive    Current state of the blessing
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   Color used for blessing text display
      */
-    public InsightfulKill(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public InsightfulKill(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

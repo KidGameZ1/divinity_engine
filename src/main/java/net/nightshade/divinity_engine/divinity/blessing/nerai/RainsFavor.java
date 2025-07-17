@@ -15,8 +15,8 @@ import java.awt.*;
 import java.util.UUID;
 
 public class RainsFavor extends Blessings {
-    public RainsFavor(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public RainsFavor(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

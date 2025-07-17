@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -13,14 +12,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.nightshade.divinity_engine.DivinityEngineMod;
-import net.nightshade.divinity_engine.block.StatueBlock;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.messages.gui.BlessingsButtonMessage;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
-import net.nightshade.divinity_engine.util.MainPlayerCapabilityHelper;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
 
@@ -64,7 +62,6 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 
 		// Update the active button text and state
 		updateActiveButton();
-		System.out.println(menu.getGod());
 
 		// Force the screen to refresh
 		this.setFocused(null);
@@ -93,7 +90,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 			blessingsInstances = GodHelper.getAllBlessingsInstancesOfGod(minecraft.player, menu.getGod());
 		}
 		if (blessingsInstances != null && !blessingsInstances.isEmpty()) {
-			int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+			int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 			if (pageNum >= 0 && pageNum < blessingsInstances.size()) {
 				BlessingsInstance selectedBlessingInstance = blessingsInstances.get(pageNum);
 				Blessings selectedBlessing = selectedBlessingInstance.getBlessing();
@@ -140,7 +137,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 			// Only accept keys 1, 2, or 3
 			if (key >= 49 && key <= 51) { // ASCII values for keys 1-3
 				int slot = key - 49; // Convert to 0-based index
-				int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+				int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 				List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
 				if (blessingsInstances != null && !blessingsInstances.isEmpty() && pageNum >= 0 && pageNum < blessingsInstances.size()) {
 					ModMessages.INSTANCE.sendToServer(new BlessingsButtonMessage(10 + slot, x, y, z));
@@ -177,7 +174,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 			return;
 		}
 
-		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+		int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 		if (pageNum >= 0 && pageNum < blessingsInstances.size()) {
 			BlessingsInstance selectedBlessingInstance = blessingsInstances.get(pageNum);
 			Blessings selectedBlessing = selectedBlessingInstance.getBlessing();
@@ -203,7 +200,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	}
 
 	private void updateActiveButton() {
-		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+		int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 		List<BlessingsInstance> blessingsInstances;
 		if (this.menu.getGod() == null) {
 			blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
@@ -257,9 +254,9 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	}
 
 	private int getEquippedSlot(BlessingsInstance blessing) {
-		BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(minecraft.player);
-		BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(minecraft.player);
-		BlessingsInstance slot2 = MainPlayerCapabilityHelper.getBlessingSlot3(minecraft.player);
+		BlessingsInstance slot0 = DivinityEngineHelper.getBlessingSlot1(minecraft.player);
+		BlessingsInstance slot1 = DivinityEngineHelper.getBlessingSlot2(minecraft.player);
+		BlessingsInstance slot2 = DivinityEngineHelper.getBlessingSlot3(minecraft.player);
 
 		if (slot0 != null && slot0.getBlessing().equals(blessing.getBlessing())) return 0;
 		if (slot1 != null && slot1.getBlessing().equals(blessing.getBlessing())) return 1;
@@ -268,9 +265,9 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 	}
 
 	private boolean isAnySlotEquipped(BlessingsInstance blessing) {
-		BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(minecraft.player);
-		BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(minecraft.player);
-		BlessingsInstance slot2 = MainPlayerCapabilityHelper.getBlessingSlot3(minecraft.player);
+		BlessingsInstance slot0 = DivinityEngineHelper.getBlessingSlot1(minecraft.player);
+		BlessingsInstance slot1 = DivinityEngineHelper.getBlessingSlot2(minecraft.player);
+		BlessingsInstance slot2 = DivinityEngineHelper.getBlessingSlot3(minecraft.player);
 
 		return (slot0 != null && slot0.getBlessing().equals(blessing.getBlessing())) ||
 				(slot1 != null && slot1.getBlessing().equals(blessing.getBlessing())) ||
@@ -286,15 +283,15 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 
 	private boolean isCurrentBlessingEquipped() {
 		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
-		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+		int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 
 		if (blessingsInstances != null && !blessingsInstances.isEmpty() &&
 				pageNum >= 0 && pageNum < blessingsInstances.size()) {
 			BlessingsInstance selectedBlessing = blessingsInstances.get(pageNum);
 
-			BlessingsInstance slot0 = MainPlayerCapabilityHelper.getBlessingSlot1(minecraft.player);
-			BlessingsInstance slot1 = MainPlayerCapabilityHelper.getBlessingSlot2(minecraft.player);
-			BlessingsInstance slot2 = MainPlayerCapabilityHelper.getBlessingSlot3(minecraft.player);
+			BlessingsInstance slot0 = DivinityEngineHelper.getBlessingSlot1(minecraft.player);
+			BlessingsInstance slot1 = DivinityEngineHelper.getBlessingSlot2(minecraft.player);
+			BlessingsInstance slot2 = DivinityEngineHelper.getBlessingSlot3(minecraft.player);
 
 			return (slot0 != null && slot0.getBlessing().equals(selectedBlessing.getBlessing())) ||
 					(slot1 != null && slot1.getBlessing().equals(selectedBlessing.getBlessing())) ||
@@ -310,7 +307,7 @@ public class BlessingsScreen extends AbstractContainerScreen<BlessingsMenu> {
 		this.baseGod = menu.getGod();
 
 		List<BlessingsInstance> blessingsInstances = GodHelper.getAllBlessingsInstances(minecraft.player);
-		int pageNum = MainPlayerCapabilityHelper.getBlessingsPageNum(minecraft.player);
+		int pageNum = DivinityEngineHelper.getBlessingsPageNum(minecraft.player);
 		int maxPages = blessingsInstances != null ? blessingsInstances.size() - 1 : 0;
 
 		button_active = Button.builder(getActiveButtonText(), e -> {

@@ -50,12 +50,15 @@ import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.OfferEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.PrayEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.worship_events.WhileNearStatueEvent;
+import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
 import net.nightshade.nightshade_core.util.MiscHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static net.nightshade.divinity_engine.util.divinity.gods.GodHelper.*;
 
@@ -167,84 +170,109 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        super.tick(pState, pLevel, pPos, pRandom);
-        int x = pPos.getX();
-        int y = pPos.getY();
-        int z = pPos.getZ();
-        if (this.god.get() == null) {
-            return;
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+        if (GodHelper.hasContactedGod(pPlacer, this.god.get())){
+            if (FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Champion || FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Devoted){
+                GodHelper.increaseFavor(this.god.get(), pPlacer, 30);
+            } else if (FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Displeased || FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Enemy) {
+                GodHelper.increaseFavor(this.god.get(), pPlacer, 20);
+            }
         }
+        super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
+    }
 
-        pLevel.scheduleTick(pPos, this, 10);
-        BlockPos frontPos = pPos.relative(pState.getValue(FACING));
-        List<ItemEntity> itemEntities = pLevel.getEntitiesOfClass(ItemEntity.class,
-                new AABB(frontPos).inflate(1.0D, 0.5D, 1.0D));
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (this.god.get() == null) return;
 
-        List<ItemStack> items = itemEntities.stream()
-                .map(ItemEntity::getItem)
-                .toList();
+        // Reschedule tick
+        level.scheduleTick(pos, this, 10);
 
-        List<Player> nearbyPlayers = pLevel.getEntitiesOfClass(Player.class,
-                new AABB(pPos).inflate(5.0D));
+        Direction facing = state.getValue(FACING);
+        BlockPos frontPos = pos.relative(facing);
 
-        List<LivingEntity> nearbyEntities = pLevel.getEntitiesOfClass(LivingEntity.class,
-                new AABB(frontPos).inflate(1.0D, 0.5D, 1.0D));
+        AABB frontBox = new AABB(frontPos).inflate(1.0D, 0.5D, 1.0D);
+        AABB statueBox = new AABB(pos).inflate(5.0D);
 
-        if ((!items.isEmpty() || !nearbyEntities.isEmpty()) && !nearbyPlayers.isEmpty()) {
-            Player closestPlayer = nearbyPlayers.get(0);
-            double closestDistance = closestPlayer.distanceToSqr(pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D);
-            int tick = 0;
+        // Collect entities on the main thread
+        List<ItemEntity> itemEntities = new ArrayList<>(level.getEntitiesOfClass(ItemEntity.class, frontBox));
+        List<LivingEntity> nearbyEntities = new ArrayList<>(level.getEntitiesOfClass(LivingEntity.class, frontBox));
+        List<ServerPlayer> players = new ArrayList<>(level.getEntitiesOfClass(ServerPlayer.class, statueBox));
 
-            for (Player player : nearbyPlayers) {
-                double distance = player.distanceToSqr(pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D);
-                if (distance < closestDistance) {
-                    closestPlayer = player;
-                    closestDistance = distance;
+        if ((itemEntities.isEmpty() && nearbyEntities.isEmpty()) || players.isEmpty()) return;
+
+        // Copy only data needed for async
+        BaseGod god = this.god.get();
+        List<ItemStack> items = itemEntities.stream().map(ItemEntity::getItem).toList();
+
+        List<DivinityEngineHelper.PlayerData> copiedPlayers = players.stream().map(p -> new DivinityEngineHelper.PlayerData(p.getUUID(), p.blockPosition(), p.isShiftKeyDown())).toList();
+        BlockPos statuePos = pos.immutable();
+
+        // Run logic async
+        CompletableFuture.runAsync(() -> {
+
+            // Find closest player
+            DivinityEngineHelper.PlayerData closest = null;
+            double minDist = Double.MAX_VALUE;
+
+            for (DivinityEngineHelper.PlayerData data : copiedPlayers) {
+                double dist = data.pos().distSqr(statuePos);
+                if (dist < minDist) {
+                    closest = data;
+                    minDist = dist;
                 }
-                if (GodHelper.hasContactedGod(player, this.god.get())) {
-                    BaseGodInstance baseGodInstance = GodHelper.getGodOrNull(player, this.god.get());
-                    MinecraftForge.EVENT_BUS.post(new WhileNearStatueEvent(baseGodInstance, player));
-                }
-
             }
 
-            if (closestPlayer.isShiftKeyDown()) {
-                if (GodHelper.hasContactedGod(closestPlayer, this.god.get())) {
-                    closestPlayer.getPersistentData().putInt("statue_prayer_tick", closestPlayer.getPersistentData().getInt("statue_prayer_tick") + 15);
-                    tick = closestPlayer.getPersistentData().getInt("statue_prayer_tick");
-                    BaseGodInstance baseGodInstance = GodHelper.getGodOrNull(closestPlayer, this.god.get());
-                    MinecraftForge.EVENT_BUS.post(new PrayEvent(baseGodInstance, closestPlayer, tick));
-                    System.out.println(closestPlayer.getDisplayName().getString()+" is praying to "+Component.translatable(this.god.get().getNameTranslationKey()).getString()+" for "+ MiscHelper.tickToSeconds(tick) +"s");
-                }
-            }else {
-                closestPlayer.getPersistentData().remove("statue_prayer_tick");
-            }
+            // Back to main thread: fire events and modify world
+            DivinityEngineHelper.PlayerData finalClosest = closest;
+            level.getServer().execute(() -> {
+                ServerPlayer closestPlayer = (ServerPlayer) level.getPlayerByUUID(finalClosest.uuid());
+                if (closestPlayer == null) return;
 
-            // Items found in front of statue
-            for (ItemEntity itemEntity : itemEntities) {
-                ItemStack item = itemEntity.getItem();
-                if (GodHelper.hasContactedGod(closestPlayer, this.god.get())) {
-                    BaseGodInstance baseGodInstance = GodHelper.getGodOrNull(closestPlayer, this.god.get());
-                    if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferItemEvent(baseGodInstance, closestPlayer, item, itemEntity))) {
-                        System.out.println(item.getHoverName().getString() + " was offered to " + Component.translatable(this.god.get().getNameTranslationKey()).getString()+" by "+closestPlayer.getName().getString());
+                for (ServerPlayer player : players) {
+                    if (GodHelper.hasContactedGod(player, god)) {
+                        BaseGodInstance godInstance = GodHelper.getGodOrNull(player, god);
+                        MinecraftForge.EVENT_BUS.post(new WhileNearStatueEvent(godInstance, player));
                     }
                 }
-            }
 
-            // Entities found in front of statue
-            for (LivingEntity entity : nearbyEntities) {
-                if (!(entity instanceof Player)) {
-                    if (GodHelper.hasContactedGod(closestPlayer, this.god.get())) {
-                        BaseGodInstance baseGodInstance = GodHelper.getGodOrNull(closestPlayer, this.god.get());
-                        if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferEntityEvent(baseGodInstance, closestPlayer, entity))) {
-                            System.out.println(entity.getName().getString() + " was offered to " + Component.translatable(this.god.get().getNameTranslationKey()).getString()+" by "+closestPlayer.getName().getString());
+                if (finalClosest.isSneaking() && GodHelper.hasContactedGod(closestPlayer, god)) {
+                    int ticks = closestPlayer.getPersistentData().getInt("statue_prayer_tick") + 15;
+                    closestPlayer.getPersistentData().putInt("statue_prayer_tick", ticks);
+
+                    BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
+                    MinecraftForge.EVENT_BUS.post(new PrayEvent(godInstance, closestPlayer, ticks));
+                    System.out.println(closestPlayer.getDisplayName().getString() + " is praying to " +
+                            Component.translatable(god.getNameTranslationKey()).getString() + " for " +
+                            MiscHelper.tickToSeconds(ticks) + "s");
+                } else {
+                    closestPlayer.getPersistentData().remove("statue_prayer_tick");
+                }
+
+                for (ItemEntity itemEntity : itemEntities) {
+                    if (GodHelper.hasContactedGod(closestPlayer, god)) {
+                        BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
+                        if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferItemEvent(godInstance, closestPlayer, itemEntity.getItem(), itemEntity))) {
+                            System.out.println(itemEntity.getItem().getHoverName().getString() + " was offered to " +
+                                    Component.translatable(god.getNameTranslationKey()).getString() + " by " + closestPlayer.getName().getString());
                         }
                     }
                 }
-            }
-        }
+
+                for (LivingEntity entity : nearbyEntities) {
+                    if (!(entity instanceof Player) && GodHelper.hasContactedGod(closestPlayer, god)) {
+                        BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
+                        if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferEntityEvent(godInstance, closestPlayer, entity))) {
+                            System.out.println(entity.getName().getString() + " was offered to " +
+                                    Component.translatable(god.getNameTranslationKey()).getString() + " by " + closestPlayer.getName().getString());
+                        }
+                    }
+                }
+            });
+
+        });
     }
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
+import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.curse.Curse;
 import net.nightshade.divinity_engine.divinity.curse.CurseInstance;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
@@ -46,6 +47,16 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
     public void updateGodInstance(BaseGodInstance updatedInstance, boolean sync) {
         updatedInstance.markDirty();
         this.godsInstances.put(updatedInstance.getBaseGodId(), updatedInstance);
+        if (sync) {
+            this.syncChanges();
+        }
+
+    }
+
+    public void updateBlessingInstance(BaseGodInstance instance, BlessingsInstance updateInstance, boolean sync) {
+        instance.markDirty();
+        updateInstance.markDirty();
+        instance.addBlessing(updateInstance);
         if (sync) {
             this.syncChanges();
         }
@@ -157,9 +168,6 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
             Optional<BaseGodInstance> optional = this.getContactedGod(god);
             if (!optional.isEmpty()) {
                 if (!MinecraftForge.EVENT_BUS.post(new LoseFaithEvent((BaseGodInstance)optional.get(), this.owner))) {
-                    if (this.owner instanceof Player player) {
-                        player.displayClientMessage(Component.translatable(god.getLossContactMessageTranslationKey()).withStyle(ChatFormatting.GRAY), false);
-                    }
                     ((BaseGodInstance)optional.get()).markDirty();
                     this.getContactedGods().remove(optional.get());
                     this.syncChanges();
@@ -168,13 +176,31 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
             }
         }
     }
+    public void loseContactAllGods() {
+        if (this.owner != null) {
+            Collection<BaseGodInstance> list = this.getContactedGods();
+            if (!list.isEmpty()) {
+                this.getContactedGods().clear();
+                syncAll();
+            }
+        }
+    }
 
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         ListTag godsList = new ListTag();
-        this.godsInstances.values().forEach((instance) -> godsList.add(instance.toNBT()));
         ListTag curseList = new ListTag();
-        this.cursesInstances.values().forEach((instance) -> curseList.add(instance.toNBT()));
+        if (this.godsInstances.isEmpty()) {
+            tag.putString("contacted_gods", "none");
+        }else {
+            this.godsInstances.values().forEach((instance) -> godsList.add(instance.toNBT()));
+        }
+
+        if (this.cursesInstances.isEmpty()) {
+            tag.putString("curses", "none");
+        }else {
+            this.cursesInstances.values().forEach((instance) -> curseList.add(instance.toNBT()));
+        }
 
         tag.put("contacted_gods", godsList);
         tag.put("curses", curseList);
@@ -190,28 +216,35 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
         ListTag godsList = nbt.getList("contacted_gods", 10);
         ListTag cursesList = nbt.getList("curses", 10);
 
-        for(Tag tag : godsList) {
-            if (tag instanceof CompoundTag compoundTag) {
-                try {
-                    BaseGodInstance instance = BaseGodInstance.fromNBT(compoundTag);
-                    this.godsInstances.put(instance.getBaseGodId(), instance);
-                } catch (Exception exception) {
-                    log.error("Exception while deserializing tag {}.\n{}", tag, exception);
+        if (nbt.getString("contacted_gods").equals("none")){
+            this.godsInstances.clear();
+        }else {
+            for(Tag tag : godsList) {
+                if (tag instanceof CompoundTag compoundTag) {
+                    try {
+                        BaseGodInstance instance = BaseGodInstance.fromNBT(compoundTag);
+
+                        this.godsInstances.put(instance.getBaseGodId(), instance);
+                    } catch (Exception exception) {
+                        log.error("Exception while deserializing tag {}.\n{}", tag, exception);
+                    }
+                } else {
+                    log.error("Tag is not a Compound! Exception while deserializing tag {}.", tag);
                 }
-            } else {
-                log.error("Tag is not a Compound! Exception while deserializing tag {}.", tag);
             }
         }
-        for(Tag tag : cursesList) {
-            if (tag instanceof CompoundTag compoundTag) {
-                try {
-                    CurseInstance instance = CurseInstance.fromNBT(compoundTag);
-                    this.cursesInstances.put(instance.getCurseID(), instance);
-                } catch (Exception exception) {
-                    log.error("Exception while deserializing tag {}.\n{}", tag, exception);
+        if (nbt.getString("curses").equals("none")){
+            this.cursesInstances.clear();
+        }else {
+            for(Tag tag : cursesList) {
+                if (tag instanceof CompoundTag compoundTag) {
+                    try {
+                        CurseInstance instance = CurseInstance.fromNBT(compoundTag);
+                        this.cursesInstances.put(instance.getCurseID(), instance);
+                    } catch (Exception exception) {
+                        log.error("Exception while deserializing tag {}.\n{}", tag, exception);
+                    }
                 }
-            } else {
-                log.error("Tag is not a Compound! Exception while deserializing tag {}.", tag);
             }
         }
     }

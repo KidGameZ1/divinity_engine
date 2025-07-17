@@ -4,6 +4,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
 
@@ -18,12 +19,12 @@ public class StarlitMirror extends Blessings {
      *
      * @param neededFavor The amount of favor required to use this blessing
      * @param cooldown    The cooldown period in ticks
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for blessing text in the UI
      */
-    public StarlitMirror(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public StarlitMirror(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**
@@ -40,7 +41,7 @@ public class StarlitMirror extends Blessings {
         if (!instance.getOrCreateTag().contains("activation_time"))
             instance.getOrCreateTag().putLong("activation_time", 0);
         if (!instance.getOrCreateTag().contains("max_reflects"))
-            instance.getOrCreateTag().putInt("max_reflects", 3);
+            instance.getOrCreateTag().putInt("max_reflects", 5);
         if (!instance.getOrCreateTag().contains("duration"))
             instance.getOrCreateTag().putInt("duration", 6000);
         return instance;
@@ -63,6 +64,16 @@ public class StarlitMirror extends Blessings {
         super.onToggleOn(instance, entity);
     }
 
+    @Override
+    public boolean onToggleOff(BlessingsInstance instance, LivingEntity entity) {
+        instance.getOrCreateTag().putInt("reflect_count", 0);
+        instance.getOrCreateTag().putLong("activation_time", 0);
+        instance.getOrCreateTag().putInt("duration", MiscHelper.secondsToTick(20));
+
+        return super.onToggleOff(instance, entity);
+    }
+
+
     /**
      * Handles projectile reflection when the blessing is active.
      * Reflects projectiles back to their source if conditions are met.
@@ -80,6 +91,7 @@ public class StarlitMirror extends Blessings {
         int maxReflects = instance.getOrCreateTag().getInt("max_reflects");
         int duration = instance.getOrCreateTag().getInt("duration");
         if(event.getProjectile().getOwner() == living) return false;
+        if(instance.isToggled() == false) return false;
         if (currentTime - activationTime <= duration && reflectCount < maxReflects) {
             instance.getOrCreateTag().putInt("reflect_count", reflectCount + 1);
 

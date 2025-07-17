@@ -1,5 +1,6 @@
 package net.nightshade.divinity_engine.registry.keys;
 
+import net.minecraft.network.chat.Component;
 import net.nightshade.divinity_engine.network.messages.key.*;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
 import org.lwjgl.glfw.GLFW;
@@ -24,6 +25,14 @@ public class DivinityEngineKeyMappings {
 
         public BlessingState getState() {
             return state;
+        }
+
+        @Override
+        public void setDown(boolean pValue) {
+            if (state.wasDown() != isDown() && isDown()) {
+                System.out.println(Component.translatable(getName()).getString() +" key setDown: " + isDown() + " time: " + System.currentTimeMillis());
+            }
+            super.setDown(pValue);
         }
     }
 
@@ -67,13 +76,13 @@ public class DivinityEngineKeyMappings {
             super.setDown(isDown);
             BlessingState state = getState();
             if (state.wasDown() != isDown && isDown) {
+                System.out.println(Component.translatable(getName()).getString() +" key setDown: " + isDown() + " time: " + System.currentTimeMillis());
+
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot1Message(0, 0));
-                BlessingSlot1Message.pressAction(Minecraft.getInstance().player, 0, 0);
                 state.setPressStartTime(System.currentTimeMillis());
                 state.updateLastTickTime(System.currentTimeMillis());
             } else if (state.wasDown() != isDown && !isDown) {
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot1Message(1, state.getHeldTime()));
-                BlessingSlot1Message.pressAction(Minecraft.getInstance().player, 1, state.getHeldTime());
             }
             state.setWasDown(isDown);
         }
@@ -89,13 +98,13 @@ public class DivinityEngineKeyMappings {
             super.setDown(isDown);
             BlessingState state = getState();
             if (state.wasDown() != isDown && isDown) {
+                System.out.println(Component.translatable(getName()).getString() +" key setDown: " + isDown() + " time: " + System.currentTimeMillis());
+
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot2Message(0, 0));
-                BlessingSlot2Message.pressAction(Minecraft.getInstance().player, 0, 0);
                 state.setPressStartTime(System.currentTimeMillis());
                 state.updateLastTickTime(System.currentTimeMillis());
             } else if (state.wasDown() != isDown && !isDown) {
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot2Message(1, state.getHeldTime()));
-                BlessingSlot2Message.pressAction(Minecraft.getInstance().player, 1, state.getHeldTime());
             }
             state.setWasDown(isDown);
         }
@@ -111,13 +120,12 @@ public class DivinityEngineKeyMappings {
             super.setDown(isDown);
             BlessingState state = getState();
             if (state.wasDown() != isDown && isDown) {
+                System.out.println(Component.translatable(getName()).getString() +" key setDown: " + isDown() + " time: " + System.currentTimeMillis());
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot3Message(0, 0));
-                BlessingSlot3Message.pressAction(Minecraft.getInstance().player, 0, 0);
                 state.setPressStartTime(System.currentTimeMillis());
                 state.updateLastTickTime(System.currentTimeMillis());
             } else if (state.wasDown() != isDown && !isDown) {
                 ModMessages.INSTANCE.sendToServer(new BlessingSlot3Message(1, state.getHeldTime()));
-                BlessingSlot3Message.pressAction(Minecraft.getInstance().player, 1, state.getHeldTime());
             }
             state.setWasDown(isDown);
         }
@@ -138,8 +146,6 @@ public class DivinityEngineKeyMappings {
                         // Show debug message
                         if (Minecraft.getInstance().player != null) {
                             ModMessages.INSTANCE.sendToServer(new BlessingSlot1Message(3, heldTime));
-                            // Directly call pressAction to see effect on client too
-                            BlessingSlot1Message.pressAction(Minecraft.getInstance().player, 3, heldTime);
                         }
                         state.updateLastTickTime(currentTime);
                     }
@@ -152,7 +158,6 @@ public class DivinityEngineKeyMappings {
                         int heldTime = state.getHeldTime();
                         if (Minecraft.getInstance().player != null) {
                             ModMessages.INSTANCE.sendToServer(new BlessingSlot2Message(3, heldTime));
-                            BlessingSlot2Message.pressAction(Minecraft.getInstance().player, 3, heldTime);
                         }
                         state.updateLastTickTime(currentTime);
                     }
@@ -165,7 +170,6 @@ public class DivinityEngineKeyMappings {
                         int heldTime = state.getHeldTime();
                         if (Minecraft.getInstance().player != null) {
                             ModMessages.INSTANCE.sendToServer(new BlessingSlot3Message(3, heldTime));
-                            BlessingSlot3Message.pressAction(Minecraft.getInstance().player, 3, heldTime);
                         }
                         state.updateLastTickTime(currentTime);
                     }

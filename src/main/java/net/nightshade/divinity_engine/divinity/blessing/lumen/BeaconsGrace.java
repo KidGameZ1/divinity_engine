@@ -23,12 +23,12 @@ public class BeaconsGrace extends Blessings {
      *
      * @param neededFavor The amount of favor required to activate this blessing
      * @param cooldown    The cooldown period between uses
-     * @param isActive    Whether the blessing is currently active
+     * @param isPassive    Whether the blessing is currently active
      * @param canToggle   Whether the blessing can be toggled on/off
      * @param textColor   The color used for displaying blessing information
      */
-    public BeaconsGrace(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public BeaconsGrace(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

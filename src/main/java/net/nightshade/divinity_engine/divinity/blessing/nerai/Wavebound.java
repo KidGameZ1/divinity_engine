@@ -15,8 +15,8 @@ import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import java.awt.*;
 
 public class Wavebound extends Blessings {
-    public Wavebound(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public Wavebound(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     @Override

@@ -18,12 +18,12 @@ public class FrozenHeart extends Blessings {
      *
      * @param neededFavor Amount of favor required to activate this blessing
      * @param cooldown    Cooldown period between activations in seconds
-     * @param isActive    Whether this blessing starts active
+     * @param isPassive    Whether this blessing starts active
      * @param canToggle   Whether this blessing can be toggled on/off
      * @param textColor   Color used for blessing text in UI
      */
-    public FrozenHeart(int neededFavor, int cooldown, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isActive, canToggle, textColor);
+    public FrozenHeart(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
+        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
     }
 
     /**

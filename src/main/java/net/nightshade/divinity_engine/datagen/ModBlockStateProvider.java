@@ -26,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         models().getExistingFile(modLoc("block/statue")));
             }
         });
+
+        blockWithItem(BlocksRegistry.POCKET_DIMENSION);
     }
 
 
