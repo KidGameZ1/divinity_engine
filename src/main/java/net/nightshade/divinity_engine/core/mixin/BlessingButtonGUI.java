@@ -65,7 +65,7 @@ public abstract class BlessingButtonGUI extends AbstractContainerScreen<Inventor
     @Unique
     private void updateButton() {
         assert minecraft != null;
-        if (GodHelper.getAllContactedGods(minecraft.player).isEmpty()){
+        if (GodHelper.getAllContactedGods(minecraft.player).isEmpty() || recipeBookComponent.isVisible()){
             this.removeWidget(imagebutton_enchantment_table_button);
         }else {
             this.addRenderableWidget(imagebutton_enchantment_table_button);
@@ -84,7 +84,6 @@ public abstract class BlessingButtonGUI extends AbstractContainerScreen<Inventor
                     GodHelper.getAllContactedGods(player).isEmpty() && !recipeBookComponent.isVisible()
             ) {
                 ModMessages.INSTANCE.sendToServer(new PlayerBlessingsButtonMessage(1, player.getBlockX(), player.getBlockY(), player.getBlockZ()));
-                PlayerBlessingsButtonMessage.handleButtonAction(player, 1, player.getBlockX(), player.getBlockY(), player.getBlockZ());
                 updateButton();
             }else {
                 updateButton();
