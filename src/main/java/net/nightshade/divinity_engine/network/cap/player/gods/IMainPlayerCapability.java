@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.network.cap.player.gods;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
@@ -20,4 +19,13 @@ public interface IMainPlayerCapability extends INBTSerializable<CompoundTag> {
     void increaseBlessingsPageNum(int num);
     void decreaseBlessingsPageNum(int num);
 
+
+    int getDcPageNum();
+    void setDCPageNum(int num);
+    void increaseDCPageNum(int num);
+    void decreaseDCPageNum(int num);
+
+
+    boolean hasDivineCodex();
+    void setHasDivineCodex(boolean hasDivineCodex);
 }

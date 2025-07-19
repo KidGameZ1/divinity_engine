@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.block.StatueBlock;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
+import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
 
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -26,6 +27,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 withExistingParent(path, modLoc("block/statue"));
             }
         });
+
+        simpleItem(ItemsRegistry.DIVINE_CODEX);
     }
 
 

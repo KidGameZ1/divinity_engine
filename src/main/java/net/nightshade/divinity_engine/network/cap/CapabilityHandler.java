@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
+import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,6 +39,14 @@ public class CapabilityHandler {
     @SubscribeEvent
     static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent e) {
         PlayerVariables.sync(e.getEntity());
+        if(!DivinityEngineHelper.getMainPlayerVariables(e.getEntity()).hasDivineCodex()) {
+            e.getEntity().addItem(ItemsRegistry.DIVINE_CODEX.get().getDefaultInstance());
+            DivinityEngineHelper.getMainPlayerVariables(e.getEntity()).setHasDivineCodex(true);
+        }
+        MainPlayerCapability.PlayerVariables.getFrom(e.getEntity()).ifPresent((data) -> {
+            data.setBlessingsPageNum(0);
+            data.setDCPageNum(0);
+        });
 //        TechniqueLoadoutGUIVariables.checkForFirstLogin(e.getEntity());
     }
 
@@ -55,6 +64,7 @@ public class CapabilityHandler {
             }
             MainPlayerCapability.PlayerVariables.getFrom(player).ifPresent((data) -> {
                 data.setBlessingsPageNum(0);
+                data.setDCPageNum(0);
             });
         }
     }

@@ -1,5 +1,6 @@
 package net.nightshade.divinity_engine.network.events.divinity;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -11,6 +12,7 @@ import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.cap.player.gods.GodsStorage;
+import net.nightshade.divinity_engine.registry.divinity.DivineCodexPagesRegistry;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
@@ -145,8 +147,21 @@ public class DivinityTickHandler {
 
         // End timing
         long duration = System.nanoTime() - start;
-        if (duration > 500_000) { // Only log if it takes longer than 0.5ms
+        if (duration > 1000_000) { // Only log if it takes longer than 1s
             System.out.println("[DEBUG] PlayerTickEvent took " + (duration / 1_000_000.0) + " ms for " + player.getName().getString());
         }
     }
+
+    @Mod.EventBusSubscriber(modid = "divinity_engine")
+    public class CodexLoginHandler {
+        @SubscribeEvent
+        public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+            if (!(event.getEntity() instanceof ServerPlayer serverPlayer)) return;
+
+            // Initialize (once)
+            DivineCodexPagesRegistry.initializePages();
+
+        }
+    }
+
 }

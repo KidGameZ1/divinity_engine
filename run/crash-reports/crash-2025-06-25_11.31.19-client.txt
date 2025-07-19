@@ -5,7 +5,7 @@ Time: 2025-06-25 11:31:19
 Description: Unexpected error
 
 java.lang.NullPointerException: Cannot invoke "net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance.increaseCooldown(int)" because "instance" is null
-	at net.nightshade.divinity_engine.item.Test.use(Test.java:25) ~[main/:?] {re:classloading}
+	at net.nightshade.divinity_engine.item.DivineCodex.use(Test.java:25) ~[main/:?] {re:classloading}
 	at net.minecraft.world.item.ItemStack.use(ItemStack.java:275) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading,xf:fml:forge:itemstack,re:mixin,xf:fml:forge:itemstack}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItem$5(MultiPlayerGameMode.java:368) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.startPrediction(MultiPlayerGameMode.java:250) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
@@ -39,9 +39,9 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Thread: Render thread
 Suspected Mod: 
 	Divinity Engine (divinity_engine), Version: 1.0-1.20.1
-		at TRANSFORMER/divinity_engine@1.0-1.20.1/net.nightshade.divinity_engine.item.Test.use(Test.java:25)
+		at TRANSFORMER/divinity_engine@1.0-1.20.1/net.nightshade.divinity_engine.item.DivineCodex.use(Test.java:25)
 Stacktrace:
-	at net.nightshade.divinity_engine.item.Test.use(Test.java:25) ~[%23189!/:?] {re:classloading}
+	at net.nightshade.divinity_engine.item.DivineCodex.use(Test.java:25) ~[%23189!/:?] {re:classloading}
 	at net.minecraft.world.item.ItemStack.use(ItemStack.java:275) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading,xf:fml:forge:itemstack,re:mixin,xf:fml:forge:itemstack}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItem$5(MultiPlayerGameMode.java:368) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading,pl:runtimedistcleaner:A}
 	at net.minecraft.client.multiplayer.MultiPlayerGameMode.startPrediction(MultiPlayerGameMode.java:250) ~[forge-1.20.1-47.4.2_mapped_parchment_2023.09.03-1.20.1.jar%23184!/:?] {re:classloading,pl:runtimedistcleaner:A}

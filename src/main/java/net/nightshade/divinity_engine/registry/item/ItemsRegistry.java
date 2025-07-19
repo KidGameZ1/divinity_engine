@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.block.StatueBlock;
-import net.nightshade.divinity_engine.item.Test;
+import net.nightshade.divinity_engine.item.DivineCodex;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 
 import java.util.function.Consumer;
@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 public class ItemsRegistry {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, DivinityEngineMod.MODID);
 
-//    public static final RegistryObject<Item> TEST = REGISTRY.register("test", () -> new Test());
+    public static final RegistryObject<Item> DIVINE_CODEX = REGISTRY.register("divine_codex", DivineCodex::new);
     public static final RegistryObject<Item> POCKET_DIMENSION = block(BlocksRegistry.POCKET_DIMENSION);
 
     private static RegistryObject<Item> block(RegistryObject<Block> block) {

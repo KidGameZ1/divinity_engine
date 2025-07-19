@@ -36,8 +36,6 @@ import net.nightshade.divinity_engine.divinity.gods.zephra.Zephra;
 import net.nightshade.divinity_engine.network.cap.player.gods.PlayerGodsCapability;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 import net.nightshade.divinity_engine.registry.blocks.entity.BlockEntitesRegistry;
-import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
-import net.nightshade.divinity_engine.registry.divinity.curse.CurseRegistry;
 import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
 
 import java.awt.*;
@@ -395,6 +393,8 @@ public class GodsRegistry {
 
         return reg;
     }
+
+
 
     static {
 

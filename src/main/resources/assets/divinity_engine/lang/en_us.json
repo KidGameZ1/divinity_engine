@@ -329,5 +329,6 @@
   "key.divinity_engine.blessing_slot_2": "Blessing Slot 2",
   "key.divinity_engine.blessing_slot_3": "Blessing Slot 3",
   "item_group.divinity_engine.statues": "Statue's Tab",
-  "gui.divinity_engine.blessings.button_trial": "Trial"
+  "gui.divinity_engine.blessings.button_trial": "Trial",
+  "item.divinity_engine.divine_codex": "Divine Codex"
 }

@@ -70,6 +70,10 @@ public class MainPlayerCapability {
 		private int blessingsPageNum = 0;
 		private int maxBlessingsPageNum = 0;
 
+		private int dcPageNum = 0;
+
+		private boolean hasDivineCodex = false;
+
 		@SubscribeEvent
 		public static void attach(AttachCapabilitiesEvent<Entity> e) {
 			if (e.getObject() instanceof Player) {
@@ -113,9 +117,12 @@ public class MainPlayerCapability {
 			}
 
 			nbt.putInt("blessingsPageNum", this.blessingsPageNum);
+			nbt.putBoolean("hasDivineCodex", this.hasDivineCodex);
 
 			return nbt;
 		}
+
+
 
 		@Override
 		public void deserializeNBT(CompoundTag nbt) {
@@ -165,7 +172,8 @@ public class MainPlayerCapability {
 				}
 			}
 
-			this.blessingsPageNum = nbt.contains("blessingsPageNum") ? nbt.getInt("blessingsPageNum") : 0;
+			this.blessingsPageNum = nbt.getInt("blessingsPageNum");
+			this.hasDivineCodex = nbt.getBoolean("hasDivineCodex");
 		}
 
 
@@ -217,6 +225,30 @@ public class MainPlayerCapability {
 			if (this.blessingsPageNum < 0) {
 				this.blessingsPageNum = 0;
 			}
+		}
+
+		public int getDcPageNum() {
+			return dcPageNum;
+		}
+		public void setDCPageNum(int num) {
+			this.dcPageNum = num;
+		}
+		public void increaseDCPageNum(int num) {
+			this.dcPageNum += num;
+		}
+		public void decreaseDCPageNum(int num) {
+			this.dcPageNum -= num;
+			if (this.dcPageNum < 0) {
+				this.dcPageNum = 0;
+			}
+		}
+
+		public boolean hasDivineCodex() {
+			return hasDivineCodex;
+		}
+
+		public void setHasDivineCodex(boolean hasDivineCodex) {
+			this.hasDivineCodex = hasDivineCodex;
 		}
 	}
 }

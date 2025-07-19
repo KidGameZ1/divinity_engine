@@ -62,7 +62,7 @@ public abstract class CreativeBlessingButtonGUI extends AbstractContainerScreen<
         assert this.minecraft != null;
         Player player = this.minecraft.player;
 
-
+        updateButton();
     }
 
     @Unique
