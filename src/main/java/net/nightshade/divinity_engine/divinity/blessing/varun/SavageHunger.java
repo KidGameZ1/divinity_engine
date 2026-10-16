@@ -6,6 +6,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
 
@@ -25,8 +28,19 @@ public class SavageHunger extends Blessings {
 
     @Override
     public boolean onKillEntity(BlessingsInstance instance, LivingEntity player, LivingDeathEvent event) {
-        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 0, false, false, true));
-        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, false, true));
+        int duration = BlessingSpecializations.isActive(player, "varun", "b") ? 140 : 100;
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, duration, 0, false, false, true));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, duration, 0, false, false, true));
+        if (!event.isCanceled()) {
+            BlessingVisuals.at(instance, player, player.position().add(0, 0.08, 0), Cue.TRAIL, 0.75);
+        }
+        if (BlessingSpecializations.isActive(player, "varun", "a")) {
+            float healthBefore = player.getHealth();
+            player.heal(1.0f);
+            if (!event.isCanceled() && player.getHealth() > healthBefore) {
+                BlessingVisuals.pulse(instance, player, Cue.HEAL);
+            }
+        }
         return true;
     }
 }

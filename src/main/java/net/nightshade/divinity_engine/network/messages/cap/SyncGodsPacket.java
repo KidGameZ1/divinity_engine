@@ -57,14 +57,11 @@ public class SyncGodsPacket {
             ListTag gods = new ListTag();
 
             godsStorage.getDirtyContactedGods().forEach(instance -> {
-                instance.resetDirty();
-
-                instance.getDirtyBlessings().forEach(blessing -> {
-                    blessing.resetDirty();
-                    instance.addBlessing(blessing); // Blessings stored inside the instance
-                });
-
                 gods.add(instance.toNBT());
+                // These instances are already stored on the god. Re-adding them dirties
+                // it again and makes every subsequent packet resend unchanged data.
+                instance.getDirtyBlessings().forEach(blessing -> blessing.resetDirty());
+                instance.resetDirty();
             });
 
             tag.put("contacted_gods", gods);

@@ -1,12 +1,12 @@
 package net.nightshade.divinity_engine.divinity.blessing.vokar;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -32,8 +32,10 @@ public class DreadConsumption extends Blessings {
             float maxHealth = player.getMaxHealth();
             if (currentHealth < maxHealth) {
                 player.setHealth(Math.min(currentHealth + 2.0F, maxHealth));
-                if (player.level() instanceof ServerLevel serverLevel)
-                    serverLevel.sendParticles(ParticleTypes.SOUL, player.getX(), player.getY() + 1, player.getZ(), 25, 0.5, 0.5, 0.5, 0.1);
+                if (!event.isCanceled()) {
+                    BlessingVisuals.link(instance, player, event.getEntity().getBoundingBox().getCenter(),
+                            player.getBoundingBox().getCenter(), Cue.HEAL);
+                }
                 return true;
             }
         }

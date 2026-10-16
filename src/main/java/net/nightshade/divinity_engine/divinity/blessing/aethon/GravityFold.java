@@ -1,17 +1,15 @@
 package net.nightshade.divinity_engine.divinity.blessing.aethon;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.nightshade_core.util.MiscHelper;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
-import java.util.Random;
 
 public class GravityFold extends Blessings {
     /**
@@ -53,17 +51,8 @@ public class GravityFold extends Blessings {
             if (DivinityEngineHelper.isKeyPressed(GLFW.GLFW_KEY_SPACE)){
                 if (instance.getOrCreateTag().getInt("grav_tick_counter") <= MiscHelper.secondsToTick(2)) {
                     living.setNoGravity(true);
-                    if (living.level() instanceof ServerLevel serverLevel) {
-                        for (int i = 0; i < 10; i++) {
-                            Random r = new Random();
-                            double angle = serverLevel.getRandom().nextDouble() * 2 * Math.PI;
-                            double radius = serverLevel.getRandom().nextDouble() * 1.5;
-                            double x = living.getX() + Math.cos(angle) * radius;
-                            double y = living.getY() + 0.02;
-                            double z = living.getZ() + Math.sin(angle) * radius;
-
-                            serverLevel.sendParticles(ParticleTypes.PORTAL, x, y, z, 1, 0, r.nextDouble(0, 0.5), 0, r.nextDouble(0, 0.2));
-                        }
+                    if (!living.isInvisible() && living.tickCount % 12 == 0) {
+                        BlessingVisuals.at(instance, living, living.position().add(0, -0.06, 0), Cue.TRAIL, 0.7);
                     }
                     instance.getOrCreateTag().putInt("grav_tick_counter", instance.getOrCreateTag().getInt("grav_tick_counter") + 2);
                     System.out.println("grav tick counter: " + instance.getOrCreateTag().getInt("grav_tick_counter"));

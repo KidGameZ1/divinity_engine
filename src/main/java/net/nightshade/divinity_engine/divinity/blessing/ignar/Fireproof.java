@@ -4,6 +4,8 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -39,6 +41,11 @@ public class Fireproof extends Blessings {
     public boolean onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
         if (event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.HOT_FLOOR) || event.getSource().is(DamageTypes.LAVA)) {
             event.setCanceled(true);
+            if (event.getSource().is(DamageTypes.HOT_FLOOR) || event.getSource().is(DamageTypes.LAVA)) {
+                BlessingVisuals.at(instance, event.getEntity(), event.getEntity().position().add(0, 0.16, 0), Cue.WARD, 0.7);
+            } else {
+                BlessingVisuals.pulse(instance, event.getEntity(), Cue.WARD);
+            }
         }
 
         return super.onTakenDamage(instance, event);

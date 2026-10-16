@@ -6,6 +6,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 import java.awt.*;
@@ -26,6 +28,7 @@ public class ChargeRelay extends Blessings {
 
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
+        boolean relayed = false;
         for (BlessingsInstance blessingsInstance : GodHelper.getAllBlessingsInstances(player)){
             if (blessingsInstance.getBlessing() instanceof Stormstep || blessingsInstance.getBlessing() instanceof TempestWrath){
                 if(player.level().isThundering()){
@@ -35,6 +38,7 @@ public class ChargeRelay extends Blessings {
                             assert newInstance != null;
                             newInstance.decreaseCooldown(2);
                             DivinityEngineHelper.setBlessingSlot((Player) player, DivinityEngineHelper.getBlessingsSlot(player, blessingsInstance.getBlessing()), newInstance);
+                            relayed = true;
                         }
                     }
                 }else {
@@ -44,10 +48,16 @@ public class ChargeRelay extends Blessings {
                             assert newInstance != null;
                             newInstance.decreaseCooldown(1);
                             DivinityEngineHelper.setBlessingSlot((Player) player, DivinityEngineHelper.getBlessingsSlot(player, blessingsInstance.getBlessing()), newInstance);
+                            relayed = true;
                         }
                     }
                 }
             }
+        }
+
+        if (relayed) {
+            BlessingVisuals.link(instance, player, event.getEntity().getBoundingBox().getCenter(),
+                    player.getBoundingBox().getCenter(), Cue.RECALL);
         }
 
         return super.onDamageEntity(instance, player, event);

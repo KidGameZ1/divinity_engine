@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "favor": 50,
+  "cooldown_seconds": 12,
+  "mode": "active",
+  "color": "#B5D5EF",
+  "particle_texture": "minecraft:textures/particle/glint.png",
+  "hooks": {
+    "pressed": [
+      {"type": "heal", "target": "self", "amount": 2},
+      {"type": "effect", "target": "self", "effect": "minecraft:speed", "ticks": 80, "amplifier": 0}
+    ]
+  }
+}

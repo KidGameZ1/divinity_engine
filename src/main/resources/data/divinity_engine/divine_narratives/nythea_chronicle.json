@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:nythea",
+  "premise": "Beneath the Dream follows the shelter that daylight mistook for desertion. Nythea and Solarius are siblings who helped the First Concord defend mortal life from oblivion. During its Sundering she hid refugees inside dreams while he sealed a breach. She saved lives he could not see, but could not return every person she sheltered. Her refuge was neither an empty deception nor a perfect kindness. She now needs a listener who can honor a shelter without consenting to remain inside it forever.",
+  "offering_examples": ["minecraft:phantom_membrane", "minecraft:amethyst_shard", "minecraft:glow_ink_sac"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "night_sky", "target": 240, "deed": "Observe the open night sky for 12 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:plant", "condition": "", "target": 3, "deed": "Plant three saplings at distinct positions"},
+  "passages": {
+    "call": [
+      "Nythea accepts phantom membrane, an amethyst shard, or a glow ink sac. A gift is a way to begin speaking, not admission to someone else's dream. She tells you so before she tells you anything beautiful. Once, she promised desperate people that they would wake when danger passed. They had heard such promises before, from frightened parents and confident commanders. Hers had the terrible advantage of being spoken by a god.",
+      "The First Concord had made ordinary sleep possible by keeping oblivion from mortal life. When the Concord sundered, Nythea made sleep into an emergency road. There was no safe time to explain all its uncertainties. Now there is time, and she will not let urgency borrow it again. Offer freely, then spend twelve continuous seconds watching the open night sky. You need not lose sleep until phantoms come merely to be worthy of her attention."
+    ],
+    "witness": [
+      "Watch the open night sky for twelve uninterrupted seconds. Nythea asks you to distinguish darkness from absence: a field beyond your sight may still be full of growing things. This observation does not require a special moon, an ancient ruin, or a message from another shrine. The night already overhead is enough. Its ordinary limits matter more than an omen tailored to reassure you.",
+      "At the shrine, she remembers counting breaths in a shelter made of borrowed memories. One sleeper supplied a kitchen; another remembered a courtyard; a child insisted on a doorway wide enough for a missing dog. These recollections are her testimony, not places you must discover. The refuge held because its occupants still had something of the world to bring into it. Some later woke. Others lost the thread that led back. She remembers their rooms more clearly than she remembers their final words."
+    ],
+    "testimony": [
+      "Nashara forged a retreat order that opened a way for refugees. Dravak held the line under that false order, and Varun evacuated his pack. Nythea hid refugees in dreams when escape alone could no longer keep them safe. Solarius saw her missing from the defense and sealed the breach believing she had abandoned him. She had not. Yet she withheld how uncertain the return journey was, telling the frightened that their sleep was only temporary. Some never returned.",
+      "Choose permanently between Stillness and Defiance. Stillness asks for sixty continuous seconds of prayer at night without taking damage: listening without forcing a wounded memory into a convenient shape. Defiance asks you to defeat four phantoms: refusing a nightmare's authority without calling every dream an enemy. Neither choice requires Solarius's permission. Nythea must answer you herself. Decide whether your first duty here is to hear what remains or to insist that refuge leave room for departure."
+    ],
+    "deed_a": [
+      "Pray at this shrine for sixty continuous seconds at night without taking damage. Make a safe place for that prayer rather than treating needless injury as proof of sincerity. Stillness is attention freely sustained, not an order to endure whatever reaches you. If the attempt breaks, begin again when you are ready. Nythea distinguishes an interrupted practice from a broken promise.",
+      "She remembers a sleeper who kept changing the ending of a remembered song. Nythea once corrected the tune, hoping familiar words would guide him home. He stopped singing. Only later did she understand that the altered verse named someone the old song had excluded. Her skill at preserving a memory did not give her ownership of it. Listen without asking every recollection to help its keeper look merciful. The lost are not a chorus required to forgive the voice that tells their story."
+    ],
+    "deed_b": [
+      "Defeat four phantoms. They are dangers in the present world, not the souls of Nythea's sheltered refugees, and she forbids that comforting confusion. Fighting them will not free four historical sleepers or reduce her debt by a count of four. Defiance means resisting the thing actually before you, rather than using an enemy to avoid a harder conversation.",
+      "Nythea remembers explaining to an impatient sleeper that waking too early might be fatal. That warning was sometimes true. It also became easier to repeat than to investigate whether the danger had changed. She fears what your chosen path exposes: the keeper of a refuge may grow attached to being needed. 'Challenge the nightmare,' she says, 'including the part that speaks gently in my voice.' She does not ask you to become suspicious of every kindness, only to preserve the right to ask where its exits are."
+    ],
+    "reckoning_a": [
+      "Plant three saplings at distinct positions. After sustained listening, Stillness must make room for life that will not remain as you first encountered it. Nythea remembers preserving a dreamed orchard at the exact hour its owner loved best. No leaves fell there. No fruit ripened either. What comforted a frightened sleeper could not feed a waking household.",
+      "These ordinary saplings are not vessels for the missing, and planting them cannot bring anyone back. They are a commitment to beginnings outside your control. Choose actual places in the world rather than trying to recover a lost dream landscape. Nythea will not demand that you wait for their growth to finish this chapter. That matters to her: care can begin without possessing the ending. You have listened to what could not change. Now let something have a future you do not keep perfectly still."
+    ],
+    "reckoning_b": [
+      "Plant three saplings at distinct positions. Defiance can break a claim without knowing what should follow it. Nythea asks for small beginnings rather than another enemy, because waking is not merely the absence of a nightmare. Someone who leaves a shelter needs reasons to inhabit the world beyond it. You are not required to build houses, locate dreamers, or repair the ancient disaster.",
+      "She remembers a rescued woman who woke angry at the seasons she had missed. Nythea tried to answer with the number of lives she had saved. The woman had not denied those lives; she had asked who was allowed to mourn the stolen years. Plant without making gratitude a condition of growth. Refusing a cage can be necessary even when its bars once held back a danger. Nythea begins to imagine a kindness that can survive hearing that it was not enough."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Dreams after the reckoning. Its dangers test your present resolve; they are not authentic copies of the people who disappeared inside the Sundering's refuge. Nythea refuses to lend their identities to opponents merely because doing so would make the trial feel important. What matters is whether you can act without surrendering the distinction between an image and a person.",
+      "Stillness does not require you to stand helpless before an attack. Defiance does not require you to hate the realm through which you travel. Carry your chosen principle through the existing trial, and return to this shrine when you have won. Failure can be followed by another attempt. 'I once made returning sound simple because I needed it to be simple,' Nythea says. 'I will tell you plainly when a road is difficult now. That is a smaller promise, and one I can keep.'"
+    ],
+    "ending_a": [
+      "Nythea finishes a story without supplying the missing person's last words. There is an uncomfortable silence where a blessing or farewell would have made a beautiful ending. She lets it remain. Your Stillness has shown her that attention need not fill every gap. A refuge can preserve someone's dignity by admitting what its keeper does not know, rather than arranging the unknown into a scene of gratitude.",
+      "Twilight Veil grants Night Vision while its nighttime condition holds, the established gift of this path. Seeing in darkness does not turn darkness into daylight; you have learned why that difference matters. Nythea will not claim that all her sleepers forgave her, nor that her brother's accusation was true. She sheltered mortal lives. She could not return them all. Beneath those two truths, neither cancelling the other, there is finally room for grief that does not have to prosecute or defend her."
+    ],
+    "ending_b": [
+      "Nythea remembers the angry woman without rehearsing an answer to her. 'She was alive because I hid her,' she says. 'She was angry because part of her life was gone. I made those facts quarrel so that I would not have to hold both.' Your Defiance has not destroyed her refuge's meaning. It has denied the refuge the right to define every survivor's account of it.",
+      "Twilight Veil's nighttime speed bonus increases from ten percent to fifteen percent, as promised for this path. It is movement, not a guarantee of escape from every consequence. Nythea cannot wake the missing by releasing her claim to gratitude, and she offers no false miracle. She does offer a changed invitation: come when rest is needed, question what is promised, leave without owing love. Her dream has become less perfect and more hospitable to the waking life it was made to protect."
+    ]
+  },
+  "dialogue": {
+    "call": "Offer freely. A shelter must not disguise its terms as a gift.",
+    "witness": "Watch twelve quiet seconds of open night; unseen does not mean empty.",
+    "testimony": "Choose Stillness or Defiance permanently. Neither requires you to excuse me.",
+    "deed_a": "Pray safely at this shrine at night for sixty uninterrupted seconds. Listen without supplying an ending.",
+    "deed_b": "Defeat four phantoms. They are threats, not the people I lost.",
+    "reckoning_a": "Plant three saplings in distinct places. Let something outgrow your memory of it.",
+    "reckoning_b": "Plant three saplings in distinct places. Beyond refusal, there must be a life.",
+    "trial": "Win a fresh Trial of Dreams, then return with your own account.",
+    "ending_a": "I can remember them without pretending to know their last words.",
+    "ending_b": "You may leave a shelter without denying that it once saved you."
+  }
+}

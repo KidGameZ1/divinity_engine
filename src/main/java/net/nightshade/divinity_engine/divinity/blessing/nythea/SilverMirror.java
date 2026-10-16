@@ -1,13 +1,12 @@
 package net.nightshade.divinity_engine.divinity.blessing.nythea;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -44,9 +43,7 @@ public class SilverMirror extends Blessings {
     public void onToggleOn(BlessingsInstance instance, LivingEntity entity) {
         instance.getOrCreateTag().putLong("activation_time", System.currentTimeMillis());
         instance.getOrCreateTag().putInt("reflect_count", 0);
-        entity.level().addParticle(ParticleTypes.ENCHANT,
-                entity.getX(), entity.getY() + 2, entity.getZ(),
-                0, 0, 0);
+        if (!entity.isInvisible()) BlessingVisuals.pulse(instance, entity, Cue.CAST);
         super.onToggleOn(instance, entity);
     }
 
@@ -72,10 +69,11 @@ public class SilverMirror extends Blessings {
                 instance.getOrCreateTag().putInt("reflect_count", reflectCount + 1);
 
                 event.setAmount(event.getAmount() * 0.75f);
-                living.hurt(event.getSource(), event.getAmount()*0.25f);
-                living.level().addParticle(ParticleTypes.ENCHANT,
-                        living.getX(), living.getY() + 1, living.getZ(),
-                        0, 0, 0);
+                boolean reflected = living.hurt(event.getSource(), event.getAmount()*0.25f);
+                if (!event.getEntity().isInvisible()) BlessingVisuals.pulse(instance, event.getEntity(), Cue.WARD);
+                if (reflected) {
+                    BlessingVisuals.at(instance, event.getEntity(), living.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
+                }
                 living.playSound(SoundEvents.ENCHANTMENT_TABLE_USE, 1.0F, 2.0F);
 
             }

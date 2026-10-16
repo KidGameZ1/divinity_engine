@@ -3,12 +3,13 @@ package net.nightshade.divinity_engine.divinity.blessing.lumen;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -23,12 +24,15 @@ public class DivineRadiance extends Blessings {
 
         living.level().getEntitiesOfClass(LivingEntity.class, living.getBoundingBox().inflate(6.0D),
                         entity -> entity != living && entity.isAlive())
-                .forEach(target -> target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0)));
+                .forEach(target -> {
+                    if (target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0))) {
+                        BlessingVisuals.at(instance, living, target.getEyePosition(), Cue.CONTROL,
+                                Math.max(0.5, target.getBbWidth()));
+                    }
+                });
 
-        if (living.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.END_ROD,
-                    living.getX(), living.getY() + 1, living.getZ(),
-                    50, 3.0, 0.5, 3.0, 0.1);
+        if (living.level() instanceof ServerLevel) {
+            BlessingVisuals.at(instance, living, living.getBoundingBox().getCenter(), Cue.WARD, 0.85);
 
             living.level().playSound(null, living.getX(), living.getY(), living.getZ(),
                     SoundEvents.NOTE_BLOCK_CHIME.get(), SoundSource.PLAYERS, 1.0F, 1.0F);

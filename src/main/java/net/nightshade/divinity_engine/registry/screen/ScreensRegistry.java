@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.nightshade.divinity_engine.client.screen.BlessingsScreen;
 import net.nightshade.divinity_engine.client.screen.DivineCodexScreen;
 import net.nightshade.divinity_engine.client.screen.PocketDimensionInvScreen;
+import net.nightshade.divinity_engine.client.screen.PocketDomainScreen;
 import net.nightshade.divinity_engine.registry.gui.MenusRegistry;
 import net.nightshade.divinity_engine.world.inventory.PocketDimensionInvMenu;
 
@@ -18,6 +19,7 @@ public class ScreensRegistry {
 		event.enqueueWork(() -> {
 			MenuScreens.register(MenusRegistry.BLESSINGS_GUI.get(), BlessingsScreen::new);
 			MenuScreens.register(MenusRegistry.POCKET_DIMENSION.get(), PocketDimensionInvScreen::new);
+			MenuScreens.register(MenusRegistry.POCKET_DOMAIN.get(), PocketDomainScreen::new);
 			MenuScreens.register(MenusRegistry.DIVINE_CODEX.get(), DivineCodexScreen::new);
 		});
 	}

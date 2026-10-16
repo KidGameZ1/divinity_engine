@@ -1,16 +1,14 @@
 package net.nightshade.divinity_engine.divinity.blessing.solarius;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -32,7 +30,7 @@ public class Sunburst extends Blessings {
         for (LivingEntity target : entityList) {
             if (target != living) {
                 // Apply blindness
-                target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, MiscHelper.secondsToTick(5), 0, false, false, true));
+                boolean blinded = target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, MiscHelper.secondsToTick(5), 0, false, false, true));
 
                 // Set on fire
                 target.setSecondsOnFire(5);
@@ -45,21 +43,17 @@ public class Sunburst extends Blessings {
                         0.4D,
                         difference.z * strength
                 );
+                Vec3 contact = target.getBoundingBox().getCenter();
+                Vec3 outward = new Vec3(difference.x * strength, 0.4D, difference.z * strength).normalize();
+                BlessingVisuals.link(instance, living, contact, contact.add(outward.scale(0.4)), Cue.IMPACT);
+                if (blinded) {
+                    BlessingVisuals.at(instance, living, target.getEyePosition(), Cue.CONTROL, 0.4);
+                }
             }
         }
 
         if (!entityList.isEmpty()){
-            if (level instanceof ServerLevel serverLevel) {
-                for (int i = 0; i < 100; i++) {
-                    double angle = level.getRandom().nextDouble() * 2 * Math.PI;
-                    double radius = level.getRandom().nextDouble() * range;
-                    double x = living.getX() + Math.cos(angle) * radius;
-                    double y = living.getY() + level.getRandom().nextDouble() * 1.5;
-                    double z = living.getZ() + Math.sin(angle) * radius;
-
-                    serverLevel.sendParticles(ParticleTypes.FLAME, x, y, z, 1, 0, 0, 0, 0);
-                }
-            }
+            BlessingVisuals.at(instance, living, living.position(), Cue.CAST, range);
         }
 
         return !entityList.isEmpty();

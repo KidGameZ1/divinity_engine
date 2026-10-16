@@ -67,6 +67,7 @@ public class PlayerBlessingsButtonMessage {
 	}
 
 	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
+        if (!(entity instanceof ServerPlayer) || entity.containerMenu instanceof BlessingsMenu menu && menu.isOpenedFromStatue()) return;
 		Level world = entity.level();
 		HashMap guistate = BlessingsMenu.guistate;
 
@@ -86,9 +87,9 @@ public class PlayerBlessingsButtonMessage {
 
 						@Override
 						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-							return new BlessingsMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(entity.blockPosition()));
+							return new BlessingsMenu(id, inventory, null);
 						}
-					}, _bpos);
+					}, buffer -> BlessingsMenu.writeOpening(buffer, _bpos, null));
 				}
 			}else {
 				entity.displayClientMessage(Component.literal("You haven't contacted any gods"), true);
@@ -100,6 +101,7 @@ public class PlayerBlessingsButtonMessage {
 			// Sync both player capabilities and gods data
 			MainPlayerCapability.PlayerVariables.sync(entity);
 			PlayerGodsCapability.load(entity).syncAll();
+            net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.sync((ServerPlayer) entity, true);
 		}
 
 	}

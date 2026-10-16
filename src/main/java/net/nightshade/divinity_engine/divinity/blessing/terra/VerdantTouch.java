@@ -1,19 +1,18 @@
 package net.nightshade.divinity_engine.divinity.blessing.terra;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.BoneMealItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -73,13 +72,10 @@ public class VerdantTouch extends Blessings {
                     if (level instanceof ServerLevel) {
                         if (growable.isBonemealSuccess(level, level.random, _bp, state)) {
                             growable.performBonemeal((ServerLevel) level, level.random, _bp, state);
+                            BlessingVisuals.at(instance, living, Vec3.atCenterOf(pos), Cue.CAST, 0.75);
                         }
                     }
                 }
-                level.sendParticles(ParticleTypes.HAPPY_VILLAGER,
-                        pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                        1, 0.1, 0.1, 0.1, 0);
-
                 CompoundTag delayTag = new net.minecraft.nbt.CompoundTag();
                 delayTag.putString("pos", pos.toString());
                 delayTag.putInt("delay", MiscHelper.secondsToTick(10));

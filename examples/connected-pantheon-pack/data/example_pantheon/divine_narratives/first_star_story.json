@@ -1,0 +1,121 @@
+{
+  "version": 2,
+  "kind": "story",
+  "id": "example_pantheon:first_star",
+  "god": "example_pantheon:vesper",
+  "title": {
+    "translate": "example_pantheon.story.first_star.title"
+  },
+  "request": "Offer something Vesper accepts, then learn what an honest guide can promise.",
+  "branches": {
+    "a": {
+      "name": "Shelter",
+      "objective": "divinity_engine:donation",
+      "condition": "",
+      "target": 4,
+      "item": "minecraft:lantern",
+      "deed": "Contribute four lanterns at Vesper's statue",
+      "reward": {
+        "id": "example_pantheon:first_star_shelter",
+        "blessing": "divinity_engine:solar_ward",
+        "description": "Records the Shelter marker for Solar Ward; no numeric modifier is installed by this example"
+      },
+      "ending": "You kept a refuge without claiming the road beyond it."
+    },
+    "b": {
+      "name": "Testimony",
+      "objective": "divinity_engine:donation",
+      "condition": "",
+      "target": 8,
+      "item": "minecraft:paper",
+      "deed": "Contribute eight paper at Vesper's statue",
+      "reward": {
+        "id": "example_pantheon:first_star_testimony",
+        "blessing": "divinity_engine:twilight_veil",
+        "description": "Records the Testimony marker for Twilight Veil; no numeric modifier is installed by this example"
+      },
+      "ending": "You recorded a useful truth without inventing certainty."
+    }
+  },
+  "chronicle": {
+    "premise": "Vesper keeps the routes used by those who return after sunset. A missing mark on an old chart asks whether guidance should promise safety or admit uncertainty. This is an addon tale, not a new account of the Sundering.",
+    "offering_examples": [
+      "minecraft:paper",
+      "minecraft:amethyst_shard"
+    ],
+    "chapter_titles": {
+      "call": { "translate": "example_pantheon.story.first_star.call.title" }
+    },
+    "witness": {
+      "objective": "divinity_engine:observe",
+      "condition": "night_sky",
+      "target": 200,
+      "deed": "Observe the open night sky for 200 consecutive ticks"
+    },
+    "reckoning": {
+      "objective": "example_pantheon:star_chart",
+      "condition": "craft_compass",
+      "target": 1,
+      "deed": "Craft a vanilla compass once as a star chart after this chapter begins",
+      "item": "minecraft:compass"
+    },
+    "passages": {
+      "call": [
+        {
+          "translate": "example_pantheon.story.first_star.call.paragraph"
+        },
+        "Make an ordinary offering she accepts. Paper and amethyst are examples only if her offering rules accept them; this story does not change those rules. The old village belongs to her account, not a hidden structure you must find."
+      ],
+      "witness": [
+        "Stand beneath an open night sky for two hundred uninterrupted ticks. A star can steady your bearing without showing the ground beneath your feet. Clouds do not create another objective, and no special moon is required.",
+        "Vesper admits that she once mistook a confident direction for a safe journey. The sky witnessed her confidence, not the safety of those who followed it."
+      ],
+      "testimony": [
+        "A keeper wanted lanterns at the last known refuge. A surveyor wanted paper for a record of hazards beyond it. Neither asked you to condemn the other. Vesper offers two permanent paths: Shelter and Testimony.",
+        "Shelter contributes four lanterns and records a Solar Ward specialization marker. Testimony contributes eight paper and records a Twilight Veil marker. These examples add no numerical blessing effect. Preview both rewards at her statue before confirming."
+      ],
+      "deed_a": [
+        "Contribute four lanterns through the story donation action at Vesper's statue. They stand for a refuge whose door remains open in both directions. You are not asked to place blocks or locate the remembered village.",
+        "Vesper accepts Shelter without pretending that shelter finishes a journey. A resting place is a promise of care, not ownership of the traveler."
+      ],
+      "deed_b": [
+        "Contribute eight paper through the story donation action at Vesper's statue. The record will distinguish a known road from a guessed one. No named book or collectible document is required.",
+        "Vesper accepts Testimony without treating a careful record as rescue. The page can warn another traveler, but it cannot take that traveler's steps."
+      ],
+      "reckoning_a": [
+        "Now craft a vanilla compass. Vesper calls this practical instrument a star chart: no custom item, name or recipe is needed. The new crafting event, not possession of an old compass, completes the reckoning.",
+        "The needle is not a promise that every road is safe. Shelter becomes more honest when those leaving it receive guidance instead of a command to remain."
+      ],
+      "reckoning_b": [
+        "Now craft a vanilla compass. It serves as Vesper's star chart, using the normal item and recipe. Receiving a compass, taking one from a chest or renaming one is not this deed.",
+        "You have made a tool without claiming that it knows every hazard. Testimony becomes useful when it equips a person to act rather than merely preserving your own account."
+      ],
+      "trial": [
+        "Return to Vesper's statue and start a new instance of her registered trial from its blessings screen. Win that fresh trial, then return to the statue. A victory earned before this chapter does not count.",
+        "Failure does not undo your chosen path, donation or completed reckoning. Vesper asks you to try again, not to buy the same promise twice."
+      ],
+      "ending_a": [
+        "Vesper places a lantern beside the unfinished chart. The blank road remains blank, but the refuge is no longer concealed by the cartographer's embarrassment. Those who rest there may leave without owing their keeper certainty.",
+        "Your Shelter ending and its marker are recorded once. Vesper grants the ordinary story favor reward, not authority over another god or an automatic new blessing power."
+      ],
+      "ending_b": [
+        "Vesper keeps the chart with its last road unfinished. Beside it she records what can be followed, what must be checked and what no witness can promise. The omission is no longer passed off as a complete map.",
+        "Your Testimony ending and its marker are recorded once. The story's favor reward does not purchase another god's agreement, and the marker alone changes no blessing statistics."
+      ]
+    },
+    "dialogue": {
+      "call": {
+        "translate": "example_pantheon.story.first_star.call.dialogue"
+      },
+      "witness": "Watch long enough to notice what the stars cannot tell you.",
+      "testimony": "Will you keep a shelter, or leave an honest record?",
+      "deed_a": "A light may welcome without ordering anyone to stay.",
+      "deed_b": "Leave room on the page for an answer you do not have.",
+      "reckoning_a": "Carry a bearing beyond the shelter you kept.",
+      "reckoning_b": "Test the habit of making, not the beauty of a record.",
+      "trial": "Begin my trial anew; yesterday's victory cannot answer today.",
+      "ending_a": "You kept a door, not a boundary around another life.",
+      "ending_b": "You left a useful truth, including the edge of what you know."
+    }
+  }
+}

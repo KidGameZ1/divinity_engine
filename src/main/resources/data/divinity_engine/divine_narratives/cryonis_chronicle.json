@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:cryonis",
+  "premise": "Cryonis once kept winter's part in the First Concord: what slept could survive to wake, and mortal life would not vanish into oblivion. During the Sundering she froze a drowned sanctuary, preserving its final memories when she could not restore its people. Her sister Nerai hears captivity in that stillness. Winter's Testament concerns the difference between keeping evidence safe and using its safekeeping to decide who may speak. Winter remembers; its keeper must also learn to answer.",
+  "offering_examples": ["minecraft:snow_block", "minecraft:packed_ice", "minecraft:blue_ice"],
+  "witness": {
+    "objective": "divinity_engine:observe",
+    "condition": "snow",
+    "target": 200,
+    "deed": "Observe a snowy place for 10 continuous seconds"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:observe",
+    "condition": "firelight",
+    "target": 240,
+    "deed": "Remain in firelight for 12 continuous seconds"
+  },
+  "passages": {
+    "call": [
+      "Cryonis asks for a snow block, packed ice, or blue ice, the familiar offerings her shrine accepts. She names them carefully because loose snowballs will matter only if you later choose Preservation. A beginning is not the same transaction as a deed. Her voice resembles a person reading an inventory in a room where someone has recently died: precise because one careless word might imply that a missing life can simply be replaced.",
+      "She tells you that the sanctuary was once famous for its badly tuned evening bell. Refugees found its uneven notes reassuring; no conquering army would boast of such a sound. After the Sundering, worshippers praised the flawless stillness she made there. Cryonis accepted the praise because correcting it would require describing the bell as it had been, crowded and imperfect, and admitting that her finest preservation was also a record of something she had failed to save."
+    ],
+    "witness": [
+      "Observe a snowy place for ten continuous seconds. Cryonis asks for attention, not exposure until you freeze. Snow can reveal tracks as readily as cover them; a smooth field is not evidence that nobody crossed it. As you watch, she asks you to consider the difference between a silence you have heard and a silence you have imposed. You need no lost sanctuary or special relic to begin learning that distinction.",
+      "Her first memory concerns the sanctuary's keeper, who stored seed in clay jars and complained about labels written too small. He believed preservation had failed if the next gardener could not tell what to plant. Cryonis once found his concern provincial beside the Concord's defense against oblivion. Now his practical objection troubles her. She has kept the sanctuary's final memories exact, but exactness alone does not answer who may understand them, who may contradict her account, or who was excluded from it."
+    ],
+    "testimony": [
+      "The sanctuary had drowned before Cryonis sealed it. Nerai's diverted evacuation current had contributed to the flood; damaged doors and the Concord's collapse made the full sequence impossible for either sister to master. Cryonis froze what remained to protect the final memories from oblivion. She cannot produce a complete count of the people inside. For years she said, 'Nothing was lost beneath my winter.' What she meant was that the memories endured. What listeners heard was that she had saved everyone.",
+      "Choose permanently between Preservation and Severity. Preservation asks you to contribute 32 snowballs, gathering a material that can shelter without pretending it is everlasting. Severity asks you to defeat six strays, confronting winter's cruelty rather than admiring it from safety. Cryonis will honor either discipline. Neither choice authorizes you to thaw an unseen sanctuary, punish Nerai, or decide for the dead. Her testimony is enough to undertake this independent quest; her sister's approval is not a missing key."
+    ],
+    "deed_a": [
+      "Contribute 32 snowballs. Use the story's donation rather than mistaking an ordinary shrine offering for this deliberate commitment. Cryonis treats the gathered snow as an exercise in modest preservation: separate handfuls, finite labor, nothing that can justify a claim of eternal custody. She remembers preparing the sanctuary's ice so carefully that she began to think the care itself made every later decision correct. It did not. A perfect vessel can still be kept from the people entitled to question its keeper.",
+      "The seed keeper had left instructions for opening his jars in spring. Cryonis preserved those instructions along with everything else, then neglected their argument: keeping something safe may include a condition under which keeping must end. Your snowballs do not enact that ending, and no ancient lock opens when they are counted. Instead, she accepts the possibility that her duty might someday require relinquishment. That possibility frightens her more honestly than any accusation that she has never loved the living."
+    ],
+    "deed_b": [
+      "Defeat six strays. Cryonis does not call them the sanctuary's citizens, and their destruction cannot substitute for consent from the people whose memories she guards. These are present hostile creatures. Meet the danger as it is, without turning your chosen Severity into a verdict against all who bear winter's marks. Her demand is exact because vague punishment has a way of discovering endless new subjects once the original grievance becomes inconvenient to examine.",
+      "She remembers a winter magistrate who rationed fuel by an impeccable schedule. When a sick household needed more, he accused it of disrespecting the common plan. Cryonis had admired his consistency before she learned how cold the room had become. Severity worthy of its name must be severe toward excuses made by the powerful as well as toward threats encountered outside. Six defeated enemies establish a limit, not permission to keep searching until all discomfort has an external culprit."
+    ],
+    "reckoning_a": [
+      "Remain in firelight for twelve continuous seconds. You need not burn an object or suffer damage; attend to a source of ordinary warmth. Cryonis asks the keeper of snow to notice what makes winter habitable. In the sanctuary, memory of the seed jars survived beside memory of a cook warming stiff hands. Neither cancels the other. Preservation that records the jars but edits out the cook has retained objects while losing the reason anyone wanted them kept.",
+      "She confesses a smaller concealment than the frozen sanctuary, and therefore one harder to excuse as necessity. In retelling its last evening, she omitted an argument about leaving before the storm. The argument made her wardens look uncertain. She now speaks it aloud, including the keeper who changed his mind twice. Their hesitation belongs to them. Your time in the light asks her to preserve warmth, disagreement, and error alongside the dignified final words that monuments prefer."
+    ],
+    "reckoning_b": [
+      "Remain in firelight for twelve continuous seconds. Having faced winter's weapons, consider who can afford to praise its tests. A sheltered official can call cold purifying while somebody outside spends a night calculating whether to move or conserve strength. Cryonis offers no trial of deliberate freezing here. The warmth is the point: Severity must know the conditions under which a demand becomes survivable before congratulating those who survived it.",
+      "She finally repeats the sick household's answer to the magistrate. They did not dispute the shortage. They disputed being accused of moral failure for needing more. Cryonis had omitted that answer from her old tale because it weakened its clean warning against waste. Now she names her omission as a choice, not an imperfection in memory. Exact judgment requires the inconvenient evidence too. The fire does not pardon her; it makes her stand beside a need her rules once kept at a distance."
+    ],
+    "trial": [
+      "Begin and win a fresh trial of Cryonis after this reckoning, then return to her shrine. You are not asked to repeat the sanctuary's death or prove that you could have saved it. The present trial tests the discipline you chose with the knowledge you have since gained. Prepare for it as a living person whose survival matters. If an attempt fails, retry; she will not demand your offering and completed deed again as payment for an unsatisfactory performance.",
+      "Before you depart, Cryonis withdraws her old boast. Something was lost beneath my winter, she says. The words do not weaken the memories she preserved. They stop using those memories to conceal the people she could not preserve. Whether Nerai would accept this distinction is not a question you must answer. A confession that depends on a sister's forgiveness would still leave that sister responsible for the speaker's honesty. This account can change even while their estrangement remains."
+    ],
+    "ending_a": [
+      "Cryonis receives you with the sanctuary's uneven bell described at last as uneven. She does not improve its sound in the telling. Preservation now includes the keeper's difficult labels, the cook's irritation, and the disputed decision to remain. The memories are not trophies of her competence. Their continued custody still raises questions this single journey cannot settle, but she has surrendered the claim that maintaining the ice automatically supplies every answer. That is a smaller achievement than resurrection and an honest one.",
+      "Your established specialization remains exactly this: Icy Pulse radius increases from three to four blocks. Its reach offers a little more room for calm, not authority over another person's future. 'You gathered winter without shattering it. Let your calm reach those who cannot find their own.' Cryonis speaks the familiar blessing without presenting serenity as obedience. Beyond the shrine, seeds may remain sheltered through cold because there will be a season when shelter is opened. She allows that future into her testament."
+    ],
+    "ending_b": [
+      "You return to a goddess who no longer calls an incomplete account complete because its omissions spared her shame. Cryonis keeps Severity, but redirects its exactness toward her own testimony. She distinguishes preserved memory from rescued life, necessary triage from the comfortable story told afterward, a hostile creature from a convenient emblem of blame. She does not renounce winter. She renounces the claim that winter's hardship proves the worthlessness of whoever needed a warmer room.",
+      "Your established specialization remains exactly this: Icy Pulse slowing lasts five seconds instead of three. That measured interval is the gift; no sentence of endless stillness accompanies it. 'You endured the cruelest cold and answered it. Be exacting, but never empty of purpose.' The sanctuary is neither thawed nor forgotten by your success. Its keeper has become answerable in a new way, and your chosen discipline has learned to ask what a stern rule protects before demanding another person endure it."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring snow block or ice. A preserved memory is not the same as a rescued life.",
+    "witness": "Observe the snow for ten continuous seconds. Stillness is not proof of absence.",
+    "testimony": "Choose Preservation or Severity permanently. Neither will make our history innocent.",
+    "deed_a": "Contribute 32 snowballs. Care is not a deed of ownership.",
+    "deed_b": "Defeat six strays. Let your judgment end where the actual danger ends.",
+    "reckoning_a": "Stay in firelight for twelve continuous seconds. Preserve the warmth in the account too.",
+    "reckoning_b": "Stay in firelight for twelve continuous seconds. Learn what makes a demand survivable.",
+    "trial": "Win a fresh trial of mine. Your survival matters more than a beautiful ordeal.",
+    "ending_a": "Let the record keep its awkward voices. They were never mine to perfect.",
+    "ending_b": "Exactness begins with the evidence that troubles its keeper."
+  }
+}

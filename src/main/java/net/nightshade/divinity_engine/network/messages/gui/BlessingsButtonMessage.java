@@ -62,10 +62,12 @@ public class BlessingsButtonMessage {
 	}
 
 	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
+		if (entity == null || entity.level().isClientSide() || !(entity.containerMenu instanceof BlessingsMenu)) return;
 		Level world = entity.level();
 		HashMap guistate = BlessingsMenu.guistate;
 
 		BlessingsMenu blessingsMenu = entity.containerMenu instanceof BlessingsMenu ? (BlessingsMenu) entity.containerMenu : null;
+        if (!blessingsMenu.stillValid(entity)) return;
 
 		// security measure to prevent arbitrary chunk generation
 		if (!world.hasChunkAt(new BlockPos(x, y, z)))
@@ -121,8 +123,7 @@ public class BlessingsButtonMessage {
 				entity.displayClientMessage(Component.literal("Unequipped blessing from slot " + (slot + 1) + "."), false);
 			} else if (!isAnySlotEquipped(entity, selectedBlessingInstance)) {
 				// Equip the blessing if it has enough favor
-				if (GodHelper.getGodOrNull(entity, selectedBlessingInstance.getBoundGod())
-						.getFavor() >= selectedBlessingInstance.getBlessing().getNeededFavor()) {
+				if (net.nightshade.divinity_engine.util.divinity.gods.DivineRelationship.canUse(entity, selectedBlessingInstance)) {
 					DivinityEngineHelper.setBlessingSlot(entity, slot, selectedBlessingInstance);
 					entity.displayClientMessage(Component.literal("Bound blessing slot " + (slot + 1) + " to " +
 							Component.translatable(selectedBlessingInstance.getBlessing().getNameTranslationKey())

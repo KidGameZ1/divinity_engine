@@ -58,7 +58,7 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public List<BlessingsInstance> getDirtyBlessings() {
-        return this.getBlessingsInstances().parallelStream().filter(BlessingsInstance::isDirty).toList();
+        return this.getBlessingsInstances().stream().filter(BlessingsInstance::isDirty).toList();
     }
 
     public BaseGod getBaseGod() {
@@ -156,7 +156,7 @@ public class BaseGodInstance implements Cloneable {
 
 
         if (this.tag != null) {
-            tag.put("tag", this.tag.copy());
+            tag.put("CustomData", this.tag.copy());
         }
 
         return tag;
@@ -199,8 +199,8 @@ public class BaseGodInstance implements Cloneable {
         }
 
 
-        if (tag.contains("tag", 10)) {
-            this.tag = tag.getCompound("tag");
+        if (tag.contains("CustomData", 10)) {
+            this.tag = tag.getCompound("CustomData");
         }
 
     }
@@ -426,24 +426,36 @@ public class BaseGodInstance implements Cloneable {
     }
 
     public void onPrayedTo(PrayEvent event) {
-        this.getBaseGod().onPrayedTo(this,event);
+        net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.interaction(this, event.getLiving(),
+                net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.Source.PRAYER,
+                () -> { this.getBaseGod().onPrayedTo(this,event); return !event.isCanceled(); });
     }
 
     public void whileNearShrine(WhileNearStatueEvent event) {
-        this.getBaseGod().whileNearShrine(this,event);
+        net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.interaction(this, event.getLiving(),
+                net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.Source.PRESENCE,
+                () -> { this.getBaseGod().whileNearShrine(this,event); return !event.isCanceled(); });
     }
 
     public boolean onOfferedItems(OfferEvent.OfferItemEvent event) {
-        return this.getBaseGod().onOfferedItems(this,event);
+        return net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.interaction(this, event.getOfferer(),
+                net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.Source.OFFERING,
+                () -> this.getBaseGod().onOfferedItems(this,event) && !event.isCanceled());
     }
 
     public boolean onOfferedEntity(OfferEvent.OfferEntityEvent event) {
-        return this.getBaseGod().onOfferedEntity(this,event);
+        return net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.interaction(this, event.getOfferer(),
+                net.nightshade.divinity_engine.util.divinity.gods.FavorRewards.Source.OFFERING,
+                () -> this.getBaseGod().onOfferedEntity(this,event) && !event.isCanceled());
     }
     public void onContact(LivingEntity living, ContactGodEvent event) {
         this.getBaseGod().onContacted(living, event);
     }
     public void onLoseFaith(LivingEntity living, LoseFaithEvent event) {
         this.getBaseGod().onLoseFaith(living, event);
+    }
+
+    public void onTick(LivingEntity living) {
+        this.getBaseGod().onTick(this, living);
     }
 }

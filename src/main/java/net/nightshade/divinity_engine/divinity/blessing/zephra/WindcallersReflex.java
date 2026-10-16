@@ -3,9 +3,12 @@ package net.nightshade.divinity_engine.divinity.blessing.zephra;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -20,6 +23,9 @@ public class WindcallersReflex extends Blessings {
         if (!instance.isOnCooldown()) {
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, MiscHelper.secondsToTick(5), 1, false, false, true));
             event.setCanceled(true);
+            Vec3 contact = event.getRayTraceResult().getLocation();
+            Vec3 incoming = event.getProjectile().getDeltaMovement().normalize().scale(0.4);
+            BlessingVisuals.link(instance, living, contact.subtract(incoming), contact, Cue.WARD);
 
             return true;
         }

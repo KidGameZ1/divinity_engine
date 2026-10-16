@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.nerai;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,6 +10,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
@@ -54,17 +55,11 @@ public class UndercurrentGrip extends Blessings {
 
             // Apply Slowness
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
+            BlessingVisuals.link(instance, living, target.position().add(0, 0.25, 0),
+                    living.position().add(0, 0.25, 0), Cue.CONTROL);
         }
 
-        // Particle feedback
-        for (int i = 0; i < 40; i++) {
-            double angle = Math.random() * 2 * Math.PI;
-            double distance = Math.random() * radius;
-            double x = living.getX() + Math.cos(angle) * distance;
-            double y = living.getY() + 0.5;
-            double z = living.getZ() + Math.sin(angle) * distance;
-            serverLevel.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, 0, 0.1, 0, 0.01);
-        }
+        BlessingVisuals.at(instance, living, living.position().add(0, 0.25, 0), Cue.CAST, 0.7);
 
         // Optional: Add sound effect here
         // level.playSound(null, living.blockPosition(), SoundEvents.GENERIC_SPLASH, SoundSource.PLAYERS, 1.0F, 1.0F);

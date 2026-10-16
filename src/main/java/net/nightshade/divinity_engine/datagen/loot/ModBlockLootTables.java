@@ -21,7 +21,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 this.dropSelf(block);
             }
         }
-        this.dropSelf(BlocksRegistry.POCKET_DIMENSION.get());
     }
 
     @Override

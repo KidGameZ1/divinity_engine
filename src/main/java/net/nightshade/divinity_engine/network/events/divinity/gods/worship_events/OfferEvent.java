@@ -4,9 +4,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.eventbus.api.Cancelable;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.network.events.divinity.gods.GodsEvent;
 
+@Cancelable
 public class OfferEvent extends GodsEvent {
     private final LivingEntity offerer;
 
@@ -19,6 +21,7 @@ public class OfferEvent extends GodsEvent {
         return offerer;
     }
 
+    @Cancelable
     public static class OfferItemEvent extends OfferEvent {
         private ItemStack offeredItem;
         private ItemEntity offeredItemEntity;
@@ -47,6 +50,7 @@ public class OfferEvent extends GodsEvent {
 
     }
 
+    @Cancelable
     public static class OfferEntityEvent extends OfferEvent {
         private Entity offeredEntity;
 

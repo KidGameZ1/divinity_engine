@@ -7,6 +7,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.Random;
@@ -48,6 +50,7 @@ public class LullOfTheLost extends Blessings {
 
             if (!hasCooldown && random.nextFloat() <= 0.35f) {
                 event.setNewTarget(null);
+                BlessingVisuals.at(instance, target, event.getEntity().getEyePosition().add(0, 0.15, 0), Cue.CONTROL, 0.3);
                 CompoundTag tag = new CompoundTag();
                 tag.putUUID("id", entityId);
                 tag.putLong("time", currentTime);

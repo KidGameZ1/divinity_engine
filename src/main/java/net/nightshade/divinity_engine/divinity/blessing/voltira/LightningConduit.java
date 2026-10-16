@@ -14,6 +14,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MathHelper;
 
 import java.awt.*;
@@ -65,7 +67,10 @@ public class LightningConduit extends Blessings {
                             }
 
                             lightning.setPos(pos.getX(), pos.getY(), pos.getZ());
-                            serverLevel.addFreshEntity(lightning);
+                            if (serverLevel.addFreshEntity(lightning)) {
+                                BlessingVisuals.at(instance, living, lightning.position(), Cue.IMPACT,
+                                        Math.max(0.75, target.getBbWidth()));
+                            }
                         }
                     }
                 }

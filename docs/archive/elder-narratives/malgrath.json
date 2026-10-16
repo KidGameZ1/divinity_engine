@@ -1,0 +1,109 @@
+{
+  "version": 2,
+  "kind": "story",
+  "id": "divinity_engine:malgrath",
+  "god": "divinity_engine:malgrath",
+  "title": "The Price of Ruin",
+  "request": "Malgrath, the Worldbreaker, offers the remembered Heart of the Unbroken Gate, a story object rather than an inventory item. Begin after contact. An accepted offering proves Ruinbrand; fifteen continuous seconds near firelight prove Sacrificial Might. Permanently choose Willing Tribute: explicitly donate one netherite ingot through the story at his statue, or Broken Claim: personally defeat twelve hostile mobs with direct melee attacks. Either deed proves Ruinous Grasp. Then successfully shield-block ten hostile attacks to prove Ashen Tribute, and win a fresh Trial of Ruin to prove Worldbreaker. Return to claim your ending and Ruinbrand specialization. No health sacrifice, healing restriction, destruction of terrain, or loss of other inventory is required. Deeds have no kill timer. Declining or postponing has no penalty; both resolutions grant every proof.",
+  "branches": {
+    "a": {
+      "name": "Willing Tribute",
+      "objective": "divinity_engine:donation",
+      "condition": "",
+      "target": 1,
+      "item": "minecraft:netherite_ingot",
+      "deed": "Explicitly donate one netherite ingot through this story's donation action at Malgrath's statue; confirming the branch alone consumes nothing, and no other item or health is required",
+      "reward": {
+        "id": "divinity_engine:malgrath_a",
+        "blessing": "divinity_engine:ruinbrand",
+        "description": "Willing Tribute: Ruinbrand's stored direct-damage cap is 20% higher. Its storage fraction, duration, radius, target limit, and no-chain rules are unchanged. Applies only while Ruinbrand is equipped and used."
+      },
+      "ending": "The Heart is surrendered without naming another person's possessions as payment. Willing Tribute permanently raises Ruinbrand's stored direct-damage cap by 20%, with its existing limits against chained detonations intact."
+    },
+    "b": {
+      "name": "Broken Claim",
+      "objective": "divinity_engine:kill",
+      "condition": "melee",
+      "target": 12,
+      "deed": "Personally defeat twelve eligible hostile mobs with direct melee attacks outside trials; no deadline, healing ban, health payment, or inventory sacrifice",
+      "reward": {
+        "id": "divinity_engine:malgrath_b",
+        "blessing": "divinity_engine:ruinbrand",
+        "description": "Broken Claim: Ruinbrand's cooldown is 10% shorter. Its storage fraction, damage cap, duration, radius, target limit, and no-chain rules are unchanged. Applies only while Ruinbrand is equipped and used."
+      },
+      "ending": "The Heart's claim to endless sacrifice is broken. Ruinbrand gains a permanent 10% shorter cooldown; your refusal to buy this ending with an ingot carries no missing blessing proof."
+    }
+  },
+  "chronicle": {
+    "premise": "Malgrath remembers the Heart of the Unbroken Gate, a fastening praised because it never yielded while everything beside it failed. It is held in the story, not spawned as a collectible. After the First Concord's Sundering, the Worldbreaker must decide whether sacrifice has meaning when the person demanding it never pays. Surrendering the Heart through Willing Tribute and breaking its claim through direct action are equally valid resolutions.",
+    "offering_examples": ["minecraft:ancient_debris", "minecraft:netherite_scrap", "minecraft:crying_obsidian"],
+    "witness": {"objective": "divinity_engine:observe", "condition": "firelight", "target": 300, "deed": "Remain within two blocks on each axis of fire, a lit campfire, or lava for fifteen continuous seconds; use a safe nearby position, not the flame itself"},
+    "reckoning": {"objective": "divinity_engine:shield", "condition": "", "target": 10, "deed": "Successfully shield-block ten attacks from eligible hostile mobs outside trials after the chosen deed; no deadline or health sacrifice"},
+    "chapter_titles": {
+      "call": "1. The Unbroken Gate",
+      "witness": "2. Beside the Heat",
+      "testimony": "3. Who Pays",
+      "deed_a": "4. Willing Tribute",
+      "deed_b": "4. Broken Claim",
+      "reckoning_a": "5. What the Gift Cannot Buy",
+      "reckoning_b": "5. What Remains Standing",
+      "trial": "6. The Measure of Ruin",
+      "ending_a": "7. A Price Freely Named",
+      "ending_b": "7. No Further Debt"
+    },
+    "passages": {
+      "call": [
+        "Malgrath, the Worldbreaker, describes a dark metal fastening small enough to hide in a closed hand. Its builders called it the Heart of the Unbroken Gate. When pressure tore the surrounding wall apart, the fastening survived. The survivors were told this proved the workmanship. Malgrath remembers one of them asking whether a gate deserved praise for remaining shut after the people beside it could no longer breathe. 'Show me what you are willing to lose,' he says, then waits to see whether you hear a question or a threat.",
+        "You may begin after contact. Offer ancient debris, netherite scrap, or crying obsidian at his Nether statue, observe firelight safely for fifteen continuous seconds, then choose your permanent branch. Willing Tribute explicitly donates one netherite ingot at the statue; Broken Claim instead requires twelve direct melee victories against hostile mobs. Both then require ten successful hostile shield blocks and a fresh Trial of Ruin. These are the five blessing proofs. The Heart exists only in this account: no hidden item must be found or destroyed. There is no health payment, healing ban, terrain destruction, or cost for declining. Nothing is taken merely because you listen."
+      ],
+      "witness": [
+        "Remain near firelight for fifteen continuous seconds. The existing observation recognizes fire, a lit campfire, or lava within two blocks on each axis. Choose a safe position beside a contained source; standing in it is unnecessary. Leaving its vicinity or extinguishing it restarts only this observation. The accepted offering has proved Ruinbrand, and this witness proves Sacrificial Might. Pain is not the evidence the god is requesting.",
+        "Ignar understands what flame can make as well as what it consumes. Malgrath does not dispute that craft or claim to improve it simply by making a larger blaze. The light lets him show where a solid thing is already failing. During the Concord's Sundering, a proud fastening could remain intact while its supports changed beyond recognition. Grond's knowledge of foundations and Mechanos's calculations each mattered to the people working around such structures. No single broken wall explains the whole catastrophe. This one asks why its celebrated strength was never measured against the lives it was meant to preserve."
+      ],
+      "testimony": [
+        "The Heart now appears in Malgrath's telling as a dangerous bargain: every failure around it is answered by demanding a greater payment to preserve the thing that did not fail. He does not hand you a cursed inventory object or bind you to a new damage rule. The danger is the bargain's logic. Vokar knows that an ending need not be an insult to what once lived. Malgrath must learn to end a claim without pretending that destruction itself absolves the hand that performs it.",
+        "Choose Willing Tribute or Broken Claim. Tribute means one netherite ingot, deliberately surrendered through the story donation action at this statue after you confirm the permanent path. Merely confirming consumes nothing. Broken Claim means twelve eligible hostile mobs personally defeated with direct melee attacks outside trials, without a deadline or healing ban. Preview the distinct Ruinbrand specializations before deciding. The first relinquishes valuable material; the second accepts direct danger rather than an inventory cost. Both prove Ruinous Grasp and reach the same later blessings. No equipped tool, armor, unrelated possession, or maximum health is the price."
+      ],
+      "deed_a": [
+        "Bring one netherite ingot and use this story's donation action at Malgrath's physical statue. Ordinary dropped offerings do not substitute for the deed. The deliberate donation consumes exactly one matching ingot, not a netherite weapon or piece of armor. If you do not yet have the ingot, you may leave and return without penalty. The branch is permanent, but the payment happens only through the donation action. Malgrath names the material because a sacrifice concealed in vague language is not a freely accepted sacrifice.",
+        "Within the account, you surrender the remembered Heart rather than claim it as a trophy. Malgrath asks what else that ingot could have become and does not demand that you call those possibilities worthless. A useful thing is more difficult to relinquish honestly than a thing one has first learned to despise. He recognizes that the builders who praised the Heart may have loved their work. Their pride does not justify the deaths around it, but breaking that justification need not require pretending they never made anything worthy of care."
+      ],
+      "deed_b": [
+        "Personally defeat twelve eligible hostile mobs with direct melee attacks outside trials. Your own close-range victories count; a pet's work, environmental accidents, and arena farming do not replace the deed. Keep your armor, heal, retreat, and rest when needed. There is no timer requiring reckless accumulation of enemies. The challenge is substantial personal action, not a demand to bleed a particular amount or destroy something another player built.",
+        "In the story, each victory answers the Heart's insistence that only further payment can end a danger. You will break that claim instead of feeding it. Malgrath is tempted to praise the violence alone. You remind him that Dravak already knows the difficult discipline of combat, and that a body count does not explain why a wall should come down. The Worldbreaker's distinct task is to recognize which supposedly eternal demand has become a machine for consuming those around it. Your deed confronts that demand without appointing another unwilling person to pay."
+      ],
+      "reckoning_a": [
+        "After Willing Tribute, successfully shield-block ten attacks from eligible hostile mobs outside trials. The ingot has been given and will not be demanded again. Ruinous Grasp is proven; these blocks prove Ashen Tribute. There is no deadline or requirement to take damage. Giving up a valuable resource did not buy permission to disregard what happens next, and it did not purchase a more expensive version of the other branch's reckoning.",
+        "Malgrath recalls a worker who kept a damaged bowl after the gate fell. He offered to shatter it cleanly. She asked him to hold it steady while she mended the rim. He had thought every crack awaited his verdict. Her request left him with a simpler, more uncomfortable duty: protect a thing whose continued use someone else had chosen. Your shield puts that duty beside sacrifice. Ruin should open a possibility; it should not become an appetite that invents reasons to consume every surviving object in the room."
+      ],
+      "reckoning_b": [
+        "After Broken Claim, successfully shield-block ten attacks from eligible hostile mobs outside trials. Ruinous Grasp has the same proof it would have earned through Tribute. These blocks prove Ashen Tribute without adding an ingot cost later. They need not come from ten different enemies, but they must stop hostile damage. You are not being asked to reproduce the old gate's failure or to protect an untracked story character.",
+        "The remembered Heart is broken. Malgrath notices that his first impulse is to call the empty space a victory and depart. Yet someone must decide what may pass through the opening and what still needs shelter. He does not ask you to reconstruct the gate, nor claim that repair can reverse the Sundering. He watches you defend yourself after the act of rupture. It is a modest lesson for a god named Worldbreaker: the ability to end a structure does not contain every skill needed by the people who live after its ending."
+      ],
+      "trial": [
+        "Begin and win a fresh Trial of Ruin after the reckoning, using Malgrath's statue. Its phases and hostile waves are the established trial, not a collapsing arena or a test of how much equipment you can lose. Follow the actual displayed rules. There is no extra story healing restriction and no requirement to possess Worldbreaker before entering the trial that proves it. An earlier victory cannot replace this attempt.",
+        "Malgrath will offer pressure, not an undisclosed bargain. A failed attempt can be retried without paying another ingot or repeating completed deeds. On a fresh victory, Worldbreaker has its proof; return to the physical statue to claim your chosen ending and permanent Ruinbrand specialization. The blessing's own activation cost, when you later equip and use it, is separate from this story's conditions. The tale never silently charges health to demonstrate that its god is serious. Deliberate risk begins with knowing which risk one has accepted."
+      ],
+      "ending_a": [
+        "Malgrath receives the surrendered Heart as a responsibility, not proof that he may keep asking. He names the ingot you freely gave and the possibilities it represented. He does not multiply its worth by claiming an unseen crowd was saved through your inventory. In the remembered story, the fastening is taken out of service and the survivors cease being billed for its preservation. Some want it displayed. Others would rather never see it again. The god permits their disagreement to outlast his dramatic gesture.",
+        "Willing Tribute permanently increases Ruinbrand's stored direct-damage cap by twenty percent when the blessing is equipped and used. It does not increase the storage fraction, extend its duration, widen the blast, add targets, or allow detonations to feed one another. Both paths have earned all five proofs. Malgrath holds the mended bowl without offering to improve its symmetry. He has learned a price that stops when paid, and a form of strength that can leave another person's careful repair alone."
+      ],
+      "ending_b": [
+        "The Heart breaks in the telling with less noise than Malgrath expected. No mountain falls and no realm becomes a lesson written over someone else's home. The demand attached to it simply has no intact place to hide. You met your chosen danger, defended yourself afterward, and returned from the trial. The god records that you paid no ingot and owed none. Refusing a particular sacrifice did not turn your fulfilled covenant into an unpaid debt.",
+        "Broken Claim permanently shortens Ruinbrand's cooldown by ten percent when equipped and used. Its stored-damage fraction and cap, duration, radius, target limits, and prohibition on detonation chains remain unchanged. Your five blessing proofs are equivalent to Willing Tribute's. Malgrath does not declare sacrifice foolish; he has accepted one difficult resolution that did not use it. When he next says, 'Show me what you are willing to lose,' he leaves room for the answer that he himself may have to relinquish a claim. That is a ruin worthy of the name."
+      ]
+    },
+    "dialogue": {
+      "call": "Begin at contact. The covenant is an offering, a firelight witness, one chosen deed, ten shield blocks, and a fresh trial. The Heart is a story, not a hidden item. Nothing is taken for listening.",
+      "witness": "Ruinbrand is proven. Observe nearby firelight for fifteen continuous seconds from a safe position to prove Sacrificial Might. Do not stand in the flames.",
+      "testimony": "Choose one explicit netherite-ingot donation or twelve personal melee victories. Both prove Ruinous Grasp. Preview the permanent specialization before choosing.",
+      "deed_a": "Use the story donation at my statue to surrender one netherite ingot. Confirmation alone takes nothing; no tool, armor, health, or unrelated item is the price.",
+      "deed_b": "Twelve direct melee victories against hostile mobs will break the claim. No timer, healing ban, or inventory sacrifice binds this deed.",
+      "reckoning_a": "Ruinous Grasp is proven. Your gift is paid. Ten successful hostile shield blocks prove Ashen Tribute; no second ingot will be asked.",
+      "reckoning_b": "Ruinous Grasp is proven. Now stop ten hostile attacks with a shield to prove Ashen Tribute. Breaking a claim does not make everything else disposable.",
+      "trial": "Ashen Tribute is proven. Win a fresh Trial of Ruin to prove Worldbreaker, then return to my statue. Failure does not reopen a paid sacrifice.",
+      "ending_a": "Willing Tribute is complete. Claim twenty percent more stored direct-damage capacity for Ruinbrand. The price is paid; the debt does not grow.",
+      "ending_b": "Broken Claim is complete. Claim a ten percent shorter Ruinbrand cooldown. Your choice left no hidden payment and no missing blessing proof."
+    }
+  }
+}

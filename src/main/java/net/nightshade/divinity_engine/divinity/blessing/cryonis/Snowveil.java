@@ -1,94 +1,80 @@
 package net.nightshade.divinity_engine.divinity.blessing.cryonis;
 
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
-import java.awt.*;
+import java.awt.Color;
+import java.util.Map;
+import java.util.WeakHashMap;
 
-/**
- * A blessing that provides invisibility abilities in cold or rainy conditions.
- * The blessing allows players to become invisible by crouching when in appropriate weather conditions.
- */
 public class Snowveil extends Blessings {
-    /**
-     * Creates a new Snowveil blessing.
-     *
-     * @param neededFavor Amount of favor required to activate this blessing
-     * @param cooldown    Cooldown period between activations in seconds
-     * @param isPassive    Whether this blessing starts active
-     * @param canToggle   Whether this blessing can be toggled on/off
-     * @param textColor   Color used for blessing text in UI
-     */
-    public Snowveil(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
-        super(neededFavor, cooldown, isPassive, isActive, canToggle, textColor);
+    private static final int REFRESH_TICKS = 6;
+    // Remember the actual effect object so another source's invisibility is never removed.
+    private static final Map<LivingEntity, MobEffectInstance> OWNED = new WeakHashMap<>();
+    private static final Map<LivingEntity, Integer> REVEALED_UNTIL = new WeakHashMap<>();
+
+    public Snowveil(int favor, int cooldown, boolean passive, boolean active, boolean toggle, Color color) {
+        super(favor, cooldown, passive, active, toggle, color);
     }
 
-    /**
-     * Called when the blessed entity takes damage.
-     * Removes invisibility effect if the entity has it.
-     *
-     * @param instance The blessing instance
-     * @param event    The damage event
-     * @return True if the event was handled
-     */
     @Override
     public boolean onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
-        if (event.getEntity().hasEffect(MobEffects.INVISIBILITY) || !(event.getEntity() instanceof Player && ((Player) event.getEntity()).isSpectator()))
-            event.getEntity().setInvisible(false);
-        return super.onTakenDamage(instance, event);
+        if (!event.isCanceled() && event.getAmount() > 0) reveal(event.getEntity());
+        return false;
     }
 
-    /**
-     * Called when the blessed entity deals damage.
-     * Removes invisibility effect if the entity has it.
-     *
-     * @param instance The blessing instance
-     * @param player   The entity dealing damage
-     * @param event    The hurt event
-     * @return True if the event was handled
-     */
     @Override
-    public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
-        if (player.hasEffect(MobEffects.INVISIBILITY) || !(player instanceof Player && ((Player) player).isSpectator()))
-            player.setInvisible(false);
-        return super.onDamageEntity(instance, player, event);
+    public boolean onDamageEntity(BlessingsInstance instance, LivingEntity living, LivingHurtEvent event) {
+        if (!event.isCanceled() && event.getAmount() > 0) reveal(living);
+        return false;
     }
 
-    /**
-     * Called every tick while the blessing is active.
-     * Manages invisibility based on weather conditions and player crouching state.
-     *
-     * @param instance The blessing instance
-     * @param living   The affected living entity
-     * @return True if the tick was handled
-     */
+    private static void reveal(LivingEntity living) {
+        if (living.level().isClientSide) return;
+        REVEALED_UNTIL.put(living, living.tickCount + 40);
+        removeOwned(living);
+    }
+
+    private static void removeOwned(LivingEntity living) {
+        var owned = OWNED.remove(living);
+        var current = living.getEffect(MobEffects.INVISIBILITY);
+        if (owned != null && current == owned && current.getDuration() <= REFRESH_TICKS
+                && current.getAmplifier() == 0 && !current.isVisible() && !current.showIcon())
+            living.removeEffect(MobEffects.INVISIBILITY);
+    }
+
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
-        Level world = living.level();
-        System.out.println(world.getBiome(BlockPos.containing(living.getX(), living.getY(), living.getZ())).value().getBaseTemperature()*100);
-        if (world.isRaining() || world.getBiome(BlockPos.containing(living.getX(), living.getY(), living.getZ())).value().getBaseTemperature()*100 < 0) {
-            if (living instanceof Player player){
-                if (player.hasEffect(MobEffects.INVISIBILITY) || !(player instanceof Player && ((Player) player).isSpectator())) {
-                    if (player.isShiftKeyDown()) {
-                        living.setInvisible(true);
-                    }else {
-                        living.setInvisible(false);
-                    }
-                }
-            }
-        }else {
-            if (living.hasEffect(MobEffects.INVISIBILITY) || !(living instanceof Player && ((Player) living).isSpectator()))
-                living.setInvisible(false);
+        if (living.level().isClientSide) return false;
+        var pos = living.blockPosition();
+        var world = living.level();
+        boolean snow = world.getBiome(pos).value().coldEnoughToSnow(pos)
+                || world.getBlockState(pos).is(Blocks.SNOW) || world.getBlockState(pos).is(Blocks.POWDER_SNOW)
+                || world.getBlockState(pos.below()).is(Blocks.SNOW_BLOCK)
+                || world.getBlockState(pos.below()).is(Blocks.SNOW);
+        if (living.swinging) reveal(living);
+        if (!snow || living.isSpectator() || !BlessingSpecializations.isEligible(living, instance)
+                || living.tickCount < REVEALED_UNTIL.getOrDefault(living, 0)) {
+            removeOwned(living);
+            return false;
         }
-        return super.onTick(instance, living);
+        var existing = living.getEffect(MobEffects.INVISIBILITY);
+        if (existing == null || existing == OWNED.get(living) && existing.getDuration() <= REFRESH_TICKS) {
+            boolean entering = existing == null;
+            living.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, REFRESH_TICKS, 0, false, false, false));
+            OWNED.put(living, living.getEffect(MobEffects.INVISIBILITY));
+            if (entering) BlessingVisuals.at(instance, living, living.position().add(0, living.getBbHeight() * .45, 0),
+                    BlessingVisuals.Cue.CAST, .65);
+        }
+        // Without refresh, only our six-tick effect expires when the blessing is unequipped.
+        return false;
     }
 }

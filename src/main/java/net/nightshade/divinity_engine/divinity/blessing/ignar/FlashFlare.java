@@ -3,12 +3,12 @@ package net.nightshade.divinity_engine.divinity.blessing.ignar;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.server.level.ServerLevel;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
@@ -50,23 +50,14 @@ public class FlashFlare extends Blessings {
             if (target != living && !target.isDeadOrDying()) {
                 target.hurt(level.damageSources().generic(), 8.0F);
                 target.setSecondsOnFire(4);
-                target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0));
+                if (target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0))) {
+                    BlessingVisuals.at(instance, living, target.getEyePosition(), Cue.CONTROL,
+                            Math.max(0.5, target.getBbWidth()));
+                }
             }
         }
 
-        if (level instanceof ServerLevel serverLevel) {
-            double x = living.getX();
-            double y = living.getY();
-            double z = living.getZ();
-
-            for (int i = 0; i < 50; i++) {
-                double offsetX = living.getRandom().nextGaussian() * 3.0D;
-                double offsetY = living.getRandom().nextGaussian() * 3.0D;
-                double offsetZ = living.getRandom().nextGaussian() * 3.0D;
-                serverLevel.sendParticles(ParticleTypes.FLAME, x + offsetX, y + offsetY, z + offsetZ, 1, 0, 0, 0, 0.1);
-            }
-            serverLevel.sendParticles(ParticleTypes.FLASH, x, y, z, 10, 0.5, 0.5, 0.5, 0.1);
-        }
+        BlessingVisuals.at(instance, living, living.position(), Cue.CAST, 5.0);
 
         return true;
     }

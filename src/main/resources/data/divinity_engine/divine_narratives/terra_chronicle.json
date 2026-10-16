@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:terra",
+  "premise": "Roots Remember begins with a gardener who mistook keeping something alive for allowing it to live. Terra once worked beside Vokar as naturally as roots work beside fallen leaves. The First Concord protected mortal life from oblivion; after its Sundering, their shared seasons became a ledger of emergencies. She sheltered Varun's fleeing pack and concealed a dying grove from her oldest friend. Now she asks for care that neither abandons the vulnerable nor makes their dependence into a monument to its keeper.",
+  "offering_examples": ["minecraft:azalea", "minecraft:moss_block", "minecraft:oak_sapling"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "forest", "target": 240, "deed": "Observe a forest biome for 12 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:breed", "condition": "", "target": 2, "deed": "Breed two animals"},
+  "passages": {
+    "call": [
+      "Terra notices the soil beneath your nails before she notices your gift. An azalea, moss block, or sapling is welcome here, but she will not pretend that giving a tree away is the same as tending one. Make an ordinary accepted offering. She speaks of the First Concord while it rests before her: a promise that mortal lives would not vanish into oblivion without even the dignity of having happened. It was protection, not a bargain for obedient worship.",
+      "When the Concord sundered, Terra kept saying that spring would settle every debt. There were refugees beneath her branches, Varun's pack among them, and no season convenient for admitting weakness. She learned to call postponement patience. Before she tells you what that cost, she asks you to look at an ordinary forest. You need not discover the grove in her story. The living world already contains the evidence she would rather have overlooked."
+    ],
+    "witness": [
+      "Observe a forest biome for twelve continuous seconds. Let trunks interrupt your view; notice that a healthy woodland does not present every life to the same light. Terra once counted green crowns from above and reported that her grove was recovering. Under those crowns, roots were tightening around failing wood. She could produce another leaf more easily than she could admit that its branch had become a burden. An impressive canopy made an excellent excuse not to kneel.",
+      "Her account changes when you return. She remembers a refugee mending a strap with bark fiber and asking whether the trees hurt. Terra answered that trees were patient. That was not an answer to the question. The forest you watched is no tribunal, and it offers no miraculous verdict. It merely makes her old method of counting inadequate. What remains standing cannot tell the whole story of what it costs to keep standing."
+    ],
+    "testimony": [
+      "Terra withheld the dying grove from Vokar. She feared that naming its decline would give death permission to enter, though death had never needed her permission. She also feared losing the shelter she had promised Varun's pack. Those fears were real; the claim that concealment was her only possible kindness was a story she told herself. Vokar discovered the loss and preserved the names associated with the grove instead of punishing her. She had prepared an argument against cruelty and found herself unable to answer gentleness.",
+      "Choose Renewal or Guardianship, then confirm the permanent path you mean to keep. Renewal asks for twelve saplings planted at distinct positions: beginnings that cannot be commanded to resemble their predecessors. Guardianship asks for sixteen mature crops harvested: care measured by readiness rather than possession. Neither choice acquits Terra, and neither requires you to consult Vokar. She owes you her own testimony. Your task is to choose how your hands will answer it, not to conduct a trial of every god she knows."
+    ],
+    "deed_a": [
+      "Plant 12 saplings at distinct positions. Terra calls your path Renewal, but cautions against arranging the young trees as an apology shaped for her comfort. They are not substitutes for the grove she lost. The old place had its own shade, its own awkward roots, its own people who knew where rain gathered. New growth can be good without making those particulars unnecessary. Let each position signify room for a future that has not promised to forgive the past.",
+      "She remembers showing Vokar a first spring shoot long before the Sundering. He had asked which fallen trunk had fed it, and she had laughed because she knew the answer. Their friendship did not begin in opposition. Only later did she start hearing every question about an ending as a threat against a beginning. Your planting gives her something harder than reassurance: evidence that she once understood what she now struggles to practice."
+    ],
+    "deed_b": [
+      "Harvest 16 mature crops. Guardianship is not the refusal to let anything leave your keeping. A field maintained forever at the edge of ripeness would feed nobody, however lovingly its keeper described the work. Terra asks you to gather what is ready, not because hunger is an elegant symbol, but because the refugees beneath her trees had stomachs. Some disliked her shelter. Some wanted roads rather than roots. Their gratitude did not cancel their right to leave.",
+      "She confesses another small shame: when Varun led the pack onward, she called their departure a wound. She did not say it to the youngest, but she let the adults carry it. A guardian can make safety expensive without ever demanding payment. Your harvest answers that habit. What you have tended can become nourishment rather than proof that you are needed. The season's success belongs also to those who take its gifts elsewhere."
+    ],
+    "reckoning_a": [
+      "Breed two animals. After planting, Terra asks you to attend to lives that move away from the place where care began. A sapling cannot follow a hungry parent or refuse a hand. Animals make the limits of a gardener's authority harder to forget. The deed is modest because this is not a contest to multiply dependence. New life brings needs before it brings any flattering sign that its keeper has done well.",
+      "Terra speaks the grove's name without calling it sleeping. That correction cannot rescue it. She lets the sentence remain without adding a prophecy of return. In the pause, Renewal acquires its sharper meaning: you may begin something worthy while a previous failure remains a failure. She will no longer ask every young leaf to testify that she was right. It is enough, and demanding enough, that the leaf has somewhere to grow."
+    ],
+    "reckoning_b": [
+      "Breed two animals. Having gathered a mature field, you now take responsibility for a beginning whose needs will not arrive according to the harvest calendar. Terra wants Guardianship to include the inconvenient life, the mouth that opens before the storehouse is full. This small deed refuses the fantasy that good care eventually becomes effortless. Neither the animals nor their young are offerings; tending life is the work, not spending it to persuade a god.",
+      "She recalls how Vokar listened when she finally admitted that she had kept the dying grove from him. He did not promise that another keeper would have saved it. He asked why she had decided no one else could share the burden. Terra still cannot answer without embarrassment. Your choice does not make you her replacement. It teaches her to recognize a guardian who can accept help without turning that help into another form of ownership."
+    ],
+    "trial": [
+      "Complete a fresh trial of Terra after the reckoning. The trial is the familiar divine challenge, not a journey to a hidden remnant of the grove. Terra will not disguise a historical rescue as something you can still accomplish. What has died is not waiting offstage for a sufficiently skillful worshipper. Your present courage matters because the present contains lives of its own, not because it can purchase an amended past.",
+      "If an attempt fails, she asks you to try again without repeating the story's completed care. She once made every setback into evidence that she must grip harder. Now she practices leaving room for another attempt. Enter with Renewal or Guardianship already chosen. Return afterward for her answer; victory alone cannot finish a conversation whose hardest part is allowing another person to speak without knowing whether the words will comfort you."
+    ],
+    "ending_a": [
+      "At your return, Terra describes the grove as gone and the lives it sheltered as having mattered. Neither clause devours the other. She will remember Vokar's refusal to punish her, but she will stop using his mercy as evidence that no wrong occurred. The names he preserved are not seeds she may demand to sprout. They are the particular dead, owed a place in speech even when the living have urgent work elsewhere.",
+      "Your Renewal remains the choice you confirmed. Twelve beginnings have taken root; their future is not a performance of Terra's innocence. She imagines one growing crooked, another shading an unwanted weed, another becoming useful in a way she would never have designed. For once the uncertainty pleases her. She offers no promise that you will never lose what you tend. Instead she promises to hear the loss named, and not immediately cover it with the word spring."
+    ],
+    "ending_b": [
+      "Terra greets you with thanks rather than a claim. Guardianship has taught her to distinguish the person who returns freely from the person who has been made afraid to leave. The harvest was gathered at maturity, and the later breeding deed brought fresh need into the world. Neither event ended the work. Together they show care as a practice with changing duties, not a title that entitles its bearer to every decision.",
+      "She will not tell the story of the dying grove as a necessary sacrifice that nobody could question. She sheltered lives there, and she withheld the truth there; both statements belong in the telling. When she speaks of Vokar, she calls him her old friend rather than the enemy she expected. There is grief still between the seasons, but no requirement that grief become suspicion. Your place beside her is that of a trusted keeper, with room to disagree and room to go."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring a living gift. Then look beneath the canopy with me.",
+    "witness": "A green crown can hide an exhausted root.",
+    "testimony": "I concealed the dying grove. Choose Renewal or Guardianship, not an excuse for me.",
+    "deed_a": "Plant twelve distinct beginnings. They need not resemble what I lost.",
+    "deed_b": "Gather sixteen mature crops. Care must learn when to release its gifts.",
+    "reckoning_a": "Tend two new animal lives without asking them to prove me innocent.",
+    "reckoning_b": "Make room for needs that arrive outside your careful calendar.",
+    "trial": "Face a fresh trial, then return. The past is not your rescue assignment.",
+    "ending_a": "Let the new roots grow without carrying the old grove's defense.",
+    "ending_b": "A keeper may accept help. A sheltered life may leave."
+  }
+}

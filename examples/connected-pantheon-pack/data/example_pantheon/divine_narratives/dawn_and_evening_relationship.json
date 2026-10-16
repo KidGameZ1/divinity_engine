@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "example_pantheon:dawn_and_evening",
+  "gods": [
+    "divinity_engine:solarius",
+    "example_pantheon:vesper"
+  ],
+  "stories": [
+    "divinity_engine:solarius",
+    "example_pantheon:first_star"
+  ],
+  "title": "Between Dawn and Evening",
+  "relation": "A difference in how guidance is offered",
+  "summary": "Solarius and Vesper ask how a warning can protect without pretending to know every road. Their conversation is optional and changes neither independent story.",
+  "epilogues": {
+    "aa": [
+      "Judgment and Shelter meet at an open door. Solarius will name a danger; Vesper will keep a place to recover. Neither calls a warning permission to own the traveler."
+    ],
+    "ab": [
+      "Judgment and Testimony compare the limits of their evidence. Solarius accepts that a clear verdict must not invent a missing witness; Vesper leaves the unknown road unfilled."
+    ],
+    "ba": [
+      "Sanctuary and Shelter offer two welcomes without making either exclusive. Bread and light sustain the traveler, but neither host demands allegiance as payment."
+    ],
+    "bb": [
+      "Sanctuary and Testimony refuse a comforting falsehood. Solarius offers care before agreement, while Vesper records uncertainty without using it as a reason to withhold help."
+    ]
+  }
+}

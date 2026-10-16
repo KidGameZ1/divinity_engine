@@ -6,6 +6,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MathHelper;
 
 import java.awt.*;
@@ -39,8 +41,16 @@ public class FatefulDraw extends Blessings {
             effects.add(MobEffects.DAMAGE_RESISTANCE);
 
         if (!effects.isEmpty()) {
-            if (!living.level().isClientSide)
-                living.addEffect(new MobEffectInstance(Objects.requireNonNull(MathHelper.pickRandom(effects)), 100, 1, false, false, true));
+            if (!living.level().isClientSide) {
+                MobEffect selected = Objects.requireNonNull(MathHelper.pickRandom(effects));
+                boolean applied = living.addEffect(new MobEffectInstance(selected, 100, 1, false, false, true));
+                if (applied && !living.isInvisible()) {
+                    Cue draw = selected == MobEffects.MOVEMENT_SPEED ? Cue.TRAIL
+                            : selected == MobEffects.DAMAGE_RESISTANCE ? Cue.WARD : Cue.IMPACT;
+                    BlessingVisuals.at(instance, living, draw == Cue.TRAIL ? living.position().add(0, 0.06, 0)
+                            : living.getBoundingBox().getCenter(), draw, 0.8);
+                }
+            }
             return true;
         }
 

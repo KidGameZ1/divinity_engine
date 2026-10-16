@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:vokar",
+  "premise": "The Last Farewell concerns a boundary that must protect without becoming a prison. Vokar helped the First Concord shelter mortal life from oblivion, not from every natural ending. After the Sundering, he preserved names that might otherwise have disappeared, including those of Terra's dying grove. His old friend had concealed that loss from him. He chose remembrance over punishment, yet his mercy did not settle how long a name should be carried, who may speak it, or when even a faithful keeper must open his hand.",
+  "offering_examples": ["minecraft:soul_sand", "minecraft:soul_soil", "minecraft:bone_block"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "underground", "target": 200, "deed": "Observe underground below Y=0 for 10 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:pray", "condition": "still", "target": 200, "deed": "Pray motionless at this shrine for 10 continuous seconds"},
+  "passages": {
+    "call": [
+      "Vokar receives an offering of soul sand, soul soil, or bone block without weighing your grief against its rarity. The gift begins a conversation; it is not a fee charged to anyone who has died. He asks whether you have ever avoided saying a name because someone nearby might begin to cry. Then he asks whether you have ever said one because you wanted to be seen remembering. His questions have no accusation in them, which makes them difficult to evade.",
+      "The First Concord stood between mortal life and oblivion. Death was not its secret enemy. An ending can leave consequences, love, debts, and a place at an absent person's table; oblivion would deny that there had ever been a person. When the Concord sundered, Vokar began carrying more than he could explain. Before he opens that burden to you, he asks you to spend a little time below the surface."
+    ],
+    "witness": [
+      "Observe underground below Y=0 for ten continuous seconds. No tomb or special cavern is required. Stone beneath the ordinary world is enough. Vokar wants you to notice how quickly the absence of a horizon becomes the feeling that you have been forgotten. Yet the earth above continues to hold footsteps, kitchens, quarrels, gardens. Being out of sight and having never existed are different things. His work begins where frightened people confuse them.",
+      "He tells you of Terra describing a dying grove as dormant. She offered details about its buds while omitting the people who had already said farewell beneath it. He recognized the omission before he understood her fear. His first impulse was to correct her in the language of offices and duties. He did not. He listened until he could hear both the gardener trying to help and the friend too ashamed to ask for help herself."
+    ],
+    "testimony": [
+      "Terra withheld the grove from him. Vokar states it plainly, without letting her good intentions turn concealment into honesty. He preserved its names instead of punishing her. Later he entrusted names to Lumen, because one keeper's endurance is not a sufficient safeguard against oblivion. He will not give you a list to collect or send you to another shrine. These are people in his account, not missing objects required to unlock your progress.",
+      "Choose Release or Remembrance, and confirm the permanent answer you wish to practice. Release means defeating eight undead at night, confronting unrest without calling all darkness evil. Remembrance means contributing eight soul sand, setting aside material for witness rather than treating the past as disposable ground. Vokar admits a private danger in each path. Release can become a convenient command to stop grieving. Remembrance can make the living feel guilty for having another day. He asks you to bear the responsibility of your choice, not to pretend it has none."
+    ],
+    "deed_a": [
+      "Defeat eight undead at night. Vokar calls this deed Release, but refuses the pleasing fiction that every foe you face is a named resident of Terra's grove. You are not reenacting a tragedy or completing a collection of souls. You are answering the unrest before you. The distinction matters: people become easy to misuse when every stranger can be recruited into a story that serves the teller's pride.",
+      "As you work, he considers the cruelty sometimes hidden inside the phrase they would want us to move on. The dead cannot interrupt to correct it. Neither can they forbid all happiness forever. Vokar offers no universal message spoken on their behalf. He asks for a humbler practice: end a present threat, keep the particular loss particular, and allow the living enough room to discover desires that nobody who died could have predicted."
+    ],
+    "deed_b": [
+      "Contribute eight soul sand through the story's donation. Remembrance does not require you to make additional ordinary offerings or surrender anything said to contain a named soul. Vokar accepts the material as a deliberate allocation of effort. What a community remembers depends partly on what it is willing to stop doing long enough to attend. Eight portions are finite. The boundary is part of the lesson, not an invitation to buy greater virtue with a ninth.",
+      "He remembers Terra asking whether he would preserve the grove's names even if she never apologized correctly. He answered yes. That answer did not mean her account was sufficient, nor that the dead belonged to him. He fears becoming the sort of keeper who confuses faithful custody with authorship. When names passed into Lumen's care, he had to accept that another voice might remember a detail he had considered unimportant."
+    ],
+    "reckoning_a": [
+      "Pray motionless at this shrine for ten continuous seconds. You have acted against unrest; now remain without fixing anything. Vokar wants Release to include the courage of not hurrying a silence. There is no voice hidden inside the pause that you must hear correctly. If your attention wanders, it does not reveal a moral defect. The deed asks for stillness, not the performance of perfect sorrow before a watching god.",
+      "He admits that preserving names felt safer than asking the living how they wished to be remembered. A record cannot disagree as vigorously as a person. He can protect the dead from erasure while still learning restraint from those who remain. Your pause gives his admission room. It is not forgiveness issued on Terra's behalf, and it is not permission to discard her grove. It is a refusal to make every unfinished feeling into another captive."
+    ],
+    "reckoning_b": [
+      "Pray motionless at this shrine for ten continuous seconds. After the measured donation, bring a moment that cannot be stacked or stored. Vokar asks you to consider an ordinary detail about someone absent: an irritating habit, a favorite tool, a joke that never improved. You need not tell him what you thought. He wants Remembrance to leave something outside the keeper's authority, because a life is more than the solemn account preserved of it.",
+      "His own stillness is less comfortable. He once believed that if a name remained exact, his obligation had been fulfilled. Lumen's keeping showed him that a name can also become a burden when spoken without care for its listeners. This is Vokar's understanding, not a command from Lumen that you must verify. He has enough authority to assign a task; he must also have enough honesty to describe the limits of what that task can teach."
+    ],
+    "trial": [
+      "Undertake and complete a fresh trial of Vokar after your reckoning. He will not ask you to seek your own death as evidence of devotion, and he does not call failure an appointment kept with him. The existing trial tests your chosen resolve in the present. It is not an entrance to the concealed grove, nor a means of recovering the people whose names entered his care.",
+      "Before you begin, Vokar recalls a day when Terra mocked him for taking too long to say goodbye to a season. He lets himself smile at the memory. Their friendship contains more than its worst disagreement, although the disagreement must remain in it. Bring that distinction into the challenge. If you fail, the completed deeds remain part of your story and another attempt is possible. After success, return for the farewell he has not yet found words to give."
+    ],
+    "ending_a": [
+      "Vokar does not announce that every restless thing has been quieted. You completed a particular deed, a reckoning, and a fresh trial; you did not abolish grief. Release is valuable precisely because it can be practiced without claiming that impossible victory. He tells you that the grove's names remain preserved, while Terra is no longer required to make every future garden into an argument over whether she deserved his mercy.",
+      "The old friend's deception remains wrong. The old friend remains more than the deception. Vokar can hold those statements together without making your permanent path a sentence passed on her. He thanks you for showing that a boundary may open rather than merely exclude. When he falls quiet, it is not because he has forgotten what to say. He is leaving a space where your own living voice can continue, unassigned to his service and unashamed of the next day."
+    ],
+    "ending_b": [
+      "Your Remembrance does not become a command to recite names until all other speech is exhausted. Vokar has learned to value the pause beside the record. He speaks of the grove, then of the care Terra gave before fear narrowed it, then of the concealment itself. He will not preserve only the flattering portion of a life, or only the portion that makes an accusation easiest. Faithful keeping requires more patience than either simplification.",
+      "He still entrusts names to Lumen. Sharing their care no longer feels like admitting that his own hands have failed. Your gift and stillness have shown him a finite keeper choosing a task without pretending to contain the whole past. There will be things neither of you can recover. He will name those absences honestly instead of filling them with convenient certainty. The last farewell is not the last time someone may be loved, and remembrance need not forbid another beginning."
+    ]
+  },
+  "dialogue": {
+    "call": "An offering opens the conversation. No dead person owes its price.",
+    "witness": "Out of sight is not the same as erased.",
+    "testimony": "Choose Release or Remembrance. Both require more care than certainty.",
+    "deed_a": "End eight undead threats at night; do not invent names for your enemies.",
+    "deed_b": "Give eight soul sand to remembrance, not to ownership of the dead.",
+    "reckoning_a": "Remain still. Not every silence asks to be ended.",
+    "reckoning_b": "Keep one quiet moment that no archive can possess.",
+    "trial": "Complete a fresh trial. Failure is not a debt owed to death.",
+    "ending_a": "A farewell may leave room without erasing who stood there.",
+    "ending_b": "Remember faithfully, and let the living have another day."
+  }
+}

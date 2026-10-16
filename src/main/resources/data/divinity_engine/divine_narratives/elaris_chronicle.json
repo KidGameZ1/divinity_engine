@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:elaris",
+  "premise": "Two Roads to Wisdom opens with a keeper of evidence who once decided the truth was too dangerous for its witnesses. Elaris concealed proof that Nashara, a former confidant, had forged a retreat order during the First Concord's Sundering. The forgery helped save refugees from oblivion, while leaving defenders to bear costs under false authority. Elaris also disputes Kairoth's incomplete chronology. Asking another god to account for missing testimony becomes more difficult when one's own archive contains a deliberate absence.",
+  "offering_examples": ["minecraft:book", "minecraft:written_book", "minecraft:enchanted_golden_apple"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "water", "target": 200, "deed": "Remain underwater, observing your surroundings, for 10 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:donation", "condition": "", "target": 3, "item": "minecraft:paper", "deed": "Contribute three paper"},
+  "passages": {
+    "call": [
+      "Elaris accepts a book, a written book, or an enchanted golden apple. An ordinary book is sufficient; the invitation is not a contest in rare gifts. The shrine's first lesson is a correction to its own dignity: a record can be meticulously preserved and still mislead everyone who reads it. What is absent may determine what every surviving sentence appears to mean.",
+      "The First Concord protected mortal life from oblivion, including the fragile continuity by which one generation could teach another. When it sundered, Elaris feared that exposing divisions among the gods would turn surviving households against one another. Fear became a reason to keep Nashara's forgery out of the account. Before defending or condemning that choice, observe your surroundings underwater for ten continuous seconds. No sacred spring is required. Begin beneath a surface that can offer a faithful image without showing everything below it."
+    ],
+    "witness": [
+      "Remain underwater for ten uninterrupted seconds, with enough air to return safely. Elaris asks you to observe from below the surface rather than merely looking at it from shore, not to retrieve an object from the bottom. The witness requires no drowning, special depth, or sunken structure. A reflection may be accurate at its angle and still omit what a person standing elsewhere would see.",
+      "At the shrine, Elaris recalls arranging the accounts of the retreat by the time each message was received. The order looked authoritative: one event followed another cleanly across the page. Yet a message delayed by danger arrived after a decision it had helped cause. Reception was not occurrence. That first discrepancy was an honest limitation. Concealing the evidence of Nashara's forgery was not. Elaris distinguishes them before asking you to trust anything else: archives contain accidents, but not every gap can honestly be blamed on one."
+    ],
+    "testimony": [
+      "Nashara forged the retreat order to save refugees. Dravak held the line under its false authority; Varun evacuated his pack; Nythea hid refugees in dreams and could not return all she sheltered. Elaris concealed proof of the forgery, partly to protect frightened survivors from retaliation and partly to protect a former confidant. Neither motive makes the record complete. The defenders' ignorance was a consequence, not a blank page without an owner.",
+      "Elaris disputes Kairoth's missing chronology while acknowledging this compromised position. His withheld prevention would have erased innocent lives; the dispute does not prove a safer alternative existed. Choose permanently between Study, contributing three enchanted books, and Experience, gaining 100 experience points. Study preserves knowledge for scrutiny; Experience tests whether a coherent explanation fits lived events. Both paths must resist the temptation to make one kind of evidence sovereign over every person who questions it."
+    ],
+    "deed_a": [
+      "Contribute three enchanted books through the story donation. This is the existing Study deed, separate from an ordinary shrine offering and its favor rules. The books are not newly discovered copies of the forged order. You need not find a particular enchantment containing a secret confession. Their value here is the deliberate choice to make a resource available rather than keeping every useful page for yourself.",
+      "Elaris remembers an archivist asking why a gap had no note. The reply was that noting the absence would invite speculation. It did, of course, invite speculation when discovered later, now joined by a justified suspicion of the keeper. A protected identity can be omitted while the omission itself is acknowledged. Elaris had acted as though those were inseparable. Your Study asks for records that distinguish an unknown fact from a withheld fact, and distinguish both from a claim the writer simply hopes will be believed."
+    ],
+    "deed_b": [
+      "Gain 100 experience points. The existing Experience deed counts newly gained experience, not levels you must surrender and not a request to die for an instructive loss. Learn through the ordinary activities available to you. Elaris refuses to prescribe one dramatic danger merely because a dramatic anecdote would be easier to remember than patient work.",
+      "A survivor once described receiving a retreat instruction after the route had already opened. Elaris initially dismissed the account because its sequence contradicted the archived messages. The person had remembered what reached the household, not what reached the command post. Both sequences could be real. That did not make every recollection accurate; it made location part of the evidence. Your lived progress asks Elaris to stop treating a witness as a flawed copy of the official account. A record should help a testimony be examined, not decide in advance which parts of a life were allowed to happen."
+    ],
+    "reckoning_a": [
+      "Contribute three paper through the story donation. After the enchanted books, these unremarkable sheets represent a different obligation: making room for qualifications rather than merely acquiring impressive statements. They are ordinary paper, not a new document item, and you do not need to write prescribed words into a book. The act is small; the distinction it asks Elaris to maintain is not.",
+      "Elaris describes three headings an honest account could have carried: what is established, what a witness believes, and what has been deliberately withheld. Nashara's authorship belongs under the first. Elaris's fear that disclosure would cause reprisals belongs under the second unless supported by further evidence. Concealed proof belongs under the third, even when there is a defensible reason not to reveal a vulnerable person's identity. Study is not finished when a collection becomes large. It must also teach its readers where the collection's authority stops."
+    ],
+    "reckoning_b": [
+      "Contribute three paper through the story donation. Experience can teach powerfully and still die with the person who learned it. These ordinary sheets acknowledge the need to preserve something for someone who was not there. No written-book puzzle follows, and there is no demand to collect a survivor's testimony from another shrine. Elaris's own testimony is sufficient to make the present obligation clear.",
+      "The three imagined headings are established fact, personal interpretation, and deliberate omission. Your experience does not exempt you from separating them. Elaris has heard gods say that only those who endured the Sundering can judge it. That would leave every later generation subject to decisions it could never question. A living witness deserves attention, not an exclusive right to conclusions. Set down enough of an account that another person could disagree intelligently. Knowledge passed onward should not require the reader to borrow the author's loyalty along with the author's eyes."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Knowledge after this reckoning. The existing trial tests your conduct under its actual demands, not whether you can recite a preferred version of the Sundering. Neither Study nor Experience gives you an exemption. A stored victory from before these questions were asked cannot finish this chapter, but a failed new attempt can be retried.",
+      "Before the trial, Elaris revisits the dispute with Kairoth. Concealing Nashara's proof does not make every criticism of his chronology false. It does make Elaris responsible for applying the same standards inward. Otherwise the archive would become a weapon used only against less favored witnesses. Carry that obligation through the trial: preparation can be revised by events, and events can be understood better through preparation. Return here after victory. There is no need to compel a confession from Nashara or obtain a missing hour from the god of time."
+    ],
+    "ending_a": [
+      "Elaris gives the concealed proof its proper description: evidence withheld by a choice, not evidence history happened to lose. Study has not made unlimited disclosure an automatic virtue. Refugees can still deserve privacy. But protecting their identities does not require declaring a forged command authentic, and preserving an old confidant's reputation is not the same duty as protecting a frightened household.",
+      "Foresight permits four dodges per cycle instead of three, the established Study specialization. The additional allowance is not perfect knowledge. Elaris keeps the dispute with Kairoth open without pretending the missing chronology certifies a painless prevention. In the account of Nashara, the rescue and the deception stand together, neither hidden in the other's footnote. You are not asked to carry a document to another shrine. The change is in what this keeper will say to the next listener, including the plain admission that a trustworthy archive must disclose where its keeper chose silence."
+    ],
+    "ending_b": [
+      "Elaris retells the survivor's account without first forcing it into the order of the command messages. Experience has restored a distinction: people inhabit events before an archive arranges them. Their disagreement with a record may expose an error, a different vantage, or a false recollection. Determining which requires inquiry, not reverence for the oldest page or the loudest witness.",
+      "Foresight begins a sixteen-second cooldown instead of twenty seconds, exactly the Experience specialization. It does not make every instinct correct. Elaris admits that protecting Nashara also protected the image of a wise keeper who could manage the consequences of truth alone. That image is harder to preserve now, and less useful. The First Concord defended mortal lives, not an archive's self-respect. If its history is worth keeping, then those who lived beneath divine decisions must remain more than examples selected to make those decisions sound inevitable. Your story ends with room for a reader who has not yet arrived."
+    ]
+  },
+  "dialogue": {
+    "call": "A preserved record may still conceal the fact that gives it meaning.",
+    "witness": "Observe underwater for ten continuous seconds, then surface safely. A reflection can be incomplete.",
+    "testimony": "Choose Study or Experience permanently. Neither may silence the other kind of witness.",
+    "deed_a": "Contribute three enchanted books. Preserve knowledge that can be questioned.",
+    "deed_b": "Gain 100 experience points. The world need not follow the archive's arrangement.",
+    "reckoning_a": "Contribute three paper. Separate fact, interpretation, and deliberate omission.",
+    "reckoning_b": "Contribute three paper. Leave an account someone else can question.",
+    "trial": "Win a fresh Trial of Knowledge, then return. Apply your standards to yourself.",
+    "ending_a": "Withheld is not the same as lost. I will stop confusing them.",
+    "ending_b": "A witness is a person, not an imperfect copy of my account."
+  }
+}

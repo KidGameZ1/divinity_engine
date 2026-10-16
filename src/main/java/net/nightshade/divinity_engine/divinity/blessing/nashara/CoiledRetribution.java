@@ -6,6 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -28,7 +30,11 @@ public class CoiledRetribution extends Blessings {
         if (event.getEntity().getHealth() <= event.getEntity().getMaxHealth()*0.5){
             if (event.getSource().getEntity() instanceof LivingEntity living){
                 event.setAmount(event.getAmount()*0.75f);
-                living.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, false, true));
+                boolean applied = living.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, false, true));
+                if (!event.getEntity().isInvisible()) BlessingVisuals.pulse(instance, event.getEntity(), Cue.WARD);
+                if (applied) {
+                    BlessingVisuals.at(instance, event.getEntity(), living.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
+                }
             }
         }
         return super.onTakenDamage(instance, event);

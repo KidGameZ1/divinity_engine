@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:dravak",
+  "premise": "The Meaning of Valor asks who is permitted to decide what courage costs. Dravak and Varun swore brotherhood before the First Concord's Sundering made every rescue a disputed account. The Concord had protected mortal life from oblivion. In its aftermath, Dravak held a line under an order forged by Nashara while Varun evacuated refugees. The rescue was real; the consent was not. His anger now threatens to make both obedience and defiance into habits when what he needs is the judgment to choose between them.",
+  "offering_examples": ["minecraft:iron_sword", "minecraft:bow", "minecraft:redstone_block"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "day_sky", "target": 200, "deed": "Observe the open daytime sky for 10 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:smelt", "condition": "", "target": 4, "deed": "Collect four iron ingots you have smelted from a furnace"},
+  "passages": {
+    "call": [
+      "Dravak accepts a weapon or redstone block without demanding that you brandish it first. An iron sword or bow is a suitable ordinary offering. He sets its meaning beside a less impressive object from memory: a cup a defender kept trying to put down somewhere level. Whenever the line shifted, the cup fell. Dravak remembers the irritation more sharply than the speeches made before the fighting. People facing death still dislike dirt in their water.",
+      "He helped uphold the First Concord because mortal life deserved protection from oblivion, not because battle made a noble spectacle. After the Sundering he held a threatened line while Varun, his sworn brother, led refugees away. He believed the order placed him inside a plan whose dangers had been honestly shared. Before he explains the forgery, he asks you to look at a sky that offers no instructions at all."
+    ],
+    "witness": [
+      "Observe the open daytime sky for ten continuous seconds. There is no required battlefield or height. Dravak wants a clear view because he remembers mistaking visibility for knowledge. He could see where the line bent. He could see Varun's people withdrawing. He could not see the decision that had made his position expendable, or the forged authority that kept him waiting for a signal no honest messenger had promised.",
+      "The sky above the retreat had remained offensively ordinary. Later songs supplied thunder, but Dravak will not borrow it. He asks what you saw in your ten seconds and accepts that it may have been nothing remarkable. That is part of the witness. Harm does not arrange the weather to announce its importance. A commander must listen to uncertain people rather than wait for the world to produce a dramatic sign that doubt has become permissible."
+    ],
+    "testimony": [
+      "Nashara forged the order to save refugees. Elaris concealed proof, Nythea hid survivors, and Varun evacuated the pack while Dravak held the line. He gives you the sequence without asking you to hunt down a document or question another shrine. The rescue succeeded for people who would otherwise have been exposed. Yet naming that purpose cannot turn his obedience into informed agreement. He also admits that he discouraged questions from defenders who trusted his confidence. The deception reached them through his own voice.",
+      "Choose Conquest or Resolve and confirm your permanent path. Conquest asks for eight hostile mobs defeated with melee attacks: decisive force close enough to require personal commitment. Resolve asks for eight hostile attacks successfully blocked with a shield: strength that creates time rather than territory. Neither answer is an oath to obey him without thought. Dravak is asking what valor should do, not whether you will help him prove that everyone except himself misunderstood the battle."
+    ],
+    "deed_a": [
+      "Defeat eight hostile mobs with melee attacks. Conquest does not mean that every place you can reach belongs to you. Dravak names the deed precisely because he remembers how an objective can expand when a leader becomes ashamed to stop. A threat met within arm's reach demands courage, but courage does not certify the wisdom of every advance. The eight encounters are your present work, not stand-ins for the people who betrayed him.",
+      "He recalls a defender asking whether they were holding for the refugees or for the authority of the order itself. Dravak answered too quickly. He thought hesitation would frighten the line more than uncertainty already had. Now he wonders what another honest sentence might have allowed them to decide. Your force cannot give that question a retroactive answer. It can establish a different habit: know what you intend to accomplish before the movement of battle begins to decide for you."
+    ],
+    "deed_b": [
+      "Successfully shield-block eight attacks from hostile mobs. Resolve measures a defense performed, not suffering accumulated. Dravak does not ask you to remove armor, seek injury, or make pain into a qualification. His defenders deserved protection while they protected others. He is ashamed of how often praise for their endurance left that simpler obligation unspoken. A held line should be judged partly by whom it allows to survive, including the people doing the holding.",
+      "He distinguishes your freely chosen deed from his obedience to the forgery. Similar actions can carry different meanings when their information and consent differ. He will not cure his anger by declaring that all orders are traps. Nor will he call the false order harmless because he might have chosen the same stand if asked. The missing question remains missing. Your shield raises the possibility of an honest defense without pretending the old one was honestly requested."
+    ],
+    "reckoning_a": [
+      "Collect four iron ingots you have smelted from a furnace. After Conquest, Dravak asks for material made useful through patient work rather than taken as a trophy. The iron stays ordinary iron. No ceremonial blade or new item must be crafted, and there is no need to surrender the ingots. He wants the interval between raw resource and usable metal to interrupt the easy thought that force alone creates a future.",
+      "While the furnace works, he admits that he has sometimes enjoyed the role of wronged brother. It gives anger a clean uniform. Varun's flight was not a simple desertion; refugees moved because Varun kept them moving. Dravak can insist that the forgery mattered without making the rescue contemptible. He cannot smelt the whole history into one pure account. Four modest pieces of useful metal are a more honest result than another perfect speech about betrayal."
+    ],
+    "reckoning_b": [
+      "Collect four iron ingots you have smelted from a furnace. Resolve must eventually make room for repair. Dravak remembers defenders trying to straighten damaged equipment after the line had moved, their hands shaking too badly for the task. The story does not require you to recreate their tools. Ordinary smelting is enough to place maintenance beside courage, giving attention to the work that grand accounts of endurance tend to omit.",
+      "He tells you he could have stayed angry forever by refusing to hear why Nashara forged the order. Hearing the reason did not make the act acceptable; it made his judgment harder and more accurate. The same is true of Elaris's concealment and Nythea's hidden survivors. Their choices do not merge into one conspiracy with one heart. Resolve now asks him to hold several difficult truths without using firmness as a reason to stop listening."
+    ],
+    "trial": [
+      "Complete a fresh trial of Dravak after the reckoning. The trial remains his existing challenge, not a reenactment in which a different performance could save the historical defenders. He states the conditions through the established trial rather than surrounding them with a fabricated military order. You already know which permanent path you chose. Nothing in this chapter asks you to transfer that choice to his command or accept an undisclosed price.",
+      "He promises no exemption from difficulty. An honest challenge can still defeat you. If that happens, you may attempt it again without treating the completed deed as a lie or the effort as wasted. Dravak wishes someone had told his younger self that distinction before he confused certainty with leadership. Return after success. He has an answer prepared, but says, with visible discomfort, that he would rather revise it than deliver another confident speech that leaves something necessary unsaid."
+    ],
+    "ending_a": [
+      "Dravak receives your Conquest without calling you an extension of his will. You met threats closely and deliberately, then did the quieter work of the furnace. He sees a form of strength that can finish its task and become useful in another way. It offers him no victory over Varun, Nashara, or the absent defenders. That absence of a personal triumph is precisely what makes the example difficult for him to dismiss.",
+      "He will tell the battle with the forged order in it, and with the refugees who escaped in it, and with his own silencing of questions in it. None will be a footnote added to protect his reputation. Brotherhood with Varun cannot be commanded back into place, but he can stop treating every mention of the rescue as an attack. Your path remains Conquest. Its answer is not endless advance; it is force that can name its purpose, accept its limits, and leave room for someone else's account of the ground."
+    ],
+    "ending_b": [
+      "Dravak's answer to your Resolve begins without a salute. He thanks you as someone who chose to stand, not as someone who owed him a position in the line. Eight blocks, the furnace's work, and the fresh trial do not erase the old defenders' injuries. They make visible a courage that can be asked for honestly. He intends to remember that distinction when the next emergency tempts him to make questions sound like disloyalty.",
+      "He still wants an accounting of the forged order. Forgiveness cannot be demanded merely because refugees survived, and reconciliation with Varun may be uneven. Yet he can acknowledge his brother's rescue without surrendering his own hurt. The cup he remembered at your first meeting returns to his telling: an ordinary person wanted somewhere level to put water. Dravak finally lets that want stand beside the heroic duty, neither smaller nor embarrassing. A defended life should be allowed to contain such unremarkable hopes."
+    ]
+  },
+  "dialogue": {
+    "call": "Offer freely. I have heard enough obedience mistaken for consent.",
+    "witness": "A clear sky did not make the order honest.",
+    "testimony": "Choose Conquest or Resolve. Do not choose my anger for me.",
+    "deed_a": "Meet eight hostile foes in melee. Know why your advance should stop.",
+    "deed_b": "Block eight hostile attacks. Defense need not worship injury.",
+    "reckoning_a": "Smelt four iron ingots. Victory must leave useful work behind it.",
+    "reckoning_b": "Smelt four iron ingots. The held line also deserves repair.",
+    "trial": "Enter a fresh trial with your choice intact and its demands known.",
+    "ending_a": "Strength can finish its task without claiming the whole world.",
+    "ending_b": "Stand by choice, and leave room for the questions I once silenced."
+  }
+}

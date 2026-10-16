@@ -1,0 +1,99 @@
+import groovy.json.JsonSlurper
+import java.security.MessageDigest
+import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
+
+tasks.register('verifyBundledMods') {
+    group = 'verification'
+    description = 'Checks embedded mod metadata, bytecode and unmodified production artifacts.'
+    dependsOn 'reobfJarJar'
+    inputs.file(tasks.named('jarJar').flatMap { it.archiveFile })
+    doLast {
+        def expected = [
+            'nightshade_core-forge-1.20.1': [group: 'net.nightshade', version: ns_core, mod: 'nightshade_core', refmap: 'nightshade_core.refmap.json'],
+            'vanguard-forge-1.20.1': [group: 'net.nightshade', version: vanguard_version, mod: 'vanguards_kit', refmap: 'vanguards_kit.refmap.json'],
+            'player-animation-lib-forge': [group: 'dev.kosmx.player-anim', version: player_animator_version, mod: 'playeranimator', refmap: 'player-animation-lib-minecraft_common-refmap.json']
+        ]
+        def rawArtifacts = configurations.jarJar.resolvedConfiguration.resolvedArtifacts
+        def output = tasks.named('jarJar').get().archiveFile.get().asFile
+        def vanguardAssets = [:]
+        new ZipFile(output).withCloseable { outer ->
+            def metadataEntry = outer.getEntry('META-INF/jarjar/metadata.json')
+            if (metadataEntry == null) throw new GradleException('Release jar is missing JarJar metadata.')
+            def metadata = outer.getInputStream(metadataEntry).withCloseable { new JsonSlurper().parse(it) }
+            expected.each { artifact, specification ->
+                def matches = metadata.jars.findAll { it.identifier.group == specification.group && it.identifier.artifact == artifact }
+                if (matches.size() != 1) throw new GradleException("Expected exactly one embedded ${artifact}.")
+                def entry = matches.first()
+                if (entry.version.artifactVersion != specification.version || entry.path.contains('_mapped_')) {
+                    throw new GradleException("Wrong release version or mapped dependency: ${entry}")
+                }
+                def nestedEntry = outer.getEntry(entry.path)
+                if (nestedEntry == null) throw new GradleException("Missing nested jar ${entry.path}")
+                byte[] bytes = outer.getInputStream(nestedEntry).withCloseable { it.bytes }
+                def raw = rawArtifacts.find { it.moduleVersion.id.group == specification.group && it.name == artifact }
+                if (raw == null || !Arrays.equals(MessageDigest.getInstance('SHA-256').digest(bytes),
+                        MessageDigest.getInstance('SHA-256').digest(raw.file.bytes))) {
+                    throw new GradleException("Embedded ${artifact} differs from its production Maven artifact.")
+                }
+                boolean hasMod = false, hasRefmap = false, hasClasses = false
+                new ZipInputStream(new ByteArrayInputStream(bytes)).withCloseable { inner ->
+                    for (def nested = inner.nextEntry; nested != null; nested = inner.nextEntry) {
+                        if (nested.name == 'META-INF/mods.toml') {
+                            String toml = new String(inner.readAllBytes(), 'UTF-8')
+                            hasMod = (toml =~ /modId\s*=\s*"${specification.mod}"/).find()
+                        } else if (nested.name == specification.refmap) {
+                            hasRefmap = true
+                        } else if (nested.name.endsWith('.class')) {
+                            byte[] header = inner.readNBytes(8)
+                            if (header.length != 8 || ((header[6] & 255) << 8 | (header[7] & 255)) > 61) {
+                                throw new GradleException("${artifact} contains bytecode newer than Java 17.")
+                            }
+                            hasClasses = true
+                        } else if (artifact == 'vanguard-forge-1.20.1' && nested.name.startsWith('assets/vanguards_kit/')) {
+                            vanguardAssets[nested.name] = inner.readAllBytes()
+                        }
+                    }
+                }
+                if (!hasMod || !hasRefmap || !hasClasses) throw new GradleException("Incomplete embedded mod: ${artifact}")
+                logger.lifecycle("Verified bundled ${specification.mod} ${specification.version}")
+            }
+
+            def requireAspectParent = { byte[] bytes, String path ->
+                if (bytes == null) throw new GradleException("Missing Battle Aspect model: ${path}")
+                def model = new JsonSlurper().parseText(new String(bytes, 'UTF-8'))
+                if (model.parent != 'vanguards_kit:item/battle_aspect') {
+                    throw new GradleException("Wrong Battle Aspect parent: ${path}")
+                }
+            }
+            // Vanguard supplies seven base items; Divinity supplies twelve more under the same saved item namespace.
+            def baseAspects = ['last_stand', 'posture_hardened', 'stonefooted', 'iron_wall',
+                               'tool_savant', 'bloodthirst', 'piercing_blow']
+            def divineAspects = ['rend', 'momentum', 'sunderer', 'overwhelm', 'bulwark', 'second_skin',
+                                 'stoic_vigor', 'enduring_spark', 'venombrand', 'soulflare', 'frostbite', 'thunderclash']
+            baseAspects.each { name ->
+                String path = "assets/vanguards_kit/models/item/${name}.json"
+                requireAspectParent(vanguardAssets[path], path)
+            }
+            divineAspects.each { name ->
+                String path = "assets/vanguards_kit/models/item/${name}.json"
+                def entry = outer.getEntry(path)
+                byte[] bytes = entry == null ? null : outer.getInputStream(entry).withCloseable { it.bytes }
+                requireAspectParent(bytes, path)
+            }
+            byte[] sharedModel = vanguardAssets['assets/vanguards_kit/models/item/battle_aspect.json']
+            if (sharedModel == null) throw new GradleException('Missing shared Battle Aspect model.')
+            def parent = new JsonSlurper().parseText(new String(sharedModel, 'UTF-8'))
+            if (!(parent.parent in ['item/generated', 'minecraft:item/generated'])
+                    || parent.textures?.layer0 != 'vanguards_kit:item/battle_aspect') {
+                throw new GradleException('Shared Battle Aspect model has a broken parent or texture reference.')
+            }
+            byte[] texture = vanguardAssets['assets/vanguards_kit/textures/item/battle_aspect.png']
+            if (texture == null || javax.imageio.ImageIO.read(new ByteArrayInputStream(texture)) == null) {
+                throw new GradleException('Missing or invalid Battle Aspect texture.')
+            }
+            logger.lifecycle('Verified all 19 Battle Aspect models and their shared texture.')
+        }
+    }
+}
+tasks.named('build').configure { dependsOn 'verifyBundledMods' }

@@ -3,10 +3,12 @@ package net.nightshade.divinity_engine.divinity.blessing.grond;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -39,7 +41,11 @@ public class Stoneform extends Blessings {
     public boolean onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
         LivingEntity player = event.getEntity();
         if (player.getHealth() <= 15){
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, MiscHelper.secondsToTick(10), 2, false, false, true));
+            int duration = MiscHelper.secondsToTick(BlessingSpecializations.isActive(player, "grond", "a") ? 12 : 10);
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration, 2, false, false, true));
+            if (!event.isCanceled() && event.getAmount() > 0) {
+                BlessingVisuals.pulse(instance, player, Cue.WARD);
+            }
             return true;
         }
 

@@ -1,0 +1,101 @@
+{
+  "version": 2,
+  "kind": "story",
+  "id": "example_pantheon:last_lantern",
+  "god": "example_pantheon:vesper",
+  "title": "The Last Lantern's Keeper",
+  "request": "Offer something Vesper accepts, then consider a keeper's right to leave.",
+  "branches": {
+    "a": {
+      "name": "Renewal",
+      "objective": "divinity_engine:donation",
+      "condition": "",
+      "target": 2,
+      "item": "minecraft:lantern",
+      "deed": "Contribute two lanterns at Vesper's statue",
+      "reward": {
+        "id": "example_pantheon:last_lantern_renewal",
+        "blessing": "divinity_engine:solar_ward",
+        "description": "Records the Renewal marker for Solar Ward; no numeric modifier is installed by this example"
+      },
+      "ending": "You renewed a shared task without binding its keeper."
+    },
+    "b": {
+      "name": "Release",
+      "objective": "divinity_engine:donation",
+      "condition": "",
+      "target": 4,
+      "item": "minecraft:bread",
+      "deed": "Contribute four bread at Vesper's statue",
+      "reward": {
+        "id": "example_pantheon:last_lantern_release",
+        "blessing": "divinity_engine:twilight_veil",
+        "description": "Records the Release marker for Twilight Veil; no numeric modifier is installed by this example"
+      },
+      "ending": "You offered a farewell without creating a debt."
+    }
+  },
+  "chronicle": {
+    "premise": "A separate Vesper story asks who tends a light when its keeper leaves. It needs no ending from The First Star's Unfinished Map and stores its own permanent choice.",
+    "offering_examples": [
+      "minecraft:paper",
+      "minecraft:amethyst_shard"
+    ],
+    "witness": {
+      "objective": "divinity_engine:observe",
+      "condition": "day_sky",
+      "target": 100,
+      "deed": "Observe the open daytime sky for 100 consecutive ticks"
+    },
+    "reckoning": {
+      "objective": "divinity_engine:observe",
+      "condition": "night_sky",
+      "target": 100,
+      "deed": "Observe the open night sky for 100 consecutive ticks"
+    },
+    "passages": {
+      "call": [
+        "Vesper recalls a lantern tended until its keeper was too tired to lift it. Make an ordinary accepted offering to hear why gratitude became an obligation no one had agreed to carry."
+      ],
+      "witness": [
+        "Observe the open daytime sky for one hundred consecutive ticks. A lantern can seem unnecessary at noon; the hands cleaning it still need rest. This memory introduces no new location to discover."
+      ],
+      "testimony": [
+        "Choose Renewal, a contribution of two lanterns, or Release, a contribution of four bread. Renewal records a Solar Ward marker; Release records a Twilight Veil marker. Neither marker implements numerical effects. This choice is independent of your other Vesper story."
+      ],
+      "deed_a": [
+        "Donate two lanterns at the statue using the story action. Vesper remembers the keeper teaching a willing successor, not assigning the task to the nearest grateful stranger."
+      ],
+      "deed_b": [
+        "Donate four bread at the statue using the story action. Vesper remembers preparing food for a departure without demanding a date of return."
+      ],
+      "reckoning_a": [
+        "Observe the open night sky for one hundred consecutive ticks. Consider a light that endures because its care can be shared, not because a keeper is forbidden to stop."
+      ],
+      "reckoning_b": [
+        "Observe the open night sky for one hundred consecutive ticks. Do not turn the keeper's absence into a promise that someone else must repay."
+      ],
+      "trial": [
+        "Start and win a new Vesper trial from her statue's blessings screen after this reckoning. Earlier victories do not count. A failed attempt may be retried without repeating your donation."
+      ],
+      "ending_a": [
+        "Return to Vesper's statue to record Renewal. The last lantern has another keeper by consent, and the first keeper may rest. Your ending and marker are granted once, independently of the unfinished map."
+      ],
+      "ending_b": [
+        "Return to Vesper's statue to record Release. The departing keeper receives food rather than a summons. Your ending and marker are granted once, and another god's story remains open."
+      ]
+    },
+    "dialogue": {
+      "call": "A light is not its keeper.",
+      "witness": "See the work that daylight lets you overlook.",
+      "testimony": "Renew the light, or provide for the keeper's departure.",
+      "deed_a": "A replacement must not become another chain.",
+      "deed_b": "A farewell can be an act of care.",
+      "reckoning_a": "The night does not require the same hands forever.",
+      "reckoning_b": "Let a departure remain a departure.",
+      "trial": "Meet this question in a fresh trial.",
+      "ending_a": "You renewed the work without claiming its workers.",
+      "ending_b": "You did not make kindness a debt."
+    }
+  }
+}

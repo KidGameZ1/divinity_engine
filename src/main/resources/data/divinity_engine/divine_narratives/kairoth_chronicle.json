@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:kairoth",
+  "premise": "The Moment Chosen asks who is allowed to refuse a rescue that would erase its own victims. Kairoth and Aethon are ancient brothers whose powers once helped the First Concord protect mortal life from oblivion. Aethon foresaw the catastrophe. Kairoth withheld a prevention timeline because it removed innocent lives from history. He did not choose that timeline, but he did choose secrecy, leaving others to act without a complete account. His defense of the unconsulted became a decision made without consultation.",
+  "offering_examples": ["minecraft:clock", "minecraft:ender_pearl", "minecraft:chorus_fruit"],
+  "witness": {"objective": "divinity_engine:smelt", "condition": "", "target": 4, "deed": "Collect four iron ingots you have smelted from a furnace"},
+  "reckoning": {"objective": "divinity_engine:observe", "condition": "rain", "target": 200, "deed": "Stand exposed to rain for 10 continuous seconds"},
+  "passages": {
+    "call": [
+      "Offer a clock, an ender pearl, or chorus fruit. Kairoth accepts the clock without pretending it contains the hours you spent obtaining it. 'A token may acknowledge a cost,' he says. 'It cannot store the person who paid.' He begins there because he once spoke of a possible future as though every life within it could be entered on a balance sheet.",
+      "The First Concord gave mortals more than protection from immediate death. It defended the possibility that their lives could continue to have consequences: promises kept, meals shared, children taught. During the Sundering, Kairoth saw a way to preserve the pact by erasing innocent lives from the history around it. Before explaining why he withheld that possibility, he asks you to smelt and collect four iron ingots from a furnace. Let an ordinary irreversible process make a witness of you."
+    ],
+    "witness": [
+      "Collect four iron ingots you have smelted from a furnace. Already owned ingots do not stand in for this work. Kairoth wants the sequence, not tribute: material placed, heat spent, a result collected. He is not asking you to construct a clockwork device or locate an ancient forge. In this small process, waiting and acting belong to the same task rather than opposing philosophies.",
+      "He recalls watching a smith stop a furnace to check a sound that might have signaled failure. The delay spoiled a batch; continuing might have ruined the workshop. Later, the smith described both possibilities without claiming to know what the unchosen one would have done. Kairoth envied that honest limitation. A god associated with time is expected to speak as though he has already examined every consequence. He has sometimes allowed that expectation to make his judgment sound like a fact about the universe."
+    ],
+    "testimony": [
+      "Aethon saw the catastrophe coming. Kairoth withheld a timeline in which it was prevented, because that prevention erased innocent people rather than rescuing them. He did not enact their erasure. He feared that a council desperate to save the Concord would count lives absent from the resulting history as lives never owed protection. That fear explains his secrecy; it does not prove that every other god would have accepted the price. Elaris disputes the gaps in his chronology, and he cannot dismiss the dispute merely by naming his intentions.",
+      "Choose permanently between Patience and Decisiveness. Patience requires sixty continuous seconds of motionless prayer. Decisiveness requires eight hostile kills within 120 seconds of the first qualifying kill. One path practices withholding action without hiding responsibility; the other practices timely intervention without pretending speed provides certainty. Neither can rewrite the Sundering. Kairoth asks for a principle you will carry forward, not approval of his private veto."
+    ],
+    "deed_a": [
+      "Pray motionless at this shrine for sixty continuous seconds. Patience is not a request to wait for a message that only Kairoth can decide to send. The task has a clear duration and an ending you can know. He considers that clarity a necessary correction to how he treated those who asked what he had seen. 'Not yet' became his way of postponing an answer without admitting that he might never give it.",
+      "During the prayer, remember that stillness is an act with a cost. The gods who did not receive his account faced the crisis with less information. The innocents in the rejected timeline were not erased, but other people suffered in the Sundering that occurred. Those facts do not make the rejected prevention merciful. They mean that refusing one injury does not remove responsibility to explain the injuries one could not prevent. Your patience must be visible enough to be questioned."
+    ],
+    "deed_b": [
+      "Defeat eight hostile mobs within 120 seconds of the first qualifying kill. The first such kill starts the existing attempt; it is not a deadline measured from this conversation. Prepare before beginning. Decisiveness is chosen readiness, not the habit of manufacturing emergencies so that nobody can interrupt a decision. A failed attempt may be tried again without pretending the ancient catastrophe can be retried with it.",
+      "Kairoth remembers the moment he decided not to reveal the prevention timeline. He has often described it as a long burden of waiting, but the concealment itself was swift. He chose whom to exclude from the decision before he had exhausted ways to explain the cost. This does not mean the hidden option should have been enacted. It means that action and inaction are poor disguises for the harder distinction: whether those affected are permitted to understand what was decided in their name."
+    ],
+    "reckoning_a": [
+      "Stand exposed to the rain for ten continuous seconds. Kairoth cannot promise when rain will come, and you need not summon a storm or perform a ritual to change the weather. Patience meets a condition you cannot satisfy by simply holding still harder. When rain is present, give it the required uninterrupted attention outside shelter. Until then, other parts of your life remain yours.",
+      "He admits that he let the image of an infinitely patient god conceal his impatience with disagreement. Aethon wanted the account opened; Elaris wanted the chronology examined. Kairoth heard both as demands to endanger the people he had protected by refusal. Yet scrutiny is not the same act as erasure. Let the rain fall without reading it as an instruction. Your chosen restraint has to leave space for evidence that arrives from outside your own fears, or it becomes another locked room with a dignified name."
+    ],
+    "reckoning_b": [
+      "Stand exposed to the rain for ten continuous seconds. After the timed deed, Decisiveness must endure something that does not become ready because you are. There is no additional combat quota and no need to expose yourself to thunder. Ordinary rain falling at your position is sufficient. Kairoth asks you to notice how readily urgency can become an appetite once it has been rewarded.",
+      "He imagines telling the council about the withheld timeline in the bluntest possible terms: prevention here means people erased, not people relocated or safely asleep. He cannot know whether that explanation would have changed the crisis. Elaris's disputed chronology cannot supply that certainty either. The useful question is what he owes a listener now. He can distinguish the option he saw from the outcomes he feared, and give those fears their proper name. Decisiveness should make an answer timely, not strip it of qualifications merely because qualifications take longer to say."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Time after the reckoning. The existing trial is a present challenge, not access to the withheld prevention timeline. Kairoth will not stage the erased innocents as obstacles to make his choice look inevitable. You are not being offered the power to reverse the Sundering, and your victory will not certify that his secrecy was the only moral response.",
+      "He offers a plainer measure instead. Meet the trial's demands with the preparation your path has taught you, then return for an answer given without delay. Patience must eventually become a completed undertaking; Decisiveness must remain attentive after the first urgent action. If the trial defeats you, another attempt is possible. Kairoth refuses to use that ordinary mercy as a claim about history. Some failures can be tried again. Some can only be accounted for by someone willing to remain present after the decisive moment has passed."
+    ],
+    "ending_a": [
+      "Kairoth does not ask you to wait for a final vindication. He names the rejected timeline's price and his own concealment separately. Innocent lives would have been erased; he withheld that option because he feared the price would be accepted. The fear was his judgment about others, not knowledge of every choice they would have made. Patience has given him a way to preserve his refusal without preserving the fiction that nobody else deserves an account.",
+      "Second Chance restores sixty percent maximum health instead of fifty percent, exactly the Patience specialization. Its recovery does not return vanished years or create a new history. Kairoth accepts that Elaris's questions may remain inconvenient and Aethon's anger may outlast this admission. He need not force those responses to ripen into forgiveness. For once, waiting means allowing someone else's answer to arrive, rather than keeping them indefinitely outside the room where his answer was chosen."
+    ],
+    "ending_b": [
+      "Kairoth answers before he can polish the answer into inevitability. 'I chose not to spend those lives. I also chose not to trust the others with the decision. Do not let the first sentence hide the second.' Decisiveness has taught him that an admission can be immediate without being complete. Elaris may still dispute the missing chronology; Aethon may still demand what his brother withheld. Those questions are not attacks on the existence of the innocents Kairoth refused to erase.",
+      "Second Chance also grants Absorption I for five seconds, the existing Decisiveness specialization. There is no extra chance to refashion the world around a cleaner account of the Sundering. Kairoth speaks of the next urgent decision more carefully: name the price early, make the refusal explicit, and do not leave others to mistake a concealed option for an option that never existed. Your chosen moment has not repaired history. It has made the next conversation harder to evade."
+    ]
+  },
+  "dialogue": {
+    "call": "A saved future can still be purchased with people it refuses to remember.",
+    "witness": "Smelt and collect four iron ingots. Witness a process you cannot honestly skip.",
+    "testimony": "Choose Patience or Decisiveness permanently. Neither turns my secrecy into fate.",
+    "deed_a": "Pray motionless at this shrine for sixty continuous seconds. Let restraint have an honest ending.",
+    "deed_b": "Defeat eight hostiles within 120 seconds of the first qualifying kill. Prepare before acting.",
+    "reckoning_a": "Stand in rain for ten continuous seconds. Waiting must leave room for another answer.",
+    "reckoning_b": "Stand in rain for ten continuous seconds. Readiness does not command the world.",
+    "trial": "Win a fresh Trial of Time. This tests the present, not a replacement history.",
+    "ending_a": "I can refuse an erasure without refusing every question about my choice.",
+    "ending_b": "I will name what I chose before calling it what had to happen."
+  }
+}

@@ -12,12 +12,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.core.particles.ParticleTypes;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Stormstep extends Blessings {
     public Stormstep(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
@@ -46,17 +47,23 @@ public class Stormstep extends Blessings {
             movement = new Vec3(0, getVerticalDashPower(instance), 0);
             activateCooldown = false;
         } else {
+            double horizontalPower = getHorizontalDashPower(instance)
+                    + (BlessingSpecializations.isActive(living, "voltira", "a") ? 0.5 : 0);
             movement = new Vec3(
-                    lookVec.x * getHorizontalDashPower(instance),
+                    lookVec.x * horizontalPower,
                     0.2,
-                    lookVec.z * getHorizontalDashPower(instance)
+                    lookVec.z * horizontalPower
             );
         }
 
         living.setDeltaMovement(movement);
+        living.hurtMarked = true;
+
         if (living.isShiftKeyDown()) {
             if (!living.getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) {
-                living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, getFallImmunityDuration(instance), 0, false, false, true));
+                int duration = getFallImmunityDuration(instance)
+                        + (BlessingSpecializations.isActive(living, "voltira", "b") ? 60 : 0);
+                living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, duration, 0, false, false, true));
             }
         }
 
@@ -68,8 +75,10 @@ public class Stormstep extends Blessings {
             serverLevel.addFreshEntity(lightning);
 
             serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 1.0F, 1.0F);
-            serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.getX(), pos.getY(), pos.getZ(), 50, 0.5, 0.5, 0.5, 0.1);
         }
+
+        Vec3 origin = living.position();
+        BlessingVisuals.link(instance, living, origin, origin.add(movement), Cue.TRAIL);
 
         return activateCooldown;
     }

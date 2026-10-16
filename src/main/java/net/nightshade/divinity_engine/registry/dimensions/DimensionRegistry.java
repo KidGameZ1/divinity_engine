@@ -6,8 +6,14 @@ import net.minecraft.world.level.Level;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 
 public class DimensionRegistry {
+    public static final ResourceKey<Level> INNER_WORLD = ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION,
+            new ResourceLocation(DivinityEngineMod.MODID, "inner_world"));
     public static final ResourceKey<Level> POCKET_DIMENSION = ResourceKey.create(
             ResourceKey.createRegistryKey(new ResourceLocation("minecraft", "dimension")),
             new ResourceLocation(DivinityEngineMod.MODID, "pocket_dimension")
+    );
+    public static final ResourceKey<Level> GODLY_TRIALS = ResourceKey.create(
+            ResourceKey.createRegistryKey(new ResourceLocation("minecraft", "dimension")),
+            new ResourceLocation(DivinityEngineMod.MODID, "godly_trials")
     );
 }

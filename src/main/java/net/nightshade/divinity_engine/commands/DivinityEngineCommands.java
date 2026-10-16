@@ -31,8 +31,8 @@ public class DivinityEngineCommands {
 	}
 
 	public static void contactGodsCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("contact")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("contact").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.argument("god-id", GodsArgument.god())
@@ -65,8 +65,8 @@ public class DivinityEngineCommands {
 											return 0;
 										}))))));
 
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("contact")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("contact").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.literal("all")
@@ -89,8 +89,8 @@ public class DivinityEngineCommands {
 													return 0;
 												}))))));
 
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("lose_faith")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("lose_faith").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.argument("god-id", GodsArgument.god())
@@ -116,8 +116,8 @@ public class DivinityEngineCommands {
 													}
 													return 0;
 												}))))));
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("lose_faith")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("lose_faith").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.literal("all")
@@ -142,8 +142,8 @@ public class DivinityEngineCommands {
 													return 0;
 												}))))));
 
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("favor")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("favor").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.argument("god-id", GodsArgument.god())
@@ -174,8 +174,8 @@ public class DivinityEngineCommands {
 														}
 														return 0;
 												})))))));
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("favor")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("favor").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("god")
 								.then(Commands.argument("player", EntityArgument.player())
 										.then(Commands.literal("all")
@@ -206,8 +206,8 @@ public class DivinityEngineCommands {
 	}
 
 	public static void getCommands(RegisterCommandsEvent event){
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("get")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("get").requires(s -> s.hasPermission(4))
 						.then(Commands.literal("gods")
 								.then(Commands.argument("player", EntityArgument.player()).executes(arguments -> {
 									Entity entityCalledOn = (new Object() {
@@ -237,8 +237,8 @@ public class DivinityEngineCommands {
 	}
 
 	public static void resetCooldowns(RegisterCommandsEvent event){
-		event.getDispatcher().register(Commands.literal("divinity_engine").requires(s -> s.hasPermission(4))
-				.then(Commands.literal("reset_cooldowns")
+		event.getDispatcher().register(Commands.literal("divinity_engine")
+				.then(Commands.literal("reset_cooldowns").requires(s -> s.hasPermission(4))
 					.then(Commands.argument("player", EntityArgument.player()).executes(arguments -> {
 						Entity entityCalledOn = (new Object() {
 							public Entity getEntity() {

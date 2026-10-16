@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:root_farewell",
+  "gods": ["divinity_engine:terra", "divinity_engine:vokar"],
+  "title": "The Season Between Friends",
+  "relation": "Old friends within the cycle of life and death",
+  "summary": "Terra and Vokar remember a friendship in which a fallen tree and a spring shoot belonged to the same conversation. The Sundering left them guarding different edges of mortal life, and Terra's concealed dying grove made their familiar language difficult. Beneath their disagreement lies a question neither can answer alone: how can care welcome what comes next without asking what came before to disappear?",
+  "epilogues": {
+    "aa": [
+      "At the shrine, your request brings Terra's Renewal beside Vokar's Release. Terra begins by imagining a young tree in the space left by the grove. Vokar asks whether it must stand in exactly the old position. Her first answer is yes; then she hears herself assigning the future a duty it never accepted. She changes the answer. The new roots may find different ground. Release need not prescribe the shape of what follows.",
+      "Vokar, in turn, admits that he has sometimes explained an ending so carefully that no room remained for another person's objection. Terra may grieve the grove without secretly refusing its death. She may also acknowledge that withholding it from him was wrong. The preserved names remain part of their account, not a summons requiring the living to rebuild every lost arrangement.",
+      "They recover an old habit of disagreeing about the next season without treating disagreement as betrayal. Your two choices do not settle their grief. They give it movement: an ending allowed to end, a beginning allowed to be unfamiliar, and two friends willing to notice when either tries to make the other half of the cycle speak alone."
+    ],
+    "ab": [
+      "Your Renewal and Remembrance meet in a question Terra had hoped to avoid: what happens when new roots disturb the place where an old name is kept? Vokar does not ask her to halt growth. Terra does not answer that roots excuse forgetting. At the shrine conversation, they consider a remembrance that can travel in speech rather than require every future life to grow around an immovable monument.",
+      "Terra names the dying grove as a loss she concealed. Vokar supplies no merciful correction to the sentence. He preserved its names instead of punishing her, and now allows those names to stand beside her admission rather than erase it. The young trees of your chosen deed belong to a different future. They are neither apologies nor replacements, though people may rest beneath them while telling what happened before.",
+      "Their friendship becomes less tidy and more habitable. Terra can propose another beginning without promising that the record will become pleasant. Vokar can keep a name without requiring the world around it to remain unchanged. Your paired choices leave them a demanding form of hope: growth that does not outvote memory, and memory that can make room without going silent."
+    ],
+    "ba": [
+      "When you ask about Guardianship and Release, Terra recalls the refugees who left her shelter and the hurt she made them carry for leaving. Vokar recognizes the pattern. A farewell can become another locked gate when its keeper insists on deciding when everyone else has said enough. Neither friend enjoys finding an echo of their own fault in the other's confession.",
+      "They begin with the mature harvest of your path. A field feeds people by allowing its work to pass into hands that will carry it elsewhere. Release, Vokar adds, should not require those hands to be empty of grief. Terra can accept that the grove is gone while still missing its particular shade. Vokar can permit life to continue without speaking as though sorrow has exceeded an approved season.",
+      "The names he preserved remain safe; the concealment she practiced remains part of the truth. No new bargain is struck over either. Instead the old friends practice ending this conversation without making the ending sound like abandonment. Your choices have given their care a threshold that works in both directions: someone may return without owing an apology for absence, and someone may leave without being declared ungrateful."
+    ],
+    "bb": [
+      "Guardianship beside Remembrance could become an endless watch, and both gods recognize the temptation when you raise their bond at the shrine. Terra would keep every endangered root within reach. Vokar would hold every threatened name in his own voice. Each can describe the plan as kindness; neither can describe how another keeper would ever be allowed to rest.",
+      "They turn instead to the sharing already present in their history. Terra sheltered Varun's pack without owning its destination. Vokar entrusted names to Lumen without surrendering their importance. Neither act was flawless, but both show care moving beyond a single pair of hands. Terra admits that concealing the dying grove denied her friend that chance to help. Vokar admits that preserving its names did not entitle him to become the author of everyone's grief.",
+      "Your two paths leave them with a quieter friendship built around continued duties rather than a final absolution. A harvest can be gathered while a name is spoken; a keeper can be corrected while remaining trusted with work. The grove does not return. What returns is their willingness to share the burden before exhaustion dresses itself as proof of devotion."
+    ]
+  }
+}

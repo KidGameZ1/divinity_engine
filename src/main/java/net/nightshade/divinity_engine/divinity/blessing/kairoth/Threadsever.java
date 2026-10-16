@@ -6,6 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -27,7 +29,10 @@ public class Threadsever extends Blessings {
     public boolean onCriticalHit(BlessingsInstance instance, CriticalHitEvent event) {
 
         if (event.getTarget() instanceof LivingEntity living){
-            living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1, false, false, true) );
+            boolean applied = living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1, false, false, true) );
+            if (applied) {
+                BlessingVisuals.at(instance, event.getEntity(), living.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
+            }
             return true;
         }
 

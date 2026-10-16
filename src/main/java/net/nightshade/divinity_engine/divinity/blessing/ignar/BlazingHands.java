@@ -1,15 +1,15 @@
 package net.nightshade.divinity_engine.divinity.blessing.ignar;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * A blessing that grants the ability to ignite enemies on hit.
@@ -41,29 +41,14 @@ public class BlazingHands extends Blessings {
      */
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
-        Random random = new Random();
-        // 15% chance to trigger the fire effect
-        if (random.nextFloat() <= 0.15f) {
+        RandomSource random = player.getRandom();
+        float chance = BlessingSpecializations.isActive(player, "ignar", "a") ? 0.25f : 0.15f;
+        if (random.nextFloat() <= chance) {
             LivingEntity target = event.getEntity();
-            // Set target on fire for 3 seconds (60 ticks)
-            target.setRemainingFireTicks(60);
+            target.setRemainingFireTicks(BlessingSpecializations.isActive(player, "ignar", "b") ? 100 : 60);
 
-            // Create particle effects on server side only
-            if (target.level() instanceof ServerLevel) {
-                ServerLevel serverWorld = (ServerLevel) target.level();
-                // Get target position with slight vertical offset
-                double x = target.getX();
-                double y = target.getY() + 0.5;
-                double z = target.getZ();
-
-                // Generate flame particles in random positions around the target
-                for (int i = 0; i < 20; i++) {
-                    double offsetX = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                    double offsetY = random.nextDouble();          // Random height offset
-                    double offsetZ = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                    serverWorld.sendParticles(ParticleTypes.FLAME, x + offsetX, y + offsetY, z + offsetZ, 1, 0, 0, 0, 0);
-                }
-            }
+            BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT,
+                    Math.max(0.75, target.getBbWidth()));
             return true;
         }
         return super.onDamageEntity(instance, player, event);

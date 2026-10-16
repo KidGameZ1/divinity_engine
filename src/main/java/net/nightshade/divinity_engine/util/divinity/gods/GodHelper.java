@@ -1,5 +1,7 @@
 package net.nightshade.divinity_engine.util.divinity.gods;
 
+import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -102,7 +104,7 @@ public class GodHelper {
                 capability.setBlessingSlot3(null);
             }
         } else {
-            if (getGodOrNull(player, god).getFavor() < slotInstance.getNeededFavor()) {
+            if (!DivineRelationship.canUse(player, slotInstance)) {
                 if (slotInstance.equals(capability.getBlessingSlot1())) {
                     capability.setBlessingSlot1(null);
                 } else if (slotInstance.equals(capability.getBlessingSlot2())) {
@@ -121,6 +123,10 @@ public class GodHelper {
      * @param slotInstance The new blessing instance
      */
     public static void updateBlessingInstance(Player player, BlessingsInstance slotInstance) {
+        updateBlessingInstance(player, slotInstance, true);
+    }
+
+    public static void updateBlessingInstance(Player player, BlessingsInstance slotInstance, boolean sync) {
         if (player == null || slotInstance == null || slotInstance.getBoundGodInstance() == null) {
             return;
         }
@@ -129,7 +135,7 @@ public class GodHelper {
         BaseGodInstance godInstance = getGodOrNull(player, god);
 
         if (godInstance != null) {
-            getContactedGodsFrom(player).updateBlessingInstance(godInstance, slotInstance, true);
+            getContactedGodsFrom(player).updateBlessingInstance(godInstance, slotInstance, sync);
         }
     }
 
@@ -227,10 +233,7 @@ public class GodHelper {
      * @param favor  Amount of favor to increase by
      */
     public static void increaseFavor(BaseGodInstance god, LivingEntity entity, int favor) {
-        if (entity instanceof Player player) {
-            player.displayClientMessage(Component.literal("You've gain " + favor + " Favor with " + Component.translatable(god.getBaseGod().getNameTranslationKey()).getString()), true);
-        }
-        getGodOrNull(entity, god.getBaseGod()).increaseFavor(favor);
+        if (god != null) increaseFavor(god.getBaseGod(), entity, favor);
     }
     /**
      * Increases favor with a god for an entity
@@ -240,10 +243,19 @@ public class GodHelper {
      * @param favor  Amount of favor to increase by
      */
     public static void increaseFavor(BaseGod god, LivingEntity entity, int favor) {
+        if (entity == null || entity.level().isClientSide || god == null || favor <= 0) return;
+        if (FavorRewards.capture(god, entity, favor)) return;
+        if (DivineRelationship.manages(god)) return;
+        var instance = getGodOrNull(entity, god);
+        if (instance == null) return;
+        int before = instance.getFavor();
+        if (before >= FavorTiers.Champion.getMaxFavor()) return;
+        instance.increaseFavor(Math.min(favor, FavorTiers.Champion.getMaxFavor() - before));
+        int gained = instance.getFavor() - before;
+        if (gained <= 0) return;
         if (entity instanceof Player player) {
-            player.displayClientMessage(Component.literal("You've gain " + favor + " Favor with " + Component.translatable(god.getNameTranslationKey()).getString()), true);
+            player.displayClientMessage(Component.literal("+" + gained + " favor | ").append(god.getName()), true);
         }
-        getGodOrNull(entity, god).increaseFavor(favor);
     }
 
     /**
@@ -254,10 +266,7 @@ public class GodHelper {
      * @param favor  Amount of favor to decrease by
      */
     public static void decreaseFavor(BaseGodInstance god, LivingEntity entity, int favor) {
-        if (entity instanceof Player player) {
-            player.displayClientMessage(Component.literal("You've lossed " + favor + " Favor with " + Component.translatable(god.getBaseGod().getNameTranslationKey()).getString()), true);
-        }
-        getGodOrNull(entity, god.getBaseGod()).decreaseFavor(favor);
+        if (god != null) decreaseFavor(god.getBaseGod(), entity, favor);
     }
     /**
      * Decreases favor with a god for an entity
@@ -267,10 +276,23 @@ public class GodHelper {
      * @param favor  Amount of favor to decrease by
      */
     public static void decreaseFavor(BaseGod god, LivingEntity entity, int favor) {
-        if (entity instanceof Player player) {
-            player.displayClientMessage(Component.literal("You've loss " + favor + " Favor with " + Component.translatable(god.getNameTranslationKey()).getString()), true);
+        if (entity == null || entity.level().isClientSide || god == null || favor <= 0) return;
+        var instance = getGodOrNull(entity, god);
+        if (instance == null) return;
+        if (DivineRelationship.manages(god)) {
+            // Discrete estrangement, not another hidden score. Ordinary trial failure never calls this.
+            instance.setFavor(instance.getFavor() < 0 ? -101 : -1);
+            if (entity instanceof net.minecraft.server.level.ServerPlayer player) {
+                player.sendSystemMessage(god.getName().copy().append(": Your desecration is remembered. Reconcile through accepted offerings at my statue; your earned deeds are preserved."));
+                net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.sync(player);
+            }
+            return;
         }
-        getGodOrNull(entity, god).decreaseFavor(favor);
+        int before = instance.getFavor();
+        instance.decreaseFavor(favor);
+        if (entity instanceof Player player) {
+            player.displayClientMessage(Component.literal("-" + (before - instance.getFavor()) + " favor | ").append(god.getName()), true);
+        }
     }
 
     /**

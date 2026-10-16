@@ -1,7 +1,6 @@
 package net.nightshade.divinity_engine.divinity.blessing.mechanos;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.level.BlockEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.util.Random;
 
@@ -58,14 +59,7 @@ public class AutoSmelter extends Blessings {
                     // Spawn items
                     Block.popResource(world, pos, smelted);
 
-                    // Add particles
-                    if (world instanceof ServerLevel serverLevel) {
-                        serverLevel.sendParticles(ParticleTypes.CRIT,
-                                pos.getX() + 0.5,
-                                pos.getY() + 0.5,
-                                pos.getZ() + 0.5,
-                                10, 0.2, 0.2, 0.2, 0.1);
-                    }
+                    BlessingVisuals.at(instance, player, Vec3.atCenterOf(pos), Cue.CAST, 0.75);
                     instance.setToggled(false);
                     return true;
                 }

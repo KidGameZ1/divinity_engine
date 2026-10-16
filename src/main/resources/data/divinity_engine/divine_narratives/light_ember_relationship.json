@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:light_ember",
+  "gods": ["divinity_engine:lumen", "divinity_engine:ignar"],
+  "title": "The Light After the Fire",
+  "relation": "Unlikely friends bound by damage and imperfect care",
+  "summary": "Lumen keeps a light whose history includes Ignar's destructive fire and his hidden help. Ignar distrusts the gentleness that asks him to account for both. Their unlikely friendship sits beside the refuge they cannot restore and the names Lumen holds in trust. Neither a beautiful flame nor a truthful accusation can do all the work of care.",
+  "epilogues": {
+    "aa": [
+      "Sanctuary and Fury meet uneasily when you ask the two friends what your choices have changed. Lumen wants light that frightened people can approach. Ignar respects force that makes a threat stop. The refuge's destruction prevents either from pretending these aims naturally cooperate. A guardian may sincerely intend safety and still make the room impossible for others to inhabit.",
+      "Ignar names his fire before his secret help with the last light. Lumen acknowledges the help without offering the harmed as an audience obliged to applaud. Vokar's entrusted names remain lives in Lumen's care, not witnesses borrowed to declare this friendship acceptable. Sanctuary does not require every door to open for Ignar. Fury does not authorize him to burn through a boundary because waiting feels like accusation.",
+      "Their accord is deliberately limited. A dangerous power can protect a refuge only if it accepts that the people within may refuse its presence. Lumen can remain Ignar's friend while respecting that refusal. Your paired paths do not rebuild the lost rooms. They leave the two gods able to imagine care that includes a closed door, an ended fight, and a light that need not celebrate the force kept outside."
+    ],
+    "ab": [
+      "Your Sanctuary and Purpose lead the friends away from the dramatic instant of rescue. Lumen remembers the room where people argued over a lamp; Ignar considers how much quiet provision was necessary before such an ordinary disagreement could occur. Fuel had to be kept, food made ready, and light placed where it served somebody rather than where it made the keeper look impressive.",
+      "At your requested shrine conversation, Ignar resists calling this practical work repayment. The refuge was destroyed by his fire, and saving its last light did not establish a credit large enough to cancel that damage. Lumen refuses an equally easy story in which all help from Ignar must be false. Their friendship can acknowledge a useful act without turning it into an instruction that the harmed forgive.",
+      "They find a shared future in maintenance that may never be praised. Lumen keeps the names entrusted by Vokar without asking them to approve the arrangement. Ignar lets the usefulness of an ember be decided by the hand that receives it. Your choices grant no new favor or claim upon either god. They leave a quieter recognition: sanctuary needs work after the welcome, and purposeful work must remain answerable to those it intends to serve."
+    ],
+    "ba": [
+      "Purification and Fury give the two friends dangerous words to share. Lumen can name corruption; Ignar can make the answer spectacular. When you ask for their epilogue, they recognize how easily that partnership could become a story in which everything destroyed had to deserve destruction. The refuge stands against that story. Its loss cannot be reclassified as cleansing simply because the gods responsible for later care prefer a nobler account.",
+      "Lumen insists that the threats in your deed were particular. Ignar accepts that a bounded fight is not permission to expand the boundary until anger has nothing left to accuse. Their agreement does not make either spotless. Lumen once edited the history toward comfort, and Ignar let his hidden help become a refuge from public responsibility. Both now have to hear their own failures without rushing to the other's defense.",
+      "They remain friends, but not an alliance against criticism. The last light was worth preserving; the ruined refuge was worth protecting before the fire. Both truths survive the conversation. Your choices leave them a demanding discipline: force may confront harm, but it cannot decide afterward that everyone it harmed was therefore an enemy."
+    ],
+    "bb": [
+      "Your Purification and Purpose make the friends examine what follows a threat's defeat. Lumen has learned to distrust the spotless account; Ignar has learned that being useful does not purchase silence. When you request their conversation, they begin with the work neither likes: naming the refuge's destruction without reducing every later act to either an acquittal or a fraud.",
+      "Ignar's help preserved the last light with Lumen. That remains a real good. Ignar's fire destroyed the refuge. That remains damage he cannot assign to somebody else's inadequate gratitude. Lumen also acknowledges his own selective telling, while keeping Vokar's entrusted names outside this exchange of explanations. No remembered person is made to certify that the friendship has earned permission to continue.",
+      "The future they describe has two different safeguards. Lumen must let protection be questioned after it acts, rather than calling criticism another form of corruption. Ignar must allow useful work to be received without demanding affection in return. Your paired paths do not promise that these safeguards will become effortless. They make a more modest hope credible: two unlikely friends can help one another change while refusing to hide the evidence that change was needed."
+    ]
+  }
+}

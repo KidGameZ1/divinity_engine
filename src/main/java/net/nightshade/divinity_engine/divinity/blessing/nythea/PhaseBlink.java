@@ -1,10 +1,11 @@
 package net.nightshade.divinity_engine.divinity.blessing.nythea;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -24,6 +25,7 @@ public class PhaseBlink extends Blessings {
     @Override
     public boolean onPressed(BlessingsInstance instance, LivingEntity living) {
         if (!living.level().isDay()) {
+
             makeInvulnerable(living);
             double distance = 4.0;  // Distance for each dash
             double dx = -Math.sin(Math.toRadians(living.getYRot())) * Math.cos(Math.toRadians(living.getXRot()));
@@ -107,10 +109,9 @@ public class PhaseBlink extends Blessings {
             }
 
             // First dash
-            if (living.level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.PORTAL, firstX, firstY + 1, firstZ, 25, 0.5, 0.5, 0.5, 0.1);
-            }
+            Vec3 dashStart = living.position();
             living.teleportTo(firstX, firstY, firstZ);
+            if (!living.isInvisible()) BlessingVisuals.link(instance, living, dashStart, living.position(), Cue.TELEPORT);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -118,10 +119,9 @@ public class PhaseBlink extends Blessings {
             }
 
             // Second dash  
-            if (living.level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.PORTAL, secondX, secondY + 1, secondZ, 25, 0.5, 0.5, 0.5, 0.1);
-            }
+            dashStart = living.position();
             living.teleportTo(secondX, secondY, secondZ);
+            if (!living.isInvisible()) BlessingVisuals.link(instance, living, dashStart, living.position(), Cue.TELEPORT);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -129,10 +129,9 @@ public class PhaseBlink extends Blessings {
             }
 
             // Third dash
-            if (living.level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.PORTAL, thirdX, thirdY + 1, thirdZ, 25, 0.5, 0.5, 0.5, 0.1);
-            }
+            dashStart = living.position();
             living.teleportTo(thirdX, thirdY, thirdZ);
+            if (!living.isInvisible()) BlessingVisuals.link(instance, living, dashStart, living.position(), Cue.TELEPORT);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -140,10 +139,9 @@ public class PhaseBlink extends Blessings {
             }
 
             // Fourth dash
-            if (living.level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.PORTAL, fourthX, fourthY + 1, fourthZ, 25, 0.5, 0.5, 0.5, 0.1);
-            }
+            dashStart = living.position();
             living.teleportTo(fourthX, fourthY, fourthZ);
+            if (!living.isInvisible()) BlessingVisuals.link(instance, living, dashStart, living.position(), Cue.TELEPORT);
 
             makeVulnerable(living);
             return true;

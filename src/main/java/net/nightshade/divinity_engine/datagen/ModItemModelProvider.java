@@ -9,8 +9,10 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.block.StatueBlock;
+import net.nightshade.divinity_engine.registry.aspects.AspectsRegistry;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
+import net.nightshade.vanguards_kit.VanguardMod;
 
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -23,10 +25,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         // Generate item models for all statue blocks
         BlocksRegistry.REGISTRY.getEntries().forEach(block -> {
             if (block.get() instanceof StatueBlock) {
+                if (block.get() instanceof net.nightshade.divinity_engine.block.LegacyElderStatueBlock) return;
                 String path = block.getId().getPath();
                 withExistingParent(path, modLoc("block/statue"));
             }
         });
+
+        // Vanguard owns these item IDs even though Divinity supplies the aspects.
+        AspectsRegistry.BATTLE_ASPECTS_REGISTER.getAspectItems().values().forEach(item ->
+                withExistingParent(item.getId().toString(),
+                        ResourceLocation.fromNamespaceAndPath(VanguardMod.MODID, "item/battle_aspect")));
 
         simpleItem(ItemsRegistry.DIVINE_CODEX);
     }

@@ -64,6 +64,19 @@
 
 # Attempt to set APP_HOME
 
+# Forge 1.20.1 needs a Java 17 Gradle runtime as well as a Java 17 compiler.
+# JAVA17_HOME is a portable explicit override; macOS can discover installed JDKs.
+if [ -n "$JAVA17_HOME" ]; then
+    JAVA_HOME=$JAVA17_HOME
+    export JAVA_HOME
+elif [ "$(uname)" = Darwin ]; then
+    java17_home=$(/usr/libexec/java_home -v 17 2>/dev/null) || java17_home=
+    if [ -n "$java17_home" ]; then
+        JAVA_HOME=$java17_home
+        export JAVA_HOME
+    fi
+fi
+
 # Resolve links: $0 may be a link
 app_path=$0
 

@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.block.StatueBlock;
+import net.nightshade.divinity_engine.block.LegacyElderStatueBlock;
 import net.nightshade.divinity_engine.item.DivineCodex;
 import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 
@@ -21,6 +22,7 @@ public class ItemsRegistry {
 
     public static final RegistryObject<Item> DIVINE_CODEX = REGISTRY.register("divine_codex", DivineCodex::new);
     public static final RegistryObject<Item> POCKET_DIMENSION = block(BlocksRegistry.POCKET_DIMENSION);
+    public static final RegistryObject<Item> GODS_TRIAL_BLOCK = block(BlocksRegistry.GODS_TRIAL_BLOCK);
 
     private static RegistryObject<Item> block(RegistryObject<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
@@ -32,16 +34,18 @@ public class ItemsRegistry {
 
     public static ItemStack getAShrineBlockItem() {
         for (Item item : ForgeRegistries.ITEMS) {
-            if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof StatueBlock) {
-                return REGISTRY.getEntries().stream().findAny().get().get().getDefaultInstance();
+            if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof StatueBlock
+                    && !(blockItem.getBlock() instanceof LegacyElderStatueBlock)) {
+                return blockItem.getDefaultInstance();
             }
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static void forEachShrineBlockItem(Consumer<Item> function) {
         for (Item item : ForgeRegistries.ITEMS) {
-            if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof StatueBlock) {
+            if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof StatueBlock
+                    && !(blockItem.getBlock() instanceof LegacyElderStatueBlock)) {
                 function.accept(blockItem);
             }
         }

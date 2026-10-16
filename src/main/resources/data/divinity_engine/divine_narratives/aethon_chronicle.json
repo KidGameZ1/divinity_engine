@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:aethon",
+  "premise": "Reading the Silence concerns a warning that was true and still incomplete. Aethon foresaw the catastrophe that sundered the First Concord, the gods' defense of mortal life against oblivion. His ancient brother Kairoth knew a possible prevention whose cost was the erasure of innocent lives, and withheld that timeline. Aethon has spent the intervening years treating every unanswered question as a stolen answer. He invites you to examine whether discovery must possess everything it reveals, and whether contemplation can remain honest when it is not comfortable.",
+  "offering_examples": ["minecraft:amethyst_shard", "minecraft:glowstone_dust", "minecraft:ender_eye"],
+  "witness": {"objective": "divinity_engine:height", "condition": "", "target": 1, "deed": "Reach Y=160 and return to this shrine"},
+  "reckoning": {"objective": "divinity_engine:observe", "condition": "underground", "target": 240, "deed": "Observe underground below Y=0 for 12 continuous seconds"},
+  "passages": {
+    "call": [
+      "Bring an amethyst shard, glowstone dust, or an eye of ender. Aethon accepts objects that catch, make, or seek light, but warns that none is a piece of certainty. In his recollection, the earliest nights of the First Concord were spent teaching mortals that darkness beyond the stars was not entitled to devour them. The pact existed so a life could have a future, not so the gods could display an orderly heaven.",
+      "He saw the coming catastrophe before the Sundering. That fact has become the hardest fact for him to live beside. A warning should have allowed preparation; he made it sound like a demand for obedience. Now he asks you to reach Y=160 and return to his shrine. The height is not a hidden observatory. Any safe route to that elevation will let him begin a lesson he once believed only he could teach."
+    ],
+    "witness": [
+      "From Y=160, the ground can seem arranged rather than inhabited. Aethon asks you to remember the labor concealed by distance: an uneven roof may cover a repaired room; a line through the trees may be someone's daily walk. Return safely to the shrine. There is no reward for falling, and no requirement to climb a particular mountain or create an elaborate monument.",
+      "Aethon recalls describing the impending disaster as a pattern of extinguished lights. Kairoth asked whose lights. Aethon thought the question an evasion because the pattern already threatened everyone. Only afterward did he understand that his brother was asking about the people inside a proposed remedy. 'I had looked far enough to see a catastrophe,' he says. 'I had not looked closely enough to describe the lives I expected other gods to spend preventing it.' The warning remained true. Its authority had limits."
+    ],
+    "testimony": [
+      "Kairoth withheld a possible timeline that prevented the Sundering by erasing innocent lives. He did not enact that prevention. Aethon was denied the chance to examine it before the crisis, and his anger is not invented. Yet he now knows the withheld possibility was not a clean rescue. Elaris disputes gaps in Kairoth's chronology; the disagreement does not establish that the missing time contains a harmless solution. Seeing catastrophe did not give Aethon knowledge of every alternative.",
+      "Choose permanently between Discovery and Contemplation. Discovery contributes four ender pearls, a commitment to pursue questions while keeping their costs visible. Contemplation requires sixty continuous seconds of prayer beneath visible night sky above Y=100, accepting attention without treating ignorance as sacred. Neither path demands contact with Kairoth or Elaris. Aethon can tell you what he knows and what he resents here, without using your journey to summon witnesses against his brother."
+    ],
+    "deed_a": [
+      "Contribute four ender pearls through the story donation. They are not keys to another timeline, and Aethon will not spend them to open a lost branch of history. The established deed marks Discovery as a deliberate expenditure: questions require work, but paying for an inquiry does not buy ownership of everyone whose life it concerns.",
+      "He remembers making a star chart with Kairoth before the Concord broke. Aethon marked the farthest points he could distinguish. His brother marked when to return home. Each thought the other was annotating the less important half. Now Aethon can imagine a discovery whose most valuable result is a boundary: this answer cannot be used without destroying people who never consented to be its material. He still wants the withheld account. Your path asks him to want it for understanding and scrutiny, not merely to prove that his original anger was righteous."
+    ],
+    "deed_b": [
+      "Pray at an Aethon shrine for sixty continuous seconds beneath visible night sky above Y=100. This is the existing Contemplation deed; the earlier ascent to Y=160 was witness, not a substitute for this sustained prayer. Use a shrine with the required elevation and view. The stars need not change shape, and no secret constellation will tell you that you have chosen the correct brother.",
+      "Aethon remembers waiting for Kairoth to finish a sentence about prevention. He filled the pause himself: there must be a way. When his brother finally spoke of cost, Aethon heard reluctance rather than information. In your prayer he asks for the discipline he lacked, leaving a question open long enough for an unwelcome answer to arrive. Contemplation is not agreement with secrecy. A person can condemn the withholding of testimony without pretending that the testimony, once heard, will be easy to accept."
+    ],
+    "reckoning_a": [
+      "Observe your underground surroundings below Y=0 for twelve continuous seconds. Discovery has looked outward and upward; now it must work where its favorite instruments cannot see the sky. No special cavern or buried record is required. Ordinary underground space offers the limit Aethon needs you to meet. There is a world beyond direct starlight, and it has not ceased to deserve care.",
+      "Aethon describes revising his chart after learning the cost of Kairoth's possible prevention. He once marked that future with a bright circle because the Concord survived there. Now he imagines writing the erased lives beside the circle, refusing to let the successful outcome consume the method used to reach it. You do not need to supply those people's names; he cannot honestly give them to you. The blank is an acknowledged absence in his evidence, not permission to reduce them to nothing."
+    ],
+    "reckoning_b": [
+      "Observe your underground surroundings below Y=0 for twelve continuous seconds. Aethon does not allow Contemplation to become a devotion available only beneath a beautiful sky. The same patience must endure where the view offers no reassurance. Your surroundings are present stone and shelter, not a divine prison or a newly revealed remnant of the First Concord.",
+      "Here he names the risk in your chosen path. He could have called the heavens inscrutable and stopped investigating his brother's silence. He could also have called his own vision complete and refused every complication. Both would have spared him this uncertainty. Instead, he holds two unfinished obligations: question the concealment, and refuse to conscript innocent lives merely because their erasure would make the great design more harmonious. The sky's absence cannot answer that conflict for him. It leaves enough quiet to hear that the conflict concerns people rather than a damaged pattern."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Stars after your reckoning. Aethon retains the existing trial because foresight without present action can become another form of withdrawal. Its challenge is not a reenactment of his prophecy, and winning it will not prove that the Sundering could have been prevented without cost. Your task is to act within the world you have, not demonstrate a counterfactual the god cannot verify.",
+      "Before you go, he recounts how he once corrected Kairoth's names for distant lights while forgetting the names of the attendants who brought their lamps. There is no cosmic revelation in the admission. It is an ordinary habit of scale, repeated until it became dangerous. Carry your Discovery or Contemplation through the trial, then return here. Aethon wants an account from the person who faced it, not a prediction that replaces that person's voice."
+    ],
+    "ending_a": [
+      "Aethon no longer describes the withheld future as the answer Kairoth stole. It was a possibility with victims, and the withholding was a decision with consequences of its own. Discovery has not made these facts comfortable companions. It has made them impossible to fold into one accusation. He will seek an account his brother can be questioned about, not a device with which to overwrite everyone else's history.",
+      "Celestial Ward's successful-block cooldown decreases from thirty to twenty-four seconds, exactly the Discovery specialization. No new star or temporal passage opens in exchange for your pearls. Aethon sets a different standard for his next warning: name what was seen, distinguish it from what was inferred, and state whose lives an intervention might spend. His curiosity has not diminished. It has acquired a responsibility to those who cannot speak from inside a beautiful answer because that answer would have erased them."
+    ],
+    "ending_b": [
+      "Aethon allows a question about the Sundering to remain unanswered without declaring the answer unknowable. Contemplation has taught him the difference. Elaris may still challenge the chronology, and Kairoth may still owe explanations. Neither obligation requires Aethon to turn every silence into proof of a painless rescue denied. He can grieve the catastrophe without inventing an innocent alternative to make that grief easier to direct.",
+      "A successful Celestial Ward block also heals one HP, the promised Contemplation specialization. The small recovery belongs to the life actually standing here. Aethon recalls his brother marking a return time on their old chart and, for once, does not hear timidity in the gesture. He is not ready to forgive every withheld word. He is ready to speak without assuming that age, distance, or a true prediction makes him the sole owner of what the silence means."
+    ]
+  },
+  "dialogue": {
+    "call": "I saw the catastrophe. That does not mean I saw every life within it.",
+    "witness": "Reach Y=160 and return safely. Distance reveals patterns and conceals households.",
+    "testimony": "Choose Discovery or Contemplation permanently; neither must excuse a hidden cost.",
+    "deed_a": "Contribute four ender pearls. An inquiry is not ownership of its answer.",
+    "deed_b": "Pray at an Aethon shrine beneath visible night sky above Y=100 for sixty uninterrupted seconds.",
+    "reckoning_a": "Observe below Y=0 for twelve continuous seconds. Discovery must recognize its limits.",
+    "reckoning_b": "Observe below Y=0 for twelve continuous seconds. Attention must survive an unlovely view.",
+    "trial": "Win a fresh Trial of Stars. Act here, where lives have not been reduced to possibilities.",
+    "ending_a": "The next warning will name its uncertainty as carefully as its danger.",
+    "ending_b": "An unanswered question is not an empty world."
+  }
+}

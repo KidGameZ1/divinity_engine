@@ -24,6 +24,8 @@ import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Set;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Base class for all gods in the divinity system.
@@ -45,23 +47,29 @@ public class BaseGod {
     private final Color textColor;
 
     private final @Nullable Curse curse;
-    private Block statueBlock;
-    private BlockEntityType statueBlockEntity;
+    private Supplier<? extends Block> statueBlock = () -> null;
+    private Supplier<? extends BlockEntityType<?>> statueBlockEntity = () -> null;
+
+    /** Automatic god registration binds registry handles, never early/null registry values. */
+    public final void bindStatue(Supplier<? extends Block> block, Supplier<? extends BlockEntityType<?>> type) {
+        this.statueBlock = Objects.requireNonNull(block);
+        this.statueBlockEntity = Objects.requireNonNull(type);
+    }
 
     public Block getStatueBlock() {
-        return statueBlock;
+        return statueBlock.get();
     }
 
     public void setStatueBlock(Block statueBlock) {
-        this.statueBlock = statueBlock;
+        this.statueBlock = () -> statueBlock;
     }
 
-    public BlockEntityType getStatueBlockEntity() {
-        return statueBlockEntity;
+    public BlockEntityType<?> getStatueBlockEntity() {
+        return statueBlockEntity.get();
     }
 
-    public void setStatueBlockEntity(BlockEntityType statueBlockEntity) {
-        this.statueBlockEntity = statueBlockEntity;
+    public void setStatueBlockEntity(BlockEntityType<?> statueBlockEntity) {
+        this.statueBlockEntity = () -> statueBlockEntity;
     }
 
     /**
@@ -140,6 +148,10 @@ public class BaseGod {
      * Called when a player loses faith in this god
      */
     public void onLoseFaith(LivingEntity living, LoseFaithEvent event) {}
+
+    public void onTick(BaseGodInstance instance ,LivingEntity living){
+
+    }
 
     /**
      * Creates a new instance of this god's handler class.

@@ -1,13 +1,13 @@
 package net.nightshade.divinity_engine.divinity.blessing.zephra;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
@@ -41,18 +41,11 @@ public class TempestSpiral extends Blessings {
             target.setDeltaMovement(pull.x, 0.1, pull.z);
             target.hurt(living.damageSources().magic(), 2.0f);
             target.hurtMarked = true;
+            BlessingVisuals.at(instance, living, target.position().add(0, 0.15, 0), Cue.IMPACT,
+                    Math.max(0.5, target.getBbWidth()), new Vec3(pull.x, 0.1, pull.z));
         }
 
-        // Wind spiral particles
-        for (int i = 0; i < 100; i++) {
-            double angle = Math.random() * 2 * Math.PI;
-            double spiral = angle + serverLevel.getGameTime() * 0.2;
-            double r = Math.random() * radius;
-            double x = living.getX() + Math.cos(spiral) * r;
-            double y = living.getY() + Math.random() * 1.5;
-            double z = living.getZ() + Math.sin(spiral) * r;
-            serverLevel.sendParticles(ParticleTypes.CLOUD, x, y, z, 1, 0, 0.05, 0, 0.01);
-        }
+        BlessingVisuals.at(instance, living, living.position(), Cue.CONTROL, radius);
 
         return true;
     }

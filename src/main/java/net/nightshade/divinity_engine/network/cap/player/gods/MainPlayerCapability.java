@@ -19,9 +19,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.divinity.trial.GodlyTrial;
 import net.nightshade.divinity_engine.network.messages.ModMessages;
 import net.nightshade.divinity_engine.network.messages.cap.SyncMainPlayerCapabilityPacket;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
+import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
+import net.nightshade.divinity_engine.registry.compat.LegacyElderContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +69,7 @@ public class MainPlayerCapability {
 		private @Nullable BlessingsInstance blessingSlot1 = null;
 		private @Nullable BlessingsInstance blessingSlot2 = null;
 		private @Nullable BlessingsInstance blessingSlot3 = null;
+        private CompoundTag legacyElderSlots = new CompoundTag();
 
 		private int blessingsPageNum = 0;
 		private int maxBlessingsPageNum = 0;
@@ -73,7 +77,6 @@ public class MainPlayerCapability {
 		private int dcPageNum = 0;
 
 		private boolean hasDivineCodex = false;
-
 		@SubscribeEvent
 		public static void attach(AttachCapabilitiesEvent<Entity> e) {
 			if (e.getObject() instanceof Player) {
@@ -85,6 +88,7 @@ public class MainPlayerCapability {
 		@Override
 		public CompoundTag serializeNBT() {
 			CompoundTag nbt = new CompoundTag();
+            if (!legacyElderSlots.isEmpty()) nbt.put("legacyElderSlots", legacyElderSlots.copy());
 
 			if (blessingSlot1 != null) {
 				CompoundTag slot1Tag = new CompoundTag();
@@ -126,6 +130,17 @@ public class MainPlayerCapability {
 
 		@Override
 		public void deserializeNBT(CompoundTag nbt) {
+            legacyElderSlots = nbt.getCompound("legacyElderSlots").copy();
+            // Free retired loadout slots, but retain their exact payload separately for recovery.
+            nbt = nbt.copy();
+            for (String slot : java.util.List.of("blessingSlot1", "blessingSlot2", "blessingSlot3")) {
+                if (!nbt.contains(slot, 10)) continue;
+                CompoundTag value = nbt.getCompound(slot);
+                if (LegacyElderContent.isBlessing(ResourceLocation.tryParse(value.getString("blessing")))) {
+                    legacyElderSlots.put(slot, value.copy());
+                    nbt.putString(slot, "none");
+                }
+            }
 			if (nbt.contains("blessingSlot1")) {
 				if (nbt.getString("blessingSlot1").equals( "none" )){
 					this.blessingSlot1 = null;

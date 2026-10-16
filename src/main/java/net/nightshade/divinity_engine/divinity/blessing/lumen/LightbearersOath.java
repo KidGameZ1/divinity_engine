@@ -1,7 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.lumen;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -12,9 +10,10 @@ import net.minecraft.world.entity.monster.Shulker;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
-import java.util.Random;
 
 public class LightbearersOath extends Blessings {
     /**
@@ -32,8 +31,6 @@ public class LightbearersOath extends Blessings {
 
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
-        Random r = new Random();
-
         Entity target = event.getEntity();
         System.out.println(target.getType());
         if (target instanceof LivingEntity livingTarget) {
@@ -49,9 +46,8 @@ public class LightbearersOath extends Blessings {
             if (isUndead || isDarkAligned) {
                 float boosted = event.getAmount() * 1.2f; // +20% damage
                 event.setAmount(boosted);
-                if (target.level() instanceof ServerLevel serverLevel) {
-                    serverLevel.sendParticles(ParticleTypes.END_ROD, target.getX(), target.getY() + 1, target.getZ(), 10, r.nextDouble(-0.5, 0.5), r.nextDouble(-0.5, 0.5), r.nextDouble(-0.5, 0.5), 0.1);
-                }
+                BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT,
+                        Math.max(0.75, target.getBbWidth()));
                 return false;
             }
         }

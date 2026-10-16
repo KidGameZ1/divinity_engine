@@ -1,12 +1,12 @@
 package net.nightshade.divinity_engine.divinity.blessing.grond;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -80,18 +80,8 @@ public class EchoingStrike extends Blessings {
                         entity.setDeltaMovement(dx * strength, 0.5, dz * strength);
                     });
 
-            // Particle shockwave (server-side only)
-            if (level instanceof ServerLevel serverLevel) {
-                for (int i = 0; i < 100; i++) {
-                    double angle = level.random.nextDouble() * 2 * Math.PI;
-                    double dist = level.random.nextDouble() * radius;
-                    double x = player.getX() + Math.cos(angle) * dist;
-                    double y = player.getY() + 0.5;
-                    double z = player.getZ() + Math.sin(angle) * dist;
-
-                    serverLevel.sendParticles(ParticleTypes.EXPLOSION, x, y, z, 1, 0, 0, 0, 0);
-                    serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 1, 0, 0.02, 0, 0);
-                }
+            if (!event.isCanceled() && event.getAmount() > 0) {
+                BlessingVisuals.at(instance, player, player.position().add(0, 0.08, 0), Cue.IMPACT, radius);
             }
 
             return true;

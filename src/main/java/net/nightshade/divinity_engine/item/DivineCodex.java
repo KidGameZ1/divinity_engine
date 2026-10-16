@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
+import net.nightshade.divinity_engine.divinity.trial.voltira.TrialOfStorms;
 import net.nightshade.divinity_engine.world.inventory.DivineCodexMenu;
 
 
@@ -26,6 +27,7 @@ public class DivineCodex extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pPlayer instanceof ServerPlayer _ent) {
+            net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.sync(_ent, true);
             BlockPos _bpos = pPlayer.blockPosition();
             NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
                 @Override

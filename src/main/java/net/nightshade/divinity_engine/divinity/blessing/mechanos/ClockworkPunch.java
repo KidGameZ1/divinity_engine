@@ -1,19 +1,19 @@
 package net.nightshade.divinity_engine.divinity.blessing.mechanos;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.Random;
 
 public class ClockworkPunch extends Blessings {
 
@@ -34,26 +34,27 @@ public class ClockworkPunch extends Blessings {
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
         LivingEntity target = event.getEntity();
-        if (target instanceof LivingEntity && new Random().nextFloat() < instance.getOrCreateTag().getFloat("knockback_chance")) {
+        float chance = instance.getOrCreateTag().getFloat("knockback_chance")
+                + (BlessingSpecializations.isActive(player, "mechanos", "a") ? 0.1f : 0);
+        if (player.getRandom().nextFloat() < Math.min(1.0f, chance)) {
+            double strength = instance.getOrCreateTag().getDouble("knockback_strength")
+                    * (BlessingSpecializations.isActive(player, "mechanos", "b") ? 1.25 : 1.0);
             Vec3 knockbackDir = target.position().subtract(player.position()).normalize();
-            target.setDeltaMovement(knockbackDir.x * instance.getOrCreateTag().getDouble("knockback_strength"),
+            target.setDeltaMovement(knockbackDir.x * strength,
                     0.5,
-                    knockbackDir.z * instance.getOrCreateTag().getDouble("knockback_strength"));
+                    knockbackDir.z * strength);
+            target.hurtMarked = true;
 
             if (player.level() instanceof ServerLevel serverLevel) {
-                spawnParticles(serverLevel, target);
+                if (!event.isCanceled() && event.getAmount() > 0) {
+                    BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT, 1.25);
+                }
                 playPunchSound(serverLevel, target);
             }
 
             return true;
         }
         return super.onDamageEntity(instance, player, event);
-    }
-
-    private void spawnParticles(ServerLevel level, Entity target) {
-        level.sendParticles(ParticleTypes.CRIT,
-                target.getX(), target.getY() + 1.0, target.getZ(),
-                15, 0.3, 0.3, 0.3, 0.1);
     }
 
     private void playPunchSound(ServerLevel level, Entity target) {

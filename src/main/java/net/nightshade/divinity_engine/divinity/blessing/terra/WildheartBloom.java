@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.terra;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -13,10 +12,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
 
 public class WildheartBloom extends Blessings {
     /**
@@ -53,6 +53,10 @@ public class WildheartBloom extends Blessings {
                 if (instance.getOrCreateTag().getCompound("allies_list").getUUID(event.getTarget().getDisplayName().getString()) != event.getTarget().getUUID() || !instance.getOrCreateTag().getCompound("allies_list").contains(event.getTarget().getDisplayName().getString())) {
                     instance.getOrCreateTag().getCompound("allies_list").putUUID(event.getEntity().getDisplayName().getString(), event.getTarget().getUUID());
                     event.getEntity().displayClientMessage(Component.literal("You have added " + event.getTarget().getDisplayName().getString() + " to your allies list!").withStyle(style -> style.withColor(Color.GREEN.getRGB())), true);
+                    if (!event.isCanceled()) {
+                        BlessingVisuals.link(instance, event.getEntity(), event.getEntity().getBoundingBox().getCenter(),
+                                event.getTarget().getBoundingBox().getCenter(), Cue.MARK);
+                    }
                 }
             }
         }
@@ -67,8 +71,6 @@ public class WildheartBloom extends Blessings {
 
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
-
-        Random r = new Random();
 
         if (instance.getOrCreateTag().getInt("time") >= instance.getOrCreateTag().getInt("time_limit")) {
             instance.onToggleOff(living);
@@ -97,9 +99,13 @@ public class WildheartBloom extends Blessings {
                                 livingEntityList.remove(entity);
                             } else {
                                 DivinityEngineMod.waitInSeconds(2, () -> {
-                                    if (entity.getHealth() < entity.getMaxHealth())
+                                    if (entity.getHealth() < entity.getMaxHealth()) {
+                                        float healthBefore = entity.getHealth();
                                         entity.heal(0.05f);
-                                    ;
+                                        if (entity.getHealth() > healthBefore && entity.level() == living.level()) {
+                                            BlessingVisuals.at(instance, living, entity.getBoundingBox().getCenter(), Cue.HEAL, 1.0);
+                                        }
+                                    }
                                 });
                             }
                         }else break;
@@ -109,30 +115,18 @@ public class WildheartBloom extends Blessings {
                 }
 
                 DivinityEngineMod.waitInSeconds(2, ()->{
-                    if (living.getHealth() < living.getMaxHealth())
+                    if (living.getHealth() < living.getMaxHealth()) {
+                        float healthBefore = living.getHealth();
                         living.heal(0.05f);
+                        if (living.getHealth() > healthBefore) {
+                            BlessingVisuals.pulse(instance, living, Cue.HEAL);
+                        }
+                    }
                 });
-                    if (instance.getOrCreateTag().getInt("time") < instance.getOrCreateTag().getInt("time_limit")) {
-                        instance.getOrCreateTag().putInt("time", instance.getOrCreateTag().getInt("time") + 1);
-                    }
-                    for (int i = 0; i < 5; i++) {
-                        double angle = serverLevel.getRandom().nextDouble() * 2 * Math.PI;
-                        double radius = serverLevel.getRandom().nextDouble() * 7;
-                        double x = living.getX() + Math.cos(angle) * radius;
-                        double y = living.getY() + 2.5;
-                        double z = living.getZ() + Math.sin(angle) * radius;
-
-                        serverLevel.sendParticles(ParticleTypes.CHERRY_LEAVES, x, y, z, 1, 0, r.nextDouble(-0.5, 0), 0, r.nextDouble(-0.2, 0));
-                    }
-                    for (int i = 0; i < 2; i++) {
-                        double angle = serverLevel.getRandom().nextDouble() * 2 * Math.PI;
-                        double radius = serverLevel.getRandom().nextDouble() * 7;
-                        double x = living.getX() + Math.cos(angle) * radius;
-                        double y = living.getY() + 0.02;
-                        double z = living.getZ() + Math.sin(angle) * radius;
-
-                        serverLevel.sendParticles(ParticleTypes.HEART, x, y, z, 1, 0, r.nextDouble(-0.5,0), 0, r.nextDouble(-0.2,0));
-                    }
+                if (instance.getOrCreateTag().getInt("time") < instance.getOrCreateTag().getInt("time_limit")) {
+                    instance.getOrCreateTag().putInt("time", instance.getOrCreateTag().getInt("time") + 1);
+                }
+                BlessingVisuals.at(instance, living, position.add(0, 0.08, 0), Cue.AURA, 6.0);
 
             }
         }

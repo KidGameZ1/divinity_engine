@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:zephra",
+  "premise": "Zephra once lent the roads of the sky to the First Concord, helping keep mortal life beyond oblivion's reach. During the Sundering, the same restraints that coordinated those winds threatened to hold evacuation routes shut. Zephra broke free and carried mortals away, leaving Voltira bound to the failing defense. Each sibling believes the other chose abandonment. An Unbound Horizon asks whether freedom can make room for those unable to keep pace, and whether returning must mean surrendering the right to leave.",
+  "offering_examples": ["minecraft:feather", "minecraft:scaffolding", "minecraft:phantom_membrane"],
+  "witness": {
+    "objective": "divinity_engine:observe",
+    "condition": "day_sky",
+    "target": 240,
+    "deed": "Observe the open daytime sky for 12 continuous seconds"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:breed",
+    "condition": "",
+    "target": 2,
+    "deed": "Breed two animals"
+  },
+  "passages": {
+    "call": [
+      "A feather, scaffolding, or a phantom membrane will serve as an accepted offering. Zephra favors the scaffolding's unromantic promise: a height made reachable by many small footholds. Songs prefer the solitary leap. Builders know how many hands must carry materials before anyone can stand above a roof. At this shrine the wind begins with that distinction, as though warning you that the account ahead will be less graceful than the tale usually told about escape.",
+      "Zephra remembers the Concord's roadside shelters, where people from distant valleys exchanged directions and mispronounced each other's names. Freedom meant destinations survived long enough to be reached. When the Sundering came, keeping a road open required breaking the arrangement that had once made roads possible. Zephra boasts of that break, then falls silent over the people who could not move quickly. Your gift buys no map to a lost place; it opens a conversation about whose journey gets remembered."
+    ],
+    "witness": [
+      "Observe the open daytime sky for twelve continuous seconds. You need not climb to a dangerous height. From ordinary ground, a person can see both the invitation above and the practical distance between a wish and a departure. Zephra asks you to notice that a clear sky does not make every road accessible. A tired body, an unfinished duty, or someone who cannot travel alone may narrow a horizon no cloud obscures.",
+      "During the evacuation, a cartwright insisted on repairing a wheel while Zephra urged everyone onward. The delay looked intolerable until the cart carried people who otherwise would have been left sitting beside the road. Zephra's favorite version of the story used to skip the repair and begin with the triumphant rush. Now the wind holds still long enough for you to hear the sound of a pin being hammered into place. Sometimes freedom arrives at the speed of maintenance."
+    ],
+    "testimony": [
+      "Zephra broke the Concord's restraints to open an evacuation route. The rupture sent strain into the remaining defense, where Voltira was still bound. Zephra saw the storm flare behind the departing mortals and believed a sibling had chosen the Concord over them. A return gust was sent, but Zephra never knew whether it reached Voltira. Later, telling the story as a clean escape, Zephra omitted both that uncertainty and the danger the broken restraints had shifted onto those who stayed.",
+      "Choose permanently between Journey and Heights. Journey requires sprinting 1,000 blocks; Heights requires reaching Y=160 and returning to this shrine. Neither is a request to find Voltira or retrace an ancient route. Your world already holds enough road and sky for the work. You are choosing between learning freedom through continued passage and learning it through an ascent that includes coming home. Zephra will not pretend the first means flight from responsibility or the second means submission to a cage."
+    ],
+    "deed_a": [
+      "Sprint 1,000 blocks. The distance belongs to your present travels, not to a prescribed pilgrimage. Zephra asks you to consider what a route leaves behind as well as what it reaches. The feet that run easily today may be carrying an injury tomorrow. A path worthy of celebration is more than a line traced by whoever happens to be fastest; it is also the possibility that someone slower could eventually follow.",
+      "The evacuation crossed a toll bridge whose keeper demanded a manifest before opening the gate. Zephra tore away the barrier, and rightly refuses to apologize for ending that obstruction. Yet the keeper's records later helped families locate people sent to different shelters. The lesson is not that every barrier deserves obedience. It is that breaking a harmful rule does not make every useful task associated with it contemptible. Count your progress without deciding that counting itself belongs only to jailers."
+    ],
+    "deed_b": [
+      "Reach Y=160 and return to this shrine. Plan the descent before celebrating the summit. Zephra has no use for a height that becomes a prison because its climber cannot safely leave. Scaffolding and patient preparation are as honorable as daring. This deed asks for the established height and return, not a particular mountain, a leap into danger, or an audience gathered to admire the view.",
+      "Above the evacuation road stood a signal platform. Zephra carried a lookout there to guide the next group, then nearly forgot to arrange a way down. The lookout's final signal was not about the horizon but about a missing ladder. Zephra tells you this with rueful affection, resisting the temptation to make the stranded person merely a joke. Your ascent should widen what you can understand below. If it only makes other people seem small, the height has taught the wrong lesson."
+    ],
+    "reckoning_a": [
+      "Breed two animals. The road pauses for lives that cannot immediately join a sprint. Zephra asks for this ordinary act of husbandry because departures often depend on creatures whose care never appears in heroic accounts. Feed and shelter them as living beings, not as proof that motion has defeated stillness. No donation of the animals is required, and the story asks for no journey with them to a shrine.",
+      "The cartwright from the evacuation later refused another invitation to travel. There were animals to tend and young mouths to feed. Zephra once mourned that refusal as a spirit diminished by domestic life. Now another interpretation becomes possible: a person exercising freedom by choosing a responsibility that a god found unexciting. Your deed cannot measure whether every enclosure is kind. It can remind a restless deity that dependence is not disgrace and that leaving is not the only decision worth respecting."
+    ],
+    "reckoning_b": [
+      "Breed two animals. After seeing how far a horizon can reach, attend to a beginning close to the ground. The work offers no spectacle comparable to your ascent, and that is deliberate. Zephra asks you to notice how a future becomes possible through food, shelter, and repeated small attentions. Neither the animals nor their young must be surrendered. Their continued life belongs to the ordinary world, not to a god's collection of impressive tributes.",
+      "The old lookout eventually built a low house with a broad doorway. Visitors teased someone who had seen so much sky for choosing such modest surroundings. The lookout answered that the doorway admitted a neighbor who could no longer climb steps. Zephra remembers this reply because it turned height from a ranking into a tool. A wider view should help you find what others need. It should not become an excuse to declare everyone who lives below your chosen summit afraid of freedom."
+    ],
+    "trial": [
+      "Win a fresh trial of Zephra after completing this reckoning, then return to the shrine. An old victory cannot answer what you now understand about the people left off the fast road. Prepare the attempt without treating preparation as a betrayal of courage. If you fail, you may try again without repeating completed chapters. Freedom includes another attempt; it is not a prize reserved for those who happened to move perfectly the first time.",
+      "Zephra almost gives you a message for Voltira and then withdraws it. You have not volunteered to become the next urgent thing carried between estranged siblings. Instead, the wind admits the sentence missing from the old escape song: breaking my restraint increased another person's burden. That truth does not erase the rescued mortals or prove the restraint should have remained. It makes the rescue a decision with a cost, rather than a fable in which liberty never has to look backward."
+    ],
+    "ending_a": [
+      "At your return, Zephra tells the road's story with the wheel repair included. The pace is less thrilling; the people are more visible. Journey has become a practice of noticing who has stopped and asking why, not assuming every pause proves cowardice. The accusation against Voltira remains a wound, but no longer a settled explanation of a flare seen from far away. Zephra can acknowledge the burden shifted by escape without wishing the evacuated people back into danger.",
+      "Journey retains its established reward: Gale Step grants an additional 5% movement speed. The extra pace does not make those behind you less deserving of a road. 'Every step made the world a little wider. Never mistake a familiar road for the only road.' This time Zephra includes the path back to an ordinary household among the possibilities. Your horizon remains unbound because staying, leaving, and returning can all be choices rather than tests of loyalty to the wind."
+    ],
+    "ending_b": [
+      "Zephra welcomes you without asking whether the shrine looks smaller after your ascent. Heights has changed the question: what could you see that you had failed to provide for? The missing ladder, the broad doorway, and the young animals all belong in the same account as the impossible view. Returning has not made your freedom false. It has given a place and a set of responsibilities the chance to be chosen with your eyes open.",
+      "Heights retains its established reward: Gale Step reduces fall damage by 25%. It softens a consequence without pretending there is no distance to fall. 'You touched the high wind and returned to tell of it. Freedom includes knowing how to come home.' Zephra cannot yet say whether Voltira will hear the old return gust differently. Your independent story needs no such assurance. The wind has learned to leave room in its praise of escape for the person who comes back."
+    ]
+  },
+  "dialogue": {
+    "call": "A feather or a foothold will do. Tell me whose departure the songs forgot.",
+    "witness": "Watch the daytime sky for twelve continuous seconds. No dangerous climb is needed.",
+    "testimony": "Journey or Heights: choose permanently. Neither path requires my sibling's permission.",
+    "deed_a": "Sprint 1,000 blocks. Remember that a useful road must outlast its fastest traveler.",
+    "deed_b": "Reach Y=160 and return here. Plan your way down before praising the view.",
+    "reckoning_a": "Breed two animals. A new life is allowed to slow the road.",
+    "reckoning_b": "Breed two animals. Let the wide view teach you a nearby responsibility.",
+    "trial": "Win a fresh trial of mine, then return. Preparation is not a cage.",
+    "ending_a": "The road home belongs among your freedoms too.",
+    "ending_b": "You returned by choice. The sky has not become smaller."
+  }
+}

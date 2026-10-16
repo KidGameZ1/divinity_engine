@@ -1,0 +1,15 @@
+{
+  "name": "divinity_engine:malgrath_shrine",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "divinity_engine:malgrath_shrine",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

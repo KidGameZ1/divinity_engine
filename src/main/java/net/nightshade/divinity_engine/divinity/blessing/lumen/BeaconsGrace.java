@@ -3,15 +3,15 @@ package net.nightshade.divinity_engine.divinity.blessing.lumen;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.UUID;
 
 /**
  * Represents a blessing that provides speed boost and protection effects in well-lit areas or during daylight.
@@ -40,11 +40,15 @@ public class BeaconsGrace extends Blessings {
      */
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
-        if (living.level().getBrightness(LightLayer.BLOCK, living.blockPosition()) >= 12) {
+        if (living.level().isClientSide) return false;
+        int threshold = qualifyingLightThreshold(living);
+        boolean bright = BlessingSpecializations.isBright(living, threshold);
+        if (bright) {
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false, true));
-        } else if (living.level().isDay() && living.level().canSeeSkyFromBelowWater(living.blockPosition())) {
-            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false, true));
+            BlessingVisuals.at(instance, living, living.position().add(0, 0.04, 0), Cue.AURA, 0.6);
         }
+        BlessingSpecializations.effect(living, MobEffects.DAMAGE_RESISTANCE,
+                bright && BlessingSpecializations.isActive(living, "lumen", "b"));
         return false;
     }
 
@@ -58,12 +62,23 @@ public class BeaconsGrace extends Blessings {
      */
     @Override
     public boolean onBeingTargeted(BlessingsInstance instance, LivingEntity target, LivingChangeTargetEvent event) {
-        if (target.level().getBrightness(LightLayer.BLOCK, target.blockPosition()) >= 12 && event.getNewTarget() != null && event.getNewTarget().distanceTo(target) <= 2) {
+        int threshold = qualifyingLightThreshold(target);
+        boolean protectedTarget = false;
+        if (target.level().getBrightness(LightLayer.BLOCK, target.blockPosition()) >= threshold && event.getNewTarget() != null && event.getNewTarget().distanceTo(target) <= 2) {
             event.setCanceled(true);
+            protectedTarget = true;
         }
         if (target.level().isDay() && target.level().canSeeSkyFromBelowWater(target.blockPosition())) {
             event.setCanceled(true);
+            protectedTarget = true;
+        }
+        if (protectedTarget) {
+            BlessingVisuals.at(instance, target, target.getBoundingBox().getCenter(), Cue.WARD, 0.85);
         }
         return false;
+    }
+
+    public static int qualifyingLightThreshold(LivingEntity player) {
+        return BlessingSpecializations.isActive(player, "lumen", "a") ? 9 : 12;
     }
 }

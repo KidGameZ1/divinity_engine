@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.nerai;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +7,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
@@ -45,19 +46,11 @@ public class TidecallersWrath extends Blessings {
 
             target.setDeltaMovement(knockback);
             target.hurtMarked = true; // Ensures knockback is applied on next tick
+            BlessingVisuals.at(instance, living, target.position().add(0, 0.5, 0), Cue.IMPACT,
+                    Math.max(0.75, target.getBbWidth()), knockback);
         }
 
-        // Splash particle burst
-        for (int i = 0; i < 80; i++) {
-            double angle = Math.random() * 2 * Math.PI;
-            double distance = Math.random() * radius;
-            double x = living.getX() + Math.cos(angle) * distance;
-            double y = living.getY() + 0.5;
-            double z = living.getZ() + Math.sin(angle) * distance;
-
-            serverLevel.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, 0, 0.1, 0, 0.01);
-            serverLevel.sendParticles(ParticleTypes.BUBBLE, x, y, z, 1, 0, 0.1, 0, 0.01);
-        }
+        BlessingVisuals.at(instance, living, living.position().add(0, 0.5, 0), Cue.CONTROL, radius);
 
         return true;
     }

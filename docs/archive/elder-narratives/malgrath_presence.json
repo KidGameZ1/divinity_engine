@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "kind": "presence",
+  "god": "divinity_engine:malgrath",
+  "color": "f28a42",
+  "texture": "minecraft:textures/particle/flame.png",
+  "sound": "minecraft:block.basalt.break",
+  "dialogue": {
+    "greeting": [
+      "Malgrath, the Worldbreaker. Before you ask what I can destroy, tell me what must remain.",
+      "Show me what you are willing to lose. Willing is the word I will not let you skip.",
+      "That crack may be a warning, not an invitation. We need not widen every one we find."
+    ],
+    "prayer": [
+      "Keep your hands clear of the flame. Pain is not a substitute for an answer.",
+      "Name the cost before you praise the power. An unnamed sacrifice usually belongs to someone else.",
+      "Be still long enough to hear what would fall with the wall. Then decide."
+    ],
+    "offering": [
+      "Accepted. Your gift ends here; it does not mortgage the contents of your pack.",
+      "Obsidian remembers pressure. I accept the material, not a promise to burn the world around it.",
+      "You brought this deliberately. No nearby building must pay a second tribute."
+    ],
+    "contact": [
+      "The Price of Ruin begins when we meet. Hear both paths: one explicit netherite-ingot donation or a demanding melee deed. Neither is a concealed health sacrifice."
+    ],
+    "return": [
+      "You came back. The account did not charge interest while you were gone."
+    ],
+    "recognition": [
+      "The Heart's claim is settled by the ending you chose. I will not reopen it to demand a greater price."
+    ],
+    "Neutral": [
+      "You may hear my story now. Knowing the cost comes before consenting to it."
+    ],
+    "Favorable": [
+      "I have seen a deliberate deed, not a pile of broken things offered as an excuse."
+    ],
+    "Devoted": [
+      "You can face a cost without pretending it was nothing. That is strength I can trust."
+    ],
+    "Champion": [
+      "You know where to stop the rupture. Carry that knowledge with the power to begin it."
+    ],
+    "Displeased": [
+      "Destruction without a purpose asks others to pay for your impatience. Consider what your actions leave standing."
+    ],
+    "Enemy": [
+      "Trust has collapsed between us. Refusing an optional sacrifice was never enough to cause that."
+    ],
+    "trial_start": [
+      "The Trial of Ruin asks you to withstand its pressure. Its displayed phases are the terms; there is no secret healing ban or item toll."
+    ],
+    "failure": [
+      "You were overcome. Learn the pressure and return; a paid tribute is not due again."
+    ],
+    "victory": [
+      "The Trial of Ruin is won. Power did not require the ground beneath every home to break. Return to my statue for any waiting ending."
+    ],
+    "curse": [
+      "Ruin Within follows hostile injury: healing is briefly diminished and existing absorption wears away faster. The curse does not consume your possessions or permanently reduce your maximum health."
+    ],
+    "curse_cleared": [
+      "Ruin Within is lifted. The breaking has an end; no hidden debt remains in your recovery."
+    ]
+  }
+}

@@ -1,16 +1,17 @@
 package net.nightshade.divinity_engine.divinity.blessing.mechanos;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -40,9 +41,11 @@ public class PrecisionImpact extends Blessings {
             // Simulate speeding it up: apply a temporary effect or tag
             be.getPersistentData().putLong("mechanos_boost_timer", serverLevel.getGameTime() + 200); // lasts 10 sec
 
-            // Optional: Play gear sound & particles
+            // Keep the machine sound alongside its blessing visual.
             serverLevel.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1f, 1f);
-            ((ServerLevel) event.getEntity().level()).sendParticles(ParticleTypes.CRIT, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 10, 0.2, 0.2, 0.2, 0.01);
+            if (!event.isCanceled()) {
+                BlessingVisuals.at(instance, event.getEntity(), Vec3.atCenterOf(pos).add(0, 0.6, 0), Cue.CAST, 0.65);
+            }
 
             return true;
         }

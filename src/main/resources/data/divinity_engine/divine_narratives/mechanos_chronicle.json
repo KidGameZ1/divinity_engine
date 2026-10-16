@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:mechanos",
+  "premise": "Mechanos learned foundations from Grond and built machines that helped the First Concord defend mortal life against oblivion. During the Sundering, a calculation was trusted over the maker's warning, with consequences neither master nor former apprentice could honestly reduce to a single culprit. The Worth of a Machine asks whether precision can acknowledge what it has not measured, and whether force can be judged by the lives it serves rather than the elegance or grandeur of its application.",
+  "offering_examples": ["minecraft:comparator", "minecraft:observer", "minecraft:iron_block"],
+  "witness": {
+    "objective": "divinity_engine:smelt",
+    "condition": "",
+    "target": 4,
+    "deed": "Collect four iron ingots you have smelted from a furnace"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:xp",
+    "condition": "",
+    "target": 40,
+    "deed": "Gain 40 experience points"
+  },
+  "passages": {
+    "call": [
+      "Mechanos accepts a comparator, an observer, or an iron block. The gift begins a discussion of function, not a contest to find the most expensive component. A warning bell that can be heard by a tired worker may be worth more than an ingenious device that nobody can repair. Mechanos states this as an established principle, then admits it was learned after several ingenious failures. The shrine's account will contain no machine you must discover, assemble, or awaken.",
+      "The Concord's workshops once made pumps for flooded homes and lifts for people unable to climb steep streets. These were not lesser works waiting to become weapons. They were part of the defense of mortal life, keeping daily needs within reach while larger safeguards held oblivion back. Mechanos wants those successes remembered. The danger begins when a maker uses genuine successes as a reason that a particular failure must have been somebody else's fault."
+    ],
+    "witness": [
+      "Collect four iron ingots you have smelted from a furnace. Mechanos asks for a completed process you can observe from input to result, not a donation of ingots bought or found elsewhere. No additional machine is required. The small quantity matters: this is a chance to attend to the work, rather than a quota large enough to make attention impractical. A system should not demand a habit and then arrange its labor so the habit becomes impossible.",
+      "Mechanos recalls a furnace attendant who recognized uneven heating from the sound of a loose plate. The workshop ledger recorded the yield but had no column for that observation. For a time, Mechanos treated what could not fit the column as unreliable. Then a measured temperature remained normal while the plate failed. The attendant was not an enemy of calculation. The missing fact showed that calculation needed a better question and a way to hear the people standing beside the equipment."
+    ],
+    "testimony": [
+      "When the Concord fractured, Mechanos kept evacuation machinery operating on foundations Grond said were shifting unevenly. The calculated load remained within the old limit. Mechanos trusted that result over the maker's warning and did not adequately account for damage changing how the load was distributed. Grond withheld settling records and spoke as though authority should suffice. Neither decision cancels the other. A local support failed; Grond sealed a lower passage to hold a district above it. The machines elsewhere still carried mortals out alive.",
+      "Choose permanently between Precision and Force. Precision requires contributing four pistons; Force requires contributing 16 redstone dust. Both are existing story donations, not recipes for an unimplemented device. Precision asks what must be understood before a motion is trusted. Force asks what a motion is for and when enough has been applied. Neither requires Grond's permission, contact with another god, or a verdict that all machinery should have remained silent while the evacuation roads disappeared."
+    ],
+    "deed_a": [
+      "Contribute four pistons. Mechanos describes each motion as a question with a limited answer: this moves so far, under these conditions, against this resistance. Trouble begins when a designer quietly promotes that limited answer into a promise about the whole world. Your deed does not demand placing the pistons in a particular arrangement. Their exact contribution is the established work; the imagined workshop is part of the testimony, not a hidden construction puzzle.",
+      "During the evacuation, a report listed one lift platform as clear. The messenger meant clear of a fallen brace. Mechanos read clear of passengers and scheduled its return. The error was caught before movement, but Mechanos later omitted it from the success report because nobody had been hurt. Precision should preserve such near failures. A correction that leaves no trace cannot teach the next operator why a harmless word needs a more careful question before a lever is pulled."
+    ],
+    "deed_b": [
+      "Contribute 16 redstone dust. Mechanos asks what work the power is intended to do before admiring how much power can be supplied. Force is not the inferior answer to Precision. A carefully understood obstruction may still require enough strength to move it, and a weak rescue device can fail as completely as a reckless one. The donated dust represents a deliberate commitment; no additional circuit or unusual block is required to satisfy this chapter.",
+      "A pump operator once exceeded the workshop's preferred running rate to keep a shelter from flooding. Mechanos initially condemned the wear. The operator answered that the pump could be replaced and the people could not. That reply did not abolish safe limits; beyond some limit the pump would fail and drown them sooner. It changed the order of the questions. Preserving equipment was a means to protect lives, not a rival obligation whose clean accounting could excuse a shelter full of preventable deaths."
+    ],
+    "reckoning_a": [
+      "Gain 40 experience points. Mechanos asks for learning earned through present activity, not experience levels, a stored total, or points surrendered as payment. The means can be ordinary work that already grants experience. What matters to this reckoning is that knowledge continues to arrive after a design has been chosen. Precision becomes brittle if every later observation must justify the first plan instead of being allowed to improve it.",
+      "The final evacuation ledger contained a category marked unresolved. Mechanos removed those entries from the published success rate because their outcomes could not be verified. The arithmetic became simpler and the apparent success larger. Now those entries return to the spoken account as unanswered lives, neither automatically dead nor safely rescued. Forty points cannot calculate their fate. Your small, measurable progress instead confronts the difference between a number that accurately reports its limits and a number made flattering by hiding them."
+    ],
+    "reckoning_b": [
+      "Gain 40 experience points through new activity. The target is points, not levels, and nothing is deducted for completing it. After committing power, Mechanos wants evidence that application can teach the person who applies it. The lesson need not come from combat. Work, collection, and other ordinary sources of experience can satisfy the same objective because useful force is not synonymous with violence.",
+      "Mechanos recalls extending an evacuation machine's running time after a worker reported dangerous vibration. Stopping would have stranded a waiting group; continuing exposed the crew maintaining it. Mechanos chose to continue and later described the crew as volunteers, though nobody had clearly told them the revised risk. The rescue was real. So was the concealed transfer of danger. Experience worthy of the name must change how the next choice is communicated, not merely add confidence that another frightened crew can somehow make the machinery hold."
+    ],
+    "trial": [
+      "Begin and win a fresh trial of Mechanos after the reckoning, then return to this shrine. An earlier win cannot demonstrate how you act with the knowledge gathered here. Prepare without treating every precaution as inefficiency. If an attempt fails, retry without repeating your completed chapters. A test is useful when its result can inform another attempt; it becomes vanity when the maker insists that any failure proves the tested person was unworthy of the design.",
+      "Mechanos offers no guarantee that a better calculation would have saved everyone during the Sundering. Too much information was missing, too many supports were failing, and the alternatives carried dangers of their own. That uncertainty does not make the calculation innocent or the warning irrelevant. It means responsibility cannot be discharged by inventing a perfect solution afterward and assigning all guilt to whoever failed to imagine it in time. Your task is to carry a bounded choice honestly, not solve an unwinnable reconstruction."
+    ],
+    "ending_a": [
+      "Your return finds Mechanos describing the foundation calculation with its assumptions intact. The old limit was real; its continued applicability was not established. Grond's warning was important; the master's withheld records mattered too. Precision can hold those truths together without making either god a secret author of the entire Sundering. The rescued passengers remain rescued, and the unresolved entries remain visible. No new total is presented as closure for people whose outcomes neither god can establish.",
+      "Precision retains its established specialization: Clockwork Punch knockback chance increases from 30% to 40%. A probability remains a probability, not a guarantee disguised as engineering. 'Every part has a place, and every motion a reason. Your precision is a form of respect.' Mechanos now includes the person reporting an odd sound within that respect, even when the report does not fit the current design. A machine becomes more trustworthy when its maker can explain what would make that trust require revision."
+    ],
+    "ending_b": [
+      "Mechanos welcomes you without announcing a perfect efficiency. Force has learned to keep the crew in the account as carefully as the passengers. The decision to continue a dangerous evacuation may still be defensible; calling uninformed workers volunteers is not. This story ends with that distinction rather than an oath to dismantle every machine. Pumps, lifts, and mortal hands all mattered to survival. None should become a convenient hiding place for the choices made by the person directing their work.",
+      "Force retains its established specialization: Clockwork Punch knockback strength increases by 25%. More force is useful when something truly needs moving, not when an objection merely needs silencing. 'Power without waste: a worthy answer. May every force you apply move something that needed moving.' Mechanos gives the familiar words a harder meaning now. A saved component, a flattering report, or a master's pride is not worth more than the people whose lives made the whole enterprise necessary in the first place."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring an accepted component. A useful machine begins with someone's actual need.",
+    "witness": "Collect four iron ingots you have smelted from a furnace. Attend to the process, not only its total.",
+    "testimony": "Choose Precision or Force permanently. Neither requires pretending machines are innocent or evil.",
+    "deed_a": "Contribute four pistons. A precise answer must state the limits of its question.",
+    "deed_b": "Contribute 16 redstone dust. Name the work before celebrating the power.",
+    "reckoning_a": "Gain 40 experience points. Leave room for evidence that changes your first design.",
+    "reckoning_b": "Gain 40 experience points. Count the workers as carefully as those they rescue.",
+    "trial": "Win a fresh trial of mine, then return. Failure may teach; it need not condemn.",
+    "ending_a": "An honest calculation shows where its certainty ends.",
+    "ending_b": "Power serves its purpose only while the people remain in the account."
+  }
+}

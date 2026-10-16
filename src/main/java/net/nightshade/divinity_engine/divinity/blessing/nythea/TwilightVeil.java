@@ -1,14 +1,16 @@
 package net.nightshade.divinity_engine.divinity.blessing.nythea;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.UUID;
 
 public class TwilightVeil extends Blessings {
     public TwilightVeil(int neededFavor, int cooldown, boolean isPassive, boolean isActive, boolean canToggle, Color textColor) {
@@ -17,25 +19,32 @@ public class TwilightVeil extends Blessings {
 
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
+        if (living.level().isClientSide) return false;
         Level level = living.level();
-        boolean isNight = !level.isDay();
-
-        UUID speedModifierUUID = UUID.fromString("7E0E1E5E-8C0D-4F9A-B8A1-F9A9E9B9E9E9");
-        AttributeModifier speedModifier = new AttributeModifier(speedModifierUUID, "Twilight Speed", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        boolean isNight = !level.isDay() && BlessingSpecializations.isEligible(living, instance);
+        double speed = BlessingSpecializations.isActive(living, "nythea", "b") ? 0.15 : 0.1;
+        BlessingSpecializations.modifier(living, Attributes.MOVEMENT_SPEED,
+                BlessingSpecializations.TWILIGHT_SPEED, "Twilight Speed", isNight ? speed : 0);
+        BlessingSpecializations.effect(living, net.minecraft.world.effect.MobEffects.NIGHT_VISION,
+                isNight && BlessingSpecializations.isActive(living, "nythea", "a"));
 
         if (isNight) {
-            if (!living.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(speedModifier)) {
-                living.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(speedModifier);
+            if (!living.isShiftKeyDown() && !living.isInvisible() && living.tickCount % 40 == 0
+                    && living.getDeltaMovement().horizontalDistanceSqr() > 0.001) {
+                Vec3 feet = living.position().add(0, 0.06, 0);
+                Vec3 movement = living.getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.25);
+                BlessingVisuals.link(instance, living, feet, feet.add(movement), Cue.TRAIL);
             }
             if (living.isShiftKeyDown() && !living.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY)) {
-                living.setInvisible(true);
+                if (!living.isInvisible()) {
+                    living.setInvisible(true);
+                    living.getPersistentData().putBoolean("divinity_engine.twilight_invisible", true);
+                }
             } else {
-                living.setInvisible(false);
+                BlessingSpecializations.clearTwilightInvisibility(living);
             }
         } else {
-            living.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(speedModifier);
-            if (!living.hasEffect(net.minecraft.world.effect.MobEffects.INVISIBILITY))
-                living.setInvisible(false);
+            BlessingSpecializations.clearTwilightInvisibility(living);
         }
 
 

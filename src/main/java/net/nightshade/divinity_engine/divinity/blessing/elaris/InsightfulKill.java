@@ -6,9 +6,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -45,8 +46,12 @@ public class InsightfulKill extends Blessings {
         if (player instanceof Player playerEntity) {
             int experience = event.getEntity().getExperienceReward();
             Level level = event.getEntity().level();
-            if (level instanceof ServerLevel _level)
-                _level.addFreshEntity(new ExperienceOrb(_level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), experience+3));
+            if (level instanceof ServerLevel _level) {
+                boolean spawned = _level.addFreshEntity(new ExperienceOrb(_level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), experience+3));
+                if (spawned) {
+                    BlessingVisuals.at(instance, player, event.getEntity().position(), Cue.MARK, 0.8);
+                }
+            }
         }
         return super.onKillEntity(instance, player, event);
     }

@@ -1,20 +1,14 @@
 package net.nightshade.divinity_engine.divinity.blessing.dravak;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * A blessing that increases damage after consecutive hits on the same target.
@@ -76,6 +70,9 @@ public class CrushingBlow extends Blessings {
             target.knockback(2.0D, player.getX() - target.getX(), player.getZ() - target.getZ());
             instance.setCooldown(600);
             hitCounter.putInt(targetId, 0);
+            if (!event.isCanceled() && event.getAmount() > 0) {
+                BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT, 1.75);
+            }
             return true;
         }
 

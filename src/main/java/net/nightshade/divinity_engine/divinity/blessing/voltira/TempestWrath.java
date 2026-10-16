@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.voltira;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,6 +9,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -42,18 +43,10 @@ public class TempestWrath extends Blessings {
         boolean isThunderstorm = serverLevel.isThundering();
         float damage = calculateDamage(instance, isThunderstorm);
 
-        // Play thunder sound and create particles
+        // Play thunder sound
         serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER,
                 1.0F, 1.0F);
-
-        for (int i = 0; i < 20; i++) {
-            double offsetX = (Math.random() - 0.5) * instance.getOrCreateTag().getDouble("effect_radius");
-            double offsetZ = (Math.random() - 0.5) * instance.getOrCreateTag().getDouble("effect_radius");
-            serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK,
-                    position.x + offsetX, position.y, position.z + offsetZ,
-                    1, 0, 0, 0, 0);
-        }
 
         // Damage and knockback nearby entities
         AABB affectedArea = new AABB(
@@ -72,6 +65,8 @@ public class TempestWrath extends Blessings {
             }
         }
 
+        BlessingVisuals.at(instance, player, position, Cue.IMPACT, instance.getOrCreateTag().getDouble("effect_radius"));
+
         return true;
     }
 
@@ -87,4 +82,3 @@ public class TempestWrath extends Blessings {
                     knockbackDir.z * instance.getOrCreateTag().getDouble("knockback_strength"));
     }
 }
-

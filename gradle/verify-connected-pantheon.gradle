@@ -1,0 +1,457 @@
+import groovy.io.FileType
+import groovy.json.JsonSlurper
+import org.gradle.api.GradleException
+
+import java.security.MessageDigest
+import java.util.regex.Pattern
+
+// JsonSlurper overwrites duplicate keys. Check the original tokens before constructing maps.
+class ConnectedPantheonJsonGuard {
+    private final String source
+    private int position
+
+    ConnectedPantheonJsonGuard(String source) { this.source = source }
+
+    void verify() {
+        value(0)
+        whitespace()
+        require(position == source.length(), 'Unexpected content after the JSON value')
+    }
+
+    private void require(boolean condition, String message) {
+        if (!condition) {
+            int line = 1 + source.substring(0, position).count('\n')
+            int column = position - source.lastIndexOf('\n', position - 1)
+            throw new IllegalArgumentException("${message} at line ${line}, column ${column}")
+        }
+    }
+
+    private String peek() { position < source.length() ? source.substring(position, position + 1) : '' }
+
+    private void whitespace() {
+        while (peek() in [' ', '\t', '\r', '\n']) position++
+    }
+
+    private void take(String expected) {
+        whitespace()
+        require(peek() == expected, "Expected '${expected}'")
+        position++
+    }
+
+    private String stringToken() {
+        take('"')
+        int start = position - 1
+        while (position < source.length()) {
+            String current = peek()
+            position++
+            if (current == '"') return source.substring(start, position)
+            if (current == '\\') {
+                String escape = peek()
+                require(escape in ['"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u'], 'Invalid string escape')
+                position++
+                if (escape == 'u') {
+                    require(position + 4 <= source.length(), 'Incomplete Unicode escape')
+                    require(source.substring(position, position + 4) ==~ /[0-9a-fA-F]{4}/, 'Invalid Unicode escape')
+                    position += 4
+                }
+            } else {
+                require(((int) current.charAt(0)) >= 32, 'Unescaped control character')
+            }
+        }
+        require(false, 'Unterminated string')
+        return null
+    }
+
+    private void value(int depth) {
+        require(depth <= 64, 'JSON nesting exceeds 64 levels')
+        whitespace()
+        switch (peek()) {
+            case '{':
+                take('{')
+                Set<String> keys = new HashSet<>()
+                whitespace()
+                if (peek() != '}') {
+                    while (true) {
+                        String key = (String) new JsonSlurper().parseText(stringToken())
+                        require(keys.add(key), "Duplicate object key '${key}'")
+                        take(':')
+                        value(depth + 1)
+                        whitespace()
+                        if (peek() != ',') break
+                        take(',')
+                    }
+                }
+                take('}')
+                break
+            case '[':
+                take('[')
+                whitespace()
+                if (peek() != ']') {
+                    while (true) {
+                        value(depth + 1)
+                        whitespace()
+                        if (peek() != ',') break
+                        take(',')
+                    }
+                }
+                take(']')
+                break
+            case '"':
+                stringToken()
+                break
+            default:
+                def token = Pattern.compile(/(?:true|false|null|-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)/)
+                    .matcher(source).region(position, source.length())
+                require(token.lookingAt(), 'Expected a JSON value')
+                String literal = token.group()
+                if (literal ==~ /-?[0-9]+/) {
+                    // JsonSlurper can wrap oversized integer literals into an apparently valid target.
+                    require(literal.length() <= 20 && new BigInteger(literal).bitLength() <= 63,
+                        'Integer literal exceeds signed 64-bit bounds')
+                }
+                position = token.end()
+        }
+    }
+}
+
+class ConnectedPantheonValidator {
+    static final List<String> GODS = ['solarius', 'nashara', 'grond', 'varun', 'dravak', 'elaris',
+        'voltira', 'vokar', 'nythea', 'kairoth', 'cryonis', 'nerai', 'zephra', 'terra', 'lumen',
+        'mechanos', 'ignar', 'aethon'].asImmutable()
+    static final List<String> PASSAGES = ['call', 'witness', 'testimony', 'deed_a', 'deed_b',
+        'reckoning_a', 'reckoning_b', 'trial', 'ending_a', 'ending_b'].asImmutable()
+    static final List<String> COMBINATIONS = ['aa', 'ab', 'ba', 'bb'].asImmutable()
+    static final Map<String, List<String>> PAIRS = [
+        dawn_dream: ['solarius', 'nythea'], stars_time: ['aethon', 'kairoth'],
+        serpent_archive: ['nashara', 'elaris'], stone_machine: ['grond', 'mechanos'],
+        tide_winter: ['nerai', 'cryonis'], storm_horizon: ['voltira', 'zephra'],
+        root_farewell: ['terra', 'vokar'], pack_valor: ['varun', 'dravak'],
+        light_ember: ['lumen', 'ignar']
+    ].asImmutable()
+    static final List<String> OBSERVATIONS = ['day_sky', 'night_sky', 'forest', 'rain', 'thunder',
+        'underground', 'high_sky', 'water', 'snow', 'firelight'].asImmutable()
+    static final List<String> KILLS = ['any', 'undead_day', 'undead_night', 'poisoned', 'forest',
+        'melee', 'projectile', 'phantom', 'stray', 'drowned', 'witch', 'burning'].asImmutable()
+    static final Set<String> OBJECTIVES = ['observe', 'donation', 'pray', 'hidden', 'submerged',
+        'smelt', 'mine', 'breed', 'xp', 'sprint', 'height', 'plant', 'harvest', 'kill', 'shield',
+        'timed_kill'] as Set
+    static final List<String> CHRONICLE_FIELDS = ['premise', 'offering_examples', 'witness',
+        'reckoning', 'passages', 'dialogue'].asImmutable()
+    static final List<String> CHRONICLE_OPTIONAL = ['chapter_titles'].asImmutable()
+    static final String CATALOG = 'src/main/java/net/nightshade/divinity_engine/util/divinity/narrative/BuiltinNarrativeCatalog.java'
+    // Approved 18 God records, including 36 complete paths, normalized independently of Java whitespace.
+    static final String CATALOG_SHA256 = 'abf54937c6cbca360f9954f1fd4b7d2eb80068eef53b41673b8d12b13a8cf148'
+
+    private final File root
+    final List<String> errors = []
+    final List<String> lines = []
+    private final Map<String, Integer> chronicleWords = new TreeMap<>()
+    private final Map<String, List<Integer>> epilogueWords = new TreeMap<>()
+    private int addonStories
+    private int addonChronicles
+    private int addonRelationships
+
+    ConnectedPantheonValidator(File root) { this.root = root }
+
+    private static void require(boolean condition, String message) {
+        if (!condition) throw new IllegalArgumentException(message)
+    }
+
+    private String relative(File file) { root.toPath().relativize(file.toPath()).toString() }
+
+    private void checked(File file, Closure action) {
+        try { action.call() }
+        catch (Exception failure) { errors.add("${relative(file)}: ${failure.message}") }
+    }
+
+    private static List<File> jsonFiles(File directory, boolean narrativeDirectoriesOnly = false) {
+        List<File> result = []
+        if (directory.isDirectory()) {
+            directory.eachFileRecurse(FileType.FILES) { File file ->
+                String path = file.path.replace(File.separator, '/')
+                if (file.name.endsWith('.json') && (!narrativeDirectoriesOnly
+                    || (path ==~ /.*\/data\/[^\/]+\/divine_narratives\/.+\.json/))) result.add(file)
+            }
+        }
+        return result.sort { a, b -> a.path <=> b.path }
+    }
+
+    static Map readJson(File file) {
+        require(file.length() <= 1048576, 'JSON exceeds the 1 MiB validation safety bound')
+        String source = file.getText('UTF-8')
+        new ConnectedPantheonJsonGuard(source).verify()
+        def value = new JsonSlurper().parseText(source)
+        require(value instanceof Map, 'Root must be an object')
+        return (Map) value
+    }
+
+    private static Map fields(Object value, Collection required, Collection optional, String at) {
+        require(value instanceof Map, "${at} must be an object")
+        Map map = (Map) value
+        def missing = required.findAll { !map.containsKey(it) }
+        def extra = map.keySet().findAll { !(it in required) && !(it in optional) }
+        require(missing.isEmpty() && extra.isEmpty(), "${at}: missing keys ${missing}; unsupported keys ${extra}")
+        return map
+    }
+
+    private static String text(Object value, String at, boolean translations = false, boolean empty = false) {
+        if (translations && value instanceof Map) {
+            Map translated = fields(value, ['translate'], [], at)
+            return text(translated.translate, "${at}.translate")
+        }
+        require(value instanceof String, "${at} must be a string${translations ? ' or translation object' : ''}")
+        String string = (String) value
+        require(string.length() <= 4096 && (empty || !string.trim().isEmpty()), "${at} must contain ${empty ? '0' : '1'}..4096 characters of text")
+        return string
+    }
+
+    private static String id(Object value, String at) {
+        String name = text(value, at)
+        require(name ==~ /[a-z0-9_.-]+:[a-z0-9\/._-]+/, "${at} must be a lowercase namespaced ID")
+        return name
+    }
+
+    private static int integer(Object value, int minimum, int maximum, String at) {
+        require(value instanceof Integer || value instanceof Long || value instanceof BigInteger,
+            "${at} must be a JSON integer, not a decimal, string, or boolean")
+        require(value >= minimum && value <= maximum, "${at} must be ${minimum}..${maximum}")
+        return ((Number) value).intValue()
+    }
+
+    private static List<String> paragraphs(Object value, String at, boolean translations) {
+        require(value instanceof List && value.size() >= 1 && value.size() <= 32, "${at} requires 1..32 paragraphs")
+        return value.withIndex().collect { paragraph, index -> text(paragraph, "${at}[${index}]", translations) }
+    }
+
+    private static int words(Collection<String> strings) { strings.join(' ').trim().split(/\s+/).length }
+
+    private static Map<String, Set<String>> acceptedOfferings() {
+        // Vanilla 1.20.1 IDs accepted by the god sources, including their item/block class checks.
+        Map<String, List<String>> names = [
+            solarius: ['gold_ingot', 'sunflower', 'glowstone', 'glowstone_dust'],
+            nashara: ['spider_eye', 'fermented_spider_eye'],
+            grond: ['raw_iron_block', 'raw_copper_block', 'raw_gold_block', 'budding_amethyst',
+                'diamond_ore', 'ancient_debris', 'netherite_block', 'diamond_block', 'gold_ore',
+                'iron_ore', 'copper_ore', 'lapis_ore', 'redstone_ore', 'emerald_ore', 'diamond',
+                'netherite_scrap', 'netherite_ingot', 'gold_block', 'iron_block', 'copper_block',
+                'lapis_block', 'emerald_block', 'redstone_block', 'amethyst_block', 'gold_ingot',
+                'iron_ingot', 'copper_ingot', 'lapis_lazuli', 'emerald', 'redstone', 'amethyst_shard'],
+            varun: ['beef', 'porkchop', 'mutton', 'chicken', 'rabbit', 'leather', 'bone', 'rabbit_hide', 'rabbit_foot'],
+            dravak: ['redstone_block', 'bow', 'crossbow'] + ['wooden', 'stone', 'iron', 'golden', 'diamond', 'netherite']
+                .collectMany { material -> ["${material}_sword".toString(), "${material}_axe".toString()] },
+            elaris: ['book', 'enchanted_book', 'written_book', 'enchanted_golden_apple'],
+            voltira: ['redstone_block', 'lightning_rod', 'trident'],
+            vokar: ['wither_rose', 'soul_sand', 'soul_soil', 'bone_block'],
+            nythea: ['phantom_membrane', 'amethyst_shard', 'glow_ink_sac'],
+            kairoth: ['clock', 'ender_pearl', 'chorus_fruit'],
+            cryonis: ['blue_ice', 'packed_ice', 'snow_block'],
+            nerai: ['prismarine', 'nautilus_shell', 'kelp'],
+            zephra: ['phantom_membrane', 'feather', 'scaffolding'],
+            terra: ['azalea', 'moss_block', 'oak_sapling', 'spruce_sapling', 'birch_sapling',
+                'jungle_sapling', 'acacia_sapling', 'dark_oak_sapling', 'cherry_sapling', 'mangrove_propagule'],
+            lumen: ['glowstone_dust', 'blaze_powder', 'candle'] + ['white', 'orange', 'magenta',
+                'light_blue', 'yellow', 'lime', 'pink', 'gray', 'light_gray', 'cyan', 'purple',
+                'blue', 'brown', 'green', 'red', 'black'].collect { "${it}_candle".toString() },
+            mechanos: ['iron_block', 'comparator', 'observer'],
+            ignar: ['coal_block', 'blaze_rod', 'magma_block'],
+            aethon: ['amethyst_shard', 'glowstone_dust', 'ender_eye']
+        ]
+        return names.collectEntries { god, items -> [(god): items.collect { "minecraft:${it}".toString() } as Set] }
+    }
+
+    static void objective(Object value, String at, boolean addon, Collection extraFields = []) {
+        Map deed = fields(value, ['objective', 'condition', 'target', 'deed'] + extraFields, ['item'], at)
+        String objectiveId = id(deed.objective, "${at}.objective")
+        String condition = text(deed.condition, "${at}.condition", false, true)
+        int target = integer(deed.target, 1, 1000000, "${at}.target")
+        text(deed.deed, "${at}.deed", addon)
+        if (deed.containsKey('item')) id(deed.item, "${at}.item")
+        String type = objectiveId.substring(objectiveId.indexOf(':') + 1)
+        if (!objectiveId.startsWith('divinity_engine:')) {
+            require(addon, "${at}: built-in lore cannot require an addon objective")
+            // Addon registration and custom condition semantics require the addon runtime, not this structural check.
+            return
+        }
+        require(type in OBJECTIVES, "${at}: unsupported objective ${objectiveId}")
+        List<String> conditions = type == 'observe' ? OBSERVATIONS :
+            (type in ['kill', 'timed_kill'] ? KILLS : (type == 'pray' ? ['', 'still', 'night_safe', 'sky_night'] : ['']))
+        require(condition in conditions, "${at}: ${type} does not support condition '${condition}'")
+        if (type == 'observe') require(target >= 100 && target <= 600, "${at}: observe needs 100..600 consecutive ticks")
+        if (type == 'height') require(target == 1, "${at}: height uses target 1 (reach Y=160 and return)")
+        require((type == 'donation') == deed.containsKey('item'), "${at}: only donation requires/allows an item for built-in objectives")
+    }
+
+    static int chronicle(Map value, String at, String god, boolean builtin, boolean overlay) {
+        fields(value, CHRONICLE_FIELDS + (overlay ? ['version', 'kind', 'story'] : []), CHRONICLE_OPTIONAL, at)
+        List<String> narrative = [text(value.premise, "${at}.premise", !builtin)]
+        require(value.offering_examples instanceof List && value.offering_examples.size() in 1..32,
+            "${at}.offering_examples requires 1..32 item IDs")
+        List<String> offerings = value.offering_examples.withIndex().collect { item, index -> id(item, "${at}.offering_examples[${index}]") }
+        require(offerings.toSet().size() == offerings.size(), "${at}.offering_examples contains duplicates")
+        if (builtin) {
+            Set<String> accepted = acceptedOfferings()[god]
+            require(accepted != null && accepted.containsAll(offerings), "${at}: offering examples not accepted by ${god}: ${offerings.findAll { !(it in (accepted ?: [])) }}")
+        }
+        objective(value.witness, "${at}.witness", !builtin)
+        objective(value.reckoning, "${at}.reckoning", !builtin)
+        fields(value.passages, PASSAGES, [], "${at}.passages")
+        fields(value.dialogue, PASSAGES, [], "${at}.dialogue")
+        if (value.containsKey('chapter_titles')) {
+            Map titles = fields(value.chapter_titles, [], PASSAGES, "${at}.chapter_titles")
+            titles.each { key, title -> text(title, "${at}.chapter_titles.${key}", true) }
+        }
+        PASSAGES.each { key ->
+            narrative.addAll(paragraphs(value.passages[key], "${at}.passages.${key}", !builtin))
+            narrative.add(text(value.dialogue[key], "${at}.dialogue.${key}", !builtin))
+        }
+        int count = words(narrative)
+        if (builtin) require(count >= 1200 && count <= 1800, "${at}: ${count} words; expected 1200..1800 across premise + passages + dialogue")
+        return count
+    }
+
+    static List<Integer> relationship(Map value, String at, List<String> expectedGods, boolean builtin) {
+        fields(value, ['version', 'kind', 'id', 'gods', 'title', 'relation', 'summary', 'epilogues'], builtin ? [] : ['stories'], at)
+        id(value.id, "${at}.id")
+        require(value.gods instanceof List && value.gods.size() == 2, "${at}.gods requires two IDs")
+        List<String> gods = value.gods.collect { id(it, "${at}.gods") }
+        require(gods[0] != gods[1], "${at}.gods must be distinct")
+        if (builtin) require(gods == expectedGods, "${at}: expected gods in branch order ${expectedGods}, got ${gods}")
+        if (value.containsKey('stories')) {
+            require(value.stories instanceof List && value.stories.size() == 2, "${at}.stories requires two IDs in god order")
+            value.stories.each { id(it, "${at}.stories") }
+        }
+        ['title', 'relation', 'summary'].each { text(value[it], "${at}.${it}", !builtin) }
+        fields(value.epilogues, COMBINATIONS, [], "${at}.epilogues")
+        return COMBINATIONS.collect { key ->
+            int count = words(paragraphs(value.epilogues[key], "${at}.epilogues.${key}", !builtin))
+            if (builtin) require(count >= 150 && count <= 250, "${at}.${key}: ${count} words; expected 150..250")
+            return count
+        }
+    }
+
+    private void catalog() {
+        File file = new File(root, CATALOG)
+        checked(file) {
+            String quoted = /"((?:\\.|[^"\\])*)"/
+            String comma = /\s*,\s*/
+            String path = /path\s*\(\s*/ + [quoted, quoted, quoted, /([0-9]+)/, quoted, quoted, quoted, quoted].join(comma) + /\s*\)/
+            String record = /new\s+God\s*\(\s*/ + [quoted, quoted, quoted, quoted, path, path].join(comma) + /\s*\)/
+            def matcher = Pattern.compile(record, Pattern.DOTALL).matcher(file.getText('UTF-8'))
+            List<List<String>> rows = []
+            while (matcher.find()) rows.add((1..20).collect { matcher.group(it) })
+            require(rows.size() == 18 && rows.collect { it[0] }.toSet() == GODS.toSet(),
+                'Expected the original 18 God records and 36 branch contracts; catalog format or IDs changed')
+            String normalized = rows.sort { a, b -> a[0] <=> b[0] }.collect { it.join('\u001f') }.join('\n')
+            String digest = MessageDigest.getInstance('SHA-256').digest(normalized.getBytes('UTF-8')).encodeHex().toString()
+            require(digest == CATALOG_SHA256, 'Approved catalog titles/branches/deeds/rewards changed; review the contract, do not silently regenerate its fingerprint')
+            lines.add('Catalog: 18 original stories / 36 complete branch contracts unchanged.')
+        }
+    }
+
+    private void builtins() {
+        File directory = new File(root, 'src/main/resources/data/divinity_engine/divine_narratives')
+        List<File> all = jsonFiles(directory)
+        List<File> chronicles = all.findAll { it.name.endsWith('_chronicle.json') }
+        List<File> relationships = all.findAll { it.name.endsWith('_relationship.json') }
+        Set<String> expectedChronicles = GODS.collect { "${it}_chronicle.json".toString() } as Set
+        Set<String> expectedRelationships = PAIRS.keySet().collect { "${it}_relationship.json".toString() } as Set
+        checked(directory) {
+            require(chronicles.size() == 18 && chronicles.collect { it.name }.toSet() == expectedChronicles,
+                "Expected exactly 18 chronicles; missing ${expectedChronicles - chronicles.collect { it.name }.toSet()}; unexpected ${chronicles.collect { it.name }.toSet() - expectedChronicles}; found ${chronicles.size()}")
+            require(relationships.size() == 9 && relationships.collect { it.name }.toSet() == expectedRelationships,
+                "Expected exactly 9 relationships; missing ${expectedRelationships - relationships.collect { it.name }.toSet()}; unexpected ${relationships.collect { it.name }.toSet() - expectedRelationships}; found ${relationships.size()}")
+        }
+        chronicles.each { file -> checked(file) {
+            Map value = readJson(file)
+            integer(value.version, 2, 2, 'version')
+            String god = file.name - '_chronicle.json'
+            require(god in GODS, "Unexpected god ${god}")
+            require(value.kind == 'chronicle' && id(value.story, 'story') == "divinity_engine:${god}", 'Chronicle kind or story ID does not match its file')
+            chronicleWords[file.name] = chronicle(value, 'chronicle', god, true, true)
+        } }
+        relationships.each { file -> checked(file) {
+            Map value = readJson(file)
+            integer(value.version, 2, 2, 'version')
+            String pair = file.name - '_relationship.json'
+            require(PAIRS.containsKey(pair), "Unexpected relationship ${pair}")
+            require(value.kind == 'relationship' && id(value.id, 'id') == "divinity_engine:${pair}", 'Relationship kind or ID does not match its file')
+            epilogueWords[file.name] = relationship(value, 'relationship', PAIRS[pair].collect { "divinity_engine:${it}".toString() }, true)
+        } }
+    }
+
+    private void addons() {
+        // Discover narrative JSON by pack directory structure, never by example filenames.
+        jsonFiles(new File(root, 'examples'), true).each { file -> checked(file) {
+            Map value = readJson(file)
+            integer(value.version, 1, 2, 'version')
+            if (value.version == 1) return
+            switch (value.kind) {
+                case 'story':
+                    fields(value, ['version', 'kind', 'god', 'title', 'request', 'branches', 'chronicle'], ['id'], 'story')
+                    id(value.god, 'story.god')
+                    if (value.containsKey('id')) id(value.id, 'story.id')
+                    ['title', 'request'].each { text(value[it], "story.${it}", true) }
+                    fields(value.branches, ['a', 'b'], [], 'story.branches')
+                    ['a', 'b'].each { key ->
+                        def branch = value.branches[key]
+                        String at = "story.branches.${key}"
+                        objective(branch, at, true, ['name', 'reward', 'ending'])
+                        text(branch.name, "${at}.name", true)
+                        text(branch.ending, "${at}.ending", true)
+                        fields(branch.reward, ['id', 'blessing', 'description'], [], "${at}.reward")
+                        id(branch.reward.id, "${at}.reward.id")
+                        id(branch.reward.blessing, "${at}.reward.blessing")
+                        text(branch.reward.description, "${at}.reward.description", true)
+                    }
+                    chronicle(fields(value.chronicle, CHRONICLE_FIELDS, CHRONICLE_OPTIONAL, 'story.chronicle'), 'story.chronicle', null, false, false)
+                    addonStories++
+                    break
+                case 'chronicle':
+                    id(value.story, 'chronicle.story')
+                    chronicle(value, 'chronicle', null, false, true)
+                    addonChronicles++
+                    break
+                case 'relationship':
+                    relationship(value, 'relationship', null, false)
+                    addonRelationships++
+                    break
+                default:
+                    require(false, "Unsupported version 2 kind '${value.kind}'")
+            }
+        } }
+    }
+
+    void verify() {
+        catalog()
+        builtins()
+        addons()
+        chronicleWords.each { name, count -> lines.add("${name}: ${count} words (premise + passages + dialogue)") }
+        epilogueWords.each { name, counts -> lines.add("${name}: ${COMBINATIONS.withIndex().collect { key, i -> "${key}=${counts[i]}" }.join(', ')} words") }
+        int stories = chronicleWords.size()
+        int relationships = epilogueWords.size()
+        int totalWords = (chronicleWords.values().sum() ?: 0) as int
+        int endingWords = (epilogueWords.values().flatten().sum() ?: 0) as int
+        lines.add("Built-ins validated: ${stories} chronicles, ${stories * 10} passages, ${stories * 10} dialogue lines, ${stories * 2} new objectives, ${relationships} relationships, ${relationships * 4} epilogues; ${totalWords} chronicle words and ${endingWords} epilogue words.")
+        lines.add("Optional v2 examples structurally validated: ${addonStories} stories, ${addonChronicles} chronicle overlays, ${addonRelationships} relationships. Addon translations/objective registration/item acceptance are runtime concerns; built-in word quotas do not apply to examples.")
+    }
+}
+
+def connectedPantheonRoot = layout.projectDirectory.asFile
+tasks.register('connectedPantheonChecks') {
+    group = 'verification'
+    description = 'Validates Connected Pantheon lore, original catalog contracts, and optional v2 pack examples without compiling.'
+    inputs.files(fileTree('src/main/resources/data/divinity_engine/divine_narratives') {
+        include '**/*_chronicle.json', '**/*_relationship.json'
+    })
+    inputs.file(ConnectedPantheonValidator.CATALOG)
+    inputs.files(fileTree('examples') { include '**/data/*/divine_narratives/**/*.json' })
+    doLast {
+        def validation = new ConnectedPantheonValidator(connectedPantheonRoot)
+        validation.verify()
+        validation.lines.each { logger.lifecycle(it) }
+        if (!validation.errors.isEmpty()) {
+            throw new GradleException('Connected Pantheon validation failed:\n - ' + validation.errors.join('\n - '))
+        }
+        logger.lifecycle('Connected Pantheon checks passed.')
+    }
+}

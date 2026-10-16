@@ -1,21 +1,15 @@
 package net.nightshade.divinity_engine.divinity.blessing.mechanos;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -51,6 +45,12 @@ public class OverdriveLoop extends Blessings {
             // Apply mining speed and movement speed
             applyOrRefreshEffect(player, MobEffects.DIG_SPEED, 40, 0);
             applyOrRefreshEffect(player, MobEffects.MOVEMENT_SPEED, 40, 0);
+            if (player.isSprinting()) {
+                BlessingVisuals.at(instance, player, player.position().add(0, 0.08, 0)
+                        .subtract(player.getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.18)), Cue.TRAIL, 0.7);
+            } else {
+                BlessingVisuals.at(instance, player, player.position().add(0, player.getBbHeight() * 0.55, 0), Cue.AURA, 0.65);
+            }
         }
 
         return false;

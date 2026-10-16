@@ -9,6 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -47,6 +49,7 @@ public class StonewardensEmbrace extends Blessings {
         for (int i = 0; i < blocks.size(); i++) {
             if (standingBlock.getDescriptionId().equals(blocks.getString(i))) {
                 living.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 0, false, false));
+                BlessingVisuals.at(instance, living, living.position().add(0, 0.08, 0), Cue.AURA, 0.85);
                 return true;
             }
         }

@@ -5,15 +5,14 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -70,22 +69,21 @@ public class IcyPulse extends Blessings {
         if (event.getSource().getDirectEntity() == player) {
             long currentTime = player.level().getGameTime();
             CompoundTag tag = instance.getOrCreateTag();
-            int effectDuration = tag.getInt("effect_duration");
+            int effectDuration = tag.getInt("effect_duration") + (BlessingSpecializations.isActive(player, "cryonis", "b") ? 40 : 0);
             int cooldown = tag.getInt("cooldown");
-            double radius = tag.getDouble("radius");
+            double radius = tag.getDouble("radius") + (BlessingSpecializations.isActive(player, "cryonis", "a") ? 1.0 : 0);
             ListTag cooldownsTag = tag.getList("entityCooldowns", 10);
 
             player.level().getEntitiesOfClass(LivingEntity.class,
                             player.getBoundingBox().inflate(radius),
                             entity -> entity != player && !hasEntityCooldown(cooldownsTag, entity.getUUID()))
                     .forEach(target -> {
-                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, effectDuration, 0));
+                        boolean slowed = target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, effectDuration, 0));
                         addEntityCooldown(cooldownsTag, target.getUUID(), currentTime + cooldown);
 
-                        if (player.level() instanceof ServerLevel serverLevel) {
-                            serverLevel.sendParticles(ParticleTypes.SNOWFLAKE,
-                                    target.getX(), target.getY() + 1, target.getZ(),
-                                    10, 0.5, 0.5, 0.5, 0.1);
+                        if (slowed) {
+                            BlessingVisuals.link(instance, player, player.position().add(0, 0.05, 0),
+                                    target.position().add(0, 0.05, 0), Cue.CONTROL);
                         }
                     });
 

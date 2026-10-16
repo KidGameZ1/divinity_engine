@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:pack_valor",
+  "gods": ["divinity_engine:varun", "divinity_engine:dravak"],
+  "title": "The Distance Between Brothers",
+  "relation": "Sworn brothers divided by an evacuation and a forged order",
+  "summary": "Varun remembers the people who needed to move; Dravak remembers the defenders who were ordered to remain. The sworn brothers once trusted each other with simpler silences. Since the Sundering, the same escape has become both a rescue and a wound in their shared account. Neither can restore their trust by denying the lives protected or the choices withheld.",
+  "epilogues": {
+    "aa": [
+      "Your Nurture and Conquest make the brothers confront what a victory is for. Varun begins with the vulnerable lives of his path. Dravak answers that such lives sometimes need a threat met directly. They agree too quickly, then stop: agreement about the goal was precisely what once allowed them to avoid asking who knew the price.",
+      "In the conversation you requested, Dravak names Nashara's forged order and Varun names the refugees it helped save. Elaris's concealed proof and Nythea's hidden survivors remain distinct parts of the history. No single villain absorbs every decision. Varun does not offer the surviving pack as payment for his brother's betrayed consent. Dravak does not demand that the pack's future be treated as evidence of a rescue that should never have happened.",
+      "They can imagine strength advancing to protect a beginning, then stopping before the beginning becomes an excuse for endless war. It is an intention, not a new campaign assigned to you. Their brotherhood remains tender at the break. Yet Dravak finally asks about what the young will need after danger passes, and Varun answers without assuming that his brother has asked only to justify another battle."
+    ],
+    "ab": [
+      "Nurture and Resolve bring the brothers to the people usually omitted from an account of the line: those carrying food, settling frightened young, and telling exhausted defenders where they could rest. Varun once treated these acts as the life Dravak protected. Dravak now points out that they also made protection possible. Neither side of the escape was merely waiting for the other to do the important work.",
+      "Your explicit shrine conversation gives them room to separate chosen defense from the forged order that denied a choice. Nashara sought to save refugees; the purpose remains real without making the means honest. Varun will not demand gratitude as a cure for his brother's hurt. Dravak will not let the hurt turn everyone who escaped into a beneficiary who must continually apologize for surviving.",
+      "The brothers do not renew their oath with grander promises. They discuss the smaller promise of asking before volunteering one another's courage. Your paths make that restraint feel less like weakness: new life needs patient care, and a held shield can create time for someone else to decide. Reconciliation begins as permission to need an answer, rather than confidence that brotherhood already supplies one."
+    ],
+    "ba": [
+      "Hunt beside Conquest is the combination both brothers find easiest to praise and hardest to question. At the shrine, they initially describe the same clean solution: identify the threat, meet it decisively, and clear a way forward. Then Varun asks who decides which threat matters most. Dravak's silence is long enough to expose the old argument beneath the confident words.",
+      "A forest hunt and a close advance can protect lives. They can also become competing pursuits in which nobody notices that the people being protected have stopped following. Varun admits his temptation to chase a clear enemy rather than face a complicated brother. Dravak admits how much he wanted victory over the account of his betrayal. Neither appetite is satisfied by your completed deeds, and neither may recruit you to satisfy it now.",
+      "They retain respect for decisive force while refusing to make it the only language of their bond. The forged order stays named, alongside the rescue, the concealed proof, and the hidden survivors. They have not found a target whose defeat would repair trust. Instead they recover the more difficult possibility of turning toward each other while there is still something unresolved to say."
+    ],
+    "bb": [
+      "Your Hunt and Resolve seem at first to reproduce the old division: Varun moving through danger while Dravak remains between danger and the vulnerable. When you request their account, Dravak objects before the familiar arrangement can be praised. He is willing to hold a line. He is not willing to have willingness presumed because it fits a story everyone already knows.",
+      "Varun accepts the distinction without making his own movement sound shameful. During the evacuation, somebody had to keep the pack going. Terra's shelter had offered breathing room, not an eternal destination. Nashara's forgery bought time at the price of honest consent; Elaris's concealment and Nythea's hiding of survivors complicated who could later tell what happened. Neither brother can make those costs disappear by volunteering to suffer more now.",
+      "What changes is the imagined return signal. In their conversation it is no longer an order backed by unquestionable authority, but information one brother owes the other. Your two paths can cooperate without becoming assigned identities from which neither god may depart. The hunter may need shelter. The defender may need to move. Their oath begins to sound like a promise to hear that need, rather than a rule against ever speaking it."
+    ]
+  }
+}

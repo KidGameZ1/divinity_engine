@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:varun",
+  "premise": "The Pack's Claim follows Varun through the distance between being followed and deserving followers. The First Concord protected mortal life from oblivion. After its Sundering, Terra sheltered his pack, Dravak held a threatened line, and Varun led an evacuation he still cannot describe without hearing those left behind. His sworn brother had been held by Nashara's forged order. The escape saved lives, but survival did not make its hidden decisions harmless. Varun asks whether strength should create a future nearby or clear the dangers beyond it.",
+  "offering_examples": ["minecraft:beef", "minecraft:leather", "minecraft:bone"],
+  "witness": {"objective": "divinity_engine:sprint", "condition": "", "target": 240, "deed": "Sprint 240 blocks"},
+  "reckoning": {"objective": "divinity_engine:observe", "condition": "water", "target": 200, "deed": "Observe underwater for 10 continuous seconds"},
+  "passages": {
+    "call": [
+      "Varun smells the offering before he speaks. Beef, leather, or bone will be accepted; he has no interest in pretending that a pack lives without cost. Make your gift freely. He remembers a child carrying a strip of leather through the evacuation because it had belonged to the harness of an animal that could not continue. The adults called it useless weight. The child knew exactly what it weighed and carried it anyway.",
+      "He once explained the First Concord as a circle of watchful backs, protecting mortal lives from oblivion while those within could sleep. The Sundering broke that circle into frightened groups with different instructions. Varun could still run, fight, and find a path. None of those abilities told him whose instruction deserved belief. Before he tells you about the order that divided him from Dravak, his sworn brother, he asks you to learn a little distance with your own feet."
+    ],
+    "witness": [
+      "Sprint 240 blocks. There is no deadline and no ancient trail you must discover. The distance belongs to your present journey. Varun asks you to notice how easily a fast traveler begins to call their own pace normal. During the evacuation he kept looking back and seeing gaps where he expected companions. He first blamed panic. Then he saw someone trying to hold a broken bundle and another person stopping to help without being ordered.",
+      "Terra's shelter had given the pack a chance to breathe, but it could not promise safety forever. Varun led them out while Dravak held the line. He remembers turning once, waiting for the familiar answering motion of his brother's hand, and seeing only a raised weapon among the defenders. The pack kept moving. Even now he sometimes calls that moment abandonment before correcting himself: movement was the task. The wrong lay partly in what nobody had been allowed to know."
+    ],
+    "testimony": [
+      "Nashara forged the order that held Dravak in place so refugees could escape. Elaris concealed proof, and Nythea hid survivors. Varun tells you these things without making you seek their speakers. He knows that the forgery served a rescue; he also knows his brother was denied an honest account of the danger and the plan. A saved life is not an argument that the person used to save it had no right to choose. Nor does the betrayal make the escape worthless.",
+      "Choose Nurture or Hunt, then confirm your permanent path. Nurture asks you to breed four animals, attending to a future that cannot yet defend itself. Hunt asks you to defeat eight hostile mobs in forest biomes, clearing threats without confusing every unfamiliar creature with an enemy. Varun will not accept a third answer in which you prove your loyalty by condemning Dravak or pardoning Nashara. His brother's story belongs to his brother. Yours begins with what your strength will make possible for the lives beside you."
+    ],
+    "deed_a": [
+      "Breed four animals. Nurture makes Varun restless at first. He knows how to watch a tree line; waiting beside vulnerable new life leaves his hands with less dramatic work. Then he remembers the evacuation's quiet labor: a feeding stopped and restarted, water shared from an inconvenient container, tired people arguing over whose turn it was to carry supplies. No song gave those arguments a verse, though the escape would have failed without what followed them.",
+      "He asks you not to think of the young as replacements for anyone lost. A pack does not repair its history by reaching its old headcount. The new lives have no duty to resemble the missing, become brave, or be grateful for existing. Varun begins telling the story differently. Where he once said he brought the pack through, he now describes people helping one another past the point where his orders could reach."
+    ],
+    "deed_b": [
+      "Defeat eight hostile mobs in forest biomes. The Hunt is aimed at threats, not at the forest's right to be wild. Varun remembers pursuing a danger after the evacuation until he no longer knew whether the people he meant to protect were still moving safely. He returned before that pursuit became another abandonment. He does not make the memory heroic. Hunger for an unmistakable enemy can be especially strong when betrayal has made the real history difficult.",
+      "Your enemies here are the hostile mobs you encounter, not disguised participants in the ancient flight. There is no revenge tally to complete on Dravak's behalf. Varun asks you to imagine the reason for the cleared path before celebrating the clearing: a traveler who will not know your name, a keeper who can turn attention elsewhere. Hunting for a pack means accepting that a successful guardian may be least visible when the danger is gone."
+    ],
+    "reckoning_a": [
+      "Observe underwater for ten continuous seconds. Use a safe pool with an easy return to air, keep your head submerged while observing, and surface before your air runs out. No special river is required. Varun remembers a crossing where those who could swim kept saying the water was easy. Those carrying the youngest did not agree. Rest where movement meets resistance and let Nurture include the conditions around a life, not merely the fact that you helped it begin.",
+      "He confesses that he once wanted the survivors to praise Dravak loudly enough to heal their brotherhood. Some were willing. Others could barely speak of the escape, and some resented being asked to repay safety with the correct story. Nythea's concealment had protected survivors, not made them available as testimony. Varun now accepts that his love for his brother cannot authorize him to spend other people's memories. He must approach the broken trust with his own words."
+    ],
+    "reckoning_b": [
+      "Observe underwater for ten continuous seconds. Use a safe pool with an easy return to air, keep your head submerged while observing, and surface before your air runs out. In water, Varun says, tracks blur before a pursuer can decide whose story they support. The Hunt needs this interruption. You have demonstrated that you can meet a threat; now consider how much remains unknown when the trail is incomplete. He does not ask you to become defenseless. He asks you to stop mistaking readiness to strike for proof that your judgment is finished.",
+      "For years he pictured Nashara's forged order as the only thing between himself and an uncomplicated loyalty. It is easier than admitting he too made decisions without consulting everyone endangered by them. Their decisions were not identical, and he will not flatten them into shared innocence. But he can no longer demand that the truth leave him spotless. The water moves around you without delivering a verdict. You may step out when the deed is complete."
+    ],
+    "trial": [
+      "Complete a fresh trial of Varun after the reckoning. The existing challenge tests you now; it does not recreate the evacuation or place imaginary refugees under your control. Varun has spent enough years treating later dangers as opportunities to win the same lost argument. He will not ask you to do the same. Keep the path you chose, and meet the trial without making every hard moment a sign that the choice was mistaken.",
+      "He tells you one unheroic detail about Dravak: before their quarrel, his sworn brother was terrible at pretending not to be hungry. Varun used to hear him approach a shared meal long before seeing him. The memory hurts, but it also releases a laugh. Brotherhood was not made solely on a battlefield. If your attempt fails, try again; your completed deeds remain. Return after victory to a god who is trying to remember more than the last time he looked back."
+    ],
+    "ending_a": [
+      "Varun speaks of the young lives you tended without calling them his. Nurture has given him a language for strength that does not require an audience at the moment of danger. He can describe a pack whose members sometimes need him, sometimes help him, and sometimes wish to travel elsewhere. That last possibility still unsettles him. He admits it before the unease can harden into a command disguised as affection.",
+      "He will not tell Dravak that the rescue settled the price of the false order. Nor will he deny the refugees their survival because its making was compromised. He can carry his part of the account without forcing either group to finish it for him. Your permanent answer stands beside that effort. The pack's future is not a verdict on the worth of its past. It is the next hungry mouth, the next shared task, and the patience to welcome a life that owes you no heroic purpose."
+    ],
+    "ending_b": [
+      "The forest is not declared safe forever when you return. Hunt is an undertaking, not a boast that danger has been removed from the world. Varun respects the difference. He has stopped imagining the perfect pursuit that would bring back his brother's trust as a prize. There is no enemy whose defeat can make an unchosen sacrifice freely chosen after the fact. There may still be honest work they can choose together.",
+      "He thanks you for making protection particular: these threats, this effort, the restraint to stop when the deed is done. He will remember Terra's shelter, Nythea's hidden survivors, Elaris's silence, and Nashara's forgery without arranging them into one pure camp and one corrupt camp. When he speaks of Dravak now, he uses his brother's name before the title of defender. A pack needs strength at its edges. It also needs someone willing to turn homeward before pursuit consumes the reason for the hunt."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring your offering freely. A pack's care is not a debt trap.",
+    "witness": "Run the distance, and remember who cannot keep your pace.",
+    "testimony": "Choose Nurture or Hunt. My brother is not yours to judge for me.",
+    "deed_a": "Tend four new animal lives, not replacements for the missing.",
+    "deed_b": "Meet eight forest threats. Leave revenge outside the count.",
+    "reckoning_a": "Rest underwater briefly with a clear way back to air. Passage is not equally easy for everyone.",
+    "reckoning_b": "Observe underwater with a clear way back to air. Let certainty wait.",
+    "trial": "Win a fresh trial, not a second version of my old escape.",
+    "ending_a": "The future may need your care without owing you its shape.",
+    "ending_b": "Know when the hunt has made enough room to turn home."
+  }
+}

@@ -1,24 +1,15 @@
 package net.nightshade.divinity_engine.divinity.blessing.aethon;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.level.LightLayer;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
-import net.nightshade.nightshade_core.util.MiscHelper;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
- * A blessing that grants enhanced vision in dark environments,
- * causing nearby entities to glow and emit particles.
+ * A blessing that marks nearby entities while the owner is crouching.
  */
 public class Veilpiercer extends Blessings {
     /**
@@ -35,44 +26,27 @@ public class Veilpiercer extends Blessings {
     }
 
     /**
-     * Applies glowing effect and particles to nearby entities in dark areas.
+     * Emits visual marks at nearby entities while crouching.
      *
      * @param instance The blessing instance
      * @param living   The blessed entity
      * @return True for cooldown
      */
-    @OnlyIn(Dist.CLIENT)
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
-        Random random = new Random();
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null && mc.player.isShiftKeyDown()) {
-            // Get all living entities in a larger range for glow removal
-            List<LivingEntity> allEntities = mc.player.level().getEntitiesOfClass(
+        if (!living.level().isClientSide && living.tickCount % 20 == 0 && living.isShiftKeyDown()) {
+            List<LivingEntity> allEntities = living.level().getEntitiesOfClass(
                     LivingEntity.class,
-                    mc.player.getBoundingBox().inflate(32.0D),
-                    entity -> entity != mc.player
+                    living.getBoundingBox().inflate(32.0D),
+                    entity -> entity != living
             );
 
             // Track only entities within the 16-block effect radius
-            Set<LivingEntity> affectedEntities = allEntities.stream()
-                    .filter(entity -> entity.distanceTo(mc.player) <= 16.0D)
-                    .collect(Collectors.toSet());
+            List<LivingEntity> affectedEntities = allEntities.stream()
+                    .filter(entity -> entity.distanceTo(living) <= 16.0D)
+                    .toList();
 
-            for (LivingEntity entity : affectedEntities) {
-                entity.level().addParticle(
-                        ParticleTypes.END_ROD,
-                        entity.getX(), entity.getY() + entity.getBbHeight() / 2, entity.getZ(),
-                        0, 0, 0
-                );
-                if (random.nextFloat() <= 0.4f) {
-                    double offsetX = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                    double offsetY = random.nextDouble();          // Random height offset
-                    double offsetZ = random.nextDouble() * 2 - 1;  // Random offset between -1 and 1
-                    entity.level().addParticle(ParticleTypes.END_ROD, entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ, 0, 0, 0);
-                }
-
-            }
+            BlessingVisuals.privateMarks(instance, living, affectedEntities);
         }
 
 

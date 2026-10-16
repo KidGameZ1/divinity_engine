@@ -24,11 +24,11 @@ import static net.nightshade.divinity_engine.network.messages.cap.SyncGodsPacket
 @Internal
 public interface InternalGodsStorage extends GodsStorage {
     default List<BaseGodInstance> getDirtyContactedGods() {
-        return this.getContactedGods().parallelStream().filter(BaseGodInstance::isDirty).toList();
+        return this.getContactedGods().stream().filter(BaseGodInstance::isDirty).toList();
     }
 
     default List<CurseInstance> getDirtyCurses() {
-        return this.getCurses().parallelStream().filter(CurseInstance::isDirty).toList();
+        return this.getCurses().stream().filter(CurseInstance::isDirty).toList();
     }
 
     void setOwner(Entity var1);

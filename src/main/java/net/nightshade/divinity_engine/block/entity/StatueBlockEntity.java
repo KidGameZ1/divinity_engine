@@ -1,11 +1,9 @@
 package net.nightshade.divinity_engine.block.entity;
 
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
@@ -21,9 +19,11 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import net.nightshade.divinity_engine.block.StatueBlock;
 import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class StatueBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
@@ -31,10 +31,16 @@ public class StatueBlockEntity extends RandomizableContainerBlockEntity implemen
 	private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
 
 	public StatueBlockEntity(BlockPos position, BlockState state) {
-		super(null ,position, state);
+		this(position, state, registeredType(state));
 	}
-	public StatueBlockEntity(BlockPos position, BlockState state, @Nullable BlockEntityType<?> entityType) {
-		super(entityType, position, state);
+	public StatueBlockEntity(BlockPos position, BlockState state, BlockEntityType<?> entityType) {
+		super(Objects.requireNonNull(entityType, "A statue requires its registered block entity type"), position, state);
+		if (!entityType.isValid(state)) throw new IllegalArgumentException("Statue entity type does not accept " + state);
+	}
+
+	private static BlockEntityType<?> registeredType(BlockState state) {
+		if (state.getBlock() instanceof StatueBlock statue) return statue.getStatueBlockEntityType();
+		throw new IllegalArgumentException("A statue block entity requires a statue block state");
 	}
 
 	@Override
@@ -88,7 +94,7 @@ public class StatueBlockEntity extends RandomizableContainerBlockEntity implemen
 
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inventory) {
-		return new BlessingsMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
+		return BlessingsMenu.fromStatue(id, inventory, this.worldPosition);
 	}
 
 	@Override

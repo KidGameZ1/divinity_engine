@@ -20,11 +20,11 @@ public enum FavorTiers {
     /**
      * Represents neutral relationship with favor value 0
      */
-    Neutral("neutral", 0, 0),
+    Neutral("neutral", 0, 49),
     /**
      * Represents positive relationship with favor range 1 to 50
      */
-    Favorable("favorable", 1, 100),
+    Favorable("favorable", 50, 100),
     /**
      * Represents strong positive relationship with favor range 51 to 80
      */

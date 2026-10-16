@@ -3,6 +3,7 @@ package net.nightshade.divinity_engine.network.cap.player.gods;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.divinity.trial.GodlyTrial;
 import org.jetbrains.annotations.Nullable;
 
 public interface IMainPlayerCapability extends INBTSerializable<CompoundTag> {

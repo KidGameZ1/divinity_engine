@@ -53,6 +53,7 @@ public class PocketInventory implements Container {
         if (index >= 0 && index < items.size()) {
             ItemStack removed = items.get(index);
             items.set(index, ItemStack.EMPTY);
+            setChanged();
             return removed;
         }
         return ItemStack.EMPTY;
@@ -82,6 +83,7 @@ public class PocketInventory implements Container {
     @Override
     public void clearContent() {
         items.clear();
+        setChanged();
     }
 
     @Override
@@ -110,6 +112,7 @@ public class PocketInventory implements Container {
     }
 
     public void loadFromTag(CompoundTag tag) {
+        items.clear();
         ListTag itemList = tag.getList("Items", Tag.TAG_COMPOUND);
         for (int i = 0; i < itemList.size(); i++) {
             CompoundTag itemTag = itemList.getCompound(i);

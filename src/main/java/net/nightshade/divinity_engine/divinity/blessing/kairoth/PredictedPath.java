@@ -5,9 +5,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
-import net.minecraftforge.common.Tags;
+import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -50,6 +52,12 @@ public class PredictedPath extends Blessings {
 
         if (isDangerNearby) {
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, MiscHelper.secondsToTick(4), 1, false, false, true));
+            if (!living.isInvisible() && !living.isShiftKeyDown() && living.tickCount % 40 == 0
+                    && living.getDeltaMovement().horizontalDistanceSqr() > 0.001) {
+                Vec3 feet = living.position().add(0, 0.06, 0);
+                Vec3 movement = living.getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.35);
+                BlessingVisuals.link(instance, living, feet, feet.add(movement), Cue.TRAIL);
+            }
             return true;
         }
 

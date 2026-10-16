@@ -1,0 +1,108 @@
+{
+  "version": 2,
+  "kind": "story",
+  "id": "divinity_engine:aureth",
+  "god": "divinity_engine:aureth",
+  "title": "The Weight of a Promise",
+  "request": "Aureth, the First Sovereign, offers a freely chosen oath, not compulsory obedience. Begin after contact. An accepted offering proves Royal Decree; fifteen continuous seconds beneath the daytime sky prove Unbroken Will. Then permanently choose Kept Word: shield-block twelve hostile attacks, or Answerable Crown: personally defeat ten hostile mobs with direct melee attacks. Either chosen deed proves Kingsguard. Next personally defeat six hostile mobs with projectiles to prove Sovereign's Reach, then win a fresh Trial of Sovereignty to prove Throne of the World. Return to the statue to claim your ending and permanent Royal Decree specialization. The deeds have no kill timer, required battlefield, healing ban, or rule against leaving. Postponing or declining has no penalty. Both paths grant all five proofs; no oath authorizes harm to allies.",
+  "branches": {
+    "a": {
+      "name": "Kept Word",
+      "objective": "divinity_engine:shield",
+      "condition": "",
+      "target": 12,
+      "deed": "Successfully shield-block twelve attacks from eligible hostile mobs outside trials; no deadline or restriction on armor, healing, travel, or rest",
+      "reward": {
+        "id": "divinity_engine:aureth_a",
+        "blessing": "divinity_engine:royal_decree",
+        "description": "Kept Word: Royal Decree's slow and outgoing-damage suppression last 20% longer. Stagger, damage bonuses, range, and target limits are unchanged. Applies only while Royal Decree is equipped and used."
+      },
+      "ending": "Aureth records the promise with its limits intact. Your kept word grants Royal Decree 20% longer slow and damage-suppression duration, not an obligation to obey every future command."
+    },
+    "b": {
+      "name": "Answerable Crown",
+      "objective": "divinity_engine:kill",
+      "condition": "melee",
+      "target": 10,
+      "deed": "Personally defeat ten eligible hostile mobs with direct melee attacks outside trials; no deadline or restriction on armor, healing, travel, or rest",
+      "reward": {
+        "id": "divinity_engine:aureth_b",
+        "blessing": "divinity_engine:royal_decree",
+        "description": "Answerable Crown: Royal Decree's cooldown is 10% shorter. Its damage, control duration, range, and target limits are unchanged. Applies only while Royal Decree is equipped and used."
+      },
+      "ending": "Aureth accepts the burden you chose instead of demanding the oath you declined. Royal Decree gains a 10% shorter cooldown; accountability, not obedience, completes your covenant."
+    }
+  },
+  "chronicle": {
+    "premise": "An old oath names a door to be held but never says when its defenders may leave. Aureth kept the wording after the people it once served had gone. In the wake of the First Concord's Sundering, he must distinguish a promise freely carried from authority that continually adds to its weight. Kept Word and Answerable Crown are equally legitimate covenants, not righteous and fallen endings.",
+    "offering_examples": ["minecraft:gold_ingot", "minecraft:lapis_lazuli", "minecraft:blue_banner"],
+    "witness": {"objective": "divinity_engine:observe", "condition": "day_sky", "target": 300, "deed": "Remain beneath an unobstructed daytime sky for fifteen continuous seconds; shelter or night resets only this observation attempt"},
+    "reckoning": {"objective": "divinity_engine:kill", "condition": "projectile", "target": 6, "deed": "Personally defeat six eligible hostile mobs with projectiles outside trials after the chosen deed; there is no deadline"},
+    "chapter_titles": {
+      "call": "1. The Unclaimed Crown",
+      "witness": "2. A Sky Without Orders",
+      "testimony": "3. The Clause Left Blank",
+      "deed_a": "4. Kept Word",
+      "deed_b": "4. Answerable Crown",
+      "reckoning_a": "5. Beyond the Shield",
+      "reckoning_b": "5. Beyond the Command",
+      "trial": "6. The Empty Seat",
+      "ending_a": "7. A Promise With an End",
+      "ending_b": "7. A Crown That Answers"
+    },
+    "passages": {
+      "call": [
+        "The statue's crown is worn smooth where a forehead should touch it. Aureth, the First Sovereign, speaks as though someone has arrived for an appointment rather than an audience. 'A crown is not given. It is endured.' He remembers a watchman who brought a stool to a royal doorway. The man expected a long duty and wanted to perform it without pretending his legs were made of stone. Aureth had once considered the stool an insult. Now it is the object he remembers most clearly.",
+        "He invites you to begin after contact and make an accepted offering at his Overworld statue; a gold ingot, lapis lazuli, or blue banner is suitable. He names the whole covenant before asking anything further: fifteen continuous seconds under the daytime sky; then either twelve successful shield blocks or ten direct melee victories against hostile mobs; then six projectile victories; then a fresh Trial of Sovereignty. These deeds prove the five blessings in order. The branch choice is permanent, but leaving, healing, resting, or declining carries no hidden penalty. No battle must occur at this doorway. The oath is precisely the deed you accept, not ownership of your future."
+      ],
+      "witness": [
+        "Remain beneath an unobstructed daytime sky for fifteen continuous seconds. You may move within its light. If you enter shelter or night falls, only this observation begins again. Aureth does not ask for a royal mountain or a discovered ruin. A patch of ordinary ground is enough. Completing this witness proves Unbroken Will; it does not ask you to demonstrate that you cannot be frightened. The sky can offer no assurance that your next promise will be easy.",
+        "During the First Concord, many powers defended mortal life from oblivion. Aureth's account concerns one small watch within that greater work, not a secret command over every god. A doorway remained guarded after its evacuation. The original order had named what to hold, but not who could release its defenders. He remembers being pleased by their obedience before thinking to ask whether anyone remained behind the door. Solarius's concern for justice could judge that failure. Aureth must answer a different question: what, exactly, had he obtained their consent to carry?"
+      ],
+      "testimony": [
+        "Lumen would have tended the exhausted watchman without first settling the wording of his oath. Dravak would recognize the cost of an order made to sound more certain than its author. Aureth does not claim their specialties as lesser forms of sovereignty. He admits that a crown cannot substitute for either care or courage. His failure was his own: he let the prestige of a promise conceal the absence of an ending. The stool became a makeshift bed while officials argued about the proper seal for a release.",
+        "Choose Kept Word or Answerable Crown. Kept Word freely promises twelve successful shield blocks against hostile attacks. Answerable Crown declines that defensive oath and accepts a different obligation: ten hostile mobs personally defeated with direct melee attacks. Neither deed has a deadline, healing ban, travel limit, or equipment restriction. Preview the permanent specialization before confirming. Both routes prove Kingsguard, then require six projectile victories and the same fresh trial. You are choosing what to undertake, not which version of history the god is allowed to remember."
+      ],
+      "deed_a": [
+        "Successfully shield-block twelve attacks from eligible hostile mobs outside trials. A block must actually stop damage; merely raising the shield in safety is not the promise. The attacks need not come from twelve different enemies, and the deed does not require you to stand still, surrender armor, or get hurt. Rest whenever you need. Aureth has written the limit where you can see it. Once twelve blocks are recorded, the obligation is fulfilled rather than quietly extended.",
+        "He remembers the watchman asking whether keeping his word meant he must never wish to go home. Aureth had answered with a speech about honor. Now he offers the sentence he should have offered then: wanting relief does not make a freely kept promise false. A sovereign who confuses fatigue with betrayal will eventually be served only by people who have learned to conceal fatigue. Your defense gives him no right to demand another night. Its force comes partly from knowing that it ends."
+      ],
+      "deed_b": [
+        "Personally defeat ten eligible hostile mobs with direct melee attacks outside trials. This is the difficult alternative Aureth has accepted in place of the watch. Pet victories and unrelated deaths do not fulfill your personal deed. There is no timed killing spree and no demand to fight unarmored. The purpose is responsibility at close quarters, not collecting enough bodies to make refusal seem respectable. Declining one oath did not make you a traitor.",
+        "Aureth recalls a messenger who finally crossed the abandoned doorway and returned carrying an empty water jar. No captive waited inside, no treasure required a guard. The messenger did not prove that all standing orders were foolish; she showed that this one had outlived its stated purpose. Your alternative gives the First Sovereign a harder answer than obedience. He must recognize a covenant whose shape he did not prefer, without secretly reducing its worth or withholding the powers he promised."
+      ],
+      "reckoning_a": [
+        "After fulfilling Kept Word, personally defeat six eligible hostile mobs with projectiles outside trials. Use your own ranged attacks; there is no distance requirement or deadline. This reckoning proves Sovereign's Reach. The change of method matters to Aureth: a shield can protect what stands immediately behind it, but responsibility also requires noticing threats beyond the place where praise is easiest to hear. You need not defend an untracked villager or discover an invisible battlefield boundary.",
+        "He finally tells you what happened to the stool. The watchman took it home. Aureth had once wanted it preserved as a monument to service, as though everything touched by duty became royal property. Returning it was a small surrender of grandeur and a substantial correction of habit. Your earlier oath remains honored. Its completion must leave room for another task chosen in the present, not an endless ceremony in which yesterday's willingness supplies today's consent."
+      ],
+      "reckoning_b": [
+        "After fulfilling Answerable Crown, personally defeat six eligible hostile mobs with projectiles outside trials. Your direct ranged victories count without a deadline or minimum range. This is the same reckoning required by Kept Word and proves the same Sovereign's Reach. Aureth will not make your alternative legitimate only to place an extra toll behind it. You have not bought an exemption from responsibility; you have established that responsibility can be undertaken without accepting every proposed oath.",
+        "He has begun writing releases as carefully as commands. Each names a task, a limit, and the person accountable for changing it. That practice cannot repair every promise mishandled during the Sundering, nor can it make him the judge of Solarius's justice or Lumen's mercy. It gives his own authority something definite to answer for. When he speaks of your victories, he does not call them proof that he was right to challenge you. They are proof that you performed the obligation you chose."
+      ],
+      "trial": [
+        "Begin and win a fresh Trial of Sovereignty after the reckoning. Start it through Aureth's statue. It is the established room-based trial, with its displayed phases and hostile waves, not a hidden throne-defense objective. An earlier victory does not supply this final proof. Neither ending requires Throne of the World to enter the trial that proves it. A failed attempt can be retried without erasing your completed deeds or changing your branch.",
+        "Aureth leaves the imagined throne empty while you prepare. He will not ask you to mistake a seat for a purpose. Hold where it is useful, move when the encounter demands it, and obey the actual trial rules rather than inventing restrictions from his metaphor. Upon a fresh victory, Throne of the World has its proof; return to the physical statue for your ending and permanent specialization. A power earned through an oath still occupies an ordinary blessing slot when used."
+      ],
+      "ending_a": [
+        "Aureth reads the record of Kept Word aloud and stops at its final line. There is no new condition folded beneath the seal. You defended yourself as promised, met threats beyond your shield, and returned from his trial. He gives you the dignity that the watchman should have received: an unmistakable acknowledgment that the work is complete. The crown has not become lighter. The person wearing it has ceased adding undisclosed weight to someone else's shoulders.",
+        "Your permanent Kept Word specialization makes Royal Decree's slow and damage-suppression effects last twenty percent longer when that blessing is equipped and used. It does not lengthen stagger, increase damage bonuses, or enlarge its reach and target limits. The completed covenant proves every Elder blessing through the same deeds as the alternate path. Aureth keeps the account beside the memory of an ordinary stool, not as evidence that obedience solves every question, but as a reminder that a promise can remain powerful after its holder is permitted to go home."
+      ],
+      "ending_b": [
+        "Aureth records that you declined the watch and fulfilled the alternative he agreed to recognize. He does not rename your decision after the fact. You met danger at close quarters, answered threats at range, and returned from the trial without becoming the occupant of his empty seat. The crown is answerable because someone may say no to its first demand and still speak a binding yes to another. The distinction is harder to govern than unquestioning loyalty.",
+        "Your permanent Answerable Crown specialization reduces Royal Decree's cooldown by ten percent when equipped and used. Its damage, control duration, range, and target limits remain unchanged. All five blessing proofs are as valid as those of Kept Word; there is no lesser ending to repair. Aureth cannot reopen the abandoned watch to give its defenders back their time. He can stop borrowing their endurance as an excuse. In his new account, the messenger is allowed to carry an empty jar without being accused of having failed to find a kingdom inside."
+      ]
+    },
+    "dialogue": {
+      "call": "Contact begins our story. Read the covenant before accepting it: an offering, a witness, your chosen deed, a reckoning, and a fresh trial prove my five blessings. No hidden oath follows you home.",
+      "witness": "Your accepted offering proves Royal Decree. Spend fifteen continuous seconds beneath the daytime sky to prove Unbroken Will.",
+      "testimony": "The witness is complete. Choose twelve hostile shield blocks or ten direct melee victories. Both covenants are honored; preview the permanent reward before confirming.",
+      "deed_a": "Kept Word asks for twelve successful hostile shield blocks. Rest and travel are allowed. I have no claim beyond the words you accepted.",
+      "deed_b": "Answerable Crown asks for ten direct melee victories against hostile mobs. You declined one oath, not the right to earn my trust.",
+      "reckoning_a": "Kingsguard is proven. Meet six hostile mobs with your own projectiles to prove Sovereign's Reach. Your earlier oath is already fulfilled.",
+      "reckoning_b": "Kingsguard is proven. Six personal projectile victories prove Sovereign's Reach, without an extra toll for the path you chose.",
+      "trial": "Sovereign's Reach is proven. Win a fresh Trial of Sovereignty to prove Throne of the World, then return to my statue. Failure permits another attempt.",
+      "ending_a": "Kept Word is complete. Claim your permanent Royal Decree specialization: its slow and damage suppression last twenty percent longer. The promise has an end.",
+      "ending_b": "Answerable Crown is complete. Claim your permanent Royal Decree specialization: ten percent shorter cooldown. Your chosen covenant is fully honored."
+    }
+  }
+}

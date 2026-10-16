@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:grond",
+  "premise": "Grond laid foundations for the First Concord so mortal lives would have something firmer than a prayer between themselves and oblivion. He taught Mechanos to build upon them and shared older forge work with Ignar. During the Sundering, the former apprentice trusted a calculation over the maker's warning; Grond trusted the authority of his warning more than his duty to explain it. What Endures asks what a maker owes the people beneath a structure, especially when the structure still stands.",
+  "offering_examples": ["minecraft:iron_ingot", "minecraft:copper_ingot", "minecraft:raw_iron_block"],
+  "witness": {
+    "objective": "divinity_engine:observe",
+    "condition": "underground",
+    "target": 220,
+    "deed": "Observe the underground for 11 continuous seconds"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:plant",
+    "condition": "",
+    "target": 3,
+    "deed": "Plant three saplings at distinct positions"
+  },
+  "passages": {
+    "call": [
+      "Bring an accepted gift of metal, such as an iron ingot, a copper ingot, or a raw iron block. Grond turns the conversation toward the hand that extracted it before speaking of what the metal might become. The work beneath a finished thing is easily forgotten, he says, especially by whoever receives the praise. His shrine offers no doorway into an ancient workshop. The workshop he means survives here as testimony, with its mistakes still embedded in the telling.",
+      "He remembers forging beside Ignar when their disagreements concerned the color of a useful heat rather than the survival of towns. They made hinges, braces, tools that outlasted arguments because someone needed them the next morning. Later, the Concord required foundations vast enough to support a defense against oblivion. Grond became accustomed to work whose failure seemed unthinkable. He wants you to hear how quickly unthinkable can become a command not to speak about what a worker has actually seen."
+    ],
+    "witness": [
+      "Observe the underground for eleven continuous seconds. Find ordinary shelter beneath the earth; no buried Concord structure is required. Grond asks you to listen without pretending the rock will deliver a convenient verdict. Stone does not confess. A builder must infer its burdens, inspect what can be inspected, and leave room for what a surface conceals. Patience is useful because it improves attention, not because enough silence turns a guess into certainty.",
+      "An apprentice once marked a small line across a foundation joint to see whether it widened. Grond praised the observation, then ordered the mark covered before a ceremonial inspection. He feared a visitor would mistake normal settling for immediate collapse. Years later, workers had to reconstruct the movement without that record. The lost mark did not alone cause a disaster. It shows how a reasonable concern for public confidence can begin teaching a whole workshop to make uncertainty invisible."
+    ],
+    "testimony": [
+      "Mechanos had learned from Grond before building machines upon the Concord's foundations. During the Sundering, the apprentice trusted a load calculation over Grond's warning that damaged supports would shift unevenly. Grond had spoken as a master expecting obedience, withholding the old settling records that would have made the warning testable. When a local foundation failed, he sealed a lower passage to keep a crowded district standing. He knew workers might still be below. Later he praised the district's survival without naming that uncertainty.",
+      "Choose permanently between Craft and Endurance. Craft requires collecting 16 iron ingots you have smelted from a furnace. Endurance requires mining 32 stone blocks below Y=0; other deep rock does not replace the specified stone. Neither choice calls for finding Mechanos or proving the apprentice wicked. You will decide whether to approach responsibility through making something fit for use or through sustained labor under weight. Grond will have to answer his own part in either case."
+    ],
+    "deed_a": [
+      "Collect 16 iron ingots you have smelted from a furnace. These are the existing terms of Craft, not a demand to construct a new machine or hand over an imagined relic. Grond asks you to consider the chain of decisions between raw material and usable work. Heat can remove what weakens an ingot, but no furnace can remove a maker's obligation to state the limits of the finished piece.",
+      "Ignar once rejected a batch Grond thought serviceable because a brace would stand above sleeping families. Grond resented the wasted fuel until a smaller flaw appeared in the same metal. He does not turn the recollection into a claim that his old companion always knew best. Their useful habit was allowing criticism to change the work before a reputation depended on defending it. Somewhere on the way to the Concord's foundations, Grond began treating disagreement as damage to the structure rather than maintenance of its safety."
+    ],
+    "deed_b": [
+      "Mine 32 stone blocks below Y=0. Grond specifies stone rather than any material found at depth, and asks you to prepare a safe route and suitable tools. Endurance is not permission to bury yourself or to confuse avoidable injury with dedication. The work's measure is finite. A maker who demands endless persistence can always praise the survivor while forgetting the people whose bodies supplied the limit nobody wanted to acknowledge.",
+      "The sealed passage returns in his account. A foreworker had warned that exhaustion was making the shift slower, and Grond answered by praising the crew's reputation for never stopping. He remembers how pleased they sounded. That pleasure did not make the pressure fair. Your continued labor must not teach him that every burden becomes righteous if someone can bear it. It should teach him to distinguish perseverance chosen by a worker from perseverance extracted by a master skilled at calling it honor."
+    ],
+    "reckoning_a": [
+      "Plant three saplings at distinct positions. Grond asks the maker of ingots to prepare for growth that will not obey a finished drawing. You need not grow the trees to maturity for this deed, and planting the same spot repeatedly is not three beginnings. The small task offers a different measure of sound work: room for a living thing to become larger than the shape you first intended for it.",
+      "He remembers refusing a proposal for replaceable supports because he wanted the Concord's foundations to express permanence. Repair seemed an admission that his work might someday be inadequate. Saplings make that pride look strange. A tree can be healthy because it changes; a foundation can endure because its makers allow inspection and renewal. Your planting does not rebuild the lost district. It challenges Grond's conviction that the worthiest thing a craftsperson can leave behind is something nobody will ever need to alter."
+    ],
+    "reckoning_b": [
+      "Plant three saplings at distinct positions. After working beneath the world's weight, make room for something that should not have to withstand that weight immediately. Endurance is not the only virtue a future needs. Young roots deserve favorable ground, not a test designed to prove how little care they can survive. The deed ends with three genuine plantings; it does not require waiting for mature trees or returning their wood as tribute.",
+      "Grond revisits the foreworker's request for relief. He used to tell that part of the story as a warning that even strong crews can falter. Now he recognizes a skilled person reporting the condition of the work. A sapling bending toward light is not betraying the soil. A worker naming fatigue is not betraying a foundation. Your modest planting lets him imagine honoring those below the district without using their endurance to justify having left them there."
+    ],
+    "trial": [
+      "Undertake and win a fresh trial of Grond, then return to his shrine. It follows the planting because strength should answer to the future it makes possible. An earlier victory cannot replace this attempt, and a failed attempt may be retried without repeating the completed work. He asks you to enter prepared, not to imitate the exhaustion of the crew whose warning he failed to honor.",
+      "Before you go, Grond describes the lower passage with no heroic conclusion attached. He does not know the fate of every worker, and will not fill that gap with either a miraculous escape or a noble last stand. Mechanos's calculation mattered, but it did not order Grond's silence afterward. The maker must bear the shape of his own choice. You are not being sent to obtain an apprentice's confession so that a master may finally consent to make his."
+    ],
+    "ending_a": [
+      "Grond welcomes you as someone whose work can be examined, not as someone whose success should never be questioned. Craft has restored an older workshop habit: a flaw named early is useful knowledge, not an insult. He recounts the concealed settling records alongside the warning Mechanos rejected. This does not make the two decisions identical or erase the district saved by sealing the passage. It prevents survival above from becoming a polished surface laid over uncertainty below.",
+      "Craft retains its established specialization: Stoneform resistance lasts 12 seconds instead of 10. Grond offers that longer interval as room to respond, not proof that resistance can replace judgment. 'Your hands gave the ore a purpose. What you build will remember the patience of its maker.' He now adds that other hands may improve it. The foundations of trust can include a maker willing to be corrected, and the future need not preserve his pride in order to preserve his useful work."
+    ],
+    "ending_b": [
+      "Your return allows Grond to speak of endurance without immediately demanding more of it. The crew below the district becomes a company of workers with knowledge, limits, and unanswered claims, rather than a supporting detail in his greatest rescue. He cannot uncover their whole fate through this quest. He can stop using what remains unknown to make a reassuring story. The same stone may still bear weight, but the god describing that weight has ceased to call every complaint a crack in loyalty.",
+      "Endurance retains its established specialization: Stoneform begins a 20-second cooldown instead of 25 seconds. A shorter interval before renewed defense is not an instruction to remain forever under strain. 'Beneath the weight of the world, you continued. The mountain knows one of its own.' Grond speaks the blessing and then permits rest to belong beside it. What endures may be a shelter maintained by many hands, rather than one exhausted guardian refusing to admit that a handover is possible."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring a gift of metal. We will speak of the hands beneath the finished work.",
+    "witness": "Observe underground for eleven continuous seconds. Rock is evidence, not an oracle.",
+    "testimony": "Choose Craft or Endurance permanently. Neither requires condemning my former apprentice.",
+    "deed_a": "Collect 16 iron ingots you have smelted from a furnace. Useful work can withstand examination.",
+    "deed_b": "Mine 32 stone blocks below Y=0. Prepare safely; other deep rock is not the specified stone.",
+    "reckoning_a": "Plant three saplings at distinct positions. Leave room for a future beyond your drawing.",
+    "reckoning_b": "Plant three saplings at distinct positions. A beginning deserves care, not only a test.",
+    "trial": "Win a fresh trial of mine, then return. Do not imitate the exhaustion I once praised.",
+    "ending_a": "Let other hands improve what yours have made.",
+    "ending_b": "The mountain can know your strength without demanding you never rest."
+  }
+}

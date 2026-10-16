@@ -1,8 +1,13 @@
 package net.nightshade.divinity_engine.divinity.blessing.kairoth;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
 
@@ -33,7 +38,13 @@ public class SecondChance extends Blessings {
     public boolean onDeath(BlessingsInstance instance, LivingDeathEvent event) {
         if (event.getEntity().getOffhandItem().getItem().toString().contains("totem_of_undying")) return false;
         event.setCanceled(true);
-        event.getEntity().setHealth(event.getEntity().getMaxHealth() / 2);
+        float healthRatio = BlessingSpecializations.isActive(event.getEntity(), "kairoth", "a") ? 0.6f : 0.5f;
+        event.getEntity().setHealth(event.getEntity().getMaxHealth() * healthRatio);
+        if (!event.getEntity().isInvisible()) BlessingVisuals.pulse(instance, event.getEntity(), Cue.HEAL);
+        if (BlessingSpecializations.isActive(event.getEntity(), "kairoth", "b")) {
+            boolean warded = event.getEntity().addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 0));
+            if (warded && !event.getEntity().isInvisible()) BlessingVisuals.pulse(instance, event.getEntity(), Cue.WARD);
+        }
         return true;
     }
 }

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "kind": "story",
+  "god": "divinity_engine:solarius",
+  "title": "Dawn's Judgment",
+  "request": "A dawn can expose the wicked or shelter the weary. Bring an offering, then choose what your light will mean.",
+  "branches": {
+    "a": {
+      "name": "Judgment",
+      "objective": "divinity_engine:kill",
+      "condition": "undead_day",
+      "target": 8,
+      "deed": "Defeat eight undead in daylight",
+      "reward": {
+        "id": "divinity_engine:solarius_a",
+        "blessing": "divinity_engine:solar_ward",
+        "description": "Solar Ward lasts 15 seconds instead of 10"
+      },
+      "ending": "You faced what others feared to name. Let your light endure: judgment need not be cruelty."
+    },
+    "b": {
+      "name": "Sanctuary",
+      "objective": "divinity_engine:donation",
+      "target": 16,
+      "item": "minecraft:bread",
+      "deed": "Contribute 16 bread",
+      "reward": {
+        "id": "divinity_engine:solarius_b",
+        "blessing": "divinity_engine:solar_ward",
+        "description": "Solar Ward can activate below 65% health instead of 50%"
+      },
+      "ending": "You made room beneath the dawn for the hungry. Your shelter, too, is justice."
+    }
+  }
+}

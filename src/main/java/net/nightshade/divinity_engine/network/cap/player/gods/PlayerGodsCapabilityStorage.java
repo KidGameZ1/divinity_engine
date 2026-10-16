@@ -8,6 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.nightshade.divinity_engine.network.events.divinity.gods.GodsEvents;
+import net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
 import net.nightshade.divinity_engine.divinity.curse.Curse;
@@ -19,6 +22,8 @@ import net.nightshade.divinity_engine.network.events.divinity.curse.UncursePlaye
 import net.nightshade.divinity_engine.network.events.divinity.gods.ContactGodEvent;
 import net.nightshade.divinity_engine.network.events.divinity.gods.LoseFaithEvent;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
+import net.nightshade.divinity_engine.registry.divinity.curse.CurseRegistry;
+import net.nightshade.divinity_engine.registry.compat.LegacyElderContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
@@ -34,6 +39,9 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
     private static final Logger log = LogManager.getLogger(PlayerGodsCapabilityStorage.class);
     private final HashMap<ResourceLocation, BaseGodInstance> godsInstances = new HashMap();
     private final HashMap<ResourceLocation, CurseInstance> cursesInstances = new HashMap();
+    // Keep retired records byte-for-byte without exposing instances to runtime callbacks.
+    private final HashMap<ResourceLocation, CompoundTag> legacyGods = new HashMap<>();
+    private final HashMap<ResourceLocation, CompoundTag> legacyCurses = new HashMap<>();
     private @Nullable Entity owner;
 
     public Collection<BaseGodInstance> getContactedGods() {
@@ -73,6 +81,7 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
     }
 
     public boolean contactGod(BaseGodInstance instance) {
+        if (this.owner != null && this.owner.level().isClientSide()) return false;
         if (this.owner == null) {
             log.error("Cannot contact god: no owner set");
             return false;
@@ -83,6 +92,8 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
             log.info("Adding god {} to player {}", instance.getBaseGodId(), this.owner.getName().getString());
             instance.markDirty();
             this.godsInstances.put(instance.getBaseGodId(), instance);
+            GodsEvents.onContactGod(new ContactGodEvent(instance, this.owner));
+            if (this.owner instanceof ServerPlayer player) DivineNarrativeManager.onContact(player, instance.getBaseGod(), true);
             log.info("Current gods count: {}", this.godsInstances.size());
             this.syncChanges();
             return true;
@@ -125,20 +136,24 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
 
 
     public Optional<BaseGodInstance> getContactedGod(BaseGod god) {
-        return this.godsInstances.values().parallelStream().filter((godInstance) -> godInstance.getBaseGod().equals(god)).findFirst();
+        return god == null ? Optional.empty() : Optional.ofNullable(this.godsInstances.get(god.getRegistryName()));
     }
 
     public Optional<CurseInstance> getCurse(Curse curse) {
-        return this.cursesInstances.values().parallelStream().filter((curseInstance) -> curseInstance.getCurseID().equals(curse)).findFirst();
+        return curse == null ? Optional.empty()
+                : Optional.ofNullable(this.cursesInstances.get(CurseRegistry.CURSES_REGISTRY.get().getKey(curse)));
     }
 
     public void loseContactedGod(BaseGodInstance instance) {
+        if (this.owner != null && this.owner.level().isClientSide()) return;
         if (this.owner != null) {
             if (this.godsInstances.containsKey(instance.getBaseGodId())) {
                 if (!MinecraftForge.EVENT_BUS.post(new LoseFaithEvent(instance, this.owner))) {
 
                     instance.markDirty();
                     this.getContactedGods().remove(instance);
+                    GodsEvents.onLoseFaith(new LoseFaithEvent(instance, this.owner));
+                    if (this.owner instanceof ServerPlayer player) DivineNarrativeManager.onContact(player, instance.getBaseGod(), false);
                     this.syncChanges();
                 }
 
@@ -164,25 +179,11 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
     }
 
     public void loseContactedGod(BaseGod god) {
-        if (this.owner != null) {
-            Optional<BaseGodInstance> optional = this.getContactedGod(god);
-            if (!optional.isEmpty()) {
-                if (!MinecraftForge.EVENT_BUS.post(new LoseFaithEvent((BaseGodInstance)optional.get(), this.owner))) {
-                    ((BaseGodInstance)optional.get()).markDirty();
-                    this.getContactedGods().remove(optional.get());
-                    this.syncChanges();
-                }
-
-            }
-        }
+        this.getContactedGod(god).ifPresent(this::loseContactedGod);
     }
     public void loseContactAllGods() {
         if (this.owner != null) {
-            Collection<BaseGodInstance> list = this.getContactedGods();
-            if (!list.isEmpty()) {
-                this.getContactedGods().clear();
-                syncAll();
-            }
+            for (BaseGodInstance instance : java.util.List.copyOf(this.getContactedGods())) loseContactedGod(instance);
         }
     }
 
@@ -202,6 +203,8 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
             this.cursesInstances.values().forEach((instance) -> curseList.add(instance.toNBT()));
         }
 
+        legacyGods.values().forEach(value -> godsList.add(value.copy()));
+        legacyCurses.values().forEach(value -> curseList.add(value.copy()));
         tag.put("contacted_gods", godsList);
         tag.put("curses", curseList);
         return tag;
@@ -211,6 +214,8 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
         if (nbt.contains("resetExistingData")) {
             this.godsInstances.clear();
             this.cursesInstances.clear();
+            this.legacyGods.clear();
+            this.legacyCurses.clear();
         }
 
         ListTag godsList = nbt.getList("contacted_gods", 10);
@@ -218,9 +223,15 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
 
         if (nbt.getString("contacted_gods").equals("none")){
             this.godsInstances.clear();
+            this.legacyGods.clear();
         }else {
             for(Tag tag : godsList) {
                 if (tag instanceof CompoundTag compoundTag) {
+                    ResourceLocation id = ResourceLocation.tryParse(compoundTag.getString("God"));
+                    if (LegacyElderContent.isGod(id)) {
+                        legacyGods.put(id, compoundTag.copy());
+                        continue;
+                    }
                     try {
                         BaseGodInstance instance = BaseGodInstance.fromNBT(compoundTag);
 
@@ -235,9 +246,15 @@ public class PlayerGodsCapabilityStorage implements InternalGodsStorage {
         }
         if (nbt.getString("curses").equals("none")){
             this.cursesInstances.clear();
+            this.legacyCurses.clear();
         }else {
             for(Tag tag : cursesList) {
                 if (tag instanceof CompoundTag compoundTag) {
+                    ResourceLocation id = ResourceLocation.tryParse(compoundTag.getString("Blessing"));
+                    if (LegacyElderContent.isCurse(id)) {
+                        legacyCurses.put(id, compoundTag.copy());
+                        continue;
+                    }
                     try {
                         CurseInstance instance = CurseInstance.fromNBT(compoundTag);
                         this.cursesInstances.put(instance.getCurseID(), instance);

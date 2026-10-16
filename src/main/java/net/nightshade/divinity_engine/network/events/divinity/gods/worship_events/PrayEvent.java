@@ -5,6 +5,7 @@ import net.minecraftforge.eventbus.api.Cancelable;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.network.events.divinity.gods.GodsEvent;
 
+@Cancelable
 public class PrayEvent extends GodsEvent {
     private final LivingEntity living;
 

@@ -1,14 +1,13 @@
 package net.nightshade.divinity_engine.divinity.blessing.cryonis;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -31,10 +30,8 @@ public class FrostbiteMantle extends Blessings {
         if (event.getSource().getEntity() instanceof LivingEntity attacker){
             attacker.setTicksFrozen(200);
             attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, false, false, true));
-            if (attacker.level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.SNOWFLAKE, attacker.getX(), attacker.getY() + 1, attacker.getZ(), 25, 0.5, 0.5, 0.5, 0.1);
-                serverLevel.sendParticles(ParticleTypes.ITEM_SNOWBALL, attacker.getX(), attacker.getY() + 1, attacker.getZ(), 25, 0.5, 0.5, 0.5, 0.1);
-            }
+            BlessingVisuals.at(instance, event.getEntity(), attacker.position().add(0, 0.08, 0), Cue.CONTROL,
+                    Math.max(0.5, attacker.getBbWidth()));
         }
         return super.onBeingDamaged(instance, event);
     }

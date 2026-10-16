@@ -5,6 +5,8 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -38,8 +40,12 @@ public class Hammerhand extends Blessings {
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
 
-        if (player.getMainHandItem().getItem() instanceof TieredItem)
+        if (player.getMainHandItem().getItem() instanceof TieredItem) {
             event.setAmount(event.getAmount() + 3);
+            if (!event.isCanceled() && event.getAmount() > 0) {
+                BlessingVisuals.at(instance, player, event.getEntity().getBoundingBox().getCenter(), Cue.IMPACT, 1.25);
+            }
+        }
 
         return super.onDamageEntity(instance, player, event);
     }

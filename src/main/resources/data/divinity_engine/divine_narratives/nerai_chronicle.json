@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:nerai",
+  "premise": "Before the Sundering, Nerai carried the First Concord's promise through rivers, wells, and harbors: mortal lives would not be swallowed by oblivion without a trace. When that protection failed, saving one shore could expose another. Her sister Cryonis froze a drowned sanctuary to preserve its final memories. Nerai has never stopped hearing a locked door in that act of mercy. The Water's Promise asks whether a guardian can shelter life without deciding that life belongs to her.",
+  "offering_examples": ["minecraft:kelp", "minecraft:prismarine", "minecraft:nautilus_shell"],
+  "witness": {
+    "objective": "divinity_engine:observe",
+    "condition": "water",
+    "target": 240,
+    "deed": "Observe the water for 12 continuous seconds"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:harvest",
+    "condition": "",
+    "target": 6,
+    "deed": "Harvest six mature crops"
+  },
+  "passages": {
+    "call": [
+      "The shrine answers with the sound of an oar entering water, although no boat passes nearby. Nerai asks for kelp, prismarine, or a nautilus shell: something the sea has sustained, shaped, or surrendered. She does not ask for a drowned person's keepsake. Too many petitioners, she says, confuse grief with a license to take. Your ordinary accepted offering begins this account; the old sanctuary is a memory she will tell you, not a ruin you must discover.",
+      "She remembers the Concord's harbor kitchens before she remembers its monuments. Steam drifted from pots while travelers argued over whose village made better soup. Such quarrels were evidence of success: people expected another morning in which to disagree. Nerai protected that expectation. Now she wants a mortal witness who can hear more than the grand claim that the sea gives and the sea takes. Both verbs conceal a hand, and sometimes that hand was hers."
+    ],
+    "witness": [
+      "Observe the water for twelve continuous seconds. You need no sacred basin; ordinary water belongs to the same world the Concord tried to preserve. Watch where its surface admits a disturbance and where it settles again. Nerai asks you to resist inventing a message in every ripple. A witness must first learn what was actually present, before a god supplies a meaning persuasive enough to replace it.",
+      "When you return, she describes a harbor clerk during the Sundering, recording arrivals on scraps of sail. Each family was counted twice: once when a boat left danger, once when it reached shelter. Nerai remembered the first number because it praised her current. She avoided asking for the second. Your brief attention to unremarkable water unsettles her more than an extravagant sacrifice would. You have practiced remaining beside something that does not immediately tell you that you are good."
+    ],
+    "testimony": [
+      "Nerai admits that she diverted a current toward an evacuation channel when the Concord began to break. Boats escaped, but the diverted water entered a sanctuary whose lower doors had already failed. Cryonis froze that drowned place to keep its final memories from oblivion. Nerai cannot establish that anyone remained alive when the ice closed. She nevertheless accused her sister of choosing a prison. Anger let her speak about the locked water without naming who had sent it there.",
+      "Choose permanently between Harmony and Protection. Harmony asks you to remain submerged for 120 continuous seconds without drowning damage; prepare a safe means of breathing first. Protection asks you to defeat six drowned. Neither choice changes the past or requires speaking to Cryonis. You are choosing how to practice Nerai's promise now: by learning to inhabit another element without conquering it, or by confronting a danger without claiming everyone you defend. She will not call either answer the innocent one."
+    ],
+    "deed_a": [
+      "Remain submerged for 120 continuous seconds without drowning damage. Nerai explicitly rejects an ordeal of suffocation. Preparation is part of Harmony: the breath you bring, the route you can leave by, the refusal to confuse injury with devotion. Underwater, the surface becomes a moving ceiling. You may find it beautiful and still want to return above it. That disagreement between wonder and need is precisely what she asks you to remember.",
+      "She tells you of a ferryman who refused her perfect current because his passengers needed to stop for someone left on a pier. She had called him ungrateful. Later, the person he recovered repaired boats that carried many others. Nerai cannot turn that outcome into a universal rule; another delay might have killed them all. What she can relinquish is the habit of treating a mortal's objection as a defect in gratitude. Your safe return is an answer she must allow."
+    ],
+    "deed_b": [
+      "Defeat six drowned. Nerai does not identify these enemies with the sanctuary's dead, nor claim that destroying them will release the memories in Cryonis's keeping. They are present dangers, and that is enough reason to confront them. Protection becomes corrupt when it invents a hated ancestor for every threat. Keep your attention on what attacks and on the living space your action can defend, rather than on a story that makes violence feel historically inevitable.",
+      "Her recollection turns to a watch captain who wanted every harbor sealed after the flood. No arrivals would mean no new risk. Nerai approved his proposal for a single frightened evening, then rescinded it when fishing boats waited outside with hungry crews. She had almost protected an empty harbor perfectly. Six victories cannot promise absolute safety. They can teach a smaller, harder discipline: remove the danger you can actually name, and leave the world large enough for people to enter it."
+    ],
+    "reckoning_a": [
+      "Harmony brings an unwelcome question: who keeps your patient listening supplied? The harbor families ate grain from inland fields. Those fields depended on channels Nerai had neglected while mourning the sea. Harvest six mature crops, waiting for ripeness rather than taking green growth merely to satisfy a request. This is not a second offering, and the harvest need not be surrendered. The work matters because water's promise must reach a meal, not end at an impressive shoreline.",
+      "Nerai recounts a farmer's complaint that her floods had left beautiful silt beneath ruined seed. She once answered that next year's field would be richer. The farmer asked what the children should eat this year. Now she repeats his question without supplying her former defense. Listening means allowing a need to interrupt your preferred timescale. Your harvest will not feed those lost children; it establishes that their objection can still change the care offered to someone else."
+    ],
+    "reckoning_b": [
+      "After the danger comes the kitchen. Harvest six mature crops. Nerai has heard protectors describe this work as beneath them, as though a cleared shore could sustain people without food. You are not being asked to donate the harvest or prove that every hungry mouth is now fed. You are asked to complete a bounded task that defense makes possible, and to recognize how little a victory means if nobody remains interested in the following day.",
+      "The old watch captain reappears in her testimony, no longer at his gate. He spent the next season repairing irrigation ditches because survivors had no use for a captain of locked doors. Nerai first regarded that labor as penance, then understood it as competence acquired late. Protection does not require endless enemies to justify itself. Sometimes its honest continuation is knowing when a crop is ready and refusing to make another person's ordinary need wait for your next heroic hour."
+    ],
+    "trial": [
+      "Nerai now asks you to undertake and win a fresh trial of hers. Earlier victories cannot answer the question raised by this account; enter after the work you have just completed. The trial is not a reenactment of the sanctuary, and no success will retroactively empty its flooded rooms. Its danger belongs to the present. Prepare, attempt it, and return to her shrine when you have prevailed. A failed attempt does not annul your chosen promise.",
+      "Before you leave, she rehearses the sentence she intends to keep: I sent the water. Not I caused every death, which would claim knowledge she lacks; not the sea decided, which would hide her decision inside weather. You cannot fight that sentence into truth for her. You can carry your own choice through uncertainty without demanding that a god first become blameless. For once, she sends a traveler away without calling departure a wound."
+    ],
+    "ending_a": [
+      "At your return, Nerai tells the harbor clerk's story again and includes both columns. Some boats never arrived. Some arrived elsewhere and were wrongly mourned. She will not smooth either fact into a perfect elegy. Harmony has taught her that an account can remain incomplete without becoming dishonest, provided its speaker admits where knowledge ends. The frozen sanctuary remains a painful question, but she no longer presents her fear of imprisonment as proof that her sister desired it.",
+      "Your established specialization is unchanged: Aquatic Grace heals one HP every ten seconds while submerged. Nerai gives its meaning no greater power than its actual gift. It cannot breathe for every lost sailor or restore a vanished home. It can help one living person remain in the water and return from it. 'You listened until the water no longer felt foreign. The tide now remembers your breath.' She leaves the final silence open for your answer."
+    ],
+    "ending_b": [
+      "Nerai receives your return without announcing that the sea is safe. Instead, she names what Protection has refused: a harbor made secure by excluding everyone, a history made simple by blaming Cryonis, a defender whose only skill is finding another enemy. She will keep defending the living, but she can no longer pretend that rescue gives her authority over their destination. The sanctuary's memories remain beyond this quest; your completed work neither seizes them nor commands their release.",
+      "Your established specialization is unchanged: Aquatic Grace grants an additional 20% swim speed in water. It is speed toward a need, not ownership of the person waiting there. Nerai imagines the watch captain lifting a gate and stepping aside, a gesture less celebrated than battle and sometimes more difficult. 'You made room for the living beneath the waves. Let the currents carry you to those in need.' Her blessing accompanies your departure; it does not require your return."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring an accepted gift of the tide. I owe you a story with both arrival columns.",
+    "witness": "Watch the water for twelve continuous seconds before accepting my explanation of it.",
+    "testimony": "Harmony or Protection: choose permanently, but do not mistake either for innocence.",
+    "deed_a": "Keep your breath safely for 120 continuous seconds beneath the water. Suffering is not the offering.",
+    "deed_b": "Defeat six drowned. Defend the present without inventing an enemy in the past.",
+    "reckoning_a": "Harvest six mature crops. Listening must reach the people who need to eat today.",
+    "reckoning_b": "Harvest six mature crops. A protected shore still needs a tomorrow.",
+    "trial": "Win a fresh trial of mine, then return. The sanctuary is not yours to undo.",
+    "ending_a": "You may love the water and still choose to leave it.",
+    "ending_b": "Let your speed serve a need, never a claim of ownership."
+  }
+}

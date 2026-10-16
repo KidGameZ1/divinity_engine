@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:tide_winter",
+  "gods": ["divinity_engine:nerai", "divinity_engine:cryonis"],
+  "title": "The Door Beneath the Ice",
+  "relation": "Sisters divided over the boundary between safekeeping and captivity",
+  "summary": "Nerai and Cryonis remember the same sanctuary from opposite sides of its final stillness. During the Sundering, water diverted for an evacuation contributed to its drowning; Cryonis froze the drowned sanctuary to preserve its final memories against oblivion. Nerai fears that such preservation can become imprisonment. Cryonis fears that release without understanding can become erasure. Both protected mortal life through the First Concord, and both have accounts that leave difficult things unsaid. Their kinship does not make either memory complete.",
+  "epilogues": {
+    "aa": [
+      "You bring Harmony and Preservation into the same shrine conversation. Nerai asks what distinguishes a sheltered memory from a captive one. Cryonis answers first with the care of her keeping, then stops. Care explains why she made the ice; it does not alone establish who should decide its future. Nerai, remembering the current she diverted, cannot honestly appoint herself the unquestioned voice of everyone beneath it either.",
+      "The sisters find an unexpected witness in the sanctuary's seed keeper. His jars were meant to open in spring, yet opening them before the fields were ready would have wasted what he saved. Harmony refuses to hurry another life into the shape of a comforting ending. Preservation refuses to call indefinite custody an answer merely because haste would be dangerous. Between those refusals, they can admit a duty whose terms are not yet settled.",
+      "No ice thaws in response to your choices, and no lost person is declared restored. What changes in this account is the sisters' willingness to leave a question visible. Nerai can hear love in the keeping without surrendering her fear of a prison. Cryonis can hear concern in that fear without treating it as a demand for oblivion."
+    ],
+    "ab": [
+      "Harmony meets Severity when you ask the sisters to speak about evidence rather than innocence. Nerai describes the water she sent toward the sanctuary. Cryonis distinguishes the memories she preserved from the lives she could not save. Their statements do not fit into a verdict with one culprit. They do make it harder for either sister to borrow the other's failure as shelter from her own.",
+      "Cryonis asks whether listening can become another postponement, an endless gentleness that never names a harmful act. Nerai answers with the farmer who needed food this year, not reassurance about richer soil later. Harmony has learned that a patient voice can still be evasive. In return, Nerai asks whether exact judgment can hear a plea it finds inconvenient. Cryonis repeats the sick household's objection to the fuel schedule without editing away its force.",
+      "Their agreement is narrow: neither patience nor severity may omit the person who bears its cost. The frozen sanctuary remains outside your power to resolve. Yet its history can now contain both a clear accusation against concealment and room for uncertainty about what could have been prevented. The sisters have not made peace by lowering their standards; they have begun applying those standards to themselves."
+    ],
+    "ba": [
+      "Protection and Preservation make an uneasy pair of guardians in this conversation. Nerai wants to know how Cryonis would recognize the moment a safeguard began harming what it guarded. Cryonis asks the same of a harbor captain who could exclude every traveler in the name of safety. Neither question can be answered by pointing to the sincerity of the person holding the gate.",
+      "You recall the cleared waters and the gathered snow. One deed removed a present danger; the other practiced keeping without pretending the material was eternal. Together they suggest two different limits. A defender must be able to stop when the danger ends. A keeper must be able to describe circumstances under which custody should change. Neither sister can supply those limits for the sanctuary by declaration, especially while so much about its last hours remains uncertain.",
+      "Cryonis acknowledges that Nerai's fear of imprisonment need not mean contempt for remembrance. Nerai acknowledges that guarding a record can protect the powerless against a victor's convenient account. This is no warrant to seize or thaw the sanctuary. It is a refusal to let the word guardian settle every argument in advance. The sisters remain responsible for explaining what their protection permits the protected to refuse."
+    ],
+    "bb": [
+      "With Protection and Severity completed, the sisters initially sound ready to put the past on trial. Nerai names the ice; Cryonis names the diverted current. You ask which present danger those accusations would remove. The question interrupts the familiar exchange. Neither your victories over drowned nor your victories over strays authorized a punishment of the other sister, and neither god can honestly claim otherwise.",
+      "They turn instead to the accounts that followed the disaster. Nerai repeated the image of a prison without knowing whether anyone was alive when it closed. Cryonis praised unbroken preservation while allowing listeners to imagine unbroken survival. Both statements offered certainty where knowledge failed. Severity can require those claims to be corrected. Protection can insist that correcting them must not expose grieving people to another spectacle of divine rivalry.",
+      "No reconciliation is proclaimed. The sisters are still capable of hurting each other, and the sanctuary remains frozen in the history you have heard. But their strength has acquired a boundary: the dead will not be conscripted as evidence for whichever sister speaks most forcefully. An honest defense may begin by laying down a charge that cannot be proved, even when the anger beneath it remains."
+    ]
+  }
+}

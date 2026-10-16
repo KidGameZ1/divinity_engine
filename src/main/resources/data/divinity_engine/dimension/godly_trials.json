@@ -1,0 +1,13 @@
+{
+  "type": "divinity_engine:godly_trials",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [],
+      "biome": "minecraft:the_void",
+      "structures": {
+        "structures": {}
+      }
+    }
+  }
+}

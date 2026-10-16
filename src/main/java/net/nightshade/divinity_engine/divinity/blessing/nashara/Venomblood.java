@@ -6,6 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -27,7 +29,10 @@ public class Venomblood extends Blessings {
     public boolean onTakenDamage(BlessingsInstance instance, LivingDamageEvent event) {
 
         if (event.getSource().getDirectEntity() instanceof LivingEntity attacker && attacker.isOnFire()) {
-            attacker.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, false, true) );
+            boolean applied = attacker.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, false, true) );
+            if (applied) {
+                BlessingVisuals.at(instance, event.getEntity(), attacker.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
+            }
         }
 
         return super.onTakenDamage(instance, event);

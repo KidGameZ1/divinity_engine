@@ -2,17 +2,17 @@ package net.nightshade.divinity_engine.divinity.blessing.lumen;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
 /**
- * A blessing that removes negative status effects from the player when taking damage.
- * Triggers a visual particle effect when activated.
+ * A blessing that removes negative status effects from the player when dealing damage.
+ * Triggers a cleansing visual when an effect is removed.
  */
 public class CleansingFlame extends Blessings {
 
@@ -28,8 +28,8 @@ public class CleansingFlame extends Blessings {
     }
 
     /**
-     * Triggered when the player takes damage. Removes all negative status effects and creates
-     * a visual particle effect around the player.
+     * Triggered when the player deals damage. Removes the listed negative status effects and
+     * creates a visual around the player when cleansing succeeds.
      *
      * @param instance The blessing instance
      * @param player   The player entity
@@ -38,19 +38,17 @@ public class CleansingFlame extends Blessings {
      */
     @Override
     public boolean onDamageEntity(BlessingsInstance instance, LivingEntity player, LivingHurtEvent event) {
-        player.removeEffect(MobEffects.POISON);
-        player.removeEffect(MobEffects.WITHER);
-        player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-        player.removeEffect(MobEffects.WEAKNESS);
-        player.removeEffect(MobEffects.HUNGER);
-        player.removeEffect(MobEffects.DIG_SLOWDOWN);
-        player.removeEffect(MobEffects.CONFUSION);
-        player.removeEffect(MobEffects.BLINDNESS);
+        boolean cleansed = player.removeEffect(MobEffects.POISON);
+        cleansed |= player.removeEffect(MobEffects.WITHER);
+        cleansed |= player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+        cleansed |= player.removeEffect(MobEffects.WEAKNESS);
+        cleansed |= player.removeEffect(MobEffects.HUNGER);
+        cleansed |= player.removeEffect(MobEffects.DIG_SLOWDOWN);
+        cleansed |= player.removeEffect(MobEffects.CONFUSION);
+        cleansed |= player.removeEffect(MobEffects.BLINDNESS);
 
-        if (player.level() instanceof ServerLevel) {
-            ((ServerLevel) player.level()).sendParticles(ParticleTypes.END_ROD,
-                    player.getX(), player.getY() + 1, player.getZ(),
-                    20, 0.5, 0.5, 0.5, 0.1);
+        if (cleansed) {
+            BlessingVisuals.pulse(instance, player, Cue.HEAL);
         }
         return true;
     }

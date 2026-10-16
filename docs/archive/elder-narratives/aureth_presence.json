@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "kind": "presence",
+  "god": "divinity_engine:aureth",
+  "color": "d5b360",
+  "texture": "minecraft:textures/particle/glitter_0.png",
+  "sound": "minecraft:block.bell.resonate",
+  "dialogue": {
+    "greeting": [
+      "I am Aureth, the First Sovereign. Stand as one who may choose, not as a possession of this crown.",
+      "There is a place before the throne where no knee is required to bend. Yours, if you wish it.",
+      "Tell me what you can promise honestly. A smaller oath kept freely outweighs a grand one extorted."
+    ],
+    "prayer": [
+      "Speak the limit as clearly as the promise. I will not call precision disloyalty.",
+      "Rest your voice. Resolve need not perform its strength every moment.",
+      "An oath cannot answer in your place forever. What do you choose today?"
+    ],
+    "offering": [
+      "I accept what you chose to place here. This gift gives me no claim upon what you kept.",
+      "Gold can carry a seal; it cannot supply consent. Your willing hand matters more.",
+      "Let this offering have an end. I will not turn a gift into an endlessly renewed demand."
+    ],
+    "contact": [
+      "A crown is not given. It is endured. Contact is enough to begin The Weight of a Promise; read the deeds and both oaths before accepting either."
+    ],
+    "return": [
+      "You returned of your own accord. Absence did not add a clause to the covenant."
+    ],
+    "recognition": [
+      "Your chosen covenant is recorded as fulfilled. A kept word and an answerable crown are both worthy endings."
+    ],
+    "Neutral": [
+      "We have spoken. You may hear my story now; there is no invisible price before the first deed."
+    ],
+    "Favorable": [
+      "I recognize the deed you have actually performed, not a debt I hope to collect."
+    ],
+    "Devoted": [
+      "Trust grows when a promise survives scrutiny. Keep its conditions where both of us can see them."
+    ],
+    "Champion": [
+      "You have stood beneath this weight without surrendering judgment. Wear that trust without making others kneel."
+    ],
+    "Displeased": [
+      "Authority does not make every demand honest. Consider the choices that have put distance between us."
+    ],
+    "Enemy": [
+      "Our trust is broken, not your right to choose. Declining an optional oath was never the offense."
+    ],
+    "trial_start": [
+      "The Trial of Sovereignty has stated its terms. Face its waves; no hidden throne or unseen line must be defended."
+    ],
+    "failure": [
+      "The attempt failed, not the deeds already fulfilled. Prepare again; I will not lengthen your oath in punishment."
+    ],
+    "victory": [
+      "The Trial of Sovereignty is won. Return to my statue when your story calls for its ending; a fresh victory completes that proof."
+    ],
+    "curse": [
+      "Broken Crown weighs upon you: hostile hits can briefly weaken your attack and resistance to knockback. The penalties are bounded, not a permanent surrender of your strength."
+    ],
+    "curse_cleared": [
+      "Broken Crown is lifted. No fragment of its judgment is entitled to remain in your strength."
+    ]
+  }
+}

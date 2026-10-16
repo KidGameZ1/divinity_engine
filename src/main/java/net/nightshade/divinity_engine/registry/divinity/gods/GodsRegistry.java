@@ -1,17 +1,12 @@
 package net.nightshade.divinity_engine.registry.divinity.gods;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import net.nightshade.divinity_engine.DivinityEngineMod;
-import net.nightshade.divinity_engine.block.StatueBlock;
-import net.nightshade.divinity_engine.block.entity.StatueBlockEntity;
+import net.nightshade.divinity_engine.api.gods.GodsDeferredRegister;
 import net.nightshade.divinity_engine.core.mixin.RegistryBuilderAccessor;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
@@ -38,9 +33,9 @@ import net.nightshade.divinity_engine.registry.blocks.BlocksRegistry;
 import net.nightshade.divinity_engine.registry.blocks.entity.BlockEntitesRegistry;
 import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
 
+import java.util.*;
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry.*;
@@ -54,7 +49,8 @@ public class GodsRegistry {
     public static final ResourceLocation REGISTRY_KEY = new ResourceLocation(DivinityEngineMod.MODID, "gods");
 
     // Deferred register for BaseGod class
-    private static final DeferredRegister<BaseGod> registry = DeferredRegister.create(REGISTRY_KEY, DivinityEngineMod.MODID);
+    private static final GodsDeferredRegister registry = GodsDeferredRegister.using(DivinityEngineMod.MODID,
+            BlocksRegistry.REGISTRY, ItemsRegistry.REGISTRY, BlockEntitesRegistry.REGISTRY);
 
     // Forge registry instance for gods
     public static final Supplier<IForgeRegistry<BaseGod>> GODS_REGISTRY = registry.makeRegistry(() -> {
@@ -325,7 +321,7 @@ public class GodsRegistry {
         blessings.add(BLAZING_HANDS);
         blessings.add(FIREPROOF);
         blessings.add(FLASHFLARE);
-        blessings.add(KINDING_FURY);
+        blessings.add(KINDLING_FURY);
         blessings.add(INFERNO_MANTLE);
         return new Ignar(
                 Set.of("fire", "combat"),
@@ -364,6 +360,7 @@ public class GodsRegistry {
      */
     public static void register(IEventBus modEventBus) {
         PlayerGodsCapability.init(modEventBus);
+        net.nightshade.divinity_engine.registry.compat.LegacyElderContent.declareStatues();
         registry.register(modEventBus);
     }
 
@@ -384,14 +381,7 @@ public class GodsRegistry {
      * @return RegistryObject containing the registered god
      */
     public static RegistryObject<BaseGod> register(String name, Supplier<? extends BaseGod> supplier) {
-        RegistryObject<BaseGod> reg = registry.register(name, supplier);
-
-        RegistryObject<Block> statue = BlocksRegistry.REGISTRY.register(name + "_statue", () -> new StatueBlock(reg));
-        ItemsRegistry.REGISTRY.register(statue.getId().getPath(), () -> new BlockItem(statue.get(), new Item.Properties()));
-        BlockEntitesRegistry.register(name+"_statue", statue, StatueBlockEntity::new);
-
-
-        return reg;
+        return registry.register(name, supplier);
     }
 
 

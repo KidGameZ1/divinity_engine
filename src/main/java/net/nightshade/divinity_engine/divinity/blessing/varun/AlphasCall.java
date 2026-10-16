@@ -1,6 +1,5 @@
 package net.nightshade.divinity_engine.divinity.blessing.varun;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -9,6 +8,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 import java.util.List;
@@ -55,16 +56,7 @@ public class AlphasCall extends Blessings {
                 }
             }
             if (!livingEntityList.isEmpty()) {
-                for (int i = 0; i < 100; i++) {
-                    double angle = living.level().random.nextDouble() * 2 * Math.PI;
-                    double radius = living.level().random.nextDouble() * 3 + 0.5;
-                    double x = living.getX() + Math.cos(angle) * radius;
-                    double y = living.getY() + 0.2 + living.level().random.nextDouble() * living.level().random.nextDouble() ;
-                    double z = living.getZ() + Math.sin(angle) * radius;
-
-                    serverLevel.sendParticles(ParticleTypes.CLOUD, x, y, z, 1, 0, 0.01, 0, 0);
-                    serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, x, y, z, 1, 0, 0.01, 0, 0);
-                }
+                BlessingVisuals.at(instance, living, position.add(0, 0.08, 0), Cue.CONTROL, 2.5);
                 return true;
             }
         }

@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:lumen",
+  "premise": "A Light Kept takes place in the uncomfortable space between sanctuary and an honest record. The First Concord protected mortal life from oblivion. After its Sundering, a refuge burned in Ignar's fire, yet Ignar secretly helped Lumen preserve its last light. Lumen also holds names entrusted by Vokar. These duties have made him good at keeping precious things and less certain about telling the whole truth of how they survived. He asks you to choose a light that welcomes the endangered or confronts what endangers them.",
+  "offering_examples": ["minecraft:glowstone_dust", "minecraft:blaze_powder", "minecraft:candle"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "night_sky", "target": 240, "deed": "Observe the open night sky for 12 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:donation", "condition": "", "target": 3, "item": "minecraft:paper", "deed": "Contribute three paper"},
+  "passages": {
+    "call": [
+      "Lumen asks that your offering be small enough to notice. Glowstone dust, blaze powder, or a candle will serve as an ordinary accepted gift. The eight lanterns named later in one possible path are a different deed, not the entrance price to this conversation. He has seen a refuge become intimidating through the grandeur of its own welcome. Someone arriving with empty hands should not have to guess whether safety is reserved for people who can match the decorations.",
+      "He speaks of a room in the lost refuge where people argued over where to set a lamp. One wanted light for mending; another needed darkness to sleep. Before the Sundering, he might have called their disagreement evidence of a badly ordered household. Now he treasures it. The First Concord protected mortal life from oblivion so that lives could contain such disagreements, not so that every sheltered person would become a grateful reflection of their guardian."
+    ],
+    "witness": [
+      "Observe the open night sky for twelve continuous seconds. Lumen does not ask you to extinguish your supplies or court danger. He wants you to stand beneath a darkness that is not a moral failure. The refuge's last light mattered because people needed it, not because everything beyond its reach deserved to be burned away. He learned that distinction late enough that he still distrusts how easily beautiful language can conceal it.",
+      "When you return, he describes the night the refuge burned. Ignar's fire destroyed it. Lumen does not soften the sentence into an accident without an author. Then he gives the part he once omitted: Ignar also helped him preserve the last light, secretly. The help did not restore the rooms or make those harmed whole. It did prevent one final loss. Lumen has spent too long alternating between those truths, as if only one could be spoken in a single breath."
+    ],
+    "testimony": [
+      "Vokar entrusted names to Lumen, and he has kept them with the same care as the surviving light. They are not a roll of witnesses obligated to endorse his choices. Some memories accuse, some console, and some have nothing to do with the gods at all. Lumen admits that he once favored the details that made sanctuary seem simple. He did not invent their goodness. He edited away the inconvenient company in which goodness had arrived.",
+      "Choose Sanctuary or Purification, then confirm your permanent path. Sanctuary asks you to contribute eight lanterns, making light available rather than hoarding it as proof of holiness. Purification asks you to defeat four witches, confronting a concrete threat rather than demanding purity from everyone who seeks shelter. You need not contact Ignar or Vokar to complete either path. Lumen will answer for what he has told and withheld here. The choice concerns the promise your light will keep, not the verdict you must deliver on his unlikely friend."
+    ],
+    "deed_a": [
+      "Contribute eight lanterns through the story donation. Sanctuary makes Lumen remember the refuge's awkward corners: the low beam tall visitors struck, the place where someone always left a wet cloak, the argument about the lamp. A shelter is not perfected by removing every sign that different people live there. Your lanterns represent room for those differences. The deed does not require a new building or the discovery of the burned refuge; its work is fully present in the measured gift.",
+      "He fears that telling of Ignar's help will sound like asking the harmed to welcome the destroyer into their homes. You owe no such welcome on their behalf. Sanctuary may include boundaries, and its keeper may still name damage honestly. Lumen can acknowledge his friendship with Ignar without assigning its emotional cost to strangers. He begins practicing the distinction by saying what he received and what he cannot forgive for anyone else."
+    ],
+    "deed_b": [
+      "Defeat four witches. Purification here means meeting the threats named by the deed, not cleansing a population of people who make a guardian uncomfortable. Lumen remembers how quickly frightened voices at the refuge wanted a visible sign by which danger could always be recognized. He wanted one too. Fire made the folly plain: something welcomed as warmth could destroy, and the god responsible could also help save what remained.",
+      "Your task does not turn every witch into an agent of the refuge's destruction. Lumen refuses that convenient story. You confront the present danger because it is present, not because winning four encounters would prove his past judgment flawless. He asks you to keep the purpose of protection distinct from the pleasure of finding someone to blame. When the count is complete, the deed is complete; righteousness does not earn authority to keep expanding its list of enemies."
+    ],
+    "reckoning_a": [
+      "Contribute three paper through the story donation. These are ordinary sheets, not a newly required written record or a vessel for souls. Lumen asks for a small material provision for testimony after the larger provision of light. Shelter must be able to hear what happened inside it. The names entrusted by Vokar remain in Lumen's custody; none are spent, copied into your inventory, or made dependent on your ability to locate another god.",
+      "He imagines three entries without asking you to write them: what was protected, what was damaged, and what the keeper still does not know. The third troubles him most. He has often treated uncertainty as a defect that might frighten people away from safety. Yet an honest shelter can say that its keeper is learning. Sanctuary becomes more trustworthy when those within it may correct the account, especially when the correction spoils a beautiful version of the rescue."
+    ],
+    "reckoning_b": [
+      "Contribute three paper through the story donation. After force, Lumen asks for the modest means of keeping an account. The sheets need no inscription and unlock no special object. They stand for the part of Purification that happens after danger is confronted: distinguishing what you actually did from what fear and pride would like to claim. Neither four victories nor three pages can settle the whole history of the burned refuge.",
+      "He speaks Ignar's help and Ignar's destruction together. He also speaks his own preference for a cleaner story. That preference was not the fire, but it made the fire harder to discuss honestly. Lumen can judge harm without insisting that the person responsible be incapable of care. Otherwise every kind act becomes evidence against the harmed, or every wrongdoing makes later repair impossible. Your reckoning asks for a record sturdy enough to resist both evasions."
+    ],
+    "trial": [
+      "Complete a fresh trial of Lumen after the reckoning. The established trial is a present challenge, not a search for the refuge's surviving light. That light belongs to the history he has shared; it is not a missing item you must recover. Lumen has no intention of hiding the last part of your independent story behind an audience with another god. You already possess the testimony needed to understand the choice you made.",
+      "He admits that the trial's clarity is a relief to him. A challenge can have known conditions even when a friendship cannot. Do not mistake that relief for proof that everything outside the trial must be simplified to match it. If you fail, another attempt is possible without repeating completed deeds. After victory, return to hear his answer. He will be ready to speak it without arranging every shadow so that his own face remains bright."
+    ],
+    "ending_a": [
+      "Lumen welcomes you without calling the refuge restored. Sanctuary has not rebuilt what burned, nor bound its former inhabitants to approve of his friendship. It has taught him to describe welcome as something offered with boundaries rather than something proclaimed over other people's wounds. He keeps the last light and Vokar's entrusted names, and now refuses to make either into evidence that all his choices must have been just.",
+      "He tells the remembered household argument to the end. The lamp had been moved, then moved back, then shaded with whatever the residents could manage. Nobody had achieved perfect satisfaction. They had nevertheless made a place in which people could ask for what they needed. That imperfect negotiation is what he wants your permanent path to honor. A light kept is not necessarily a light held still. Sometimes it is carried a little farther from the keeper so someone else can finally sleep."
+    ],
+    "ending_b": [
+      "Lumen's answer to Purification contains no declaration that his hands are clean. You confronted four threats, provided the means of an account, and completed his fresh trial. Those are real accomplishments. Their meaning would shrink if he inflated them into proof that everyone who stands near his light must be good, or everyone beyond it must deserve suspicion. He will keep distinguishing a deed from the convenient identity built around it.",
+      "Ignar remains responsible for the refuge's destruction and remains the unlikely friend who helped preserve its last light. Lumen can say both without demanding agreement from the people harmed. Vokar's entrusted names remain particular lives, not supporting witnesses in a defense of divine reputations. Your path offers protection that can bear to examine itself afterward. When Lumen thanks you, there is less ceremony than before. He no longer needs the conversation to look spotless in order to believe it has done some good."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring a little light. Welcome should not require an impressive entrance.",
+    "witness": "Darkness is not guilt. Let the night make that plain.",
+    "testimony": "Choose Sanctuary or Purification without choosing a convenient lie for me.",
+    "deed_a": "Give eight lanterns. Make room for lives unlike the keeper's.",
+    "deed_b": "Confront four witches. Protection must know when its task is finished.",
+    "reckoning_a": "Give three paper. A shelter must leave room for its occupants' account.",
+    "reckoning_b": "Give three paper. Record the limits of what force has accomplished.",
+    "trial": "Complete a fresh trial, then return for an answer without a polished excuse.",
+    "ending_a": "The light may move so someone else can rest.",
+    "ending_b": "Care can judge harm without inventing spotless people."
+  }
+}

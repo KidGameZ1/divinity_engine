@@ -4,6 +4,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -39,6 +41,7 @@ public class ScholarsEdge extends Blessings {
         if (target.getHealth() >= target.getMaxHealth()) {
             float currentDamage = event.getAmount();
             event.setAmount(currentDamage * 1.15f);
+            BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
         }
 
         return super.onDamageEntity(instance, player, event);

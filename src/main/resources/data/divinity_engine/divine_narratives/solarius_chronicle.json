@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:solarius",
+  "premise": "Dawn's Judgment begins with a god who remembers a door closing more clearly than the people on either side. The First Concord defended mortal life against oblivion, not against darkness itself. When its Sundering opened a breach, Solarius sealed it while believing his sister Nythea had abandoned the defenders. The world survived. That survival became his strongest evidence that he had understood the disaster correctly. Now he asks a mortal to distinguish a necessary act from the story used to excuse everything around it.",
+  "offering_examples": ["minecraft:gold_ingot", "minecraft:sunflower", "minecraft:glowstone", "minecraft:glowstone_dust"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "day_sky", "target": 200, "deed": "Observe the open daytime sky for 10 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:harvest", "condition": "", "target": 6, "deed": "Harvest six mature crops"},
+  "passages": {
+    "call": [
+      "Solarius asks for gold, a sunflower, glowstone, or glowstone dust. He names the smallest gift without disdain: a flower has turned toward the sun all its life and owes him nothing. Offer freely. In the warmth of the shrine, he recalls the First Concord as a promise that a mortal's unfinished day mattered. Farmers could expect another planting; children could become people their parents had not imagined. Oblivion threatened even that possibility. The gods bound their different powers together to hold it back.",
+      "Then his recollection sharpens into a closed gate. During the Sundering he waited for Nythea among defenders whose shadows were disappearing before their bodies fell. She did not return to his position. He sealed the breach. 'Ask what I should have done,' he says, 'but first look at what the dawn still reaches.' Witness ordinary daylight beneath the open sky before accepting his verdict."
+    ],
+    "witness": [
+      "Spend ten continuous seconds beneath the open daytime sky. There is no particular hill to find and no ancient battlefield to uncover. Solarius wants the light you already live under, on work you can interrupt and resume. Watch how something casts a shadow without becoming the sun's enemy. The witness is attention, not a demand to survive an attack or wait for a miraculous sign.",
+      "When you return, he remembers a defender sheltering a wounded companion beneath a shield. From above, only the shield was visible. He had praised that small darkness once. Yet for years he called every absence from his battle line a betrayal. His voice loses its ceremonial certainty. 'A light can show you where someone stood,' he admits. 'It cannot tell you why they left.' He will give his testimony now, including what he learned too late."
+    ],
+    "testimony": [
+      "Nythea did not abandon mortal life. She sheltered survivors in dreams when waking roads failed, and she could not bring every sleeper back. Some refugees had escaped along a retreat route opened by Nashara's forged order; Dravak held the line under that false order while Varun evacuated his pack. Solarius knows this now. He does not know every name, and knowledge cannot reopen the instant when he sealed the breach. He mistook his sister's absence from his sight for absence from her duty.",
+      "Choose permanently between Judgment and Sanctuary. Judgment requires defeating eight undead in daylight; it makes accusation answerable to evidence and protection answerable to its costs. Sanctuary requires contributing sixteen bread; it gives need a claim that does not depend on innocence being beautifully proved. Neither choice acquits Solarius or condemns Nythea. He asks what principle you will practice when your own view is incomplete, not which sibling you will worship instead."
+    ],
+    "deed_a": [
+      "Judgment sends you against eight undead in daylight. These are present dangers, not substitutes for the people Solarius lost, and their defeat will not settle his dispute with his sister. He refuses the easy ceremony in which a mortal kills enough enemies to make a god's conscience clean. Count the deed honestly. Let the daylight requirement remind you that action should withstand being seen.",
+      "He recalls declaring Nythea faithless before asking whether there had been another place to defend. His witnesses repeated what he said because they had watched him save their world. Gratitude became a borrowed authority over events he had never witnessed. 'My error was not that I struck the breach,' he tells you. 'It was that I made the same stroke against her name.' Your chosen judgment must preserve the distinction between stopping harm and pretending that force has explained it."
+    ],
+    "deed_b": [
+      "Contribute sixteen bread through the story's donation, rather than dropping them as ordinary offerings. Solarius calls this Sanctuary, but does not promise that every hungry person is harmless or grateful. At the Sundering, exhausted defenders wanted a list separating loyal households from suspected deserters. A cook asked whether the children would have to learn the accusations before they could eat. He remembers approving the list. He remembers the cook ignoring it.",
+      "Bread cannot reverse that decision. It can establish a different habit in the person who brings it now. Solarius asks you to feed need without turning nourishment into an interrogation. Shelter still requires boundaries against violence; it does not require a sufferer to perform purity. The god who once measured safety by a sealed entrance begins to consider the obligations on the safe side. There are people behind every gate, including the gate that held."
+    ],
+    "reckoning_a": [
+      "Harvest six mature crops. Judgment has dealt with danger; now it must account for the conditions in which the protected continue living. Solarius remembers defenders breaking green stalks to clear their sightlines. Their decision may have saved them that hour. The hunger afterward was real as well, and no battle report gave it a place beside the victory. A useful account must hold both consequences without making one erase the other.",
+      "Wait for ripeness rather than treating every growing thing as another target. The harvest is modest because this is not a tax on your choice. It asks you to notice a different measure of readiness. Solarius can name the moment his seal held. He cannot name the moment all the survivors stopped being in danger, because there was no such moment. A verdict that closes the inquiry too soon becomes another locked door."
+    ],
+    "reckoning_b": [
+      "Harvest six mature crops. Six ripe plants are not a reconstruction of the lost granaries, and you need not build a settlement or find survivors. The work addresses the weakness of Sanctuary: giving once can let the giver imagine that need has ended. Solarius asks you to follow bread backward to the patience, weather, and hands that make it possible.",
+      "He had believed Nythea's shelter must have failed if some sleepers never returned. Now he hears the cruelty in demanding that rescue be complete before calling any part of it real. Yet he also refuses to let partial rescue become an excuse not to ask about the missing. Gather what has actually ripened. Leave the distinction between a living stalk and an empty place intact. Sanctuary must be able to celebrate a meal while remembering who never reached its table."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Light after this reckoning. An earlier victory cannot answer a question you had not yet heard. The familiar trial remains a test of your ability to face danger; it does not stage the Sundering or summon its dead. Solarius will not make you act his history until you arrive at the conclusion he prefers.",
+      "Before you enter, he offers the admission he withheld from his own defenders: he was frightened. Oblivion was taking the space in which another decision might have been possible. Fear did not make the sealing unnecessary, but concealing fear made his account sound infallible. Carry Judgment or Sanctuary through the trial without mistaking success for omniscience. If you fail, prepare and try again. Return to this shrine after victory, not to another god's court, to hear what he is finally willing to say."
+    ],
+    "ending_a": [
+      "Solarius speaks Nythea's name without attaching a charge to it. 'I sealed the breach. I believed she had left us. Those are different statements, and only one describes what my hands did.' He cannot make the admission reach backward to every person who trusted his accusation. He can stop asking new listeners to repeat it. Your Judgment has given him an example of force bounded by an obligation to revise the story around it.",
+      "Solar Ward lasts fifteen seconds instead of ten, the promised specialization of this path. Its endurance is not a verdict about the worth of those outside its protection. Solarius leaves the missing in his account rather than transforming them into proof of victory. Dawn comes without announcing that the world is innocent. There is work visible in it, and there is enough light to begin that work without pretending you can see everything."
+    ],
+    "ending_b": [
+      "Solarius no longer describes the saved world as though safety had been distributed equally. He remembers the cook, the unfinished list, and the defenders who ate beside people they had been taught to suspect. His seal kept oblivion out. It did not finish the labor of protecting mortal life. 'I thought sanctuary was the part behind me,' he says. 'You have shown me it is also the part I must keep facing.'",
+      "Solar Ward can activate below sixty-five percent health instead of fifty percent, exactly the Sanctuary promise. It answers vulnerability earlier; it does not make you invulnerable or erase any other god's grief. Solarius cannot bring his sister's lost sleepers home by forgiving her, and she owes him no immediate reconciliation. Still, his next account of the Sundering will include the refuge he could not see. A dawn that admits another shelter has become wider without burning brighter."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring a freely given light. I have a closed door to account for.",
+    "witness": "Watch the daylight for ten uninterrupted seconds; notice what its shadows shelter.",
+    "testimony": "Judgment or Sanctuary: choose permanently how your light will serve an incomplete world.",
+    "deed_a": "Defeat eight undead in daylight. Their defeat is protection, not my absolution.",
+    "deed_b": "Contribute sixteen bread. Hunger need not win an argument before it may eat.",
+    "reckoning_a": "Harvest six mature crops. A victory must answer for the life after it.",
+    "reckoning_b": "Harvest six mature crops. Shelter includes tomorrow's meal.",
+    "trial": "Win a fresh Trial of Light, then return. Courage need not pretend to certainty.",
+    "ending_a": "I will name what I did without claiming I saw everything.",
+    "ending_b": "The gate held. Our duty did not end at the gate."
+  }
+}

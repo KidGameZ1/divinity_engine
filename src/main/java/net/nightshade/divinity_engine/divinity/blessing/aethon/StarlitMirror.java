@@ -1,9 +1,12 @@
 package net.nightshade.divinity_engine.divinity.blessing.aethon;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -58,9 +61,7 @@ public class StarlitMirror extends Blessings {
     public void onToggleOn(BlessingsInstance instance, LivingEntity entity) {
         instance.getOrCreateTag().putLong("activation_time", System.currentTimeMillis());
         instance.getOrCreateTag().putInt("reflect_count", 0);
-        entity.level().addParticle(net.minecraft.core.particles.ParticleTypes.END_ROD,
-                entity.getX(), entity.getY() + 2, entity.getZ(),
-                0, 0, 0);
+        if (!entity.isInvisible()) BlessingVisuals.pulse(instance, entity, Cue.CAST);
         super.onToggleOn(instance, entity);
     }
 
@@ -105,9 +106,9 @@ public class StarlitMirror extends Blessings {
                 event.getProjectile().setGlowingTag(true);
                 event.setCanceled(true);
 
-                living.level().addParticle(net.minecraft.core.particles.ParticleTypes.ENCHANTED_HIT,
-                        living.getX(), living.getY() + 1, living.getZ(),
-                        0, 0, 0);
+                Vec3 hit = event.getRayTraceResult().getLocation();
+                BlessingVisuals.link(instance, living, hit,
+                        hit.add(event.getProjectile().getDeltaMovement().normalize()), Cue.WARD);
                 living.playSound(net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, 1.0F, 2.0F);
             }
             return true;

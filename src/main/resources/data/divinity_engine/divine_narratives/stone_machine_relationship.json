@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:stone_machine",
+  "gods": ["divinity_engine:grond", "divinity_engine:mechanos"],
+  "title": "The Weight Beneath the Drawing",
+  "relation": "Former mentor and apprentice disputing how a maker should know a limit",
+  "summary": "Grond made foundations for the First Concord, and Mechanos learned from him before building machinery upon that work. When the Sundering damaged the supports, Mechanos trusted a calculation over Grond's warning. The warning lacked records Grond had withheld, and the calculation assumed conditions that no longer reliably held. Their works saved mortal lives from oblivion and from immediate disaster, while decisions made around those works concealed other lives at risk. Their estrangement concerns responsibility, not a natural war between stone and machines.",
+  "epilogues": {
+    "aa": [
+      "Craft and Precision give master and former apprentice an uncomfortable common language: show the work. Grond describes the settling records he withheld. Mechanos states the assumptions behind the old load limit. The warning and the calculation stop competing as sacred declarations. Each becomes something another mind could have examined, questioned, and perhaps improved while choices were still available.",
+      "They cannot establish that exchanging the records would certainly have prevented the local failure. The Sundering had damaged more than anyone could inspect in time. But uncertainty about a better outcome does not excuse the refusal to share useful evidence. Grond's authority did not make explanation unnecessary. Mechanos's arithmetic did not make missing conditions irrelevant. Your completed disciplines require both claims to remain in the account.",
+      "The conversation leaves room for the older workshop Grond remembers from his forge companionship with Ignar: criticism reaching a piece before pride made revision intolerable. No divine machine is constructed, no lost district rebuilt. What becomes possible is a relationship in which teaching does not demand obedience and independent invention does not require contempt for experience. A former apprentice can outgrow a master's methods without outgrowing the need to listen."
+    ],
+    "ab": [
+      "Craft and Force meet over the pump that could be replaced and the people who could not. Grond respects a tool made to endure; Mechanos insists that endurance is useful only while it serves the work. At first the disagreement resembles their old quarrel. Then Grond recalls rejecting replaceable supports because admitting future repair would diminish the monument he wanted to leave.",
+      "Mechanos answers with the crew kept beside dangerous machinery without a clear account of the increased risk. Calling a device expendable does not make its operators expendable. The maker of a durable brace and the director of an overworked pump must both explain who bears the danger when a design is pushed beyond its comfortable limits. Saving passengers does not erase that question, though it remains a real achievement.",
+      "Neither concludes that caution always outranks urgency. The Sundering offered choices in which waiting could kill as surely as acting. Your two paths instead expose the lie that a useful result can make every concealed cost acceptable afterward. The former apprentice may apply force the master dislikes, but must name its purpose and burden. The master may demand better craft, but cannot protect an elegant object at the expense of the lives it exists to serve."
+    ],
+    "ba": [
+      "Endurance and Precision turn the discussion away from the gods' reputations and toward a worker's report of fatigue. Grond once heard that report as a challenge to the crew's honor. Mechanos might once have dismissed it because the ledger contained no measured reduction in capacity. Both interpretations made the same mistake: they treated a person close to the work as less reliable than the story already being told about it.",
+      "You recall mining beneath the world and contributing parts whose motion has defined limits. Endurance is not infinite simply because its limit has not yet been reached. Precision is incomplete when it records the machine but not the condition of the hands maintaining it. The gods cannot recover the sealed passage's missing workers by refining this conversation, and refuse to claim that they have.",
+      "They can acknowledge a form of knowledge neither owned alone. A maker knows the shape of a foundation; an operator knows an instrument's readings; a tired worker may notice the first moment both descriptions stop matching the lived task. Your choices let that third voice remain in the history. The former apprenticeship does not resume, but its hierarchy no longer decides in advance whose warning deserves to be heard."
+    ],
+    "bb": [
+      "Endurance and Force could have given the two gods a convenient legend: the foundation held, the machinery ran, and therefore every cost was justified. Instead you ask them to keep the lower passage and the maintenance crew in the same account as the district and the evacuated passengers. A surviving structure is evidence of strength. It is not a complete moral inventory of the decision that kept it standing.",
+      "Grond names the workers he might have sealed below. Mechanos withdraws the claim that an uninformed crew volunteered for its increased danger. Neither knows how to make those admissions equal the lives saved, and neither is permitted the comfort of calling the rescued lives worthless. The First Concord had opposed oblivion for a reason. Its failure forced terrible decisions without making every later concealment necessary.",
+      "No final balance is announced in this conversation. What your paths demand is simpler and harder than a verdict against stone or machinery: stop praising strength in ways that make other people unable to refuse another burden. Grond can honor a rest. Mechanos can honor a limit. Their former partnership remains damaged, but its surviving work need not teach the next generation that endurance means silence or power means exemption from explanation."
+    ]
+  }
+}

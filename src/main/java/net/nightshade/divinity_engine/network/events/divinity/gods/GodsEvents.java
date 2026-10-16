@@ -101,13 +101,12 @@ public class GodsEvents {
         playerTickCounters.put(player, tickCount + 1);
     }*/
 
-    @SubscribeEvent
     public static void onContactGod(ContactGodEvent e) {
         Entity entity = e.getEntity();
         if (!entity.level().isClientSide()) {
             if (entity instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity)entity;
-                if (living instanceof Player player && !GodHelper.getContactedGodsFrom(entity).getContactedGods().contains(e.getInstance())) {
+                if (living instanceof Player player) {
                     player.displayClientMessage(Component.translatable(e.getInstance().getBaseGod().getContactMessageTranslationKey()).withStyle(ChatFormatting.GRAY), false);
                 }
                 e.getInstance().onContact(living, e);
@@ -116,7 +115,6 @@ public class GodsEvents {
         }
     }
 
-    @SubscribeEvent
     public static void onLoseFaith(LoseFaithEvent e) {
         Entity entity = e.getEntity();
         if (!entity.level().isClientSide()) {
@@ -131,7 +129,6 @@ public class GodsEvents {
         }
     }
 
-    @SubscribeEvent
     public static void onPrayedToGod(PrayEvent e) {
         Entity entity = e.getLiving();
         if (entity instanceof LivingEntity) {
@@ -139,7 +136,6 @@ public class GodsEvents {
             e.getInstance().onPrayedTo(e);
         }
     }
-    @SubscribeEvent
     public static void onOfferItemToGod(OfferEvent.OfferItemEvent e) {
         Entity entity = e.getOfferer();
         ItemStack stack = e.getOffer();
@@ -151,7 +147,6 @@ public class GodsEvents {
                 }
         }
     }
-    @SubscribeEvent
     public static void onOfferEntityToGod(OfferEvent.OfferEntityEvent e) {
         Entity offerer = e.getOfferer();
         Entity offer = e.getOffer();

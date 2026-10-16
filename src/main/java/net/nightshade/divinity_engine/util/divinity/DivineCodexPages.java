@@ -1,8 +1,6 @@
 package net.nightshade.divinity_engine.util.divinity;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -18,24 +16,9 @@ public record DivineCodexPages() {
             title = Component.literal("");
         }
 
+        // Keep one full entry per registration; the reader paginates for its current layout.
         titles.add(title);
-
-        // Use a working variable to process overflow repeatedly
-        Component workingContent = content;
-
-        while (DivinityEngineHelper.doesTextOverflow(Minecraft.getInstance().font, workingContent, 118, 30, 140, 0.95f)) {
-            titles.add(title); // Add title again for each line split
-
-            DivinityEngineHelper.LineSplitResult result = DivinityEngineHelper.splitOverflowingLines(
-                    Minecraft.getInstance().font, workingContent, 118, 30, 140, 0.95f
-            );
-
-            contents.add(result.visible());
-            workingContent = result.overflow(); // Continue with overflow
-        }
-
-        // Add the last remaining visible content (not overflowing anymore)
-        contents.add(workingContent);
+        contents.add(content);
     }
 
         public int sizeTitles() {

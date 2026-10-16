@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kind": "relationship",
+  "id": "divinity_engine:storm_horizon",
+  "gods": ["divinity_engine:voltira", "divinity_engine:zephra"],
+  "title": "The Signal Across the Break",
+  "relation": "Siblings divided by a binding kept and restraints broken",
+  "summary": "Voltira's storm and Zephra's winds once helped the First Concord protect mortal life from oblivion. In the Sundering, Voltira remained bound while Zephra broke the restraints to carry mortals away. The rupture shifted danger onto those still holding the defense; remaining bound also sheltered people who could not yet escape. Each sibling believes the other's choice meant abandonment. Neither saw the whole evacuation, and neither knows enough to make the other's silence a complete confession.",
+  "epilogues": {
+    "aa": [
+      "Pursuit and Journey arrive together in your account: a chosen target and a road long enough to test the choice. Voltira asks why the wind never returned. Zephra describes the return gust sent toward the failing defense. Voltira describes the recall signal left unsent because redirecting its power would have weakened the evacuation corridor. For the first time in this conversation, two silences have different histories rather than a single shared meaning of rejection.",
+      "Zephra does not demand that Voltira celebrate the ruptured restraints. Voltira does not demand that the rescued mortals should have waited. Both decisions shifted danger, and neither sibling held a view wide enough to calculate every consequence. Pursuit now asks where an accusation actually lands. Journey asks whether the story has left behind someone whose pace or position made their work harder to see.",
+      "Their old anger survives the exchange, but it has lost its simplest proof. A missing answer cannot establish that no answer was attempted. Your two choices do not bind the siblings into a new service or promise that they will never quarrel again. They leave them with a more demanding route: follow the evidence far enough to discover that the person called deserter was also trying to bring somebody home."
+    ],
+    "ab": [
+      "Pursuit meets Heights through the image of a lookout who needed a ladder. Voltira once aimed her questions at an empty ridge because the old signal plan insisted an answer belonged there. Zephra once placed a guide above an evacuation road and nearly forgot the descent. Both mistakes came from treating a useful position as though a person could occupy it without needs of their own.",
+      "In this shrine conversation, the siblings compare what each could see. Voltira felt a restraint break and the burden increase. Zephra saw a storm flare while mortals were fleeing. Neither observation was false. The betrayal each inferred from it was more than the observation could establish. Your ascent and return give them a language for that distinction: a wider view matters because someone brings its knowledge back, not because height grants infallibility.",
+      "Voltira can still ask Zephra to acknowledge the shifted burden. Zephra can still ask why the defense offered no safe way to leave. Neither question must be a projectile aimed to end the exchange. No ancient binding is undone here. A route back becomes imaginable because neither sibling is required to pretend the view from the other position was available during the disaster."
+    ],
+    "ba": [
+      "Conduit and Journey sound like opposites until the siblings consider what an evacuation road requires. A route needs places where power and people can safely pause. A refuge needs a way out, or its protection becomes another barrier. Your lightning rods and long travel do not choose between those needs. They make it possible to ask how one could serve the other without demanding that either become permanent captivity.",
+      "Voltira admits that she once treated a keeper's warning as disloyalty to the binding. Zephra admits praising departure so completely that tending animals or repairing a wheel looked like failure to be free. Both had mistaken a necessary kind of work for the only honorable life. During the Sundering, that mistake narrowed what each could imagine the other was trying to save.",
+      "They do not draft a new Concord in this conversation. Instead they recognize a condition the old arrangement lacked in practice: those carrying the burden must be able to say when it changes, and those leaving must name what their departure transfers. Zephra's rescue and Voltira's stand can both remain worthy without becoming commands for future mortals to repeat the same sacrifices in silence."
+    ],
+    "bb": [
+      "Conduit and Heights bring the siblings to the difficult word return. Voltira has treated returning as proof that love accepts a binding. Zephra has feared that any return would surrender the freedom won by breaking it. Your completed ascent suggests another possibility: coming back can be a fresh choice, neither cancellation of departure nor consent to every burden waiting at home.",
+      "Voltira describes the workers whose dangerous load she concealed. Zephra describes the wind's rupture and the strain it sent through the remaining defense. Neither asks the other to call those costs harmless. They compare them with the lives their actions genuinely protected, refusing the easier alternatives of a flawless rescue or a wholly corrupt Concord. Protection against oblivion mattered. The people spent to maintain it mattered too.",
+      "This conversation does not magically release Voltira or restore the broken restraints. Its quieter change is that an invitation no longer has to conceal a command. Zephra may imagine approaching without being captured; Voltira may imagine a visit that ends without becoming another abandonment. Your choices have made room for shelter with an exit and a horizon that includes home, while leaving the siblings responsible for whether they use that room."
+    ]
+  }
+}

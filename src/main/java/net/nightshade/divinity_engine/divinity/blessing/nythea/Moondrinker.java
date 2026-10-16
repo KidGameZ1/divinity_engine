@@ -3,6 +3,8 @@ package net.nightshade.divinity_engine.divinity.blessing.nythea;
 import net.minecraft.world.entity.LivingEntity;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -24,7 +26,11 @@ public class Moondrinker extends Blessings {
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
         if (!living.level().isDay()){
             if (living.level().canSeeSky(living.blockPosition())) {
+                float healthBefore = living.getHealth();
                 living.heal(0.05f);
+                if (living.getHealth() > healthBefore && living.tickCount % 40 == 0 && !living.isInvisible()) {
+                    BlessingVisuals.at(instance, living, living.getEyePosition().add(0, 0.15, 0), Cue.HEAL, 0.25);
+                }
             }
         }
         return super.onTick(instance, living);

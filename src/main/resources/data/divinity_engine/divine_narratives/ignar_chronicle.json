@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:ignar",
+  "premise": "What the Fire Leaves follows a god who would rather be feared than heard making an inadequate apology. The First Concord protected mortal life from oblivion. After its Sundering, Ignar's fire destroyed a refuge. He secretly helped Lumen preserve its last light, then let secrecy turn that necessary help into another excuse not to face the whole damage. Fury and Purpose are not choices between a guilty god and an innocent one. They are different disciplines for a power that must learn to leave something living beyond its own heat.",
+  "offering_examples": ["minecraft:coal_block", "minecraft:blaze_rod", "minecraft:magma_block"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "firelight", "target": 200, "deed": "Observe firelight for 10 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:harvest", "condition": "", "target": 4, "deed": "Harvest four mature crops"},
+  "passages": {
+    "call": [
+      "Ignar accepts a coal block, blaze rod, or magma block as an ordinary offering. He tells you not to throw yourself into danger to make the gesture look sincere. There was a time when he enjoyed the spectacle of fearless worship. Now he hears, beneath the cheering, the people whose work begins after someone else's magnificent act: carrying water, counting supplies, looking for a place where the air can be breathed.",
+      "He once called the First Concord a firebreak against oblivion. It protected mortal lives rather than promising that every life would be comfortable. After the Sundering, he used the distinction too readily. Discomfort, danger, and destruction began to blur whenever he wanted an argument for acting quickly. Bring the offering, then attend to an ordinary source of firelight. He will speak of the refuge after you have watched a flame without asking it to become a performance."
+    ],
+    "witness": [
+      "Observe firelight for ten continuous seconds from a safe place, such as beside a lit campfire within two blocks. Do not stand on the fire. Ignar does not require an uncontrolled blaze, a burned building, or damage to yourself. A tended fire can be watched without becoming a disaster. Notice how the useful light arrives with the same power that can consume what holds it. He used to think acknowledging that danger was enough. The refuge taught him how little an accurate warning means when the person giving it will not accept limits.",
+      "His fire destroyed the refuge. He says it before naming a motive, because motives have always arrived quickly when he wanted somewhere to hide. Afterward he secretly helped Lumen preserve the last light. It was useful help, and it was not enough. The rooms stayed lost. The people harmed were not required to appreciate the surviving flame. Ignar remembers wanting Lumen to look at him with gratitude because any other expression felt unbearable."
+    ],
+    "testimony": [
+      "Lumen kept the light, and their unlikely friendship grew around work neither could describe cleanly. Ignar did not tell the public story of his help. At first he could call the secrecy modesty. Later he recognized a less flattering comfort: if nobody knew he could act carefully, nobody would expect sustained care from him. Being feared was simpler than becoming accountable for tomorrow. This is his admission, not a claim that Lumen owed him a public defense.",
+      "Choose Fury or Purpose, then confirm the permanent path. Fury asks you to defeat eight burning hostile mobs, directing destructive force toward a defined threat. Purpose asks you to contribute sixteen charcoal, preserving useful heat for work rather than spectacle. Neither path is permission to burn a refuge again. Neither makes your ordinary world into the stage of his old disaster. Ignar will tell the history himself; you do not need Lumen's contact or any other god's approval to choose what your fire should leave behind."
+    ],
+    "deed_a": [
+      "Defeat eight burning hostile mobs. Fury is a bounded deed against hostile threats, not a request to spread fire through a forest or settlement. Ignar once treated the ability to ignite as proof that he understood what would follow. He now asks a harder question: can a wielder stop enjoying the display long enough to remember the purpose? The count marks the task's boundary. Beyond it lies no hidden demand to demonstrate greater devotion through greater destruction.",
+      "He remembers Lumen carrying the preserved light away from the ruin without turning to applaud. Ignar had done something necessary, and the necessity did not make him the center of the rescue. That slight, as he first called it, became an education. Your victories should make room for something other than admiration. He will not tell you that anger is always wrong; he asks whether it can finish its work without insisting on a final audience."
+    ],
+    "deed_b": [
+      "Contribute sixteen charcoal through the story donation. Purpose asks for an exact provision, not a bonfire large enough to impress a god. Charcoal holds the possibility of heat that has not yet been spent. Ignar likes its unglamorous patience less than he pretends. A saved resource can be used by someone who never learns who prepared it, for a task too ordinary to enter any chronicle.",
+      "He describes helping Lumen shield the last light from the collapse around them. The account offers no secret restoration of the refuge and no revelation that the destruction was secretly harmless. It shows only that, when he attended to a limited task, he could be careful. That makes his earlier carelessness harder to excuse, not easier. Your provision answers the useful part of the memory. It asks him to repeat care as a practice rather than display it once as evidence for the defense."
+    ],
+    "reckoning_a": [
+      "Harvest four mature crops. After Fury, Ignar asks you to wait for something that cannot be made ready by adding heat. A field's ripeness follows needs that do not care how urgent a god's apology has become. The crops are ordinary crops; you need not plant a memorial garden, find the old refuge, or surrender the harvest. This deed shifts your attention from a threat destroyed to nourishment that must remain useful afterward.",
+      "Ignar remembers the smell of burned stores more clearly than the sight of the flames. He does not turn it into a lesson about necessary waste. Someone had gathered those stores, carried them, decided what could be spared. The damage reached backward into that labor and forward into meals that would not happen. Your small harvest cannot balance the account. It teaches him to describe its entries with more respect than the single grand word ruin allowed."
+    ],
+    "reckoning_b": [
+      "Harvest four mature crops. Purpose now follows the provision of fuel with attention to what useful heat might serve. Ignar has no new recipe to demand and no special feast to conjure. He wants you to recognize that the meal belongs to the hungry person, not to the flame that helped prepare it. Gather at maturity. Good intentions do not make an unready crop nourishing, any more than remorse makes a damaged refuge whole.",
+      "He admits a different temptation: to make himself so useful that no one dares mention the fire again. Repair offered on that condition is another attempt to control the account. Lumen's friendship must be allowed to contain criticism, and strangers must be allowed not to trust him. Your measured work sets no price on their forgiveness. It leaves something useful without attaching a demand that every recipient describe the giver as changed."
+    ],
+    "trial": [
+      "Complete a fresh trial of Ignar after the reckoning. This is his established challenge, not a demand to reenact the refuge's burning. He will not test your conviction by asking you to damage a home or accept unnecessary injury. Fury or Purpose is already your permanent choice. The trial asks you to carry that choice through difficulty, then return to speak about what you have done.",
+      "Before you enter, he starts a boast and stops halfway through it. He had almost promised that fire never hesitates. A tended hearth, he admits, is mostly the work of people deciding when not to add fuel. The correction annoys him, which gives it a certain credibility. If an attempt fails, you can try again without repeating completed deeds. He would rather see a considered second attempt than a reckless gesture made to protect the story you wanted to tell about the first."
+    ],
+    "ending_a": [
+      "Ignar receives your Fury without asking for a larger flame. The hostile threats were confronted, the mature crops gathered, and the fresh trial completed. He cannot make those deeds prove that his own destruction was justified. He can learn from the shape they leave: force with an end, followed by attention to life that cannot flourish inside perpetual emergency. It is less dramatic than his old accounts of himself and harder to dismiss as mere sentiment.",
+      "He will say that his fire destroyed the refuge before saying that he helped save its last light. Not because the help was false, but because he must stop using it to block the first sentence. Lumen may remain his friend without becoming his advocate to everyone harmed. Your permanent path gives anger a task, not a throne. Ignar ends the conversation while there is still more he could say in his own defense. For once he lets the useful silence be the thing his fire leaves."
+    ],
+    "ending_b": [
+      "Ignar thanks you for the charcoal without calling it humble, as if ordinary work needed his flattering permission to matter. Purpose has brought him fuel reserved for later and a harvest gathered when it was ready. Both refuse the impatient demand that everything justify itself in the instant he notices it. He has always been able to create urgency. He is beginning to recognize how much harder it is to become someone others can plan around.",
+      "The refuge remains destroyed. Its last light remains preserved through his secret help and Lumen's keeping. Those truths no longer need to wrestle for the whole account. Ignar offers no promise that the harmed will forgive, and no claim that your choice has paid their losses. Instead he accepts a future containing uncelebrated work and unwelcome reminders. His friendship with Lumen may live there too. When he imagines the next useful ember, he finally imagines someone else's hands deciding when it should be spent."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring fuel, not an injury. I do not need another spectacle.",
+    "witness": "Watch the light safely. Knowing fire is dangerous never excused my carelessness.",
+    "testimony": "Choose Fury or Purpose. Neither is a pardon for the refuge.",
+    "deed_a": "Defeat eight burning hostile foes. Keep the fire's task bounded.",
+    "deed_b": "Give sixteen charcoal. Let useful heat wait for someone else's need.",
+    "reckoning_a": "Gather four mature crops. Destruction must not consume what follows it.",
+    "reckoning_b": "Gather four mature crops without charging forgiveness for the meal.",
+    "trial": "Complete a fresh trial. Recklessness will not improve an honest attempt.",
+    "ending_a": "Give fury a task, and let it end before it becomes a throne.",
+    "ending_b": "Leave an ember another hand may choose how to use."
+  }
+}

@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="communion_example"
+version="1.0.0"
+displayName="Inner World API Example"
+description='''A small development-only god, story and Inner World demonstrating the public API.'''
+[[dependencies.communion_example]]
+modId="divinity_engine"
+mandatory=true
+versionRange="[1.9-1.20.1,)"
+ordering="AFTER"
+side="BOTH"

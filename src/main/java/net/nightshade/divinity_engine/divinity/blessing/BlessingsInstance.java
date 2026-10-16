@@ -12,6 +12,7 @@ import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.registry.divinity.blessing.BlessingsRegistry;
 import net.nightshade.divinity_engine.registry.divinity.gods.GodsRegistry;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
@@ -29,6 +30,9 @@ public class BlessingsInstance implements Cloneable {
     private BaseGodInstance boundGod = null;
     /** Whether this blessing is currently toggled on/off (for toggleable blessings) */
     private boolean toggled = false;
+    private boolean keyPressed;
+    private long keyPressedAt;
+    private long lastHeldAt = Long.MIN_VALUE;
 
     /**
      * Tracks if blessing state has changed and needs saving
@@ -291,6 +295,7 @@ public class BlessingsInstance implements Cloneable {
     }
 
     public void onToggleOn(LivingEntity entity) {
+        if (!BlessingSpecializations.isEligible(entity, this)) return;
         this.getBlessing().onToggleOn(this, entity);
         this.setToggled(true);
     }
@@ -303,6 +308,7 @@ public class BlessingsInstance implements Cloneable {
     }
 
     public void onTick(LivingEntity entity) {
+        if (!BlessingSpecializations.isEligible(entity, this)) return;
         if (this.getBlessing().onTick(this, entity)){
             setCooldown(getBlessing().getCooldown());
         }
@@ -310,160 +316,209 @@ public class BlessingsInstance implements Cloneable {
     }
 
     public void onPressed(LivingEntity entity) {
-        this.getBlessing().onPressed(this, entity);
+        if (keyPressed || isOnCooldown() || !BlessingSpecializations.isEligible(entity, this)) return;
+        keyPressed = true;
+        keyPressedAt = entity.level().getGameTime();
+        lastHeldAt = Long.MIN_VALUE;
+        if (this.getBlessing().onPressed(this, entity)) startCooldown(entity);
     }
 
     public void onHeld(LivingEntity entity, int heldTicks) {
-        this.getBlessing().onHeld(this, entity, heldTicks);
+        if (!keyPressed || isOnCooldown() || !BlessingSpecializations.isEligible(entity, this)) return;
+        long now = entity.level().getGameTime();
+        if (lastHeldAt == now) return;
+        lastHeldAt = now;
+        if (this.getBlessing().onHeld(this, entity, heldTicks(entity))) startCooldown(entity);
     }
 
     public void onRelease(LivingEntity entity, int heldTicks) {
-        if (this.getBlessing().onRelease(this, entity, heldTicks) || this.getBlessing().onHeld(this, entity, heldTicks) || this.getBlessing().onPressed(this, entity))
-            setCooldown(getBlessing().getCooldown());
+        boolean wasPressed = keyPressed;
+        keyPressed = false;
+        // A release never replays a press or a held callback. Ignore unsolicited release packets.
+        if (wasPressed && !isOnCooldown() && BlessingSpecializations.isEligible(entity, this)) {
+            if (this.getBlessing().onRelease(this, entity, heldTicks(entity))) startCooldown(entity);
+        }
+    }
+
+    private int heldTicks(LivingEntity entity) {
+        return (int) Math.min(72000L, Math.max(0L, entity.level().getGameTime() - keyPressedAt));
+    }
+
+    public void startCooldown(LivingEntity entity) {
+        setCooldown(BlessingSpecializations.cooldownTicks(entity, this));
     }
 
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onRightClickBlock(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onRightClickEntity(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onRightClickItem(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onRightClickEmpty(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onBeingTargeted(LivingEntity target, LivingChangeTargetEvent event) {
+        if (!BlessingSpecializations.isEligible(target, this)) return;
         if(this.getBlessing().onBeingTargeted(this, target, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onBeingDamaged(LivingAttackEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onBeingDamaged(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onCriticalHit(CriticalHitEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onCriticalHit(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onDamageEntity(LivingEntity player, LivingHurtEvent event) {
+        if (!BlessingSpecializations.isEligible(player, this)) return;
         if(this.getBlessing().onDamageEntity(this, player,event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onKillEntity(LivingEntity player, LivingDeathEvent event) {
+        if (!BlessingSpecializations.isEligible(player, this)) return;
         if(this.getBlessing().onKillEntity(this, player,event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onTakenDamage(LivingDamageEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onTakenDamage(this,event))
-            setCooldown(getBlessing().getCooldown());
+            startCooldown(event.getEntity());
     }
 
     public void onProjectileHit(LivingEntity entity, ProjectileImpactEvent event) {
+        if (!BlessingSpecializations.isEligible(entity, this)) return;
         if (this.getBlessing().onProjectileHit(this, entity, event))
-            setCooldown(getBlessing().getCooldown());
+            startCooldown(entity);
     }
 
     public void onDeath(LivingDeathEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onDeath(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onRespawn(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onHeal(LivingHealEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onHeal(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onKnockback(LivingKnockBackEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onKnockback(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onFall(LivingFallEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onFall(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onEXPDrop(LivingExperienceDropEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getAttackingPlayer(), this)) return;
         if(this.getBlessing().onEXPDrop(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onEXPPickup(PlayerXpEvent.PickupXp event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onEXPPickup(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onJump(LivingEvent.LivingJumpEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onJump(this, event))
             setCooldown(getBlessing().getCooldown());
            
     }
 
     public void onDrowning(LivingDrownEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onDrowning(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onBreathe(LivingBreatheEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onBreathe(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onBlocksWithShield(ShieldBlockEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onBlocksWithShield(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onBreakBlock(BlockEvent.BreakEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getPlayer(), this)) return;
         if(this.getBlessing().onBreakBlock(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onPlaceBlock(BlockEvent.EntityPlaceEvent event){
+        if (!(event.getEntity() instanceof LivingEntity living) || !BlessingSpecializations.isEligible(living, this)) return;
         if(this.getBlessing().onPlaceBlock(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onItemCrafted(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onItemPickup(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onItemSmelted(PlayerEvent.ItemSmeltedEvent event){
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onItemSmelted(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onSleepInBed(PlayerSleepInBedEvent event) {
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if(this.getBlessing().onSleepInBed(this, event))
             setCooldown(getBlessing().getCooldown());
     }
 
     public void onWakeUp(PlayerWakeUpEvent event){
+        if (!BlessingSpecializations.isEligible(event.getEntity(), this)) return;
         if (this.getBlessing().onWakeUp(this, event))
             setCooldown(getBlessing().getCooldown());
     }

@@ -3,7 +3,6 @@ package net.nightshade.divinity_engine.network.events.divinity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
@@ -12,64 +11,25 @@ import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
 import net.nightshade.divinity_engine.divinity.gods.FavorTiers;
 import net.nightshade.divinity_engine.network.cap.player.gods.GodsStorage;
-import net.nightshade.divinity_engine.registry.divinity.DivineCodexPagesRegistry;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Mod.EventBusSubscriber(modid = "divinity_engine", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DivinityTickHandler {
 
-    private static final Queue<Player> playerQueue = new ConcurrentLinkedQueue<>();
-    private static final int BATCH_SIZE = 5;
-
-    // Enqueue player for processing
-    public static void queuePlayer(Player player) {
-        if (player != null && !playerQueue.contains(player) && player.isAlive()) {
-            playerQueue.offer(player);
-        }
-    }
-
-    // Add players on login to queue
     @SubscribeEvent
-    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        queuePlayer(event.getEntity());
-    }
-
-    // Remove players from queue on logout to avoid memory leaks
-    @SubscribeEvent
-    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-        playerQueue.remove(event.getEntity());
-    }
-
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-
-        int processed = 0;
-        while (processed < BATCH_SIZE && !playerQueue.isEmpty()) {
-            Player player = playerQueue.poll();
-
-            if (player != null && player.isAlive()) {
-                processPlayerTicks(player);
-
-                // Re-queue player for next batch if still alive
-                playerQueue.offer(player);
-            }
-
-            processed++;
-        }
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player)
+                || !player.isAlive()) return;
+        processPlayerTicks(player);
     }
 
     private static void processPlayerTicks(Player player) {
         int tickCount = player.tickCount;
 
         GodsStorage godData = GodHelper.getContactedGodsFrom(player);
-        // Start timing
-        long start = System.nanoTime();
         // ===== Curse Tick (every 10 ticks) =====
         if (tickCount % 10 == 0) {
             for (CurseInstance curse : godData.getCurses()) {
@@ -97,6 +57,7 @@ public class DivinityTickHandler {
                 for (BaseGodInstance godInstance : contactedGods) {
                     FavorTiers tier = FavorTiers.getByFavor(godInstance.getFavor());
                     BaseGod baseGod = godInstance.getBaseGod();
+                    if (!net.nightshade.divinity_engine.util.divinity.innerworld.CommunionManager.inRealm(player)) godInstance.onTick(player);
 
                     if (tier == FavorTiers.Enemy && baseGod.getCurse() != null) {
                         boolean alreadyCursed = godData.getCurse(baseGod.getCurse()).isPresent();
@@ -129,39 +90,27 @@ public class DivinityTickHandler {
                     DivinityEngineHelper.getBlessingSlot3(player)
             };
 
+            boolean updatedBlessing = false;
             for (BlessingsInstance slot : slots) {
                 if (slot != null) {
                     GodHelper.validateBlessingSlot(player, slot);
+                    if (!DivinityEngineHelper.hasBlessingInSlot(slot.getBlessing(), player)) continue;
 
-                    if ((slot.getBlessing().isPassive() || slot.getBlessing().canToggle())) {
+                    if (!net.nightshade.divinity_engine.util.divinity.innerworld.CommunionManager.busy(player)
+                            && (slot.getBlessing().isPassive() || slot.getBlessing().canToggle())) {
                         slot.onTick(player);
                     } if (slot.getCooldown() != 0){
                         slot.decreaseCooldown(2);
-                        System.out.println("Cooldown: " + slot.getCooldown());
                     }
 
-                    GodHelper.updateBlessingInstance(player, slot);
+                    GodHelper.updateBlessingInstance(player, slot, false);
+                    updatedBlessing = true;
                 }
             }
+            // Preserve the two-tick cadence, but serialize once for the whole loadout.
+            if (updatedBlessing) godData.syncChanges();
         }
 
-        // End timing
-        long duration = System.nanoTime() - start;
-        if (duration > 1000_000) { // Only log if it takes longer than 1s
-            System.out.println("[DEBUG] PlayerTickEvent took " + (duration / 1_000_000.0) + " ms for " + player.getName().getString());
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = "divinity_engine")
-    public class CodexLoginHandler {
-        @SubscribeEvent
-        public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-            if (!(event.getEntity() instanceof ServerPlayer serverPlayer)) return;
-
-            // Initialize (once)
-            DivineCodexPagesRegistry.initializePages();
-
-        }
     }
 
 }

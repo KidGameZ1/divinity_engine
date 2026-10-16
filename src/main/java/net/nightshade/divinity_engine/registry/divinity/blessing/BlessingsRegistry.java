@@ -148,7 +148,7 @@ public class BlessingsRegistry {
             () -> new MindMirror(180, 0, true,false, false, Color.white) // neededFavor: 80, cooldown: 0 in second
     );
     public static final RegistryObject<Blessings> ARCANE_RECALL = registry.register("arcane_recall",
-            () -> new ArcaneRecall(235, 0, false,true, false, Color.white) // neededFavor: 80, cooldown: 0 in second
+            () -> new ArcaneRecall(235, 20, true, false, false, Color.white)
     );
 
     // Voltira Blessings
@@ -207,7 +207,7 @@ public class BlessingsRegistry {
             () -> new SecondChance(50, 10800, true,false, false, new Color(248, 250, 152)) // neededFavor: 25, cooldown: 10800 in second
     );
     public static final RegistryObject<Blessings> ECHO_STEP = registry.register("echo_step",
-            () -> new EchoStep(125, 30, false,true, false, new Color(248, 250, 152)) // neededFavor: 50, cooldown: 30 in second
+            () -> new EchoStep(125, 30, true,true, false, new Color(248, 250, 152)) // neededFavor: 50, cooldown: 30 in second
     );
     public static final RegistryObject<Blessings> PREDICTED_PATH = registry.register("predicted_path",
             () -> new PredictedPath(180, 15, true,false, false, new Color(248, 250, 152)) // neededFavor: 80, cooldown: 15 in second
@@ -331,7 +331,7 @@ public class BlessingsRegistry {
     public static final RegistryObject<Blessings> FLASHFLARE = registry.register("flash_flare",
             () -> new FlashFlare(150, 30, false,true,false, Color.orange) // neededFavor: 80, cooldown: 30 in second
     );
-    public static final RegistryObject<Blessings> KINDING_FURY = registry.register("kinding_fury",
+    public static final RegistryObject<Blessings> KINDLING_FURY = registry.register("kindling_fury",
             () -> new KindlingFury(185, 30, true,false, false, Color.orange) // neededFavor: 80, cooldown: 30 in second
     );
     public static final RegistryObject<Blessings> INFERNO_MANTLE = registry.register("inferno_mantle",

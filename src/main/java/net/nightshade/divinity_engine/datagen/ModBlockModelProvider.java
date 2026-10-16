@@ -22,6 +22,7 @@ public class ModBlockModelProvider extends ModelProvider<BlockModelBuilder> {
         // Create models for all statue blocks
         BlocksRegistry.REGISTRY.getEntries().forEach(block -> {
             if (block.get() instanceof StatueBlock) {
+                if (block.get() instanceof net.nightshade.divinity_engine.block.LegacyElderStatueBlock) return;
                 String path = block.getId().getPath();
                 getBuilder(path)
                         .parent(getExistingFile(modLoc("block/statue")))

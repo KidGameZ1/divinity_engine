@@ -1,10 +1,10 @@
 package net.nightshade.divinity_engine.divinity.blessing.cryonis;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -36,7 +36,11 @@ public class FrozenHeart extends Blessings {
      */
     @Override
     public boolean onTick(BlessingsInstance instance, LivingEntity living) {
+        boolean thawed = living.getTicksFrozen() > 0;
         living.setTicksFrozen(0);
+        if (thawed) {
+            BlessingVisuals.pulse(instance, living, Cue.WARD);
+        }
         return super.onTick(instance, living);
     }
 }

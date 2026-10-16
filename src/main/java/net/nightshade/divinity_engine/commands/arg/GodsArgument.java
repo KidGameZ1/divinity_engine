@@ -32,7 +32,9 @@ public class GodsArgument implements ArgumentType<BaseGod> {
         String remaining = reader.getRemaining();
         String registryName = remaining.contains(" ") ? remaining.split(" ")[0] : remaining;
         reader.setCursor(reader.getString().indexOf(registryName) + registryName.length());
-        return (BaseGod)((IForgeRegistry) GodsRegistry.GODS_REGISTRY.get()).getValues().stream().filter((clan) -> ((IForgeRegistry) GodsRegistry.GODS_REGISTRY.get()).getKey(clan).toString().equalsIgnoreCase(registryName)).findFirst().orElseGet(() -> ERROR_INVALID_VALUE.create(registryName));
+        return GodsRegistry.GODS_REGISTRY.get().getValues().stream()
+                .filter(god -> god.getRegistryName().toString().equalsIgnoreCase(registryName))
+                .findFirst().orElseThrow(() -> ERROR_INVALID_VALUE.create(registryName));
     }
 
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {

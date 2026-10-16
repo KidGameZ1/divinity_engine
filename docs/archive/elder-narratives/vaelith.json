@@ -1,0 +1,108 @@
+{
+  "version": 2,
+  "kind": "story",
+  "id": "divinity_engine:vaelith",
+  "god": "divinity_engine:vaelith",
+  "title": "A Thing That Should Not Be",
+  "request": "Vaelith, the Unwritten, shows you the Unwritten Margin, an unstable object held in the story rather than your inventory. Begin after contact. An accepted offering proves Rift Lance; fifteen continuous seconds below Y=0 prove Impossible Angle. Use a safe Overworld location for this witness; the End shrine does not restrict where deeds occur. Permanently choose Held Boundary: shield-block twelve hostile attacks to stabilize the Margin, or Clean Severance: personally defeat ten hostile mobs with projectiles to unmake it. Either deed proves Boundary Prison. Then personally defeat six hostile mobs with direct melee attacks to prove Unwritten Form, and win a fresh Trial of Unmaking to prove Unmaking. Return for your ending and Rift Lance specialization. No item sacrifice, void jump, equipment restriction, or kill timer is required. Both paths grant every proof; postponing or declining has no penalty.",
+  "branches": {
+    "a": {
+      "name": "Held Boundary",
+      "objective": "divinity_engine:shield",
+      "condition": "",
+      "target": 12,
+      "deed": "Successfully shield-block twelve attacks from eligible hostile mobs outside trials; no deadline, location restriction, required injury, or inventory sacrifice",
+      "reward": {
+        "id": "divinity_engine:vaelith_a",
+        "blessing": "divinity_engine:rift_lance",
+        "description": "Held Boundary: Rift Lance's validated range is 15% longer. Line of sight, loaded-area checks, damage, armor bypass, and target limits are unchanged. Applies only while Rift Lance is equipped and used."
+      },
+      "ending": "The Margin is stabilized without being declared harmless or eternal. Held Boundary permanently extends Rift Lance's validated range by 15%, never through arbitrary walls or unloaded areas."
+    },
+    "b": {
+      "name": "Clean Severance",
+      "objective": "divinity_engine:kill",
+      "condition": "projectile",
+      "target": 10,
+      "deed": "Personally defeat ten eligible hostile mobs with projectiles outside trials; no deadline, minimum range, void disposal, or inventory sacrifice",
+      "reward": {
+        "id": "divinity_engine:vaelith_b",
+        "blessing": "divinity_engine:rift_lance",
+        "description": "Clean Severance: Rift Lance's cooldown is 10% shorter. Its range, damage, armor bypass, line of sight, and target limits are unchanged. Applies only while Rift Lance is equipped and used."
+      },
+      "ending": "The Margin is unmade, not the lives or records beside it. Clean Severance permanently shortens Rift Lance's cooldown by 10%; declining preservation leaves no missing blessing proof."
+    }
+  },
+  "chronicle": {
+    "premise": "Vaelith holds an impossible outline called the Unwritten Margin: a remembered object whose inside is not reliably separated from its outside. It is not a new inventory item or dungeon. The god must distinguish making room for something unfamiliar from granting it permission to consume its neighbors. Stabilization and unmaking are two accountable responses to the same uncertainty, neither a verdict that the other gods are weak or mistaken.",
+    "offering_examples": ["minecraft:popped_chorus_fruit", "minecraft:shulker_shell", "minecraft:end_rod"],
+    "witness": {"objective": "divinity_engine:observe", "condition": "underground", "target": 300, "deed": "Remain below Y=0 for fifteen continuous seconds in a safe ordinary-world location; an Overworld shelter works, and no End location is required"},
+    "reckoning": {"objective": "divinity_engine:kill", "condition": "melee", "target": 6, "deed": "Personally defeat six eligible hostile mobs with direct melee attacks outside trials after the chosen deed; no deadline or required dimension"},
+    "chapter_titles": {
+      "call": "1. The Unwritten Margin",
+      "witness": "2. What Stone Contains",
+      "testimony": "3. Two Honest Limits",
+      "deed_a": "4. Held Boundary",
+      "deed_b": "4. Clean Severance",
+      "reckoning_a": "5. Beside the Impossible",
+      "reckoning_b": "5. Beside the Absence",
+      "trial": "6. The Shape of a Decision",
+      "ending_a": "7. Room Without Surrender",
+      "ending_b": "7. An End Without Erasure"
+    },
+    "passages": {
+      "call": [
+        "Vaelith, the Unwritten, describes a pale outline suspended where a page ought to end. It has no reliable inside, yet something like a room waits within it. 'You mistake what exists for what must exist.' The words might sound like an invitation to careless wonder if the god did not immediately point out a second fact: a thing without a dependable edge cannot know where another thing begins. The object is called the Unwritten Margin. It appears in this story, not in a hidden chest or as a dangerous item slipped into your inventory.",
+        "Begin after contact and make an accepted offering at Vaelith's End statue: popped chorus fruit, a shulker shell, or an end rod. Vaelith discloses every proof: fifteen continuous seconds below Y=0 in a safe ordinary-world location; then either twelve hostile shield blocks to stabilize the Margin or ten personal projectile victories to unmake it; then six direct melee victories; then a fresh Trial of Unmaking. Both branches earn all five blessings' proofs. No inventory sacrifice, void jump, healing ban, or timed killing spree is involved. The End shrine does not confine your deeds to the End. You may decline, rest, or travel without a concealed penalty."
+      ],
+      "witness": [
+        "Remain below Y=0 for fifteen continuous seconds. A secure Overworld shelter is suitable; you do not need to dig beneath the End or stand near the void. Moving safely below that height is allowed. Crossing back above it restarts only the observation. The accepted offering proves Rift Lance, and this witness proves Impossible Angle. Vaelith asks you to notice a boundary that already works before deciding how an impossible one ought to change.",
+        "Stone has an outside even when you cannot see all of it. The room in which you stand is useful because it does not occupy every neighboring room. Vaelith once considered such separations merely timid habits of matter. The First Concord's defense of mortal life against oblivion made the distinction harder to dismiss: a life needs room to become something, but also enough continuity to remain someone's life. The Sundering did not prove that existence itself was a mistake. It exposed how much protection depends on limits that powerful beings are tempted to call uninteresting."
+      ],
+      "testimony": [
+        "Aethon's attention reaches the distant stars, and his Pocket Dimension remains a different kind of refuge. Kairoth studies the consequences of moments that cannot all be kept. Vaelith will not pretend the Margin is a better sky or a way to rewrite their history. It cannot recover the innocent lives a rejected timeline would have erased. Nythea's hidden survivors likewise remain people in her account, not raw material with which to test an elegant opening. The question here is smaller and more exact: what may this unfamiliar thing touch?",
+        "Choose Held Boundary or Clean Severance. Held Boundary stabilizes the Margin through twelve successful shield blocks against eligible hostile attacks. Clean Severance unmakes it through ten hostile mobs personally defeated with projectiles. Neither deed requires a particular dimension, a minimum distance, or a kill deadline. Preview the permanent Rift Lance specialization before confirming your branch. Both routes prove Boundary Prison and then require six direct melee victories and the same fresh trial. Preserving the object does not prove it innocent; ending it does not prove that unfamiliar things deserve destruction."
+      ],
+      "deed_a": [
+        "Successfully shield-block twelve attacks from eligible hostile mobs outside trials. A raised shield must actually stop hostile damage to count. The attacks need not come from twelve different enemies. You may keep your armor, heal, leave, and return; no position must be held continuously. The deed expresses a boundary through a supported defense rather than asking you to babysit an invisible story entity or maintain an untracked magical circle.",
+        "Within the account, the Margin acquires an edge it cannot cross merely because it wishes to be larger. Vaelith dislikes how ordinary the result looks. A bounded impossible room resembles a room. You ask whether novelty was the purpose, or whether there was something worth allowing to remain. The god cannot yet tell you what will eventually occupy it, and does not invent a grateful prisoner to make your choice feel unquestionably correct. Stabilization is the decision to accept a limited responsibility under uncertainty, not a promise that everything preserved will justify the effort."
+      ],
+      "deed_b": [
+        "Personally defeat ten eligible hostile mobs with projectiles outside trials. Your own ranged attacks count; there is no minimum range, trick shot, or requirement to fight from a ledge. Do not throw possessions into the void. Ordinary items have no role in this resolution, and a pet's kill does not establish the precision of your action. Prepare a safe line of sight and take the time you need.",
+        "In the story, each deliberate strike narrows the Margin's claim until it can be ended without extending the cut into everything beside it. Vaelith admits that unmaking once appealed as a way to escape explanation: remove the object and there is supposedly nothing left to discuss. Elaris would recognize the difference between a missing page and an answered question. You will retain the account of what was ended and why. The deed severs a dangerous boundary; it does not erase your responsibility for deciding that the uncertainty could not be safely carried."
+      ],
+      "reckoning_a": [
+        "After Held Boundary, personally defeat six eligible hostile mobs with direct melee attacks outside trials. There is no timer or required dimension. Boundary Prison is already proven; these close-range victories prove Unwritten Form. Stabilizing the Margin did not bind you to an endless escort mission or force you to maintain a new object between sessions. Its fate is recorded by your permanent branch, and this is the next finite deed.",
+        "Vaelith now describes the impossible room from beside its threshold rather than from a vantage outside all consequences. Nearness changes the language. What looked like a pleasing exception from afar becomes something that might share a wall with another person's home. Terra's care for roots and Nerai's knowledge of living waters are not made obsolete because a boundary can be breached. They know forms of belonging that a spatial incision cannot supply. Your close work asks Vaelith to remember that an edge is experienced by someone standing next to it."
+      ],
+      "reckoning_b": [
+        "After Clean Severance, personally defeat six eligible hostile mobs with direct melee attacks outside trials. Boundary Prison has the same proof it would receive through stabilization. These victories prove Unwritten Form; no replacement item or later preservation task is demanded. The Margin's absence does not create a debt payable by deleting ordinary possessions, and this deed requires no dangerous experiment at the edge of the End.",
+        "Vaelith keeps the description of the lost outline. Some of its lines contradict one another. The god chooses not to smooth them into a perfect justification. An action can be carefully bounded and still leave uncertainty behind. Kairoth cannot supply a convenient discarded future proving that preservation would have failed, and Aethon's unanswered sky cannot certify it either. Your close-range deed places a present, limited action beside the irreversible choice. It is possible to continue without converting every doubt into a reason to repeat the cut."
+      ],
+      "trial": [
+        "Begin and win a fresh Trial of Unmaking after the reckoning, through Vaelith's statue. The established trial uses its displayed phases and hostile waves. There is no spatial maze, teleport puzzle, concealed boundary objective, or requirement to possess Unmaking before entering the encounter that proves it. Your earlier victories cannot answer this later challenge. A failed attempt can be retried without changing the fate of the Margin or erasing completed deeds.",
+        "Vaelith calls the arena a place with agreed edges. That is not an instruction to discover an undocumented perfect position. Fight according to the actual trial rules, not the god's taste for metaphor. A fresh victory proves Unmaking. Return to the physical statue to claim your chosen ending and permanent Rift Lance specialization. These are extraordinary powers with ordinary responsibilities: equipping one still uses a blessing slot, and its reach does not grant permission to ignore walls, friendly lives, or places the world has not loaded."
+      ],
+      "ending_a": [
+        "The Unwritten Margin remains. Its edge is no longer a request that the rest of the world become less definite. Vaelith refuses to name it safe for all time, but accepts that uncertainty alone does not require annihilation. You have defended a boundary, faced danger beside it, and returned from the trial. No unseen civilization emerges to declare your choice the only moral answer. The room is simply allowed to be a room without taking every other room into itself.",
+        "Held Boundary permanently extends Rift Lance's validated range by fifteen percent when equipped and used. Line of sight, loaded-area checks, damage, armor bypass, and target limits remain unchanged. The lance does not travel through arbitrary walls because your story mentions the impossible. All five blessing proofs are complete, equal to Clean Severance's. Vaelith revises the opening lesson: what exists need not be all that can exist, but what can exist must still make room for what is already here. The distinction is a boundary the Unwritten has chosen to keep."
+      ],
+      "ending_b": [
+        "The Unwritten Margin is gone, while its record remains. Vaelith names neither its absence nor your courage as proof that every uncertainty must be cut away. You chose a limit, performed the deed, met danger at close quarters, and returned from the trial. The god keeps the account where it can be questioned. Nothing about your victory licenses an invisible removal of other lives, possessions, or histories. An ending that cannot be examined would only reproduce the unreliable boundary you set out to end.",
+        "Clean Severance permanently shortens Rift Lance's cooldown by ten percent when equipped and used. It adds no range, damage, armor bypass, targets, or exception to line of sight. Your five blessing proofs are as complete as those of Held Boundary; no lost object must be reconstructed to earn a supposedly better conclusion. Vaelith leaves a blank space in the account without pretending it was always blank. A thing that should not remain has ended, and the world around it has not been forced to forget why."
+      ]
+    },
+    "dialogue": {
+      "call": "Begin at contact. An offering, a witness below Y=0, your chosen deed, a reckoning, and a fresh trial prove my blessings. The Margin is a story object; sacrifice no inventory to the void.",
+      "witness": "Rift Lance is proven. Spend fifteen continuous seconds below Y=0 in a safe ordinary-world shelter to prove Impossible Angle. You need not remain in the End.",
+      "testimony": "Twelve hostile shield blocks stabilize the Margin; ten personal projectile victories unmake it. Both prove Boundary Prison. Preview the permanent reward before deciding.",
+      "deed_a": "Hold twelve hostile attacks at your shield. No hidden circle binds your feet, and no pain is required to prove that an edge exists.",
+      "deed_b": "Defeat ten hostile mobs with your own projectiles. No minimum distance or timer applies. End the claim precisely; throw nothing into the void.",
+      "reckoning_a": "Boundary Prison is proven. Six direct melee victories prove Unwritten Form. The Margin's upkeep is not an endless task concealed inside your choice.",
+      "reckoning_b": "Boundary Prison is proven. Six direct melee victories prove Unwritten Form. The absent Margin creates no new payment or lesser path.",
+      "trial": "Unwritten Form is proven. Win a fresh Trial of Unmaking to prove Unmaking, then return to my statue. Its displayed rules are the whole challenge.",
+      "ending_a": "Held Boundary is complete. Claim fifteen percent more validated Rift Lance range, with line of sight and targeting limits intact. Make room without consuming your neighbors.",
+      "ending_b": "Clean Severance is complete. Claim a ten percent shorter Rift Lance cooldown. The object is gone; the account of your choice remains."
+    }
+  }
+}

@@ -1,9 +1,18 @@
 package net.nightshade.divinity_engine.divinity.blessing.aethon;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 
 import java.awt.*;
 
@@ -12,10 +21,7 @@ import java.awt.*;
  * When activated, it can block projectiles and create visual/audio effects.
  */
 public class CelestialWard extends Blessings {
-    /**
-     * Tracks the last time a projectile was blocked to enforce cooldown (in milliseconds)
-     */
-    private long lastBlockTime = 0;
+    private static final String READY_AT = "divinity_engine.celestial_ward_ready_at";
 
     /**
      * Creates a new CelestialWard blessing
@@ -40,16 +46,28 @@ public class CelestialWard extends Blessings {
      */
     @Override
     public boolean onProjectileHit(BlessingsInstance instance, LivingEntity living, ProjectileImpactEvent event) {
-        if(event.getProjectile().getOwner() == living) return false;
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastBlockTime >= 30000) {
-            lastBlockTime = currentTime;
-            living.level().addParticle(net.minecraft.core.particles.ParticleTypes.END_ROD,
-                    living.getX(), living.getY() + 1, living.getZ(),
-                    0, 0, 0);
-            living.playSound(net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, 1.0F, 1.0F);
-            event.getProjectile().setDeltaMovement(0,0,0);
-            event.setCanceled(true);
+        if (!(living instanceof ServerPlayer player) || event.isCanceled()
+                || event.getProjectile().getOwner() == living || instance.isOnCooldown()
+                || !(event.getRayTraceResult() instanceof EntityHitResult hit) || hit.getEntity() != living) return false;
+        // One clock per save, even across dimension travel; the deadline belongs to the player, not the registry singleton.
+        long now = player.server.overworld().getGameTime();
+        if (now < Math.max(player.getPersistentData().getLong(READY_AT), instance.getOrCreateTag().getLong(READY_AT))) return false;
+        long deadline = now + BlessingSpecializations.cooldownTicks(player, instance);
+        player.getPersistentData().putLong(READY_AT, deadline);
+        instance.getOrCreateTag().putLong(READY_AT, deadline);
+        instance.markDirty();
+        ServerLevel level = player.serverLevel();
+        level.playSound(null, living.blockPosition(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 1.0F, 1.0F);
+        Vec3 incoming = event.getProjectile().getDeltaMovement().normalize().scale(0.6);
+        event.getProjectile().setDeltaMovement(0, 0, 0);
+        event.setCanceled(true);
+        BlessingVisuals.link(instance, living, hit.getLocation(), hit.getLocation().add(incoming), Cue.WARD);
+        if (BlessingSpecializations.isActive(player, "aethon", "b")) {
+            float healthBefore = player.getHealth();
+            player.heal(1.0f);
+            if (player.getHealth() > healthBefore && !player.isInvisible()) {
+                BlessingVisuals.pulse(instance, player, Cue.HEAL);
+            }
         }
         return true;
     }

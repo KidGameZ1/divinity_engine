@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "kind": "presence",
+  "god": "divinity_engine:vaelith",
+  "color": "b5f3ee",
+  "texture": "minecraft:textures/particle/glitter_0.png",
+  "sound": "minecraft:block.amethyst_block.resonate",
+  "dialogue": {
+    "greeting": [
+      "I am Vaelith, the Unwritten. You mistake what exists for what must exist; let us not make the opposite mistake.",
+      "There is room beside the known. There need not be a wound through everything within it.",
+      "You arrived by an ordinary path. Possibility does not make the ordinary unworthy."
+    ],
+    "prayer": [
+      "Notice where your breath ends and the room begins. Neither must conquer the other.",
+      "Leave a little uncertainty in the sentence. It is not the same as leaving it empty.",
+      "A boundary can shelter a life. Learn that before celebrating every breach."
+    ],
+    "offering": [
+      "Accepted. Your gift's journey ends at the shrine, not in an inventory cast into the void.",
+      "A shell can shelter and a rod can light a room. A boundary need not be a weapon to matter.",
+      "What you freely place here is enough for this offering. I have not erased what you kept."
+    ],
+    "contact": [
+      "A Thing That Should Not Be begins at contact. The Unwritten Margin belongs to our story, not a hidden dungeon. Hear both its stabilization and its unmaking before choosing."
+    ],
+    "return": [
+      "The space you left remained a space, not an accusation. Welcome back."
+    ],
+    "recognition": [
+      "The Margin's fate remains the one you chose. Neither preservation nor unmaking needs a lesser ending beside it."
+    ],
+    "Neutral": [
+      "We have met. The first boundary is an honest account of what I will ask, not an invisible threshold."
+    ],
+    "Favorable": [
+      "Your deed has given one possibility a definite shape. We may continue from there."
+    ],
+    "Devoted": [
+      "You distinguish an opening from permission to consume its neighbors. I trust that care."
+    ],
+    "Champion": [
+      "You can end a thing without demanding the world forget it. Keep that precision when power makes haste tempting."
+    ],
+    "Displeased": [
+      "Not every limit is an insult. Consider whose room narrows when you make yours larger."
+    ],
+    "Enemy": [
+      "Our trust is fractured. Declining an optional experiment was never a wrong that needed punishment."
+    ],
+    "trial_start": [
+      "The Trial of Unmaking has agreed edges and stated phases. There is no invisible maze behind its waves."
+    ],
+    "failure": [
+      "This attempt ended. Its failure does not erase your chosen deed or require a different ending. Try again when ready."
+    ],
+    "victory": [
+      "The Trial of Unmaking is won. Return to my statue for the ending your story has earned; the victory need not unmake anything else."
+    ],
+    "curse": [
+      "Fractured Existence can leave a bounded, delayed echo after a hostile hit. That echo cannot fracture into another echo; it is not endless injury."
+    ],
+    "curse_cleared": [
+      "Fractured Existence is lifted. No pending echo is entitled to cross that ending."
+    ]
+  }
+}

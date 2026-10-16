@@ -1,15 +1,20 @@
 package net.nightshade.divinity_engine.network.cap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.ChunkWatchEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,8 +22,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.cap.player.gods.IMainPlayerCapability;
 import net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability;
+import net.nightshade.divinity_engine.registry.dimensions.DimensionRegistry;
 import net.nightshade.divinity_engine.registry.item.ItemsRegistry;
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
+import net.nightshade.divinity_engine.util.divinity.trials.TrialSessionManager;
 import org.jetbrains.annotations.Nullable;
 
 import static net.nightshade.divinity_engine.network.cap.player.gods.MainPlayerCapability.*;
@@ -47,8 +54,20 @@ public class CapabilityHandler {
             data.setBlessingsPageNum(0);
             data.setDCPageNum(0);
         });
-//        TechniqueLoadoutGUIVariables.checkForFirstLogin(e.getEntity());
+        if (e.getEntity() instanceof ServerPlayer serverPlayer) {
+            TrialSessionManager.handlePlayerLogin(serverPlayer);
+        }
     }
+    @SubscribeEvent
+    static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent e) {
+        if (e.getEntity() instanceof ServerPlayer serverPlayer) {
+            TrialSessionManager.handlePlayerLogout(serverPlayer);
+        }
+        PlayerVariables.sync(e.getEntity());
+
+    }
+
+
 
     private static void playerSave(PlayerEvent.SaveToFile event) {
         Player player = event.getEntity();
@@ -107,6 +126,9 @@ public class CapabilityHandler {
     static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent e) {
 //        TechniqueLoadoutGUIVariables.checkForFirstLogin(e.getEntity());
         PlayerVariables.sync(e.getEntity());
+        if (e.getEntity() instanceof ServerPlayer serverPlayer) {
+            TrialSessionManager.handleRespawn(serverPlayer, e);
+        }
         if (!e.isEndConquered()) {
         }
     }
@@ -114,6 +136,9 @@ public class CapabilityHandler {
     @SubscribeEvent
     static void onPlayerChangeDimension(PlayerEvent.PlayerChangedDimensionEvent e) {
         PlayerVariables.sync(e.getEntity());
+        if (e.getEntity() instanceof ServerPlayer serverPlayer) {
+            TrialSessionManager.handlePlayerChangedDimension(serverPlayer, e.getTo());
+        }
     }
 
     @Nullable

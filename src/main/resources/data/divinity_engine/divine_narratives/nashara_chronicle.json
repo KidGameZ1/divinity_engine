@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:nashara",
+  "premise": "The Serpent's Answer begins with a lie that saved lives and made other lives easier to spend. During the Sundering of the First Concord, Nashara forged a retreat order to let refugees escape oblivion's advance. Dravak held the line under that false order, Varun evacuated his pack, and Nythea hid refugees in dreams. Elaris, once Nashara's confidant, concealed the proof. Nashara now offers two arts of survival while testing whether you can recognize the moment an explanation becomes another seduction.",
+  "offering_examples": ["minecraft:spider_eye", "minecraft:fermented_spider_eye"],
+  "witness": {"objective": "divinity_engine:observe", "condition": "forest", "target": 240, "deed": "Observe a forest for 12 continuous seconds"},
+  "reckoning": {"objective": "divinity_engine:breed", "condition": "", "target": 2, "deed": "Breed two animals"},
+  "passages": {
+    "call": [
+      "Nashara asks for a spider eye or fermented spider eye, gifts whose usefulness depends on knowing what they are. 'A dangerous ingredient is more honest than a harmless label,' she says. Her welcome is warm enough to make you wonder where its edge has been put away. She promises that this story does not require poisoning yourself, deceiving another player, or delivering a message to a rival shrine.",
+      "The First Concord defended mortal life from oblivion. When it sundered, a retreat route existed that frightened authorities would not open quickly enough. Nashara copied the authority they would obey. She begins with the refugees who escaped, arranging them in her account like shields before the harder questions. Offer freely, then watch a forest for twelve continuous seconds. She wants you to see how concealment shelters vulnerable things before asking whose sight her lie deliberately defeated."
+    ],
+    "witness": [
+      "Observe a forest for twelve uninterrupted seconds. No particular grove is sacred to this task, and you need not find a hidden camp. Nashara directs your attention to the difference between cover and emptiness. A branch can interrupt a hunter's view without removing the creature behind it. Concealment does not have one moral meaning simply because a witness cannot see through it.",
+      "At the shrine she recalls carrying the forged order through hands trained to recognize seals rather than desperation. A clerk corrected a fold in the paper before forwarding it. Nashara remembers that small gesture with a tenderness that sounds almost like contempt. 'The letter looked right,' she says. 'That was enough.' Then she admits she has told the story so often that the clerk has become a fool in it. The clerk was working through a catastrophe. Nashara needed that person's trust and later mocked the trust she had used."
+    ],
+    "testimony": [
+      "She forged the retreat order to save refugees, not to deliver the world to oblivion. Dravak held the line under its false authority, while Varun evacuated his pack and Nythea sheltered refugees in dreams. Elaris concealed evidence of the forgery. Nashara and Elaris had trusted each other with doubts they would never place before a council; afterward, their confidence became a hiding place for consequences. Nashara cannot prove that honest appeal would have failed. She can prove only that she chose the lie and that lives escaped through the opening it made.",
+      "Choose permanently between Venom and Subtlety. Venom requires defeating four poisoned hostile mobs; Subtlety requires remaining invisible and sneaking near this shrine for thirty continuous seconds. One makes intervention precise, the other practices concealment without making it universal permission. Neither path authorizes harm to bystanders. You are choosing how to carry dangerous power, not signing a declaration that every successful deception was necessary."
+    ],
+    "deed_a": [
+      "Defeat four poisoned hostile mobs. The requirement is poisoned hostiles, not animals or unsuspecting people. Nashara is exact about the target because she remembers how easily an intended exception became a broad excuse. Venom, she says, should have a known purpose and a limit. It should not be poured through an entire household merely because one doorway is guarded.",
+      "She offers you an attractive account of the forgery: a single stroke of ink that spared a crowd. Then she interrupts herself. That single stroke also assigned duties to people who could not question the authority behind it. Dravak's line paid for time the refugees needed, but the line did not knowingly accept Nashara's terms. The rescue remains real. So does the stolen consent. Your four victories cannot settle that old debt. Their precision asks whether she can describe the people her old precision conveniently left outside the frame."
+    ],
+    "deed_b": [
+      "Remain invisible and sneaking near this shrine for thirty continuous seconds. Subtlety is the existing concealment deed, not a demand to steal, enter another player's home, or invent a clandestine mission. Prepare the means to become invisible; the story grants no new potion or item. An interrupted attempt can be begun again. Nashara will not call a practical mistake a betrayal.",
+      "While you practice being unseen, she recalls Elaris hiding the proof of her forged order. At first she called that loyalty. Later she resented needing someone else to control the evidence. Their old confidences turned sharp: each knew the other's excuses too well to believe a polished version. Nashara wants you to notice the difference between concealment that protects a refugee and concealment that protects a powerful person's account of herself. The same quiet can serve either. Skill alone cannot tell you which service you have chosen."
+    ],
+    "reckoning_a": [
+      "Breed two animals. After the poisoned hostiles, Nashara asks you to participate in a beginning rather than another precise ending. The animals are ordinary living creatures, not reincarnated refugees or tokens in a hidden bargain. This is not a demand for a farm of any particular size. The deed is deliberately small enough that usefulness cannot be measured by a magnificent tally.",
+      "She remembers a refugee who later refused to thank her. Nashara had expected fear to soften into admiration once the immediate danger passed. Instead, the survivor wanted to know why the people holding the line had been lied to. Nashara answered by naming the children saved. That was a true answer to a different question. Venom can stop a danger quickly; it cannot compel the people who benefit to adopt the wielder's moral account. New life deserves a future not spent repaying the cleverness that helped make it possible."
+    ],
+    "reckoning_b": [
+      "Breed two animals. Subtlety has practiced withholding your presence; now it must protect something whose existence should not have to remain concealed. No named creature or rare species is required. Nashara asks for care in the ordinary world because a secret rescue can become a permanent secret if its keeper never imagines a life beyond flight.",
+      "She remembers planning where refugees could hide but not where they could later tell their own stories. In her preferred version, safety was proof that the lie had worked and therefore proof that the lie should remain hidden. Elaris's concealed evidence helped preserve that convenient circle. Now she admits that a survivor might need privacy from pursuers and openness about the gods' decisions. Those are not contradictory needs. Your quiet skill must learn to distinguish them. A shadow can be a passage toward a life in daylight, not a claim to own everything that passes through it."
+    ],
+    "trial": [
+      "Begin and win a fresh Trial of Shadows after the reckoning. Nashara does not ask you to forge an order or trick an ally as an entrance fee. The existing trial tests how you handle danger; it does not make other players experimental victims of your chosen path. No part of it can establish that deception is always wiser than trust.",
+      "She offers advice with the old persuasive ease: remember who benefits from the instruction you are given. That includes hers. During the Sundering she acted for refugees, but also found satisfaction in succeeding where councils stalled. Pride did not invent the lives saved, and admitting it does not erase them. It does prevent rescue from laundering every motive into virtue. Return here after a fresh victory. If you fail, retry without owing her a confession of personal unworthiness. She has enough uses for shame; she need not make this another one."
+    ],
+    "ending_a": [
+      "Nashara tells the story of the clerk again and leaves out the sneer. The order was believed because trust is how people coordinate work they cannot each verify. She exploited something necessary, not merely something foolish. Your Venom has given her a language for a bounded intervention, and a reason to admit where her own intervention exceeded its claimed bounds. The defenders were not ink marks placed conveniently between refugees and danger.",
+      "Serpent's Bite poison lasts two seconds longer, the promised Venom specialization. It is not permission to extend an old lie or a new claim over anyone you save. Nashara still believes the forged order prevented terrible loss. She no longer asks you to treat that belief as proof that the betrayed were unreasonable to resent her. 'Let my answer have teeth,' she says, 'but let it answer the question actually asked.' For once, the serpent does not choose the question herself."
+    ],
+    "ending_b": [
+      "Nashara stops calling the concealed proof a gift Elaris owed her. It was a choice by a former confidant, with motives and consequences that cannot be possessed merely because they concern her. Your Subtlety has not made her transparent. It has made one distinction harder to evade: protecting the location of a vulnerable person is not the same as protecting a god from a truthful accusation.",
+      "Successful Serpent's Bite poison also applies Weakness I for two seconds, exactly the Subtlety specialization. No other god loses favor, and no surviving refugee becomes an obligation you must locate. Nashara keeps her skill at silence, but abandons her demand that silence always be called kindness. She cannot return stolen consent to the defenders by becoming eloquent about it. She can refuse to steal it again in the telling. The safest path through a shadow may end with someone speaking who no longer needs the shadow's keeper."
+    ]
+  },
+  "dialogue": {
+    "call": "Bring an honest dangerous thing. Then hear about my useful lie.",
+    "witness": "Watch a forest for twelve continuous seconds. Cover is not the same as emptiness.",
+    "testimony": "Choose Venom or Subtlety permanently. Rescue is not permission to own its story.",
+    "deed_a": "Defeat four poisoned hostiles. Keep the purpose narrower than the power.",
+    "deed_b": "Stay invisible and sneaking near this shrine for thirty continuous seconds.",
+    "reckoning_a": "Breed two animals. A future is more than an enemy precisely removed.",
+    "reckoning_b": "Breed two animals. Concealment should protect the chance to live openly.",
+    "trial": "Win a fresh Trial of Shadows. Question useful advice, including mine.",
+    "ending_a": "I used their trust. I will not call them fools for having it.",
+    "ending_b": "Keep the vulnerable hidden when needed, not the powerful blameless."
+  }
+}

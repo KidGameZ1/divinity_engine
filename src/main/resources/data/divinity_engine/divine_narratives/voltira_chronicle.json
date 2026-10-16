@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "kind": "chronicle",
+  "story": "divinity_engine:voltira",
+  "premise": "The First Concord bound Voltira's storm into a defense against oblivion, giving mortal towns a sky beneath which tomorrow remained possible. When the Sundering broke that defense, her sibling Zephra tore free of the restraints to evacuate mortals. Voltira remained bound and believed the departing wind had abandoned her. The Storm's Will asks how power can take responsibility without treating every limit as betrayal, and how a binding once accepted can become something its bearer must finally question.",
+  "offering_examples": ["minecraft:lightning_rod", "minecraft:redstone_block", "minecraft:trident"],
+  "witness": {
+    "objective": "divinity_engine:observe",
+    "condition": "rain",
+    "target": 200,
+    "deed": "Observe the rain for 10 continuous seconds"
+  },
+  "reckoning": {
+    "objective": "divinity_engine:pray",
+    "condition": "still",
+    "target": 200,
+    "deed": "Pray motionless at Voltira's shrine for 10 continuous seconds"
+  },
+  "passages": {
+    "call": [
+      "Voltira requests a lightning rod, a redstone block, or a trident. The offering should be a chosen gift, she insists, not whatever fear makes you drop when thunder speaks. Her own earliest oath was chosen too. She placed the storm within the Concord because unbounded power had not kept small settlements from disappearing at the edges of the world. A restraint could be a promise to remain available when somebody weaker needed her.",
+      "She tells the heroic portion fluently: bridges standing under impossible skies, lightning diverted from crowded roofs, nights in which a mill kept turning because she held a single current steady. Then she says Zephra's name, and the account sharpens into accusation. The wind left. Before she explains, she asks you to witness weather without a target. You hear how much effort it costs a goddess of thunder to request attention rather than immediate agreement."
+    ],
+    "witness": [
+      "Observe the rain for ten continuous seconds. Ordinary rainfall is enough; you need not wait for thunder or offer yourself to a lightning strike. Voltira asks you to attend to a storm's dispersed consequences: a field receiving water, a traveler losing warmth, a roof being tested seam by seam. Power does not become harmless merely because no single dramatic impact announces where it went. She would rather you understood that before learning to praise her aim.",
+      "During the Sundering, her binding continued to draw on her strength after its guiding signals failed. She recalls feeling requests from several directions at once, each urgent and each incomplete. The Concord had protected real people; it had also taught its servants to conceal the strain that protection imposed. Voltira told the other keepers she could sustain the load longer than she believed. She feared that an honest warning would start a panic she could not shelter."
+    ],
+    "testimony": [
+      "Voltira felt Zephra break the restraints and the storm recoil through her own binding. She did not see the mortals being carried away. In that instant she believed her sibling had chosen freedom over everyone left behind. She now admits withholding a recall signal: redirecting enough power to send it would have weakened a corridor still crowded with evacuees. Later she called the silence proof that Zephra had never tried to return. It proved only that she had not heard an answer.",
+      "Choose permanently between Pursuit and Conduit. Pursuit requires eight hostile mobs defeated with projectiles, making force answer to a selected target. Conduit requires two lightning rods contributed through the story donation, making a place for power to go. Neither path is an oath to avenge Voltira or a request to contact Zephra. She has enough evidence to name her own decisions, and you have enough freedom to choose your discipline without accepting her oldest accusation as fact."
+    ],
+    "deed_a": [
+      "Defeat eight hostile mobs with projectiles. Voltira values the interval between choosing and striking: distance gives a person room to reconsider, even when it also makes consequences harder to see. The enemies are current dangers, not stand-ins for her sibling. She forbids herself the easy satisfaction of describing each hit as an answer to abandonment. Pursuit should mean following responsibility to its destination, not finding a target large enough to receive an old humiliation.",
+      "She remembers a signaler who kept turning a damaged lamp toward an empty ridge because the instructions named that ridge as the proper station. The people needing help had already moved. Voltira blamed the signaler until she learned she herself had refused to revise the instructions, afraid that uncertainty would undermine trust. Accuracy without a willingness to update the aim is merely a disciplined way of missing. Your deed is finite, but the habit it tests must outlive the eighth victory."
+    ],
+    "deed_b": [
+      "Contribute two lightning rods. Their purpose in this deed is deliberate direction, not an additional requirement to build a tower or summon a storm. Voltira recalls the first keeper who asked where a diverted strike would finish. The council praised a roof saved and forgot the ground beyond it. A conduit is not a disappearance. Whatever receives the force becomes part of the account, whether or not the people celebrating safety can see it.",
+      "The two rods remind her of two kinds of agreement: accepting a burden, and remaining free to report that the burden has become unbearable. She once treated the second as a betrayal of the first. That belief made her a dependable guardian until it made her a silent failure point. Your offering cannot release the ancient binding or repair the Concord. It can establish a smaller model in which directing power includes acknowledging the limits of what directs it."
+    ],
+    "reckoning_a": [
+      "Pray motionless at Voltira's shrine for ten continuous seconds. After acting at a distance, remain close enough to hear an answer. This is a brief, chosen stillness, not a new binding or a demand that you endure harm. She asks you to stop moving because pursuit can become a means of never being present when someone reports what your well-aimed action actually did.",
+      "In the silence she names a settlement whose storm channel she abandoned to keep the evacuation corridor intact. She has long described that decision as unavoidable. Perhaps no available choice could have spared everyone, but she concealed the settlement's loss afterward because the survivors elsewhere needed hope and she needed their gratitude. Those motives were not identical. Your prayer does not absolve her. It gives her an interval in which no new emergency can be used to interrupt the sentence she owes."
+    ],
+    "reckoning_b": [
+      "Pray motionless at Voltira's shrine for ten continuous seconds. Having provided a direction for power, practice a limit that you enter voluntarily and may leave. Voltira does not ask you to reproduce her binding. She asks you to notice that a promise has a speaker, a duration, and conditions under which continuing it may cease to serve its purpose. Treating all three as weaknesses is how a useful safeguard becomes an instrument nobody dares question.",
+      "She recalls a maintenance keeper who marked a cracked storm anchor for replacement. Voltira erased the mark from the public report because the repair would require a frightening interval without protection. She arranged for watchful workers instead, asking living vigilance to make up for missing capacity. They did not all survive. The danger was real; so was the decision to hide it. Stillness lets her name the workers as people entrusted with a cost, not components that disappointed her."
+    ],
+    "trial": [
+      "Undertake and win a fresh trial of Voltira, then return to the shrine. The challenge follows your reckoning, so a victory earned before it cannot stand in for this attempt. Bring preparation rather than an intention to impress her by surviving avoidable danger. A failed attempt may be retried without undoing your completed work. The storm is not entitled to your life simply because you have chosen to learn from it.",
+      "Voltira gives you no message to carry to Zephra. For years she imagined a mortal champion forcing an apology from the wind, and calls that fantasy what it was: another way to put her burden on someone unable to refuse a god safely. She still feels abandoned. Feelings can remain after their certainty has been challenged. Your trial concerns the direction of your own strength, not the impossible assignment of making her grief disappear before you may succeed."
+    ],
+    "ending_a": [
+      "Your return does not quiet Voltira's storm. It gives its anger a boundary. She can pursue the truth of what happened without declaring in advance that every missing answer must condemn Zephra. She admits her withheld signal, her overstated strength, and the settlement left outside the protected route. None proves that the Concord should never have existed. They prove that a defense of mortal life becomes untrustworthy when its guardians are allowed to edit the names of those it failed.",
+      "Pursuit keeps its established reward: Stormstep horizontal dash power increases from 2.5 to 3.0. Voltira calls the added reach an obligation to look farther, not an excuse to strike sooner. 'Your aim outran hesitation. Carry the thunder forward, but choose where it lands.' She speaks without naming an enemy for you. Somewhere beyond her knowledge the wind still moves; for this completed story, allowing it to remain a question is more truthful than claiming you have delivered a verdict."
+    ],
+    "ending_b": [
+      "Voltira no longer mistakes a conduit for something that should never complain. She recounts the keeper's erased warning beside the bridges and roofs her power truly saved. The record is less triumphant and more useful. A future guardian hearing it might report a dangerous load before becoming its final casualty. Whether her sibling could have acted differently remains unresolved here. What she can change is the expectation that everyone who loves her must demonstrate it by staying bound.",
+      "Conduit keeps its established reward: Stormstep vertical-dash Slow Falling lasts eight seconds instead of five. Its longer descent is a measured interval to recover, not immunity to consequences. 'You gave the storm a place to rest. Even lightning needs a hand that can guide it.' When you leave, Voltira does not call the departure desertion. She has learned to distinguish a completed promise from an exhausted servant, and to let an ending be honorable without first making it permanent captivity."
+    ]
+  },
+  "dialogue": {
+    "call": "Offer freely. I know too well how a chosen promise can become a binding.",
+    "witness": "Observe ordinary rain for ten continuous seconds. Thunder is not required.",
+    "testimony": "Choose Pursuit or Conduit permanently. My accusation is not your objective.",
+    "deed_a": "Defeat eight hostile mobs with projectiles. Choose the actual danger, not my old grievance.",
+    "deed_b": "Contribute two lightning rods. Directed power still has a destination.",
+    "reckoning_a": "Pray motionless here for ten continuous seconds. Stay to hear what follows the strike.",
+    "reckoning_b": "Pray motionless here for ten continuous seconds. A chosen pause is not a chain.",
+    "trial": "Win a fresh trial of mine, then return. You are not my messenger of vengeance.",
+    "ending_a": "Carry the thunder forward without pretending every silence names an enemy.",
+    "ending_b": "Even a faithful guardian must be allowed to name an unbearable load."
+  }
+}

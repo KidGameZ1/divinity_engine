@@ -20,6 +20,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Get all statue blocks from the registry
         BlocksRegistry.REGISTRY.getEntries().forEach(block -> {
             if (block.get() instanceof StatueBlock) {
+                // Preserve the shipped models and rotations of saved legacy relics.
+                if (block.get() instanceof net.nightshade.divinity_engine.block.LegacyElderStatueBlock) return;
                 // Create the blockstate with rotations
                 Block statueBlock = block.get();
                 horizontalBlock(statueBlock,

@@ -278,7 +278,7 @@ public class Blessings {
         if (this == o) {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
-            BaseGod gods = (BaseGod) o;
+            Blessings gods = (Blessings) o;
             return this.getRegistryName().equals(gods.getRegistryName());
         } else {
             return false;

@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PowderSnowBlock.class)
 public class PowderSnowBlockMixin {
 
-    @Inject(method = "entityInside", at =@At("TAIL"),cancellable = true)
+    @Inject(method = "entityInside", at =@At("TAIL"))
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity, CallbackInfo ci){
         if (DivinityEngineHelper.hasBlessingInSlot(BlessingsRegistry.SNOWVEIL.get(), pEntity)) {
             if (pEntity instanceof LivingEntity _livEntity){

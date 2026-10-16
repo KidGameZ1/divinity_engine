@@ -1,0 +1,1 @@
+net.nightshade.divinity_engine.compat.kubejs.DivinityKubeJSPlugin

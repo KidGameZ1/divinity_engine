@@ -6,6 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -47,6 +49,9 @@ public class Rootgrip extends Blessings {
             if (!attacker.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
                 attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1, false, false, true));
                 instance.getOrCreateTag().putInt("hit_count", instance.getOrCreateTag().getInt("hit_count") + 1);
+                if (!event.isCanceled() && event.getAmount() > 0) {
+                    BlessingVisuals.at(instance, player, attacker.position().add(0, 0.08, 0), Cue.CONTROL, 1.0);
+                }
             }
         }
         return super.onDamageEntity(instance, player, event);

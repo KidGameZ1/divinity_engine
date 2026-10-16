@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "kind": "presence",
+  "god": "divinity_engine:solarius",
+  "color": "ffd36a",
+  "texture": "minecraft:textures/particle/glitter_0.png",
+  "sound": "minecraft:block.amethyst_block.chime",
+  "dialogue": {
+    "greeting": ["The dawn finds you again.", "Stand in the light; you need hide nothing here.", "What will you illuminate today?"],
+    "prayer": ["Let your silence be honest.", "I hear the question beneath your words.", "Carry this warmth to someone who needs it."],
+    "offering": ["A gift freely given shines brightest.", "Your offering feeds more than flame.", "I accept. Let generosity follow you beyond this shrine."],
+    "failure": ["One eclipse does not end the sun. Rise and try again."],
+    "return": ["Even after absence, a new dawn is possible. I remember you."],
+    "recognition": ["This shrine remembers the light you chose to become."]
+  }
+}

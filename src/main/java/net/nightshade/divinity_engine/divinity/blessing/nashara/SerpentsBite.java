@@ -6,6 +6,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
+import net.nightshade.divinity_engine.util.divinity.narrative.BlessingSpecializations;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
@@ -20,7 +23,14 @@ public class SerpentsBite extends Blessings {
         LivingEntity target = event.getEntity();
 
         if (!target.hasEffect(MobEffects.POISON)){
-            target.addEffect(new MobEffectInstance(MobEffects.POISON, MiscHelper.secondsToTick(5), 1, false, false));
+            int duration = MiscHelper.secondsToTick(BlessingSpecializations.isActive(player, "nashara", "a") ? 7 : 5);
+            boolean applied = target.addEffect(new MobEffectInstance(MobEffects.POISON, duration, 1, false, false));
+            if (applied && BlessingSpecializations.isActive(player, "nashara", "b")) {
+                target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 0));
+            }
+            if (applied) {
+                BlessingVisuals.at(instance, player, target.getBoundingBox().getCenter(), Cue.IMPACT, 0.8);
+            }
         }
 
         return super.onDamageEntity(instance, player, event);

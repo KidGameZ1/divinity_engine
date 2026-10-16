@@ -2,11 +2,13 @@ package net.nightshade.divinity_engine.divinity.blessing.dravak;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -40,6 +42,7 @@ public class Unyielding extends Blessings {
     public boolean onTick(BlessingsInstance instance, LivingEntity player) {
         if (player.getHealth() <= player.getMaxHealth() * 0.5f) {
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20, 0, false, false, true));
+            BlessingVisuals.at(instance, player, player.position().add(0, 0.08, 0), Cue.AURA, 0.9);
         }
         return super.onTick(instance, player);
     }
@@ -58,6 +61,8 @@ public class Unyielding extends Blessings {
         if (player.getHealth() <= player.getMaxHealth() * 0.5f) {
             event.setStrength(event.getStrength() * 0.5f);
             event.setCanceled(true);
+            BlessingVisuals.at(instance, player, player.position().add(0, 0.08, 0)
+                    .add(new Vec3(-event.getRatioX(), 0, -event.getRatioZ()).normalize().scale(0.12)), Cue.WARD, 0.9);
         }
 
         return super.onKnockback(instance, event);

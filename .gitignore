@@ -4,6 +4,12 @@
 /build/classes/java/main/
 /run/
 /run-data/
-/gradle/
+/gradle/*
+!/gradle/verify-bundled-mods.gradle
+!/gradle/verify-connected-pantheon.gradle
+!/gradle/gradle-daemon-jvm.properties
 /.idea/
 /assets/
+**/.DS_Store
+/logs/
+!/gradle/wrapper/

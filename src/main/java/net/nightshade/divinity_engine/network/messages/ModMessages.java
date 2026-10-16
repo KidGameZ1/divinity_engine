@@ -12,11 +12,18 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 import net.nightshade.divinity_engine.DivinityEngineMod;
 import net.nightshade.divinity_engine.network.messages.cap.SyncGodsPacket;
 import net.nightshade.divinity_engine.network.messages.cap.SyncMainPlayerCapabilityPacket;
+import net.nightshade.divinity_engine.network.messages.effects.PrivateBlessingEffectsPacket;
 import net.nightshade.divinity_engine.network.messages.gui.BlessingsButtonMessage;
+import net.nightshade.divinity_engine.network.messages.gui.EquipBlessingMessage;
 import net.nightshade.divinity_engine.network.messages.gui.PlayerBlessingsButtonMessage;
+import net.nightshade.divinity_engine.network.messages.gui.PocketRoomSizeMessage;
+import net.nightshade.divinity_engine.network.messages.gui.PocketResidentsMessage;
+import net.nightshade.divinity_engine.network.messages.gui.PocketExitMessage;
+import net.nightshade.divinity_engine.network.messages.gui.TrialButtonMessage;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot1Message;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot2Message;
 import net.nightshade.divinity_engine.network.messages.key.BlessingSlot3Message;
+import net.nightshade.divinity_engine.network.messages.trial.SyncTrialStatePacket;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -32,6 +39,11 @@ public class ModMessages {
     }
 
     public static void register() {
+        NetworkRegistry.ChannelBuilder.named(new ResourceLocation(DivinityEngineMod.MODID, "content"))
+                .networkProtocolVersion(net.nightshade.divinity_engine.api.content.DivinityContent::fingerprint)
+                .clientAcceptedVersions(version -> version.equals(net.nightshade.divinity_engine.api.content.DivinityContent.fingerprint()))
+                .serverAcceptedVersions(version -> version.equals(net.nightshade.divinity_engine.api.content.DivinityContent.fingerprint()))
+                .simpleChannel();
         SimpleChannel net = NetworkRegistry.ChannelBuilder
                 .named(new ResourceLocation(DivinityEngineMod.MODID, "messages"))
                 .networkProtocolVersion(() -> "1.0")
@@ -48,6 +60,22 @@ public class ModMessages {
         INSTANCE.registerMessage(id(), BlessingSlot2Message.class, BlessingSlot2Message::buffer, BlessingSlot2Message::new, BlessingSlot2Message::handler);
         INSTANCE.registerMessage(id(), BlessingSlot3Message.class, BlessingSlot3Message::buffer, BlessingSlot3Message::new, BlessingSlot3Message::handler);
         INSTANCE.registerMessage(id(), PlayerBlessingsButtonMessage.class, PlayerBlessingsButtonMessage::buffer, PlayerBlessingsButtonMessage::new, PlayerBlessingsButtonMessage::handler);
+        INSTANCE.registerMessage(id(), TrialButtonMessage.class, TrialButtonMessage::buffer, TrialButtonMessage::new, TrialButtonMessage::handler);
+        INSTANCE.registerMessage(id(), SyncTrialStatePacket.class, SyncTrialStatePacket::toBytes, SyncTrialStatePacket::new, SyncTrialStatePacket::handle);
+        INSTANCE.registerMessage(id(), EquipBlessingMessage.class, EquipBlessingMessage::encode, EquipBlessingMessage::new,
+                EquipBlessingMessage::handle, java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        INSTANCE.registerMessage(id(), PrivateBlessingEffectsPacket.class, PrivateBlessingEffectsPacket::encode,
+                PrivateBlessingEffectsPacket::decode, PrivateBlessingEffectsPacket::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        INSTANCE.registerMessage(id(), PocketRoomSizeMessage.class,
+                PocketRoomSizeMessage::encode, PocketRoomSizeMessage::new, PocketRoomSizeMessage::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        INSTANCE.registerMessage(id(), PocketResidentsMessage.class,
+                PocketResidentsMessage::encode, PocketResidentsMessage::new, PocketResidentsMessage::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        INSTANCE.registerMessage(id(), PocketExitMessage.class,
+                PocketExitMessage::encode, PocketExitMessage::decode, PocketExitMessage::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 
     public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

@@ -4,13 +4,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 import net.nightshade.nightshade_core.util.MiscHelper;
 
 import java.awt.*;
-import java.util.List;
 
 public class PredatorsFocus extends Blessings {
 
@@ -43,6 +43,8 @@ public class PredatorsFocus extends Blessings {
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MiscHelper.secondsToTick(10), 0, false, false, true));
                 setEffectsActive(instance, true);
                 setCrouchTick(instance, 0);
+                BlessingVisuals.at(instance, player, player.getEyePosition().add(player.getLookAngle().scale(0.3)),
+                        Cue.CAST, 0.55);
                 return true;
             }
         } else {

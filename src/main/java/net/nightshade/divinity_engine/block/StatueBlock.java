@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -38,11 +39,13 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.nightshade.divinity_engine.block.entity.StatueBlockEntity;
 import net.nightshade.divinity_engine.divinity.gods.BaseGod;
 import net.nightshade.divinity_engine.divinity.gods.BaseGodInstance;
@@ -53,12 +56,11 @@ import net.nightshade.divinity_engine.network.events.divinity.gods.worship_event
 import net.nightshade.divinity_engine.util.DivinityEngineHelper;
 import net.nightshade.divinity_engine.util.divinity.gods.GodHelper;
 import net.nightshade.divinity_engine.world.inventory.BlessingsMenu;
-import net.nightshade.nightshade_core.util.MiscHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 import static net.nightshade.divinity_engine.util.divinity.gods.GodHelper.*;
 
@@ -67,11 +69,21 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final double DETECTION_RANGE = 5.0D;
-    private final @Nullable RegistryObject<BaseGod> god;
-    public StatueBlock(@Nullable RegistryObject<BaseGod> godObject) {
+    private static final VoxelShape SHAPE = box(0, 0, 0, 16, 32, 16);
+    private final @Nullable RegistryObject<? extends BaseGod> god;
+    private final @Nullable Supplier<? extends BlockEntityType<StatueBlockEntity>> blockEntityType;
+
+    /** Compatibility constructor for existing manually registered addon statues. */
+    public StatueBlock(@Nullable RegistryObject<? extends BaseGod> godObject) {
+        this(godObject, null);
+    }
+
+    public StatueBlock(@Nullable RegistryObject<? extends BaseGod> godObject,
+                       @Nullable Supplier<? extends BlockEntityType<StatueBlockEntity>> blockEntityType) {
         super(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(1f, 10f).randomTicks().lightLevel(s -> 5).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
         this.god = godObject;
+        this.blockEntityType = blockEntityType;
     }
 
     @Override
@@ -86,22 +98,12 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
 
     @Override
     public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
-            default -> box(0, 0, 0, 16, 32, 16);
-            case NORTH -> box(0, 0, 0, 16, 32, 16);
-            case EAST -> box(0, 0, 0, 16, 32, 16);
-            case WEST -> box(0, 0, 0, 16, 32, 16);
-        };
+        return SHAPE;
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
-            default -> box(0, 0, 0, 16, 32, 16);
-            case NORTH -> box(0, 0, 0, 16, 32, 16);
-            case EAST -> box(0, 0, 0, 16, 32, 16);
-            case WEST -> box(0, 0, 0, 16, 32, 16);
-        };
+        return SHAPE;
     }
 
     @Override
@@ -146,144 +148,113 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (GodHelper.hasContactedGod(player, this.god.get())){
-            if (FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) != FavorTiers.Champion || FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) != FavorTiers.Devoted){
-                GodHelper.decreaseFavor(this.god.get(), player, 20);
-            } else if (FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) == FavorTiers.Displeased || FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) == FavorTiers.Enemy) {
-                GodHelper.decreaseFavor(this.god.get(), player, 30);
-            }
-        }
-
-
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        boolean destroyed = super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        if (destroyed && !level.isClientSide && GodHelper.hasContactedGod(player, getGod()))
+            GodHelper.decreaseFavor(getGod(), player, 10);
+        return destroyed;
     }
     @Override
     public void attack(BlockState blockstate, Level world, BlockPos pos, Player player) {
         super.attack(blockstate, world, pos, player);
-        if (GodHelper.hasContactedGod(player, this.god.get())){
-            if (FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) != FavorTiers.Champion || FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) != FavorTiers.Devoted){
-                GodHelper.decreaseFavor(this.god.get(), player, 5);
-            } else if (FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) == FavorTiers.Displeased || FavorTiers.getByFavor(GodHelper.getGodOrNull(player, this.god.get()).getFavor()) == FavorTiers.Enemy) {
-                GodHelper.decreaseFavor(this.god.get(), player, 8);
-            }
-        }
+        // Accidental clicks no longer punish faith; actual destruction carries the penalty.
     }
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        if (GodHelper.hasContactedGod(pPlacer, this.god.get())){
-            if (FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Champion || FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Devoted){
-                GodHelper.increaseFavor(this.god.get(), pPlacer, 30);
-            } else if (FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Displeased || FavorTiers.getByFavor(GodHelper.getGodOrNull(pPlacer, this.god.get()).getFavor()) == FavorTiers.Enemy) {
-                GodHelper.increaseFavor(this.god.get(), pPlacer, 20);
-            }
-        }
+        // Favor is awarded by the validated EntityPlaceEvent after cancellation/rollback checks.
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
     }
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (this.god.get() == null) return;
-
-        // Reschedule tick
         level.scheduleTick(pos, this, 10);
+        BaseGod baseGod = getGod();
+        if (baseGod == null) return;
+        List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(DETECTION_RANGE),
+                player -> player.isAlive() && !player.isSpectator());
+        if (players.isEmpty()) return;
 
-        Direction facing = state.getValue(FACING);
-        BlockPos frontPos = pos.relative(facing);
+        // All entity checks, event callbacks and mutations stay on this server tick.
+        for (ServerPlayer player : players) {
+            if (!GodHelper.hasContactedGod(player, baseGod)) continue;
+            BaseGodInstance instance = GodHelper.getGodOrNull(player, baseGod);
+            MinecraftForge.EVENT_BUS.post(new WhileNearStatueEvent(instance, player));
+            if (!validInteraction(level, pos, player, instance)) continue;
+            net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.nearShrine(player, baseGod, pos);
+            if (!player.isShiftKeyDown() || !pos.equals(net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.nearestStatue(player, null))) continue;
+            var data = player.getPersistentData();
+            String identity = level.dimension().location() + ":" + pos.asLong();
+            boolean continued = identity.equals(data.getString("divinity_prayer_shrine"))
+                    && level.getGameTime() - data.getLong("divinity_prayer_seen") == 10;
+            int duration = continued ? data.getInt("statue_prayer_tick") + 10 : 10;
+            data.putString("divinity_prayer_shrine", identity);
+            data.putLong("divinity_prayer_seen", level.getGameTime());
+            data.putInt("statue_prayer_tick", duration);
+            tryPray(level, pos, player, instance, duration);
+        }
 
-        AABB frontBox = new AABB(frontPos).inflate(1.0D, 0.5D, 1.0D);
-        AABB statueBox = new AABB(pos).inflate(5.0D);
-
-        // Collect entities on the main thread
-        List<ItemEntity> itemEntities = new ArrayList<>(level.getEntitiesOfClass(ItemEntity.class, frontBox));
-        List<LivingEntity> nearbyEntities = new ArrayList<>(level.getEntitiesOfClass(LivingEntity.class, frontBox));
-        List<ServerPlayer> players = new ArrayList<>(level.getEntitiesOfClass(ServerPlayer.class, statueBox));
-
-        if ((itemEntities.isEmpty() && nearbyEntities.isEmpty()) || players.isEmpty()) return;
-
-        // Copy only data needed for async
-        BaseGod god = this.god.get();
-        List<ItemStack> items = itemEntities.stream().map(ItemEntity::getItem).toList();
-
-        List<DivinityEngineHelper.PlayerData> copiedPlayers = players.stream().map(p -> new DivinityEngineHelper.PlayerData(p.getUUID(), p.blockPosition(), p.isShiftKeyDown())).toList();
-        BlockPos statuePos = pos.immutable();
-
-        // Run logic async
-        CompletableFuture.runAsync(() -> {
-
-            // Find closest player
-            DivinityEngineHelper.PlayerData closest = null;
-            double minDist = Double.MAX_VALUE;
-
-            for (DivinityEngineHelper.PlayerData data : copiedPlayers) {
-                double dist = data.pos().distSqr(statuePos);
-                if (dist < minDist) {
-                    closest = data;
-                    minDist = dist;
-                }
+        ServerPlayer closest = players.stream().filter(player -> GodHelper.hasContactedGod(player, baseGod))
+                .min(java.util.Comparator.comparingDouble(player -> player.distanceToSqr(Vec3.atCenterOf(pos)))).orElse(null);
+        if (closest == null) return;
+        AABB frontBox = new AABB(pos.relative(state.getValue(FACING))).inflate(1, 0.5, 1);
+        BaseGodInstance instance = GodHelper.getGodOrNull(closest, baseGod);
+        for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, frontBox)) {
+            if (!item.isAlive() || item.getItem().isEmpty()) continue;
+            OfferEvent.OfferItemEvent offer = new OfferEvent.OfferItemEvent(instance, closest, item.getItem(), item);
+            if (!MinecraftForge.EVENT_BUS.post(offer) && item.isAlive() && !item.getItem().isEmpty()
+                    && frontBox.intersects(item.getBoundingBox()) && closest.isAlive()
+                    && GodHelper.hasContactedGod(closest, baseGod) && instance.onOfferedItems(offer)) {
+                item.discard();
+                net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.onAcceptedOffering(closest, baseGod);
             }
+        }
+        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, frontBox)) {
+            if (entity instanceof Player || !entity.isAlive() || entity.getHealth() > entity.getMaxHealth() * 0.3F) continue;
+            OfferEvent.OfferEntityEvent offer = new OfferEvent.OfferEntityEvent(instance, closest, entity);
+            if (!MinecraftForge.EVENT_BUS.post(offer) && entity.isAlive() && frontBox.intersects(entity.getBoundingBox())
+                    && entity.getHealth() <= entity.getMaxHealth() * 0.3F && closest.isAlive()
+                    && GodHelper.hasContactedGod(closest, baseGod) && instance.onOfferedEntity(offer)) {
+                entity.kill();
+                if (!entity.isAlive()) net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.onAcceptedOffering(closest, baseGod);
+            }
+        }
+    }
 
-            // Back to main thread: fire events and modify world
-            DivinityEngineHelper.PlayerData finalClosest = closest;
-            level.getServer().execute(() -> {
-                ServerPlayer closestPlayer = (ServerPlayer) level.getPlayerByUUID(finalClosest.uuid());
-                if (closestPlayer == null) return;
+    /** Validate again after arbitrary prayer listeners, before invoking a god's favor-mutating callback. */
+    public boolean tryPray(ServerLevel level, BlockPos pos, ServerPlayer player, BaseGodInstance instance, int duration) {
+        if (!validInteraction(level, pos, player, instance) || !player.isShiftKeyDown()) return false;
+        PrayEvent prayer = new PrayEvent(instance, player, duration);
+        if (!MinecraftForge.EVENT_BUS.post(prayer) && validInteraction(level, pos, player, instance) && player.isShiftKeyDown()) {
+            instance.onPrayedTo(prayer);
+            if (!prayer.isCanceled() && validInteraction(level, pos, player, instance) && player.isShiftKeyDown()) {
+                net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.onPrayer(player, instance.getBaseGod(), pos, duration);
+                return true;
+            }
+        }
+        net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.interruptPrayer(player, instance.getBaseGod());
+        return false;
+    }
 
-                for (ServerPlayer player : players) {
-                    if (GodHelper.hasContactedGod(player, god)) {
-                        BaseGodInstance godInstance = GodHelper.getGodOrNull(player, god);
-                        MinecraftForge.EVENT_BUS.post(new WhileNearStatueEvent(godInstance, player));
-                    }
-                }
-
-                if (finalClosest.isSneaking() && GodHelper.hasContactedGod(closestPlayer, god)) {
-                    int ticks = closestPlayer.getPersistentData().getInt("statue_prayer_tick") + 15;
-                    closestPlayer.getPersistentData().putInt("statue_prayer_tick", ticks);
-
-                    BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
-                    MinecraftForge.EVENT_BUS.post(new PrayEvent(godInstance, closestPlayer, ticks));
-                    System.out.println(closestPlayer.getDisplayName().getString() + " is praying to " +
-                            Component.translatable(god.getNameTranslationKey()).getString() + " for " +
-                            MiscHelper.tickToSeconds(ticks) + "s");
-                } else {
-                    closestPlayer.getPersistentData().remove("statue_prayer_tick");
-                }
-
-                for (ItemEntity itemEntity : itemEntities) {
-                    if (GodHelper.hasContactedGod(closestPlayer, god)) {
-                        BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
-                        if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferItemEvent(godInstance, closestPlayer, itemEntity.getItem(), itemEntity))) {
-                            System.out.println(itemEntity.getItem().getHoverName().getString() + " was offered to " +
-                                    Component.translatable(god.getNameTranslationKey()).getString() + " by " + closestPlayer.getName().getString());
-                        }
-                    }
-                }
-
-                for (LivingEntity entity : nearbyEntities) {
-                    if (!(entity instanceof Player) && GodHelper.hasContactedGod(closestPlayer, god)) {
-                        BaseGodInstance godInstance = GodHelper.getGodOrNull(closestPlayer, god);
-                        if (!MinecraftForge.EVENT_BUS.post(new OfferEvent.OfferEntityEvent(godInstance, closestPlayer, entity))) {
-                            System.out.println(entity.getName().getString() + " was offered to " +
-                                    Component.translatable(god.getNameTranslationKey()).getString() + " by " + closestPlayer.getName().getString());
-                        }
-                    }
-                }
-            });
-
-        });
+    private boolean validInteraction(ServerLevel level, BlockPos pos, ServerPlayer player, BaseGodInstance instance) {
+        return instance != null && player.isAlive() && !player.isRemoved() && player.serverLevel() == level
+            && level.hasChunkAt(pos) && level.getBlockState(pos).getBlock() == this
+            && getGod() == instance.getBaseGod() && GodHelper.getGodOrNull(player, getGod()) == instance
+            && player.distanceToSqr(Vec3.atCenterOf(pos)) <= 36;
     }
 
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-
-
+        if (pLevel.isClientSide()) return InteractionResult.SUCCESS;
+        if (getGod() == null || pHand != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
         if (hasContactedGod(pPlayer, god.get())){
             if (GodHelper.getAllBlessingsInstances(pPlayer) != null){
                 if (!pLevel.isClientSide()) {
                     BlockEntity entity = pLevel.getBlockEntity(pPos);
                     if(entity instanceof StatueBlockEntity) {
-                        NetworkHooks.openScreen(((ServerPlayer)pPlayer), (StatueBlockEntity)entity, pPos);
+                        NetworkHooks.openScreen(((ServerPlayer)pPlayer), (StatueBlockEntity)entity,
+                                buffer -> BlessingsMenu.writeOpening(buffer, pPos, getGod()));
+                        net.nightshade.divinity_engine.util.divinity.narrative.DivineNarrativeManager.onStatueOpened((ServerPlayer) pPlayer, getGod());
                     } else {
                         throw new IllegalStateException("Our Container provider is missing!");
                     }
@@ -300,30 +271,24 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
 
     @Override
     public MutableComponent getName() {
-        if (god.get() != null && god != null){
-            return Component.literal(Component.translatable(god.get().getNameTranslationKey()).getString() + " " + Component.translatable("block.divinity_engine.statue").getString());
+        BaseGod value = getGod();
+        if (value != null) {
+            return Component.translatable("block.divinity_engine.named_statue", Component.translatable(value.getNameTranslationKey()));
         }
         return Component.translatable("block.divinity_engine.statue");
     }
 
-    @Override
-    public String getDescriptionId() {
-        if (god.get() != null && god != null){
-            return Component.literal(Component.translatable(god.get().getNameTranslationKey()).getString()+ " " + Component.translatable("block.divinity_engine.statue").getString()).getString();
-        }
-        return Component.translatable("block.divinity_engine.statue").getString();
-    }
-
     public BaseGod getGod(){
-        return this.god.get();
+        return this.god == null || !this.god.isPresent() ? null : this.god.get();
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        if (god.get() != null){
+        BaseGod value = getGod();
+        if (value != null){
             if (Screen.hasShiftDown()){
-                pTooltip.add(Component.translatable(god.get().getNameTranslationKey()).withStyle(Style.EMPTY.withColor(god.get().getColor().getRGB())));
-                pTooltip.add(Component.literal(" -Godly Domains: "+GodHelper.getFormattedDomains(god.get())).withStyle(Style.EMPTY.withColor(god.get().getColor().getRGB())));
+                pTooltip.add(Component.translatable(value.getNameTranslationKey()).withStyle(Style.EMPTY.withColor(value.getColor().getRGB())));
+                pTooltip.add(Component.literal(" -Godly Domains: "+GodHelper.getFormattedDomains(value)).withStyle(Style.EMPTY.withColor(value.getColor().getRGB())));
             }else {
                 pTooltip.add(Component.translatable("divinity_engine.tooltip.shift").withStyle(ChatFormatting.DARK_PURPLE));
             }
@@ -340,7 +305,18 @@ public class StatueBlock extends Block implements SimpleWaterloggedBlock, Entity
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new StatueBlockEntity(pos, state, this.god.get().getStatueBlockEntity());
+        return getStatueBlockEntityType().create(pos, state);
+    }
+
+    public BlockEntityType<?> getStatueBlockEntityType() {
+        var id = ForgeRegistries.BLOCKS.getKey(this);
+        BlockEntityType<?> type = blockEntityType == null ? null : blockEntityType.get();
+        // Only legacy manual registrations need the name/explicit-god fallback.
+        if (type == null && id != null) type = ForgeRegistries.BLOCK_ENTITY_TYPES.getValue(id);
+        if (type == null && getGod() != null) type = getGod().getStatueBlockEntity();
+        if (type == null || ForgeRegistries.BLOCK_ENTITY_TYPES.getKey(type) == null || !type.isValid(defaultBlockState()))
+            throw new IllegalStateException("No registered block entity type bound to statue " + id);
+        return type;
     }
 
     @Override

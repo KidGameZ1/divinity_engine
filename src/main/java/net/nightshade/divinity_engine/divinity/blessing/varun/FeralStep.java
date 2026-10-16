@@ -4,6 +4,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.nightshade.divinity_engine.divinity.blessing.Blessings;
 import net.nightshade.divinity_engine.divinity.blessing.BlessingsInstance;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals;
+import net.nightshade.divinity_engine.util.divinity.effects.BlessingVisuals.Cue;
 
 import java.awt.*;
 
@@ -33,6 +35,10 @@ public class FeralStep extends Blessings {
             living.setDeltaMovement(
                     living.getDeltaMovement().multiply(1 + getSpeedBoost(instance), 1, 1 + getSpeedBoost(instance))
             );
+            if (living.getDeltaMovement().horizontalDistanceSqr() > 1.0E-4) {
+                BlessingVisuals.at(instance, living, living.position().add(0, 0.08, 0)
+                        .subtract(living.getDeltaMovement().multiply(1, 0, 1).normalize().scale(0.2)), Cue.TRAIL, 0.75);
+            }
         }
 
         return super.onTick(instance, living);
@@ -41,6 +47,9 @@ public class FeralStep extends Blessings {
     @Override
     public boolean onFall(BlessingsInstance instance, LivingFallEvent event) {
         event.setDamageMultiplier(event.getDamageMultiplier() * (1 - getFallDamageReduction(instance)));
+        if (!event.isCanceled() && event.getDistance() > 0 && getFallDamageReduction(instance) > 0) {
+            BlessingVisuals.at(instance, event.getEntity(), event.getEntity().position().add(0, 0.08, 0), Cue.WARD, 1.0);
+        }
         return super.onFall(instance, event);
     }
 
