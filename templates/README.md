@@ -9,8 +9,8 @@ Download complete project ZIPs from the
   development dependencies from the full Divinity bundle, then builds its own jar.
 
 Each has a complete README. Neither includes Minecraft/library jars or worlds.
-These templates target the current source API, which can be newer than a hosted
-release carrying the same Divinity version number.
+These templates target Divinity Engine 1.12 for Forge 1.20.1. The Java importer
+requires the full 1.12 dependency bundle, not an older or slim jar.
 
 Maintainers regenerate downloads with `python3 tools/package_addon_templates.py`
 and verify them with the same command plus `--check`. Generated development

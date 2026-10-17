@@ -2,8 +2,8 @@
 
 These are **complete source starter projects**, not extra mod jars to drop into
 `mods/`. Download and unzip one into a working directory, then follow its README.
-Both target the **current Divinity Engine source update, Forge 1.20.1 / 47.4.2**.
-Older builds with the same Divinity version label can lack these APIs.
+Both target **Divinity Engine 1.12, Forge 1.20.1 / 47.4.2**.
+Use the full 1.12 bundle for the Java project, not an older or slim jar.
 
 | Project | Download | What you get |
 | --- | --- | --- |

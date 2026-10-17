@@ -68,8 +68,8 @@ migration. Make world backups before changing a content pack.
 
 ## Build From Source
 
-Use Java 17. The current development dependencies are Core `1.6.0`, Vanguard
-`2.2.1-1.20.1`, and Player Animator `1.0.2-rc1+1.20`. Core and Vanguard resolve
+Use Java 17. The current development dependencies are Core `1.6.1`, Vanguard
+`2.2.2-1.20.1`, and Player Animator `1.0.2-rc1+1.20`. Core and Vanguard resolve
 from local Maven in this source setup; build/publish their matching Forge projects
 locally first. Do not assume these coordinates are available from Maven Central.
 

@@ -18,7 +18,7 @@ wrapper; do not install an unrelated system Gradle. Forge's official
 [development setup guide](https://docs.minecraftforge.net/en/1.20.1/gettingstarted/)
 explains the underlying IDE and JDK setup.
 
-Obtain the current full **Divinity Engine 1.9-1.20.1 bundle**, not the slim jar.
+Obtain the current full **Divinity Engine 1.12-1.20.1 bundle**, not the slim jar.
 This guide documents the current source update, which can be newer than a public
 mod-hosting release bearing the same version number. The importer checks for the
 automatic god/statue API. It cannot prove every behavior in an older build is
@@ -30,14 +30,14 @@ Run these terminal commands from the extracted project root:
 
 ```sh
 chmod +x gradlew
-./gradlew -b setup.gradle importDivinity "-PdivinityJar=/absolute/path/to/divinity_engine-1.9-1.20.1.jar" --console=plain
+./gradlew -b setup.gradle importDivinity "-PdivinityJar=/absolute/path/to/divinity_engine-1.12-1.20.1.jar" --console=plain
 ./gradlew build --console=plain
 ```
 
 On Windows PowerShell, use the included batch wrapper:
 
 ```powershell
-.\gradlew.bat -b setup.gradle importDivinity "-PdivinityJar=C:\Downloads\divinity_engine-1.9-1.20.1.jar" --console=plain
+.\gradlew.bat -b setup.gradle importDivinity "-PdivinityJar=C:\Downloads\divinity_engine-1.12-1.20.1.jar" --console=plain
 .\gradlew.bat build --console=plain
 ```
 

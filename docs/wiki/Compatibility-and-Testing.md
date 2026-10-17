@@ -3,7 +3,7 @@
 ## Versions And Installation
 
 - Minecraft 1.20.1, Forge 47.4.2 and Java 17 are the development target.
-- The full Divinity jar embeds Forge Core 1.6.0, Vanguard 2.2.1-1.20.1 and Player Animator 1.0.2-rc1+1.20.
+- The full Divinity 1.12 jar embeds Forge Core 1.6.1, Vanguard 2.2.2-1.20.1 and Player Animator 1.0.2-rc1+1.20.
 - KubeJS, Rhino and Architectury are optional external dependencies, not embedded.
 - Do not mix the newer NeoForge Core/Vanguard artifacts into this Forge instance.
 

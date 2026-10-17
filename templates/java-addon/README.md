@@ -2,7 +2,7 @@
 
 A standalone **Forge 1.20.1 / Forge 47.4.2 / JDK 17** project. You do not need
 to clone Divinity Engine or obtain access to its libraries' private repositories.
-You do need the **current full Divinity Engine 1.9-1.20.1 dependency bundle** that
+You do need the **current full Divinity Engine 1.12-1.20.1 dependency bundle** that
 contains `GodsDeferredRegister`. A version number alone does not guarantee that
 an older download has the current API.
 
@@ -22,14 +22,14 @@ macOS/Linux, from this directory:
 
 ```sh
 chmod +x gradlew
-./gradlew -b setup.gradle importDivinity "-PdivinityJar=/absolute/path/to/divinity_engine-1.9-1.20.1.jar" --console=plain
+./gradlew -b setup.gradle importDivinity "-PdivinityJar=/absolute/path/to/divinity_engine-1.12-1.20.1.jar" --console=plain
 ./gradlew build --console=plain
 ```
 
 Windows PowerShell:
 
 ```powershell
-.\gradlew.bat -b setup.gradle importDivinity "-PdivinityJar=C:\Downloads\divinity_engine-1.9-1.20.1.jar" --console=plain
+.\gradlew.bat -b setup.gradle importDivinity "-PdivinityJar=C:\Downloads\divinity_engine-1.12-1.20.1.jar" --console=plain
 .\gradlew.bat build --console=plain
 ```
 

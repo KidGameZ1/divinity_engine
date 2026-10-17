@@ -63,7 +63,7 @@
       "archive": "divinity-java-starter.zip",
       "source": "templates/java-addon",
       "bytes": 65972,
-      "sha256": "58bcddeb760e370a5acb816fcb3e98e5708d1ea859003d6280342cee0fef51d3",
+      "sha256": "c0a70b08a12e98c27b36fb73b5da13bb3f8368cda9f49b009f7e51c0cd0dc0f8",
       "files": [
         {
           "path": ".gitignore",
@@ -77,8 +77,8 @@
         },
         {
           "path": "README.md",
-          "bytes": 8650,
-          "sha256": "86c49906f4bba4d79da3d3d48be209f0d0bf6f3ce10f97001adcd14c22918b76"
+          "bytes": 8653,
+          "sha256": "ba3399c83664d9d6c37e7e69e6423a7f1d49248bc464e163daeec5ee067caefd"
         },
         {
           "path": "build.gradle",
@@ -127,8 +127,8 @@
         },
         {
           "path": "setup.gradle",
-          "bytes": 5712,
-          "sha256": "24476ee3b6c19691beba11d092d7e5f8ba9d624a88fd4f73272907d5ec6e94a5"
+          "bytes": 5713,
+          "sha256": "fd98a7d2c310b086da5011d2c069f5f466dc7530b5a4e28ae775378e03f3a55e"
         },
         {
           "path": "src/main/java/com/example/haven/GuidingBreath.java",
@@ -152,8 +152,8 @@
         },
         {
           "path": "src/main/resources/META-INF/mods.toml",
-          "bytes": 604,
-          "sha256": "19ae4c4cb09b41ad25bb505dd8bdc5ffa789c1ad6ab07670f58564b7231148e2"
+          "bytes": 605,
+          "sha256": "130ff7de95df37aa7f135e01d5b6649a9e7cfc8693fd1f4363cd9de04cd22526"
         },
         {
           "path": "src/main/resources/assets/haven_addon/lang/en_us.json",
