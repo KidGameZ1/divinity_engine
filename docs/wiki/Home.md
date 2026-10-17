@@ -33,3 +33,14 @@ not prerequisites for progression.
 Divinity's full JarJar includes the required Forge builds of Core, Vanguard and
 Player Animator. KubeJS is optional and is **not bundled**. Developers must use
 the Forge 1.20.1 APIs, not similarly named APIs from newer NeoForge branches.
+
+### Library Developer Guides
+
+- [Nightshade Core / RenderLib for Forge 1.20.1](https://github.com/KidGameZ1/NightshadesUtilities/tree/codex/forge-1.20.1/docs/wiki): rendering, particles, UI, networking and lifecycle examples.
+- [Vanguard for Forge 1.20.1](https://github.com/KidGameZ1/Vanguard-Forge-1.20.1/tree/main/docs/wiki): combat integration, aspects, equipment and side-safe APIs.
+
+These two repositories are private, so their guides require repository access.
+Their Markdown guides live in the repositories because GitHub's wiki feature is
+unavailable for them under the current account plan. A newer library source
+version is not automatically the version bundled by Divinity; check
+[Compatibility and Testing](Compatibility-and-Testing.md) before choosing dependencies.

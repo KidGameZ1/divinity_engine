@@ -34,15 +34,21 @@ changed by this patch.
 
 ## Current delivery status
 
-Source edits and regression tests are present, but the new dependency builds
-have not been verified or integrated into Divinity's bundle. Publication attempts
-were stopped while compilation spent minutes reading source files. A captured
-Vanguard thread dump showed javac blocked in FileDispatcherImpl.read0 while
-loading source; open-file inspection showed it moving slowly between sources.
-Nightshade compilation showed the same slow source-read symptom.
+The source-read blocker was resolved on 2026-10-16 by downloading the missing
+iCloud project files without moving the projects or changing any worlds.
+Fresh Java 17 checks passed for the patch versions:
 
-Divinity remains on Core 1.6.0 and Vanguard 2.2.1-1.20.1 until both new artifacts
-are built and tested. No live improvement should be inferred from these source
-changes yet. Resume by building/publishing the dependency patch versions, then
-updating Divinity's dependency properties, running the focused integration suite,
-and verifying the nested JAR metadata.
+- Core 1.6.1: `test testCommonPort jarJar reobfJarJar`; 43 unit tests and the
+  separate 25-test common-side suite passed with no failures, errors or skips.
+  The common suite overlaps the unit suite; these are not 68 unique tests.
+- Vanguard 2.2.2-1.20.1: `compileJava test jarJar reobfJarJar` passed. The test
+  task reported `NO-SOURCE`, so this is compile/package evidence, not a unit-test
+  or gameplay pass.
+
+Neither patch version has been integrated into Divinity's bundle. Divinity
+remains on Core 1.6.0 and Vanguard 2.2.1-1.20.1. These builds do not establish
+live performance improvements or replace client/server integration testing.
+Before changing the bundle, publish the new dependency artifacts to the chosen
+Maven repository, update Divinity's dependency properties, run the focused
+integration suite and verify nested JAR metadata. A source push to GitHub is
+not a Maven publication or a downloadable mod release.
