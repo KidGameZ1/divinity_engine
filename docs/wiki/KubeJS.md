@@ -1,5 +1,9 @@
 # KubeJS
 
+For a full project with installation and packaging steps, use the
+[JSON + KubeJS tutorial](JSON-KubeJS-Tutorial.md) and
+[downloadable starter](Addon-Templates.md). This page describes the callback API.
+
 Optional integration targets **KubeJS 2001.6.5-build.26**, Rhino
 `2001.2.2-build.17` and Architectury Forge `9.1.12` on Minecraft 1.20.1.
 Install these separately when using scripts. Divinity works without KubeJS;

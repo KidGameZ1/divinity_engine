@@ -5,6 +5,9 @@ stories, permanent specializations, a Divine Codex and personal pocket domains.
 
 - [Player and developer wiki](https://github.com/KidGameZ1/divinity_engine/wiki)
 - [Versioned wiki source](docs/wiki/Home.md)
+- [Download complete JSON + KubeJS and Java starter projects](docs/wiki/Addon-Templates.md)
+- [Step-by-step JSON + KubeJS tutorial](docs/wiki/JSON-KubeJS-Tutorial.md)
+- [Step-by-step Java addon tutorial](docs/wiki/Java-Addon-Tutorial.md)
 - [JSON definitions + KubeJS programming example](examples/json-kubejs-content)
 - [JSON-only built-in actions example](examples/json-content)
 - [Alternative KubeJS startup declarations](examples/kubejs-content)

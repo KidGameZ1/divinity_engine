@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "domains": ["Shelter", "Wayfinding"],
+  "blessings": ["example_pantheon:guiding_breath"],
+  "offerings": {"minecraft:amethyst_shard": 2, "minecraft:bread": 1},
+  "prayer_favor": 1,
+  "color": "#B5D5EF"
+}

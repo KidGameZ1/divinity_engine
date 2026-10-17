@@ -1,0 +1,103 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import java.security.MessageDigest
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
+
+// Separate from build.gradle so setup works before Forge resolves any mod jars.
+plugins { id 'base' }
+
+tasks.register('importDivinity') {
+    group = 'setup'
+    description = 'Creates local, unbundled development copies from a full Divinity Engine jar.'
+    doLast {
+        String input = providers.gradleProperty('divinityJar').orNull
+        if (!input) throw new GradleException('Pass -PdivinityJar=/absolute/path/to/the/full/divinity_engine.jar')
+        File bundle = file(input)
+        if (!bundle.isFile()) throw new GradleException("Bundle not found: ${bundle}")
+        File destination = file('libs/managed')
+        Map<String, Map> modules = [:]
+        Map<String, String> fileOwners = [:]
+        Map<String, byte[]> prepared = [:]
+        Closure readJar = { byte[] bytes ->
+            Map<String, byte[]> entries = [:]
+            new ZipInputStream(new ByteArrayInputStream(bytes)).withCloseable { zip ->
+                ZipEntry entry
+                while ((entry = zip.nextEntry) != null) {
+                    if (!entry.directory) entries[entry.name] = zip.readAllBytes()
+                }
+            }
+            entries
+        }
+        Closure collect
+        collect = { String group, String artifact, String version, byte[] bytes ->
+            if (![group, artifact, version].every { it ==~ /[A-Za-z0-9_.+\-]+/ }) {
+                throw new GradleException("Unsafe dependency coordinates: ${group}:${artifact}:${version}")
+            }
+            String key = "${group}:${artifact}"
+            String digest = MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()
+            if (modules.containsKey(key)) {
+                if (modules[key].version != version || modules[key].sha256 != digest) {
+                    throw new GradleException("Conflicting bundled copies of ${key}; use a consistent Divinity bundle.")
+                }
+                return
+            }
+            if (modules.size() >= 32) throw new GradleException('Unexpectedly large dependency tree; import stopped.')
+            String name = "${artifact}-${version}.jar"
+            if (fileOwners.containsKey(name)) throw new GradleException("Duplicate local artifact filename: ${name}")
+            fileOwners[name] = key
+            modules[key] = [group: group, artifact: artifact, version: version, file: name, sha256: digest]
+            Map<String, byte[]> entries = readJar(bytes)
+            byte[] metadata = entries['META-INF/jarjar/metadata.json']
+            if (metadata != null) {
+                def nested = new JsonSlurper().parseText(new String(metadata, 'UTF-8'))
+                nested.jars.each { dependency ->
+                    byte[] child = entries[dependency.path]
+                    if (child == null) throw new GradleException("Missing bundled dependency: ${dependency.path}")
+                    collect(dependency.identifier.group, dependency.identifier.artifact,
+                            dependency.version.artifactVersion, child)
+                }
+            }
+            ByteArrayOutputStream output = new ByteArrayOutputStream()
+            new ZipOutputStream(output).withCloseable { zip ->
+                entries.each { String path, byte[] contents ->
+                    // ForgeGradle remaps each dependency individually. Do not load a second,
+                    // still-obfuscated copy through JarJar in the development game.
+                    if (!path.startsWith('META-INF/jarjar/') &&
+                            !(path ==~ /(?i)META-INF\/[^\/]+\.(SF|RSA|DSA|EC)/)) {
+                        ZipEntry entry = new ZipEntry(path)
+                        entry.time = 0
+                        zip.putNextEntry(entry)
+                        zip.write(contents)
+                        zip.closeEntry()
+                    }
+                }
+            }
+            prepared[name] = output.toByteArray()
+        }
+
+        byte[] source = bundle.bytes
+        def root = readJar(source)
+        if (!root.containsKey('META-INF/jarjar/metadata.json') ||
+                !root.containsKey('net/nightshade/divinity_engine/api/gods/GodsDeferredRegister.class')) {
+            throw new GradleException('Use the current full Divinity Engine dependency bundle, not a slim jar or an older API build.')
+        }
+        String version = '1.9-1.20.1'
+        String metadata = new String(root['META-INF/mods.toml'], 'UTF-8')
+        if (!metadata.contains('version="' + version + '"') && !metadata.contains('version = "' + version + '"')) {
+            throw new GradleException("This starter targets Divinity ${version}. Check its README before upgrading dependencies.")
+        }
+        collect('local.divinity', 'divinity_engine', version, source)
+        destination.mkdirs()
+        prepared.each { String name, byte[] bytes -> new File(destination, name).bytes = bytes }
+        String bundleHash = MessageDigest.getInstance('SHA-256').digest(source).encodeHex().toString()
+        new File(destination, 'dependencies.json').text = JsonOutput.prettyPrint(JsonOutput.toJson([
+                bundleSha256: bundleHash,
+                developmentGroup: 'local.divinity.starter.' + bundleHash.substring(0, 16),
+                modules: modules.values().toList()
+        ])) + '\n'
+        logger.lifecycle("Imported ${modules.size()} development dependencies into libs/managed. Original jar unchanged.")
+        logger.lifecycle('Next: ./gradlew build --console=plain. Never distribute libs/managed with your addon.')
+    }
+}

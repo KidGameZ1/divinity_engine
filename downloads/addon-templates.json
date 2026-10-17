@@ -1,0 +1,176 @@
+{
+  "format": 1,
+  "templates": [
+    {
+      "archive": "divinity-json-kubejs-starter.zip",
+      "source": "templates/json-kubejs-addon",
+      "bytes": 15334,
+      "sha256": "3ff00617006bb3dead08df57730a15585a4b1cb877f1063a4e8306340ab23bc9",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1301,
+          "sha256": "5e9c8b1a83114ebd13db0595be0dc1f50f033750654249dd203a94cd933f7648"
+        },
+        {
+          "path": "README.md",
+          "bytes": 19224,
+          "sha256": "bab9722e452b0014297d973144bf2ed4d9055b66c680d2f7725ee632389e7475"
+        },
+        {
+          "path": "config/divinity_engine/content/example_pantheon/blessings/guiding_breath.json",
+          "bytes": 187,
+          "sha256": "34c782bb33d797d6d75c8d8b90f0f2da5b90c69f6506e8df33ee320095da70f9"
+        },
+        {
+          "path": "config/divinity_engine/content/example_pantheon/gods/aster.json",
+          "bytes": 231,
+          "sha256": "7f775dedb9eff2ae6dc94e12012ff651b5229c6875f3e48cca2075e29ff2a3cb"
+        },
+        {
+          "path": "config/divinity_engine/content/example_pantheon/trials/trial_of_shelter.json",
+          "bytes": 661,
+          "sha256": "8f8531a777aa84ee6c06b8b325edef6ae0ee62f3ce497bf9a4a7c500eb70c88d"
+        },
+        {
+          "path": "kubejs/server_scripts/aster.js",
+          "bytes": 811,
+          "sha256": "2bf8ae8779cadc5622cd1604018647c1c955979c397a8daad54d329aea119e14"
+        },
+        {
+          "path": "kubejs/server_scripts/recipes.js",
+          "bytes": 234,
+          "sha256": "53dd8de2bb6398dedf284158644f3e812291c5976db568d4515c74400da356d5"
+        },
+        {
+          "path": "resourcepacks/aster-addon/assets/example_pantheon/lang/en_us.json",
+          "bytes": 485,
+          "sha256": "ba81c63502873ffc1f88d374e97652a78bf6922c4247ebcbe3c1d5202b459558"
+        },
+        {
+          "path": "resourcepacks/aster-addon/pack.mcmeta",
+          "bytes": 115,
+          "sha256": "7591ed623aa9b44a0547680625d2b78595ab122e8a0721cb717c9b06d272a80d"
+        },
+        {
+          "path": "tests/starter.test.mjs",
+          "bytes": 10770,
+          "sha256": "0a74cf02a330db237d037b27eb85194d81c16d5eec475231ed5ada165ffd9fe3"
+        }
+      ]
+    },
+    {
+      "archive": "divinity-java-starter.zip",
+      "source": "templates/java-addon",
+      "bytes": 65972,
+      "sha256": "58bcddeb760e370a5acb816fcb3e98e5708d1ea859003d6280342cee0fef51d3",
+      "files": [
+        {
+          "path": ".gitignore",
+          "bytes": 70,
+          "sha256": "bbc79d7d254cc37a08b84be5e0379a2ce252fe3a629eed1777666a0aeaf2ac73"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1300,
+          "sha256": "75bc15cf60051cb02b98d1d3c8993a66675650f93726c86c1964a25579987fc6"
+        },
+        {
+          "path": "README.md",
+          "bytes": 8650,
+          "sha256": "86c49906f4bba4d79da3d3d48be209f0d0bf6f3ce10f97001adcd14c22918b76"
+        },
+        {
+          "path": "build.gradle",
+          "bytes": 2493,
+          "sha256": "62bd0a9bd22572342b6cea7d616a9c49523a32072333f3b03e5cb678f50f546d"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.jar",
+          "bytes": 43453,
+          "sha256": "cb0da6751c2b753a16ac168bb354870ebb1e162e9083f116729cec9c781156b8"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.properties",
+          "bytes": 250,
+          "sha256": "05e7bec397ce5a52628d31dcc4c8b636cbdc55e28f8cef19d097c71b5c5fbb42"
+        },
+        {
+          "path": "gradle.properties",
+          "bytes": 140,
+          "sha256": "e866e35c67c17a4c98033f3b48907124f31ea2fcf95ac70186616a5bdd57ca72"
+        },
+        {
+          "path": "gradlew",
+          "bytes": 9180,
+          "sha256": "da0730b93a8ac4a628754fd6d3cd49980725a24b7dcd4cdc9e115eb41b1fab47"
+        },
+        {
+          "path": "gradlew.bat",
+          "bytes": 2826,
+          "sha256": "95e8ae8e8a256a2f066cdd745d56f7a3fc87aa058a2e4beb483300db7171bd1f"
+        },
+        {
+          "path": "licenses/Gradle-LICENSE.txt",
+          "bytes": 23622,
+          "sha256": "9536d88ea948603d18e232a13f5958d67807cd80828036b082bff171d2cf0703"
+        },
+        {
+          "path": "licenses/Gradle-NOTICE.txt",
+          "bytes": 868,
+          "sha256": "c2de5fd9adc7ccc4e1382a0e1f38ec6e14f8ca6e28d3c20289fe80353b019aa1"
+        },
+        {
+          "path": "settings.gradle",
+          "bytes": 225,
+          "sha256": "93d8e2a43e6474fbebb8cf7d4389ee272ab8292cd0eca052eae9e6be46c03b63"
+        },
+        {
+          "path": "setup.gradle",
+          "bytes": 5712,
+          "sha256": "24476ee3b6c19691beba11d092d7e5f8ba9d624a88fd4f73272907d5ec6e94a5"
+        },
+        {
+          "path": "src/main/java/com/example/haven/GuidingBreath.java",
+          "bytes": 1318,
+          "sha256": "1f536de2d2fc19caa02b7249dc29e8f772196b5b374b5e6a58e95a011ed816f1"
+        },
+        {
+          "path": "src/main/java/com/example/haven/HavenAddon.java",
+          "bytes": 2121,
+          "sha256": "c67c19fc7b32018eb0685871c8508df96eab9deec60b5da2ee64a58b69f4d516"
+        },
+        {
+          "path": "src/main/java/com/example/haven/HavenGod.java",
+          "bytes": 1632,
+          "sha256": "871f3dc3eb0cf8f0d0e6f58845a9e7bbd488c9b39fca461fd90b46ee92b825f0"
+        },
+        {
+          "path": "src/main/java/com/example/haven/ShelterVigil.java",
+          "bytes": 1288,
+          "sha256": "7847bf7e4e79c2233378b18d4e1f78a3342f94bfb393c15946d55487311ee7a7"
+        },
+        {
+          "path": "src/main/resources/META-INF/mods.toml",
+          "bytes": 604,
+          "sha256": "19ae4c4cb09b41ad25bb505dd8bdc5ffa789c1ad6ab07670f58564b7231148e2"
+        },
+        {
+          "path": "src/main/resources/assets/haven_addon/lang/en_us.json",
+          "bytes": 618,
+          "sha256": "4b4e144c513cf699ce10d7e96c1dbf5d4e6a679e0744a7b03684fc7a67cf1185"
+        },
+        {
+          "path": "src/main/resources/data/haven_addon/recipes/haven_statue.json",
+          "bytes": 246,
+          "sha256": "57279c3063e15329437321488e696a159765da8cd9438177656e8060e45df55e"
+        },
+        {
+          "path": "src/main/resources/pack.mcmeta",
+          "bytes": 86,
+          "sha256": "18675ad9a4d2bf6582c65b38656919d8c9a73b3c78dc8633944cb12d643c8143"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,20 @@
 # Developer Guide
 
+## Start With A Complete Project
+
+The API reference is not the first step. Download a runnable starter, follow its
+tutorial, then use the reference pages while expanding it.
+
+1. [Download an addon template](Addon-Templates.md): JSON + KubeJS or standalone Java, including build/install instructions.
+2. [Build a JSON + KubeJS addon](JSON-KubeJS-Tutorial.md): exact folders, a god, blessing, trial, custom logic, testing and distribution.
+3. [Build a Java addon](Java-Addon-Tutorial.md): import dependencies, learn registration, implement behavior, run Forge and build a jar.
+4. [Add assets and translations](Assets-and-Localization.md): statue fallback/overrides, resource paths, names and packaging.
+5. [Add stories and real blessing upgrades](Stories-and-Upgrades.md): playable chapters, permanent choices, reward eligibility and implementation.
+
+The starter projects are intentionally small enough to understand completely.
+They do not silently generate quests or custom worldgen. Add each system only
+after you can run and test the previous one.
+
 ## Pick The Smallest Tool That Fits
 
 | Goal | Recommended route |

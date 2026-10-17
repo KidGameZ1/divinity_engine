@@ -1,5 +1,9 @@
 # Java API
 
+New to addon development? Start with the [complete Java tutorial](Java-Addon-Tutorial.md)
+and its [downloadable project](Addon-Templates.md). This page is a compact API reference,
+not a replacement for project setup.
+
 Use Java when the bounded JSON behaviors are insufficient. All gameplay callbacks
 still need server-thread checks and per-player state. Never register world content
 from a tick or a datapack reload.

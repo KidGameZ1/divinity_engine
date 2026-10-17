@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" A ", "SSS", "SSS"],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "S": { "item": "minecraft:stone" }
+  },
+  "result": { "item": "haven_addon:haven_statue", "count": 1 }
+}

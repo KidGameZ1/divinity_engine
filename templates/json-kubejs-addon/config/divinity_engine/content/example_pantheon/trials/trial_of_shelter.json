@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "god": "example_pantheon:aster",
+  "reward_favor": 25,
+  "start_message": "Aster: Make a road where fear has closed the gate.",
+  "complete_message": "Aster: You have become a shelter for others.",
+  "phases": [
+    {
+      "name": "Keep the Watch",
+      "objective": "Defeat the sentries",
+      "duration_ticks": 600,
+      "goal": "defeat_all",
+      "spawns": [{"entity": "minecraft:zombie", "count": 3}]
+    },
+    {
+      "name": "Hold the Refuge",
+      "objective": "Survive for twenty seconds",
+      "duration_ticks": 400,
+      "goal": "survive",
+      "spawns": [{"entity": "minecraft:skeleton", "count": 2}]
+    }
+  ]
+}

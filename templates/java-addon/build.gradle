@@ -1,0 +1,77 @@
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+if (JavaVersion.current() != JavaVersion.VERSION_17) {
+    throw new GradleException('Use JDK 17 for both JAVA_HOME and your IDE Gradle JVM.')
+}
+
+group = mod_group
+version = mod_version
+base { archivesName = mod_id }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
+
+def dependencyManifest = file('libs/managed/dependencies.json')
+if (!dependencyManifest.isFile()) {
+    throw new GradleException('First run: ./gradlew -b setup.gradle importDivinity -PdivinityJar=/absolute/path/to/divinity_engine.jar')
+}
+def imported = new JsonSlurper().parse(dependencyManifest)
+if (!imported.developmentGroup) {
+    throw new GradleException('Re-run setup.gradle importDivinity to refresh the development dependency manifest.')
+}
+
+minecraft {
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'info'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.buildDir}/createSrgToMcp/output.srg"
+            mods {
+                "${mod_id}" { source sourceSets.main }
+            }
+        }
+        client { }
+        server {
+            workingDirectory project.file('run-server')
+            args '--nogui'
+        }
+    }
+}
+
+repositories {
+    flatDir { dirs 'libs/managed' }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.2'
+    imported.modules.each { dependency ->
+        // A bundle-specific group avoids stale ForgeGradle caches when a source build
+        // changes without changing its version, and never shadows a published artifact.
+        implementation(fg.deobf("${imported.developmentGroup}:${dependency.artifact}:${dependency.version}")) {
+            transitive = false
+        }
+    }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    inputs.property('mod_version', project.version)
+    filesMatching('META-INF/mods.toml') { expand mod_version: project.version }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest.attributes('Implementation-Version': project.version)
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}

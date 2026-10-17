@@ -1,0 +1,10 @@
+{
+  "haven_addon.gods.haven": "Haven",
+  "haven_addon.gods.haven.contact": "Haven: There is room beside this light for you.",
+  "haven_addon.gods.haven.loss": "Haven: The road remains open, should you return.",
+  "block.haven_addon.haven_statue": "Statue of Haven",
+  "haven_addon.blessings.guiding_breath": "Guiding Breath",
+  "haven_addon.blessings.guiding_breath.description": "While injured and in water, restore 2 health points. Cooldown: 12 seconds.",
+  "haven_addon.trial.start": "Haven: Keep watch. A refuge begins with someone who stays.",
+  "haven_addon.trial.complete": "Haven: Your vigil is remembered."
+}
