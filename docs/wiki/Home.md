@@ -10,7 +10,7 @@ personal pocket domain.
 ## Choose Your Starting Point
 
 - [Player Guide](Player-Guide.md): contact, favor, blessing slots, stories and trials.
-- [Developer Guide](Developer-Guide.md): choose JSON, KubeJS or a Java addon.
+- [Developer Guide](Developer-Guide.md): define content in JSON, program blessing behavior with KubeJS, or build a Java addon.
 - [JSON Content](JSON-Content.md): create a god, its statue, blessings and a trial.
 - [KubeJS](KubeJS.md): startup declarations and server-side custom blessing behavior.
 - [Java API](Java-API.md): existing registries, instance state, stories and Codex pages.

@@ -1,0 +1,8 @@
+{
+  "example_pantheon.gods.aster": "Aster",
+  "example_pantheon.gods.aster.contact": "Aster: Even a lost traveler deserves a guiding light.",
+  "example_pantheon.gods.aster.loss": "Aster: The road remains, should you return.",
+  "example_pantheon.blessings.guiding_breath": "Guiding Breath",
+  "example_pantheon.blessings.guiding_breath.description": "While in water, restore 2 health points. Does nothing at full health.",
+  "block.example_pantheon.aster_statue": "Statue of Aster"
+}

@@ -5,7 +5,58 @@ Optional integration targets **KubeJS 2001.6.5-build.26**, Rhino
 Install these separately when using scripts. Divinity works without KubeJS;
 no KubeJS classes are loaded by the normal mod entry point.
 
-## Declare Content In Startup Scripts
+## Recommended: JSON Definitions, Scripted Behavior
+
+JSON defines your addon content; KubeJS programs its custom blessing logic.
+Install the [combined JSON + KubeJS example](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/json-kubejs-content)
+for a complete god, automatic statue, scripted blessing, trial and translations.
+It has **no startup script**: JSON already registers the content.
+
+For example, define
+`config/divinity_engine/content/example_pantheon/blessings/guiding_breath.json`:
+
+```json
+{
+  "schema_version": 1,
+  "favor": 50,
+  "cooldown_seconds": 12,
+  "mode": "active",
+  "color": "#B5D5EF",
+  "particle_texture": "minecraft:textures/particle/glint.png",
+  "hooks": {}
+}
+```
+
+Then program it in `kubejs/server_scripts/aster.js`:
+
+```js
+DivinityEvents.blessing('example_pantheon:guiding_breath', event => {
+  if (event.hook !== 'pressed') return
+  const owner = event.owner
+  if (!owner.isInWater()) return
+
+  const before = owner.getHealth()
+  if (before >= owner.getMaxHealth()) return
+  owner.heal(2)
+  if (owner.getHealth() > before) event.markSuccessful()
+})
+```
+
+This heals only when the owner is injured and in water. Successful healing uses
+the JSON cooldown and visual; a canceled heal does not count as success. Keep
+`hooks` empty here: an unconditional JSON heal would run before the script's
+water check. To combine fixed actions with scripted additions intentionally,
+populate JSON hooks and remember that their success is preserved.
+
+Install matching JSON definitions on client and server; server scripts belong
+on the server (the same instance in singleplayer). Ship KubeJS and its dependencies
+with your scripted addon. Divinity itself does not require KubeJS, but without
+this script a blessing with empty JSON hooks has no custom behavior.
+
+The current callback API covers content blessings. It is not an arbitrary god,
+trial or curse callback API; use Java for unsupported custom systems.
+
+## Alternative: Declare Content In Startup Scripts
 
 Create `kubejs/startup_scripts/my_pantheon.js`:
 
@@ -32,21 +83,10 @@ load, before Forge registers blocks. Do not retain the event, schedule declarati
 later, or put declarations in `server_scripts`. Registry changes require restart
 on both sides. Script and JSON declarations share one registry: duplicate IDs fail.
 
-## Add Custom Behavior On The Server
+## Callback Contract
 
-Create `kubejs/server_scripts/my_pantheon.js`:
-
-```js
-DivinityEvents.blessing('my_pack:steady_breath', event => {
-  if (event.hook !== 'pressed') return
-  if (event.owner.isInWater()) {
-    event.owner.heal(1)
-    event.markSuccessful()
-  }
-})
-```
-
-The callback runs after JSON actions on the **server thread**, only through the
+Whether declared in JSON or a startup script, the callback runs after definition
+actions on the **server thread**, only through the
 configured content blessing's eligible hook/cooldown path. This does not intercept
 every built-in blessing. Keep an empty `hooks` object if a content blessing is
 entirely scripted. Use an appropriate `mode` and hook.
@@ -74,9 +114,9 @@ startup registrations or change the handshake fingerprint. Ship matching startup
 definitions on both sides; server logic belongs on the server. Use `instance`
 data rather than a global variable for per-player counters.
 
-The full [KubeJS example](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/kubejs-content)
+The full [startup-script example](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/kubejs-content)
 includes all three declaration types. Its language/resource pack is shared with
-the JSON example. Do not install both registration alternatives together.
+the JSON-only example. Install only one Aster example; they use the same IDs.
 
 For development only, `./gradlew runGameTestServer -PwithKubeJS=true ...` adds the
 optional libraries to a development run. They are compile-only by default and

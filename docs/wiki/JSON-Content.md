@@ -5,6 +5,24 @@ about gods and their statue blocks before opening a world. Install identical
 definition files on the client and server, then fully restart both. A content
 fingerprint participates in the network handshake and rejects mismatched definitions.
 
+## Definitions And Programming
+
+Use JSON to define IDs, god membership, favor requirements, cooldowns, visuals
+and supported trial phases. Use **KubeJS server scripts** to program custom
+blessing conditions and behavior. A JSON-defined blessing can receive a
+`DivinityEvents.blessing` callback directly by its ID; it does not need a second
+registration in a startup script.
+
+For script-only blessing behavior, use `"hooks": {}` in the JSON and put the logic
+in `kubejs/server_scripts`. JSON actions run before the callback, so leaving a heal
+action in JSON would heal before your script checks a custom condition.
+See the [combined example](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/json-kubejs-content)
+and [KubeJS guide](KubeJS.md) for the complete setup and success/cooldown handling.
+
+JSON's fixed actions below still work without KubeJS. JSON alone is not a language
+for arbitrary programming. The current KubeJS callback API covers content
+blessings, not arbitrary god or trial lifecycle logic.
+
 ## File Layout
 
 ```text

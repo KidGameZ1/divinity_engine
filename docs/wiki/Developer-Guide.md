@@ -5,26 +5,37 @@
 | Goal | Recommended route |
 | --- | --- |
 | New god, automatic statue, simple abilities, phased arena trial | Startup JSON content |
-| Same content plus custom blessing conditions/logic | KubeJS startup + server scripts |
+| JSON-defined content with programmed blessing behavior | JSON definitions + KubeJS server scripts |
+| Prefer declaring that content in JavaScript instead of JSON | KubeJS startup declarations + server scripts |
 | New stories, chapters, lore or relationships | Existing narrative datapack format |
 | Arbitrary gameplay events, custom curses, new objective handlers or renderers | Java addon |
 
-JSON is a bounded behavior format, not a programming language. It does not run
-commands, scripts or arbitrary NBT. KubeJS callbacks are trusted server code,
-not a sandbox for untrusted pack downloads.
+**For a programmable JSON addon, use JSON for definitions and KubeJS for custom
+blessing logic.** JSON is a bounded behavior format, not a programming language.
+Its built-in actions work without KubeJS, but conditions and custom behavior use
+KubeJS server callbacks (or a Java addon). JSON does not run commands, scripts or
+arbitrary NBT. KubeJS callbacks are trusted server code, not a sandbox for
+untrusted pack downloads.
 
 ## First Working Addon
 
-1. Install the full Divinity Engine Forge 1.20.1 jar in an isolated test instance.
-2. Follow [JSON Content](JSON-Content.md) and install the Aster example plus its resource pack.
+1. Install Divinity Engine and the compatible [KubeJS dependencies](KubeJS.md) in an isolated Forge 1.20.1 test instance.
+2. Install the [combined JSON + KubeJS example](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/json-kubejs-content): JSON definitions on both sides, the callback on the server, and the resource pack on the client. Fully restart both sides.
 3. Contact Aster through the automatically created statue, earn favor, and equip Guiding Breath.
-4. Verify its healing, cooldown and trial before adding more content.
-5. Add a narrative datapack or a [KubeJS callback](KubeJS.md) only when needed.
+4. While injured and standing in water, activate Guiding Breath. The script heals 2 health points; Divinity applies the configured cooldown and visual after success. On dry land or at full health it does nothing.
+5. Edit the server callback to program your behavior, leaving registry identity and metadata in JSON. Add stories through a narrative datapack when needed.
 
-The repository includes complete alternatives under
+For fixed built-in actions, KubeJS is unnecessary: use
 [`examples/json-content`](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/json-content)
-and [`examples/kubejs-content`](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/kubejs-content).
-Do not install both alternatives with the same IDs: duplicate registrations fail startup.
+instead. [`examples/kubejs-content`](https://github.com/KidGameZ1/divinity_engine/tree/main/examples/kubejs-content)
+shows the alternative of declaring content in startup JavaScript.
+Choose one example: all three use the same Aster IDs. The combined example needs
+no startup script; re-registering its JSON IDs in JavaScript fails startup.
+
+The current custom callback API covers content blessings. JSON gods and trials
+use the built-in systems; arbitrary god/trial callbacks, curses and new objective
+handlers still require Java. KubeJS support is not a general scripting hook for
+every mod system.
 
 ## The Model To Learn
 
