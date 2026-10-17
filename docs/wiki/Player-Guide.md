@@ -8,8 +8,7 @@ worship budget. You can know multiple gods; progress is tracked independently.
 
 Open the blessings menu to equip eligible blessings. A menu opened by a statue
 shows only that statue's god. Normal active slots use rebindable R/G/V defaults;
-passives and toggles follow their descriptions. The removed ascension prototype
-does not add X/Z/C/B controls.
+passives and toggles follow their descriptions.
 
 The Favor panel explains the current relationship and remaining worship rewards.
 Budgets reset after server time, not by repeatedly sleeping or logging in.

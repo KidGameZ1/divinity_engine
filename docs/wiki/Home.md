@@ -5,8 +5,7 @@ not necessarily the most recent release on a mod hosting site.
 
 Divinity Engine adds 18 gods, favor, equipped blessings, curses, protected trials,
 connected stories, permanent blessing specializations, a Divine Codex, and Aethon's
-personal pocket domain. The removed ascension and Elder-god prototypes are not
-active gameplay features; compatibility blocks may remain to protect older saves.
+personal pocket domain.
 
 ## Choose Your Starting Point
 
@@ -17,7 +16,7 @@ active gameplay features; compatibility blocks may remain to protect older saves
 - [Java API](Java-API.md): existing registries, instance state, stories and Codex pages.
 - [Effects and UI](Effects-and-UI.md): Nightshade integration and safe visual lifecycles.
 - [Compatibility and Testing](Compatibility-and-Testing.md): save IDs, dependencies and focused checks.
-- [Pantheon](Pantheon.md): the original 18 gods and their connected stories.
+- [Pantheon](Pantheon.md): the 18 gods and their connected stories.
 
 The normal gameplay path uses statues, menus and the Codex. Admin commands are
 not prerequisites for progression.

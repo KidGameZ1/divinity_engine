@@ -28,6 +28,3 @@ accounts of the First Concord and its Sundering.
 The Codex reveals later chapters and endings through play. This page deliberately
 does not expose the unchosen endings. See each discovered god's in-game guide for
 accepted offerings, exact objectives, eligibility and reward previews.
-
-Aureth, Malgrath and Vaelith are retired prototypes. Compatibility statue IDs may
-remain for old saves; they are not additional active gods or new story requirements.
